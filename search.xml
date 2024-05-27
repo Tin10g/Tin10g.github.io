@@ -22,7 +22,7 @@
       
         <tags>
             
-            <tag> 工具使用 </tag>
+            <tag> 复现BUG记录 </tag>
             
         </tags>
       
@@ -49,7 +49,9 @@
       
         <tags>
             
-            <tag> 工具使用 </tag>
+            <tag> 脚本 </tag>
+            
+            <tag> 数据集 </tag>
             
         </tags>
       
@@ -76,7 +78,7 @@
       
         <tags>
             
-            <tag> 工具使用 </tag>
+            <tag> 配置环境 </tag>
             
         </tags>
       
