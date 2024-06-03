@@ -1,5 +1,4 @@
 https://tin10g.github.io/2024/06/03/Springboot%E5%BC%80%E5%8F%91_1/
-https://tin10g.github.io/2024/05/28/PlantUML%E4%BD%BF%E7%94%A8/
 https://tin10g.github.io/2024/05/27/%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%86%E9%85%8D/
 https://tin10g.github.io/2024/05/27/%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83/
 https://tin10g.github.io/2024/05/27/bug%E8%AE%B0%E5%BD%95/
@@ -15,7 +14,6 @@ https://tin10g.github.io/tags/%E5%A4%8D%E7%8E%B0BUG%E8%AE%B0%E5%BD%95/
 https://tin10g.github.io/tags/%E8%84%9A%E6%9C%AC/
 https://tin10g.github.io/tags/%E6%95%B0%E6%8D%AE%E9%9B%86/
 https://tin10g.github.io/tags/%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83/
-https://tin10g.github.io/tags/Java%E5%B7%A5%E5%85%B7/
 https://tin10g.github.io/tags/%E5%BC%80%E5%8F%91/
 https://tin10g.github.io/tags/Springboot/
 https://tin10g.github.io/categories/Tin10g%E6%83%B3%E6%90%9E%E7%A7%91%E7%A0%94/
@@ -23,7 +21,5 @@ https://tin10g.github.io/categories/%E5%A5%87%E6%80%9D%E5%A6%99%E6%83%B3/
 https://tin10g.github.io/categories/Tin10g%E6%83%B3%E6%90%9E%E7%A7%91%E7%A0%94/YOLOv7%E5%A4%8D%E7%8E%B0%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/
 https://tin10g.github.io/categories/Tin10g%E6%83%B3%E6%90%9E%E7%A7%91%E7%A0%94/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E5%B0%8F%E6%8C%87%E5%8D%97/
 https://tin10g.github.io/categories/Tin10g%E6%83%B3%E6%90%9E%E7%A7%91%E7%A0%94/YOLOv9%E5%A4%8D%E7%8E%B0Bug/
-https://tin10g.github.io/categories/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/
-https://tin10g.github.io/categories/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/JAVA/
 https://tin10g.github.io/categories/%E5%BC%80%E5%8F%91/
 https://tin10g.github.io/categories/%E5%BC%80%E5%8F%91/Springboot%E5%BC%80%E5%8F%91/
