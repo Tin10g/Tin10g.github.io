@@ -6,7 +6,7 @@
   <link href="https://tin10g.github.io/atom.xml" rel="self"/>
   
   <link href="https://tin10g.github.io/"/>
-  <updated>2024-05-27T15:00:32.614Z</updated>
+  <updated>2024-06-03T08:40:44.581Z</updated>
   <id>https://tin10g.github.io/</id>
   
   <author>
@@ -15,6 +15,63 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JAVA后端开发</title>
+    <link href="https://tin10g.github.io/2024/06/03/Springboot%E5%BC%80%E5%8F%91_1/"/>
+    <id>https://tin10g.github.io/2024/06/03/Springboot%E5%BC%80%E5%8F%91_1/</id>
+    <published>2024-06-03T07:54:05.972Z</published>
+    <updated>2024-06-03T08:40:44.581Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="技术选择"><a href="#技术选择" class="headerlink" title="技术选择"></a>技术选择</h1><ul><li><p>框架基础：Springboot</p></li><li><p>数据层：mybatis plus</p></li><li><p>安全权限框架：shiro</p></li><li><p>缓存中间件：Redis</p></li><li><p>用户身份凭证：JWT</p></li><li><p><strong>技术栈</strong></p><ul><li>SpringBoot</li><li>MySQL</li><li>shiro</li><li>redis</li><li>JWT</li><li>mybatis plus</li></ul></li></ul><h1 id="SpringBoot项目"><a href="#SpringBoot项目" class="headerlink" title="SpringBoot项目"></a>SpringBoot项目</h1><h2 id="开发工具与环境"><a href="#开发工具与环境" class="headerlink" title="开发工具与环境"></a>开发工具与环境</h2><ol><li>idea</li><li>mysql</li><li>jdk 20</li><li>maven3.3.9</li></ol><h2 id="项目创建"><a href="#项目创建" class="headerlink" title="项目创建"></a>项目创建</h2><p>idea工具 <code>Spring Initializr</code>类型的新项目</p><h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><p><img src="/img/Springboot1-1.png" alt="alt text"></p><h2 id="导入依赖-pom-xml"><a href="#导入依赖-pom-xml" class="headerlink" title="导入依赖 pom.xml"></a>导入依赖 pom.xml</h2><h3 id="SpringBoot依赖"><a href="#SpringBoot依赖" class="headerlink" title="SpringBoot依赖"></a>SpringBoot依赖</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;</span><br><span class="line">&lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">&lt;optional&gt;true&lt;/optional&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">&lt;optional&gt;true&lt;/optional&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure><h3 id="MyBatis-Plus依赖"><a href="#MyBatis-Plus依赖" class="headerlink" title="MyBatis-Plus依赖"></a>MyBatis-Plus依赖</h3><p>加入</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.baomidou&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mybatis-plus-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.3.1.tmp&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure><p>一般要加入mysql、lombok</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;8.0.18&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.18.10&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure><h4 id="Mybatis-Plus使用"><a href="#Mybatis-Plus使用" class="headerlink" title="Mybatis-Plus使用"></a>Mybatis-Plus使用</h4><ol><li>在application.yml文件配置mysql数据源信息<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">spring:</span><br><span class="line">  datasource:</span><br><span class="line">    driver-class-name: com.mysql.cj.jdbc.Driver</span><br><span class="line">    username: root</span><br><span class="line">    password: 123456</span><br><span class="line">    url: jdbc:mysql://localhost:3306/testMyBatisPlus?useUnicode=true&amp;characterEncoding=utf8</span><br></pre></td></tr></table></figure></li><li>编写对应实体类<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">package xxx;</span><br><span class="line"></span><br><span class="line">import lombok.Data;</span><br><span class="line"></span><br><span class="line">@Data</span><br><span class="line">public class User &#123;</span><br><span class="line">    private Long id;</span><br><span class="line">    private String name;</span><br><span class="line">    private int age;</span><br><span class="line">    private String email;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li>编写操作实体Mapper类<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">package mapper;</span><br><span class="line"></span><br><span class="line">import bean.User;</span><br><span class="line">import com.baomidou.mybatisplus.core.mapper.BaseMapper;</span><br><span class="line"></span><br><span class="line">public interface UserMapper extends BaseMapper&lt;User&gt; &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li>BaseMapper要封装一些常用的CRUD方法</li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;技术选择&quot;&gt;&lt;a href=&quot;#技术选择&quot; class=&quot;headerlink&quot; title=&quot;技术选择&quot;&gt;&lt;/a&gt;技术选择&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;框架基础：Springboot&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;数据层：mybatis plus&lt;/p&gt;</summary>
+      
+    
+    
+    
+    <category term="开发" scheme="https://tin10g.github.io/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    <category term="Springboot开发" scheme="https://tin10g.github.io/categories/%E5%BC%80%E5%8F%91/Springboot%E5%BC%80%E5%8F%91/"/>
+    
+    
+    <category term="开发" scheme="https://tin10g.github.io/tags/%E5%BC%80%E5%8F%91/"/>
+    
+    <category term="Springboot" scheme="https://tin10g.github.io/tags/Springboot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PlantUML</title>
+    <link href="https://tin10g.github.io/2024/05/28/PlantUML%E4%BD%BF%E7%94%A8/"/>
+    <id>https://tin10g.github.io/2024/05/28/PlantUML%E4%BD%BF%E7%94%A8/</id>
+    <published>2024-05-28T03:01:56.125Z</published>
+    <updated>2024-05-28T04:29:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="PlantUML"><a href="#PlantUML" class="headerlink" title="PlantUML"></a>PlantUML</h1><h2 id="序列图"><a href="#序列图" class="headerlink" title="序列图"></a>序列图</h2><h3 id="基本的例子"><a href="#基本的例子" class="headerlink" title="基本的例子"></a>基本的例子</h3><ul><li><p><strong>两个参与者之间的信息</strong></p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@startuml</span><br><span class="line">Alice -&gt; Bob: Authentication Request</span><br><span class="line">Bob --&gt; Alice: Authentication Response</span><br><span class="line"></span><br><span class="line">Alice -&gt; Bob: Another authentication Request</span><br><span class="line">Alice &lt;-- Bob: Another authentication Response</span><br><span class="line">@enduml</span><br></pre></td></tr></table></figure></li><li><p><strong>声明参与者</strong></p><ul><li>actor（角色）</li><li>boundary（边界）</li><li>control（控制）</li><li>entity（实体）</li><li>database（数据库）</li><li>collections（集合）</li><li>queue（队列）</li></ul></li></ul><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@startuml</span><br><span class="line">participant Participant as Foo</span><br><span class="line">actor       Actor       as Foo1</span><br><span class="line">boundary    Boundary    as Foo2</span><br><span class="line">control     Control     as Foo3</span><br><span class="line">entity      Entity      as Foo4</span><br><span class="line">database    Database    as Foo5</span><br><span class="line">collections Collections as Foo6</span><br><span class="line">queue       Queue       as Foo7</span><br><span class="line">Foo -&gt; Foo1 : To actor </span><br><span class="line">Foo -&gt; Foo2 : To boundary</span><br><span class="line">Foo -&gt; Foo3 : To control</span><br><span class="line">Foo -&gt; Foo4 : To entity</span><br><span class="line">Foo -&gt; Foo5 : To database</span><br><span class="line">Foo -&gt; Foo6 : To collections</span><br><span class="line">Foo -&gt; Foo7: To queue</span><br><span class="line">@enduml</span><br></pre></td></tr></table></figure><p><img src="/../img/PlantUML_1.png" alt="alt text"></p><p>as重命名</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;PlantUML&quot;&gt;&lt;a href=&quot;#PlantUML&quot; class=&quot;headerlink&quot; title=&quot;PlantUML&quot;&gt;&lt;/a&gt;PlantUML&lt;/h1&gt;&lt;h2 id=&quot;序列图&quot;&gt;&lt;a href=&quot;#序列图&quot; class=&quot;headerlink&quot; ti</summary>
+      
+    
+    
+    
+    <category term="课程学习" scheme="https://tin10g.github.io/categories/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="JAVA" scheme="https://tin10g.github.io/categories/%E8%AF%BE%E7%A8%8B%E5%AD%A6%E4%B9%A0/JAVA/"/>
+    
+    
+    <category term="Java工具" scheme="https://tin10g.github.io/tags/Java%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
   
   <entry>
     <title>YOLO系列环境配置心路</title>
