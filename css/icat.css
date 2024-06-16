@@ -32,6 +32,10 @@
     background: var(--icat-blue);
     transition: background .3s;
     border-radius: 8px;
+    -webkit-transition: background .3s;
+    -moz-transition: background .3s;
+    -ms-transition: background .3s;
+    -o-transition: background .3s;
 }
 
 #blog-info a:hover .site-name {
