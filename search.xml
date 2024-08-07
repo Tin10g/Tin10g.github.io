@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>杂记 · PlotNeuralNet使用</title>
+      <link href="/2024/08/07/PlotNeuralNet%E4%BD%BF%E7%94%A8/"/>
+      <url>/2024/08/07/PlotNeuralNet%E4%BD%BF%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<h1 id="PlotNeuralNet使用"><a href="#PlotNeuralNet使用" class="headerlink" title="PlotNeuralNet使用"></a>PlotNeuralNet使用</h1><ol><li>在PlotNeuralNet源代码中新建my_project把自己的python程序放里面</li><li>写Unet.py脚本，存储在my_project中<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import sys</span><br><span class="line">sys.path.append(&#x27;../&#x27;)</span><br><span class="line">from pycore.tikzeng import *</span><br><span class="line">from pycore.blocks  import *</span><br><span class="line"></span><br><span class="line">arch = [ </span><br><span class="line">    # 开头</span><br><span class="line">    to_head(&#x27;..&#x27;), </span><br><span class="line">    to_cor(),</span><br><span class="line">    to_begin(),</span><br><span class="line">    </span><br><span class="line">    #　添加输入层</span><br><span class="line">    to_input( &#x27;../examples/fcn8s/cats.jpg&#x27; ),</span><br><span class="line"></span><br><span class="line">    #  添加block1包含一个二重卷积接relu</span><br><span class="line">    to_ConvConvRelu( name=&#x27;ccr_b1&#x27;, s_filer=500, n_filer=(64,64), offset=&quot;(0,0,0)&quot;, to=&quot;(0,0,0)&quot;, width=(2,2), height=40, depth=40  ),</span><br><span class="line">    to_Pool(name=&quot;pool_b1&quot;, offset=&quot;(0,0,0)&quot;, to=&quot;(ccr_b1-east)&quot;, width=1, height=32, depth=32, opacity=0.5),</span><br><span class="line">    #  添加三个block，每个包含三个二卷积加一池化</span><br><span class="line">    *block_2ConvPool( name=&#x27;b2&#x27;, botton=&#x27;pool_b1&#x27;, top=&#x27;pool_b2&#x27;, s_filer=256, n_filer=128, offset=&quot;(1,0,0)&quot;, size=(32,32,3.5), opacity=0.5 ),</span><br><span class="line">    *block_2ConvPool( name=&#x27;b3&#x27;, botton=&#x27;pool_b2&#x27;, top=&#x27;pool_b3&#x27;, s_filer=128, n_filer=256, offset=&quot;(1,0,0)&quot;, size=(25,25,4.5), opacity=0.5 ),</span><br><span class="line">    *block_2ConvPool( name=&#x27;b4&#x27;, botton=&#x27;pool_b3&#x27;, top=&#x27;pool_b4&#x27;, s_filer=64,  n_filer=512, offset=&quot;(1,0,0)&quot;, size=(16,16,5.5), opacity=0.5 ),</span><br><span class="line"></span><br><span class="line">    #  瓶颈，为block5</span><br><span class="line">    to_ConvConvRelu( name=&#x27;ccr_b5&#x27;, s_filer=32, n_filer=(1024,1024), offset=&quot;(2,0,0)&quot;, to=&quot;(pool_b4-east)&quot;, width=(8,8), height=8, depth=8, caption=&quot;Bottleneck&quot;  ),</span><br><span class="line">    to_connection( &quot;pool_b4&quot;, &quot;ccr_b5&quot;),</span><br><span class="line"></span><br><span class="line">    #　解码器</span><br><span class="line">    #  多个block，每个为unconv</span><br><span class="line">    *block_Unconv( name=&quot;b6&quot;, botton=&quot;ccr_b5&quot;, top=&#x27;end_b6&#x27;, s_filer=64,  n_filer=512, offset=&quot;(2.1,0,0)&quot;, size=(16,16,5.0), opacity=0.5 ),</span><br><span class="line">    to_skip( of=&#x27;ccr_b4&#x27;, to=&#x27;ccr_res_b6&#x27;, pos=1.25),</span><br><span class="line">    *block_Unconv( name=&quot;b7&quot;, botton=&quot;end_b6&quot;, top=&#x27;end_b7&#x27;, s_filer=128, n_filer=256, offset=&quot;(2.1,0,0)&quot;, size=(25,25,4.5), opacity=0.5 ),</span><br><span class="line">    to_skip( of=&#x27;ccr_b3&#x27;, to=&#x27;ccr_res_b7&#x27;, pos=1.25),    </span><br><span class="line">    *block_Unconv( name=&quot;b8&quot;, botton=&quot;end_b7&quot;, top=&#x27;end_b8&#x27;, s_filer=256, n_filer=128, offset=&quot;(2.1,0,0)&quot;, size=(32,32,3.5), opacity=0.5 ),</span><br><span class="line">    to_skip( of=&#x27;ccr_b2&#x27;, to=&#x27;ccr_res_b8&#x27;, pos=1.25),    </span><br><span class="line">    </span><br><span class="line">    *block_Unconv( name=&quot;b9&quot;, botton=&quot;end_b8&quot;, top=&#x27;end_b9&#x27;, s_filer=512, n_filer=64,  offset=&quot;(2.1,0,0)&quot;, size=(40,40,2.5), opacity=0.5 ),</span><br><span class="line">    to_skip( of=&#x27;ccr_b1&#x27;, to=&#x27;ccr_res_b9&#x27;, pos=1.25),</span><br><span class="line">    </span><br><span class="line">    to_ConvSoftMax( name=&quot;soft1&quot;, s_filer=512, offset=&quot;(0.75,0,0)&quot;, to=&quot;(end_b9-east)&quot;, width=1, height=40, depth=40, caption=&quot;SOFT&quot; ),</span><br><span class="line">    to_connection( &quot;end_b9&quot;, &quot;soft1&quot;),</span><br><span class="line">    #  结束</span><br><span class="line">    to_end() </span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    namefile = str(sys.argv[0]).split(&#x27;.&#x27;)[0]</span><br><span class="line">    to_generate(arch, namefile + &#x27;.tex&#x27; )</span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    main() </span><br></pre></td></tr></table></figure></li><li>执行后生成 Unet.tex，这个是latex代码</li><li>用 git bash 进入my_project文件中，解析Unet得到模型图片的pdf<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bash ../tikzmake.sh Unet</span><br></pre></td></tr></table></figure></li></ol><h2 id="Bug记录"><a href="#Bug记录" class="headerlink" title="Bug记录"></a>Bug记录</h2><h3 id="tikzmake-sh-line-13-xdg-open-command-not-found报错"><a href="#tikzmake-sh-line-13-xdg-open-command-not-found报错" class="headerlink" title="../tikzmake.sh: line 13: xdg-open: command not found报错"></a><code>../tikzmake.sh: line 13: xdg-open: command not found</code>报错</h3><p>修改 tikzmake.sh 的代码</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">python $1.py </span><br><span class="line">pdflatex $1.tex</span><br><span class="line"></span><br><span class="line">rm *.aux *.log *.vscodeLog</span><br><span class="line">rm *.tex</span><br><span class="line"></span><br><span class="line">if [[ &quot;$OSTYPE&quot; == &quot;darwin&quot;* ]]; then</span><br><span class="line">    open $1.pdf</span><br><span class="line">elif [[ &quot;$OSTYPY&quot; == &quot;darwin&quot;* ]]; then</span><br><span class="line">    xdg-open $1.pdf</span><br><span class="line">else</span><br><span class="line">    start $1.pdf</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 杂记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习 </tag>
+            
+            <tag> 技巧 </tag>
+            
+            <tag> 科研绘图 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>杂记 · Git与Github对项目进行相关操作</title>
       <link href="/2024/08/06/git%E4%B8%8A%E4%BC%A0%E9%A1%B9%E7%9B%AE/"/>
       <url>/2024/08/06/git%E4%B8%8A%E4%BC%A0%E9%A1%B9%E7%9B%AE/</url>
