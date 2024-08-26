@@ -178,14 +178,21 @@
   </url>
   
   <url>
-    <loc>https://tin10g.github.io/tags/%E5%A4%8D%E7%8E%B0BUG%E8%AE%B0%E5%BD%95/</loc>
+    <loc>https://tin10g.github.io/tags/%E6%8A%80%E5%B7%A7/</loc>
     <lastmod>2024-08-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://tin10g.github.io/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</loc>
+    <loc>https://tin10g.github.io/tags/%E7%A7%91%E7%A0%94%E7%BB%98%E5%9B%BE/</loc>
+    <lastmod>2024-08-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://tin10g.github.io/tags/%E5%A4%8D%E7%8E%B0BUG%E8%AE%B0%E5%BD%95/</loc>
     <lastmod>2024-08-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -206,7 +213,14 @@
   </url>
   
   <url>
-    <loc>https://tin10g.github.io/tags/nothing/</loc>
+    <loc>https://tin10g.github.io/tags/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</loc>
+    <lastmod>2024-08-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://tin10g.github.io/tags/%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83/</loc>
     <lastmod>2024-08-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -234,21 +248,7 @@
   </url>
   
   <url>
-    <loc>https://tin10g.github.io/tags/%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83/</loc>
-    <lastmod>2024-08-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://tin10g.github.io/tags/%E6%8A%80%E5%B7%A7/</loc>
-    <lastmod>2024-08-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://tin10g.github.io/tags/%E7%A7%91%E7%A0%94%E7%BB%98%E5%9B%BE/</loc>
+    <loc>https://tin10g.github.io/tags/nothing/</loc>
     <lastmod>2024-08-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -264,14 +264,14 @@
   </url>
   
   <url>
-    <loc>https://tin10g.github.io/categories/Tin10g%E6%83%B3%E6%90%9E%E7%A7%91%E7%A0%94/</loc>
+    <loc>https://tin10g.github.io/categories/%E6%9D%82%E8%AE%B0/</loc>
     <lastmod>2024-08-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://tin10g.github.io/categories/%E5%A5%87%E6%80%9D%E5%A6%99%E6%83%B3/</loc>
+    <loc>https://tin10g.github.io/categories/Tin10g%E6%83%B3%E6%90%9E%E7%A7%91%E7%A0%94/</loc>
     <lastmod>2024-08-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -285,14 +285,14 @@
   </url>
   
   <url>
-    <loc>https://tin10g.github.io/categories/Tin10g%E6%83%B3%E6%90%9E%E7%A7%91%E7%A0%94/YOLOv9%E5%A4%8D%E7%8E%B0Bug/</loc>
+    <loc>https://tin10g.github.io/categories/%E5%A5%87%E6%80%9D%E5%A6%99%E6%83%B3/</loc>
     <lastmod>2024-08-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://tin10g.github.io/categories/Tin10g%E6%83%B3%E6%90%9E%E7%A7%91%E7%A0%94/YOLOv7%E5%A4%8D%E7%8E%B0%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</loc>
+    <loc>https://tin10g.github.io/categories/Tin10g%E6%83%B3%E6%90%9E%E7%A7%91%E7%A0%94/YOLOv9%E5%A4%8D%E7%8E%B0Bug/</loc>
     <lastmod>2024-08-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -306,7 +306,7 @@
   </url>
   
   <url>
-    <loc>https://tin10g.github.io/categories/%E6%9D%82%E8%AE%B0/</loc>
+    <loc>https://tin10g.github.io/categories/Tin10g%E6%83%B3%E6%90%9E%E7%A7%91%E7%A0%94/YOLOv7%E5%A4%8D%E7%8E%B0%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</loc>
     <lastmod>2024-08-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
