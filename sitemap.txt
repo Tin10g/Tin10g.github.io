@@ -1,9 +1,9 @@
+https://tin10g.github.io/2024/10/23/2024web-SSTI-Flask%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/
 https://tin10g.github.io/2024/05/27/yolov9_%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83/
 https://tin10g.github.io/2024/05/27/yolov9_%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%86%E9%85%8D/
 https://tin10g.github.io/2024/05/27/yolov9_bug%E8%AE%B0%E5%BD%95/
 https://tin10g.github.io/2024/05/27/yolov9_tensorbord%E4%BD%BF%E7%94%A8/
 https://tin10g.github.io/2024/09/26/YOLOWorld%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/
-https://tin10g.github.io/2024/10/23/2024web-SQL%E8%BF%87%E6%BB%A4%E7%BB%95%E8%BF%87/
 https://tin10g.github.io/2024/10/22/2023web-RCE/
 https://tin10g.github.io/2024/08/07/PlotNeuralNet%E4%BD%BF%E7%94%A8/
 https://tin10g.github.io/2024/10/22/2023web-MD5%E7%BB%95%E8%BF%87&sha1%E7%A2%B0%E6%92%9E/
@@ -53,7 +53,6 @@ https://tin10g.github.io/tags/Web/
 https://tin10g.github.io/tags/CTF/
 https://tin10g.github.io/tags/%E7%BD%91%E5%AE%89/
 https://tin10g.github.io/tags/SQL-Lab/
-https://tin10g.github.io/tags/SQL/
 https://tin10g.github.io/tags/%E7%AE%97%E6%B3%95/
 https://tin10g.github.io/tags/%E5%AD%A6%E4%B9%A0/
 https://tin10g.github.io/tags/%E6%8A%80%E5%B7%A7/
@@ -72,6 +71,7 @@ https://tin10g.github.io/tags/nothing/
 https://tin10g.github.io/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/
 https://tin10g.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/
 https://tin10g.github.io/tags/Python/
+https://tin10g.github.io/tags/%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/
 https://tin10g.github.io/categories/Web-2023%E7%AC%94%E8%AE%B0%EF%BC%88%E6%9C%AA%E6%95%B4%E7%90%86%EF%BC%89/
 https://tin10g.github.io/categories/Web-%E5%81%9A%E9%A2%98-SQL-Lab/
 https://tin10g.github.io/categories/Web-2024%E7%AC%94%E8%AE%B0/
