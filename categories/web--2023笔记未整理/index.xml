@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>All Posts - Ting BLOG🐈</title>
-    <link>http://localhost:1313/posts/</link>
+    <title>Web · 2023笔记（未整理） - Category - Ting BLOG🐈</title>
+    <link>http://localhost:1313/categories/web--2023%E7%AC%94%E8%AE%B0%E6%9C%AA%E6%95%B4%E7%90%86/</link>
     <description>This is Ting&#39;s BLOG ...</description>
     <generator>Hugo 0.136.5 &amp; FixIt v0.3.13</generator>
     <language>en</language>
     <managingEditor>ting10win@gmail.com (Ting)</managingEditor>
     <webMaster>ting10win@gmail.com (Ting)</webMaster>
     <lastBuildDate>Sat, 01 Jul 2023 11:25:40 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/categories/web--2023%E7%AC%94%E8%AE%B0%E6%9C%AA%E6%95%B4%E7%90%86/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>MD5绕过&amp;sha1碰撞</title>
       <link>http://localhost:1313/posts/2023web-md5%E7%BB%95%E8%BF%87sha1%E7%A2%B0%E6%92%9E/</link>
