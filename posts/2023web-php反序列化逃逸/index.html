@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>Php反序列化逃逸 - Ting BLOG🐈</title><meta name="author" content="Ting">
+<meta name="description" content=" 参考文章：PHP反序列化字符串逃逸
+原理逃逸原理：反序列化时，是以}来进行结尾的，同时在字符串内，是以关键字后面的数字来规定所读取的内容的长度。
+"><meta name="keywords" content='Web, CTF'>
+  <meta itemprop="name" content="php反序列化逃逸">
+  <meta itemprop="description" content="参考文章：PHP反序列化字符串逃逸
+原理逃逸原理：反序列化时，是以}来进行结尾的，同时在字符串内，是以关键字后面的数字来规定所读取的内容的长度。">
+  <meta itemprop="datePublished" content="2023-07-01T11:25:40+08:00">
+  <meta itemprop="dateModified" content="2023-07-01T11:25:40+08:00">
+  <meta itemprop="wordCount" content="234">
+  <meta itemprop="keywords" content="Web,CTF"><meta property="og:url" content="http://localhost:1313/posts/2023web-php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%80%83%E9%80%B8/">
+  <meta property="og:site_name" content="Ting BLOG🐈">
+  <meta property="og:title" content="php反序列化逃逸">
+  <meta property="og:description" content="参考文章：PHP反序列化字符串逃逸
+原理逃逸原理：反序列化时，是以}来进行结尾的，同时在字符串内，是以关键字后面的数字来规定所读取的内容的长度。">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-07-01T11:25:40+08:00">
+    <meta property="article:modified_time" content="2023-07-01T11:25:40+08:00">
+    <meta property="article:tag" content="Web">
+    <meta property="article:tag" content="CTF">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="php反序列化逃逸">
+  <meta name="twitter:description" content="参考文章：PHP反序列化字符串逃逸
+原理逃逸原理：反序列化时，是以}来进行结尾的，同时在字符串内，是以关键字后面的数字来规定所读取的内容的长度。">
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/2023web-php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%80%83%E9%80%B8/" title="php反序列化逃逸 - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/2023web-ping/" title="Ping" /><link rel="next" type="text/html" href="http://localhost:1313/posts/2023web-php%E4%BC%AA%E5%8D%8F%E8%AE%AE/" title="PHP伪协议" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/2023web-php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%80%83%E9%80%B8/index.md" title="php反序列化逃逸 - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "php反序列化逃逸",
+    "inLanguage": "en",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/posts\/2023web-php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%80%83%E9%80%B8\/"
+    },"genre": "posts","keywords": "Web, CTF","wordcount":  234 ,
+    "url": "http:\/\/localhost:1313\/posts\/2023web-php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%80%83%E9%80%B8\/","datePublished": "2023-07-01T11:25:40+08:00","dateModified": "2023-07-01T11:25:40+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Ting"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/archives/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/archives/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>Php反序列化逃逸</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/web--2023%E7%AC%94%E8%AE%B0%E6%9C%AA%E6%95%B4%E7%90%86/" class="post-category" title="Category - Web · 2023笔记（未整理）"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Web · 2023笔记（未整理）</a></span></div><div class="post-meta-line"><span title="published on 2023-07-01 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2023-07-01">2023-07-01</time></span>&nbsp;<span title="234 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 300 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>2 minutes</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#原理">原理</a></li>
+    <li><a href="#过滤后字符变多型">过滤后字符变多型</a></li>
+    <li><a href="#过滤后字符变少">过滤后字符变少</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><blockquote>
+<p>参考文章：<a href="https://blog.csdn.net/weixin_52585514/article/details/124200376"target="_blank" rel="external nofollow noopener noreferrer">PHP反序列化字符串逃逸</a></p>
+</blockquote>
+<h2 id="原理" class="heading-element"><span>原理</span>
+  <a href="#%e5%8e%9f%e7%90%86" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>逃逸原理：反序列化时，是以<code>}</code>来进行结尾的，同时在字符串内，是以关键字后面的数字来规定所读取的内容的长度。</p>
+<h2 id="过滤后字符变多型" class="heading-element"><span>过滤后字符变多型</span>
+  <a href="#%e8%bf%87%e6%bb%a4%e5%90%8e%e5%ad%97%e7%ac%a6%e5%8f%98%e5%a4%9a%e5%9e%8b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p><strong>demo</strong>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="n">A</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="o">$</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;q&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="o">$</span><span class="n">b</span><span class="o">=</span><span class="s1">&#39;21&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="n">a</span><span class="o">=</span><span class="n">new</span> <span class="n">A</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">var_dump</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>结果：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">string(45) &#34;O:1:&#34;A&#34;:2:{s:1:&#34;a&#34;;s:1:&#34;q&#34;;s:1:&#34;b&#34;;s:2:&#34;21&#34;;}&#34;</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>关键函数【将序列化后的值，将所有的&rsquo;q&rsquo;变为&rsquo;ww&rsquo;】</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">function filter($a){
+</span></span><span class="line"><span class="cl">    $filter=&#39;/q/i&#39;;
+</span></span><span class="line"><span class="cl">    return preg_replace($filter,&#39;ww&#39;,$a);
+</span></span><span class="line"><span class="cl">}</span></span></code></pre></td></tr></table>
+</div>
+</div><p>目的：要将反序列后<code>$b</code>的值变为我们想要的值。</p>
+<p><strong>例：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="n">A</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="o">$</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;qqqqqqq&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="o">$</span><span class="n">b</span><span class="o">=</span><span class="s1">&#39;21&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="n">function</span> <span class="n">filter</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="o">$</span><span class="n">filter</span><span class="o">=</span><span class="s1">&#39;/q/i&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">preg_replace</span><span class="p">(</span><span class="o">$</span><span class="n">filter</span><span class="p">,</span><span class="s1">&#39;ww&#39;</span><span class="p">,</span><span class="o">$</span><span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="n">a</span><span class="o">=</span><span class="n">new</span> <span class="n">A</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">var_dump</span><span class="p">(</span><span class="n">serialize</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span><span class="s1">&#39;&lt;pre&gt;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="n">r</span><span class="o">=</span><span class="n">filter</span><span class="p">(</span><span class="n">serialize</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="n">var_dump</span><span class="p">(</span><span class="o">$</span><span class="n">r</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">string(51)&#34;O:1:&#34;A&#34;:2:{s:1:&#34;a&#34;s:7:&#34;qqqqqqa&#34;;s:1:&#34;b&#34;s:2:&#34;21&#34;;}&#34;
+</span></span><span class="line"><span class="cl">string(58)&#34;0:1:&#34;A&#34;:2:{s:1:&#34;a&#34;;s:7:&#34;wwwwwwwwwwwwww&#34;;s:1:&#34;b&#34;;s:2:&#34;21&#34;;}&#34;</span></span></code></pre></td></tr></table>
+</div>
+</div><p>假设我们想要$b=104，构造的$b的值的序列化后为:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&#34;;s:1:&#34;b&#34;;s:3:&#34;104&#34;;}</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中<code>&quot;;</code>是用来闭合的</p>
+<p><strong>逃逸方法</strong>
+如果直接等于<code>&quot;;s:1:&quot;b&quot;;s:3:&quot;104&quot;;}</code>的结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">string(73)&#34;0:1:&#34;A&#34;:2:{s:1:&#34;a&#34;s:28:&#34;qqqqqqq&#34;s:1:&#34;b&#34;s3:&#34;104&#34;;}&#34;s:1:&#34;b&#34;s:2:&#34;21&#34;;}&#34;
+</span></span><span class="line"><span class="cl">string(80)&#34;0:1:&#34;A&#34;:2:{s:1:&#34;a&#34;;s:28:&#34;wwwwwwwwwwwwwwwww&#34;;s:1:&#34;b&#34;;s:3:&#34;104&#34;;}&#34;;s:1:&#34;b&#34;;s:2:&#34;21&#34;;}&#34;</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果我们把s:28后面的内容以字符串按要求填满了28个，那么s:1:&ldquo;b&rdquo;;s:3:&ldquo;104&rdquo;;}就会被包含在序列化字符串内。而}”后面的内容，即;s:1:&ldquo;b&rdquo;;s:2:&ldquo;21&rdquo;;}&ldquo;就不会被认为是序列化字符串的内容，从而执行了我们构造的&rdquo;;s:1:&ldquo;b&rdquo;;s:3:&ldquo;104&rdquo;;}，即让一个成员b的值为104。</p>
+<p>构造：在上面，只要让&rsquo;w&rsquo;字符的数量按要求达到s:后面所要求的的数量（28）即可。</p>
+<p>在filter函数中，一个q被换成了两个w，所以让q的数量等于<code>&quot;;s:1:&quot;b&quot;;s:3:&quot;104&quot;;}</code>的字符串长度就行了。因为<code>&quot;;s:1:&quot;b&quot;;s:3:&quot;104&quot;;}</code> 的字符串长度为21，让<code>q</code>的数量为21，反序列化后<code>a</code>的值的长度为就是<strong>q的数量加上<code>&quot;;s:1:&quot;b&quot;;s:3:&quot;104&quot;;}</code></strong>  的长度（42），在filter()之后，<code>w</code>的数量就是刚好42，而我们<strong>添加上去的字符串就会被逃逸出来，会在反序列化的时候成功执行</strong>。</p>
+<p>最终</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="n">A</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="o">$</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;qqqqqqqqqqqqqqqqqqqqq&#34;;s:1:&#34;b&#34;;s:3:&#34;104&#34;;}&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="o">$</span><span class="n">b</span><span class="o">=</span><span class="s1">&#39;21&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="n">function</span> <span class="n">filter</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="o">$</span><span class="n">filter</span><span class="o">=</span><span class="s1">&#39;/q/i&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">preg_replace</span><span class="p">(</span><span class="o">$</span><span class="n">filter</span><span class="p">,</span><span class="s1">&#39;ww&#39;</span><span class="p">,</span><span class="o">$</span><span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="n">a</span><span class="o">=</span><span class="n">new</span> <span class="n">A</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">var_dump</span><span class="p">(</span><span class="n">serialize</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span><span class="s1">&#39;&lt;pre&gt;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="n">r</span><span class="o">=</span><span class="n">filter</span><span class="p">(</span><span class="n">serialize</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="n">var_dump</span><span class="p">(</span><span class="o">$</span><span class="n">r</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>得到：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">string(87) &#34;O:1:&#34;A&#34;:2:{s:1:&#34;a&#34;;s:42:&#34;qqqqqqqqqqqqqqqqqqqqq&#34;;s:1:&#34;b&#34;;s:3:&#34;104&#34;;}&#34;;s:1:&#34;b&#34;;s:2:&#34;21&#34;;}&#34;
+</span></span><span class="line"><span class="cl">string(108) &#34;O:1:&#34;A&#34;:2:{s:1:&#34;a&#34;;s:42:&#34;wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww&#34;;s:1:&#34;b&#34;;s:3:&#34;104&#34;;}&#34;;s:1:&#34;b&#34;;s:2:&#34;21&#34;;}&#34;</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后再进行反序列化就可以发现，$b的值变成了104。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">print_r(unserialize($r));</span></span></code></pre></td></tr></table>
+</div>
+</div><p>结果：
+<img loading="lazy" src="/upload/2023/08/image-1693188308651.png" alt="image-1693188308651" srcset="/upload/2023/08/image-1693188308651.png?size=small, /upload/2023/08/image-1693188308651.png?size=medium 1.5x, /upload/2023/08/image-1693188308651.png?size=large 2x" data-title="image-1693188308651" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+<p><strong>综述：</strong>
+让字符&rsquo;w&rsquo;占用了原本属于&quot;;s:1:&ldquo;b&rdquo;;s:3:&ldquo;104&rdquo;}的位置，从而让&quot;;s:1:&ldquo;b&rdquo;;s:3:&ldquo;104&rdquo;}逃逸出去而成功执行。</p>
+<h2 id="过滤后字符变少" class="heading-element"><span>过滤后字符变少</span>
+  <a href="#%e8%bf%87%e6%bb%a4%e5%90%8e%e5%ad%97%e7%ac%a6%e5%8f%98%e5%b0%91" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p><strong>demo：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="n">A</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="o">$</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="o">$</span><span class="n">b</span><span class="o">=</span><span class="s1">&#39;20&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">function</span> <span class="n">filter</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="o">$</span><span class="n">filter</span><span class="o">=</span><span class="s1">&#39;/qq/i&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">preg_replace</span><span class="p">(</span><span class="o">$</span><span class="n">filter</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">,</span><span class="o">$</span><span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="n">a</span><span class="o">=</span><span class="n">new</span> <span class="n">A</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">var_dump</span><span class="p">(</span><span class="n">serialize</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s1">&#39;&lt;pre&gt;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="n">r</span><span class="o">=</span><span class="n">filter</span><span class="p">(</span><span class="n">serialize</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="n">var_dump</span><span class="p">(</span><span class="o">$</span><span class="n">r</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">string(79)&#34;O:1:&#34;A&#34;:2:s:1:&#34;a&#34;;s:34:&#34;qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq&#34;;s:1:&#34;b&#34;;s:2:&#34;20&#34;;}&#34;
+</span></span><span class="line"><span class="cl">string(62)&#34;0:1:&#34;A&#34;:2:{s 1:&#34;a&#34;is:34:&#34;wwwwwwwwwwwwwwwww&#34;js:1:&#34;b&#34;js 2:&#34;20&#34;;}</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>逃逸方法</strong>
+如果要让$b=104,那么他的序列化后就是：<code>&quot;;s:1:&quot;b&quot;;s:3:&quot;104&quot;;}</code></p>
+<p>但是前面要加个东西，如：<code>A&quot;;s:1:&quot;b&quot;;s:3:&quot;104&quot;;}</code>【A是用来闭合的】。
+得到：
+<img loading="lazy" src="/upload/2023/08/image-1693191140709.png" alt="image-1693191140709" srcset="/upload/2023/08/image-1693191140709.png?size=small, /upload/2023/08/image-1693191140709.png?size=medium 1.5x, /upload/2023/08/image-1693191140709.png?size=large 2x" data-title="image-1693191140709" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+<p>要让<code>s:1:&quot;a&quot;:s:32:&quot;</code>读取到<code>s:22:&quot;A&quot;</code>，这样<code>s:22:&quot;A</code>就会变成<code>$a</code>的值了，后面的内容就可以执行。</p>
+<p>两个q会变成一个w，所以只要让w的个数等于黄色字符串的长度，即可。</p>
+<p>得到：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="n">A</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="o">$</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="o">$</span><span class="n">b</span><span class="o">=</span><span class="s1">&#39;A&#34;;s:1:&#34;b&#34;;s:3:&#34;104&#34;;}&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">function</span> <span class="n">filter</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="o">$</span><span class="n">filter</span><span class="o">=</span><span class="s1">&#39;/qq/i&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">preg_replace</span><span class="p">(</span><span class="o">$</span><span class="n">filter</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">,</span><span class="o">$</span><span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="n">a</span><span class="o">=</span><span class="n">new</span> <span class="n">A</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">var_dump</span><span class="p">(</span><span class="n">serialize</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s1">&#39;&lt;pre&gt;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="n">r</span><span class="o">=</span><span class="n">filter</span><span class="p">(</span><span class="n">serialize</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="n">var_dump</span><span class="p">(</span><span class="o">$</span><span class="n">r</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">print_r</span><span class="p">(</span><span class="n">unserialize</span><span class="p">(</span><span class="o">$</span><span class="n">r</span><span class="p">));</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>综述
+1.字符串增加：构造的序列化加在qqqq（就是值有很多qqqq的）那个变量里。字符串减少：构造的序列化加在另一个变量里。</p>
+<p>2.字符串减少：字符串&rsquo;qqqqxxx&rsquo;的数量依照构造的那个序列化字符串的长度。字符串减少：字符串&rsquo;qqqqxxx&rsquo;的数量依照&quot;O:1:&ldquo;A&rdquo;:2:{s:1:&ldquo;a&rdquo;;s:44:&ldquo;wwwwwwwwwwwwwwwwwwwwww&rdquo;;s:1:&ldquo;b&rdquo;;s:22:&ldquo;A&rdquo;;s:1:&ldquo;b&rdquo;;s:3:&ldquo;104&rdquo;;}&quot;;}&ldquo;中黄色字符串的长度。</p>
+</div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2023-07-01 11:25:40">Updated on 2023-07-01&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/2023web-php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%80%83%E9%80%B8/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="Share on X" data-sharer="twitter" data-url="http://localhost:1313/posts/2023web-php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%80%83%E9%80%B8/" data-title="Php反序列化逃逸" data-hashtags="Web,CTF"><i class="fa-brands fa-x-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/2023web-php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%80%83%E9%80%B8/" data-hashtag="Web"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/2023web-php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%80%83%E9%80%B8/" data-title="Php反序列化逃逸"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  </span>
+        </div>
+      </div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/web/" class="post-tag" title="Tags - Web">Web</a><a href="/tags/ctf/" class="post-tag" title="Tags - CTF">CTF</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/2023web-ping/" class="post-nav-item" rel="prev" title="Ping"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Ping</a><a href="/posts/2023web-php%E4%BC%AA%E5%8D%8F%E8%AE%AE/" class="post-nav-item" rel="next" title="PHP伪协议">PHP伪协议<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.136.5">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="Tin10g.github.io">Ting</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">This website works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":1000},"comment":{"enable":false},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"typeit":{"cursorChar":"|","cursorSpeed":1000,"duration":-1,"loop":false,"speed":100},"version":"v0.3.13"};console.log('Page config:', window.config);</script><script src="/js/theme.min.js" defer></script></body>
+</html>
