@@ -12,7 +12,7 @@
   <meta itemprop="description" content="[HNCTF 2022 WEEK3]ssssti思路fenjing一把梭 [以下是看大佬博客知道的]">
   <meta itemprop="datePublished" content="2024-10-28T11:25:40+08:00">
   <meta itemprop="dateModified" content="2024-10-28T11:25:40+08:00">
-  <meta itemprop="wordCount" content="31">
+  <meta itemprop="wordCount" content="27">
   <meta itemprop="keywords" content="Web,做题"><meta property="og:url" content="http://localhost:1313/posts/2024%E5%81%9A%E9%A2%98-hnctf-2022-week3ssssti/">
   <meta property="og:site_name" content="Ting BLOG🐈">
   <meta property="og:title" content="【HNCTF 2022 WEEK3】ssssti">
@@ -40,7 +40,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "http:\/\/localhost:1313\/posts\/2024%E5%81%9A%E9%A2%98-hnctf-2022-week3ssssti\/"
-    },"genre": "posts","keywords": "Web, 做题","wordcount":  31 ,
+    },"genre": "posts","keywords": "Web, 做题","wordcount":  27 ,
     "url": "http:\/\/localhost:1313\/posts\/2024%E5%81%9A%E9%A2%98-hnctf-2022-week3ssssti\/","datePublished": "2024-10-28T11:25:40+08:00","dateModified": "2024-10-28T11:25:40+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -144,7 +144,7 @@
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>【HNCTF 2022 WEEK3】ssssti</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/web--2024%E5%81%9A%E9%A2%98/" class="post-category" title="Category - Web · 2024做题"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Web · 2024做题</a></span></div><div class="post-meta-line"><span title="published on 2024-10-28 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-10-28">2024-10-28</time></span>&nbsp;<span title="31 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 100 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>One minute</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/web--2024%E5%81%9A%E9%A2%98/" class="post-category" title="Category - Web · 2024做题"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Web · 2024做题</a></span></div><div class="post-meta-line"><span title="published on 2024-10-28 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-10-28">2024-10-28</time></span>&nbsp;<span title="27 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 100 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>One minute</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>Contents</span>
@@ -175,13 +175,9 @@
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">blacklist = [&#39;\&#39;&#39;, &#39;&#34;&#39;, &#39;args&#39;, &#39;os&#39;, &#39;_&#39;]，不能用post方法
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">也不能用{%   %}</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">blacklist = [&#39;\&#39;&#39;, &#39;&#34;&#39;, &#39;args&#39;, &#39;os&#39;, &#39;_&#39;]，不能用post方法</span></span></code></pre></td></tr></table>
 </div>
 </div></li>
 <li>
