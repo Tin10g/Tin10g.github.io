@@ -13,11 +13,10 @@
   ```
   blacklist = [&#39;\&#39;&#39;, &#39;&#34;&#39;, &#39;args&#39;, &#39;os&#39;, &#39;_&#39;]，不能用post方法
   
-  也不能用{%%}
+  也不能用{%   %}
   ```
 
 * 可以用request.cookies，通过cookies传入参数
-* 
 
 ## EXP
 
@@ -33,7 +32,7 @@ python3 fenjing -m fenjing webui
 
 
 ## 总结
-* 
+* fenjing一把梭
 
 ---
 
