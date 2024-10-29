@@ -248,7 +248,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$output = $twig-&gt;render( $_GET[‘custom_email’] , array(“first_name” =&gt; $user.first_name) );</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$output = $twig-&gt;render( $_GET[&#39;custom_email&#39;] , array(&#34;first_name&#34; =&gt; $user.first_name) );</span></span></code></pre></td></tr></table>
 </div>
 </div><p>本身就有xss漏洞，如果用<code>custom_emai</code>直接写<code>&lt;img&gt;alert(&quot;xss&quot;)&lt;/img&gt;</code></p>
 <p>但是由于本身的不规范，还有这更严重的ssti漏洞</p>
@@ -676,8 +676,7 @@
   <a href="#%e6%bc%8f%e6%b4%9e%e6%8c%96%e6%8e%98" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p><img loading="lazy" src="..%5cimg%5c%e6%a8%a1%e6%9d%bf%e6%b3%a8%e5%85%a51.png" alt="较全的反映了ssti的一些模板渲染引擎及利用" srcset="..%5cimg%5c%e6%a8%a1%e6%9d%bf%e6%b3%a8%e5%85%a51.png?size=small, ..%5cimg%5c%e6%a8%a1%e6%9d%bf%e6%b3%a8%e5%85%a51.png?size=medium 1.5x, ..%5cimg%5c%e6%a8%a1%e6%9d%bf%e6%b3%a8%e5%85%a51.png?size=large 2x" data-title="较全的反映了ssti的一些模板渲染引擎及利用" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
-</div><div class="post-footer" id="post-footer">
+</h2></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">

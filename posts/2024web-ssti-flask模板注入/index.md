@@ -52,7 +52,7 @@
 例如：
 
 ```
-$output = $twig-&gt;render( $_GET[‘custom_email’] , array(“first_name” =&gt; $user.first_name) );
+$output = $twig-&gt;render( $_GET[&#39;custom_email&#39;] , array(&#34;first_name&#34; =&gt; $user.first_name) );
 ```
 
 本身就有xss漏洞，如果用`custom_emai`直接写`&lt;img&gt;alert(&#34;xss&#34;)&lt;/img&gt;`
@@ -317,7 +317,7 @@ cookie:di=__dict__;temp=_TemplateReference__context;lip=lipsum;glo=__globals__;b
 
 ## 漏洞挖掘
 
-![较全的反映了ssti的一些模板渲染引擎及利用](..\img\模板注入1.png)
+
 
 ---
 
