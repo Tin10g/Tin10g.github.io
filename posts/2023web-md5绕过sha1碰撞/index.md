@@ -84,6 +84,12 @@ payload：``` /?a=QNKCDZO&amp;b=240610708```
 payload： /?a[]=1&amp;b[]=2
 *注：==绕过也可用此法*
 
+3. `a=1`，`b=&#39;1&#39;`可以绕过这个
+
+   ```
+   ($this-&gt;a !== $this-&gt;b) &amp;&amp; (md5($this-&gt;a) === md5($this-&gt;b)) &amp;&amp; (sha1($this-&gt;a)=== sha1($this-&gt;b))
+   ```
+
 ### MD5碰撞
 例：
 ```
