@@ -130,35 +130,220 @@
     </a><a href="mailto:ting10win@gmail.com" title="Email"target="_blank" rel="external nofollow noopener noreferrer me"><i class="fa-regular fa-envelope fa-fw" aria-hidden="true"></i>
     </a><a href="/index.xml" title="RSS"target="_blank" rel="external nofollow noopener noreferrer me"><i class="fa-solid fa-rss fa-fw" aria-hidden="true"></i>
     </a></div></div>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_2/">机器学习 · 数据集</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2024-03-01 11:25:40'>published on <time datetime="2024-03-01">2024-03-01</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category" title="Category - 机器学习"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 机器学习</a></span></div><div class="content"><h3 id="数据集" class="heading-element"><span>数据集</span>
-  <a href="#%e6%95%b0%e6%8d%ae%e9%9b%86" class="heading-mark">
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/2024%E5%81%9A%E9%A2%98-swpuctf-2021-%E6%96%B0%E7%94%9F%E8%B5%9Bsql/">【SWPUCTF 2021 新生赛】sql</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2024-07-01 11:25:40'>published on <time datetime="2024-07-01">2024-07-01</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/web--2024%E5%81%9A%E9%A2%98/" class="post-category" title="Category - Web · 2024做题"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Web · 2024做题</a></span></div><div class="content"><h3 id="swpuctf-2021-新生赛sql" class="heading-element"><span>[SWPUCTF 2021 新生赛]sql</span>
+  <a href="#swpuctf-2021-%e6%96%b0%e7%94%9f%e8%b5%9bsql" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><h3 id="可用数据集" class="heading-element"><span>可用数据集</span>
-  <a href="#%e5%8f%af%e7%94%a8%e6%95%b0%e6%8d%ae%e9%9b%86" class="heading-mark">
+</h3><h3 id="思路" class="heading-element"><span>思路</span>
+  <a href="#%e6%80%9d%e8%b7%af" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><p>学习阶段使用的数据集</p></div><div class="post-footer">
-    <a href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_2/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/' class="post-tag">机器学习</a><a href='/tags/%E5%AD%A6%E4%B9%A0/' class="post-tag">学习</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_3/">机器学习 · 特征工程</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2024-03-01 11:25:40'>published on <time datetime="2024-03-01">2024-03-01</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category" title="Category - 机器学习"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 机器学习</a></span></div><div class="content"><h3 id="特征工程" class="heading-element"><span>特征工程</span>
-  <a href="#%e7%89%b9%e5%be%81%e5%b7%a5%e7%a8%8b" class="heading-mark">
+</h3><ul>
+<li>使用常规字符型的联合注入起手</li>
+<li>通过弹窗，在每个语句中找到对应的过滤内容，替换过滤内容</li>
+<li>发现显示只有开头，使用函数获取每一段flag</li>
+</ul>
+<h3 id="exp" class="heading-element"><span>EXP</span>
+  <a href="#exp" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><h3 id="为什么需要" class="heading-element"><span>为什么需要</span>
-  <a href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e9%9c%80%e8%a6%81" class="heading-mark">
+</h3><ol>
+<li>
+<p>一开始在做闭合中发现<code>--+</code>被过滤，因为<code>+</code>表示空格</p></div><div class="post-footer">
+    <a href="/posts/2024%E5%81%9A%E9%A2%98-swpuctf-2021-%E6%96%B0%E7%94%9F%E8%B5%9Bsql/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/web/' class="post-tag">Web</a><a href='/tags/%E5%81%9A%E9%A2%98/' class="post-tag">做题</a><a href='/tags/sql%E6%B3%A8%E5%85%A5/' class="post-tag">SQL注入</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/2024web-ssti-flask%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/">SSTI-Flask模板注入</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2024-07-01 11:25:40'>published on <time datetime="2024-07-01">2024-07-01</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/web--2024%E7%AC%94%E8%AE%B0/" class="post-category" title="Category - Web · 2024笔记"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Web · 2024笔记</a></span></div><div class="content"><h3 id="flask之ssti模版注入" class="heading-element"><span>Flask之SSTI模版注入</span>
+  <a href="#flask%e4%b9%8bssti%e6%a8%a1%e7%89%88%e6%b3%a8%e5%85%a5" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><p>数据和特征决定了机器学习的上限，模型和算法知识逼近这个上限。</p></div><div class="post-footer">
-    <a href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_3/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/' class="post-tag">机器学习</a><a href='/tags/%E5%AD%A6%E4%B9%A0/' class="post-tag">学习</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/yolov9_tensorbord%E4%BD%BF%E7%94%A8/">Tensorbord 使用</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2024-01-01 11:25:40'>published on <time datetime="2024-01-01">2024-01-01</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/yolov9/" class="post-category" title="Category - YOLOv9"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> YOLOv9</a></span></div><div class="content"><h3 id="tensorbord" class="heading-element"><span>tensorbord</span>
-  <a href="#tensorbord" class="heading-mark">
+</h3><p>参考博客：[flask之ssti模版注入从零到入门](<a href="https://xz.aliyun.com/t/3679?time__1311=n4%2Bxnii%3DoGqmqDK0QDODlx6e0%3DWyK0KA%3DoK4iK%3Dx"target="_blank" rel="external nofollow noopener noreferrer">flask之ssti模版注入从零到入门 - 先知社区</a>)</p></div><div class="post-footer">
+    <a href="/posts/2024web-ssti-flask%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/web/' class="post-tag">Web</a><a href='/tags/%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/' class="post-tag">模板注入</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/uni-app%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0_1/">Vue3&#43;ts开发学习 · 基础准备</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2024-04-01 11:25:40'>published on <time datetime="2024-04-01">2024-04-01</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/vue3+ts%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0/" class="post-category" title="Category - Vue3+ts开发学习"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Vue3+ts开发学习</a></span></div><div class="content"><blockquote>
+<p>黑马的视频学习</p>
+</blockquote>
+<h3 id="vscode配置一个uni-app--ts项目" class="heading-element"><span>VSCode配置一个uni-app + TS项目</span>
+  <a href="#vscode%e9%85%8d%e7%bd%ae%e4%b8%80%e4%b8%aauni-app--ts%e9%a1%b9%e7%9b%ae" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><h3 id="服务器启动" class="heading-element"><span>服务器启动</span>
-  <a href="#%e6%9c%8d%e5%8a%a1%e5%99%a8%e5%90%af%e5%8a%a8" class="heading-mark">
+</h3><ul>
+<li>uni-app插件
+<ul>
+<li>uni-create-view</li>
+<li>uni-helper</li>
+<li>uniapp小程序扩展</li>
+</ul>
+</li>
+<li>ts类型校验
+<ul>
+<li>声明类文件</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">pnpm i -D miniprogram-api-typings @uni-helper/uni-app-types</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>配置tsconfig.json</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">  &#34;types&#34;: [
+</span></span><span class="line"><span class="cl">    &#34;@dcloudio/types&#34;,
+</span></span><span class="line"><span class="cl">    &#34;miniprogram-api-typings&#34;,
+</span></span><span class="line"><span class="cl">    &#34;@uni-helper/uni-app-types&#34;
+</span></span><span class="line"><span class="cl">  ]</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&#34;vueCompilerOptions&#34;: {
+</span></span><span class="line"><span class="cl">  // experimentalRuntimeMode 已废弃，现调整为 nativeTags，请升级 Volar 插件至最新版本
+</span></span><span class="line"><span class="cl">  &#34;nativeTags&#34;: [&#34;block&#34;, &#34;component&#34;, &#34;template&#34;, &#34;slot&#34;]
+</span></span><span class="line"><span class="cl">},</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>json注释问题</li>
+</ul>
+<h3 id="内部配置" class="heading-element"><span>内部配置</span>
+  <a href="#%e5%86%85%e9%83%a8%e9%85%8d%e7%bd%ae" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ol>
+<li>mainifest.json中添加微信小程序的appid</li>
+</ol>
+<blockquote>
+<p>一定是小程序相关的appid配置</p></div><div class="post-footer">
+    <a href="/posts/uni-app%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0_1/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/vue3/' class="post-tag">Vue3</a><a href='/tags/uni-app/' class="post-tag">Uni-App</a><a href='/tags/%E5%BC%80%E5%8F%91/' class="post-tag">开发</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/uni-app%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0_3/">Vue3&#43;ts开发学习 · 小兔鲜儿3</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2024-04-01 11:25:40'>published on <time datetime="2024-04-01">2024-04-01</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/vue3+ts%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0/" class="post-category" title="Category - Vue3+ts开发学习"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Vue3+ts开发学习</a></span></div><div class="content"><blockquote>
+<p>黑马的视频学习</p>
+</blockquote>
+<h3 id="首页" class="heading-element"><span>首页</span>
+  <a href="#%e9%a6%96%e9%a1%b5" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><h3 id="组件封装" class="heading-element"><span>组件封装</span>
+  <a href="#%e7%bb%84%e4%bb%b6%e5%b0%81%e8%a3%85" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><h4 id="只有一个页面需要使用" class="heading-element"><span>只有一个页面需要使用</span>
+  <a href="#%e5%8f%aa%e6%9c%89%e4%b8%80%e4%b8%aa%e9%a1%b5%e9%9d%a2%e9%9c%80%e8%a6%81%e4%bd%bf%e7%94%a8" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><blockquote>
+<p>以首页导航栏示例
+/index/index.vue</p></div><div class="post-footer">
+    <a href="/posts/uni-app%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0_3/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/vue3/' class="post-tag">Vue3</a><a href='/tags/uni-app/' class="post-tag">Uni-App</a><a href='/tags/%E5%BC%80%E5%8F%91/' class="post-tag">开发</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/uni-app%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0_2/">Vue3&#43;ts开发学习——小兔鲜儿2</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2024-04-01 11:25:40'>published on <time datetime="2024-04-01">2024-04-01</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/vue3+ts%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0/" class="post-category" title="Category - Vue3+ts开发学习"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Vue3+ts开发学习</a></span></div><div class="content"><blockquote>
+<p>黑马的视频学习</p>
+</blockquote>
+<h3 id="基础架构" class="heading-element"><span>基础架构</span>
+  <a href="#%e5%9f%ba%e7%a1%80%e6%9e%b6%e6%9e%84" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><h3 id="构建页面" class="heading-element"><span>构建页面</span>
+  <a href="#%e6%9e%84%e5%bb%ba%e9%a1%b5%e9%9d%a2" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ol>
+<li>安装uni-ui</li>
+</ol>
+<blockquote>
+<p><a href="https://uniapp.dcloud.net.cn/component/uniui/uni-ui.html"target="_blank" rel="external nofollow noopener noreferrer">uniapp官网</a>
+npm安装跟着开始说明走，直接安装就行。</p></div><div class="post-footer">
+    <a href="/posts/uni-app%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0_2/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/vue3/' class="post-tag">Vue3</a><a href='/tags/uni-app/' class="post-tag">Uni-App</a><a href='/tags/%E5%BC%80%E5%8F%91/' class="post-tag">开发</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/git%E4%B8%8A%E4%BC%A0%E9%A1%B9%E7%9B%AE/">杂记 · Git与Github对项目进行相关操作</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2024-04-01 11:25:40'>published on <time datetime="2024-04-01">2024-04-01</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E6%9D%82%E8%AE%B0/" class="post-category" title="Category - 杂记"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 杂记</a></span></div><div class="content"><h3 id="使用git与github对项目进行相关操作" class="heading-element"><span>使用Git与Github对项目进行相关操作</span>
+  <a href="#%e4%bd%bf%e7%94%a8git%e4%b8%8egithub%e5%af%b9%e9%a1%b9%e7%9b%ae%e8%bf%9b%e8%a1%8c%e7%9b%b8%e5%85%b3%e6%93%8d%e4%bd%9c" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><h3 id="上传本地项目" class="heading-element"><span>上传本地项目</span>
+  <a href="#%e4%b8%8a%e4%bc%a0%e6%9c%ac%e5%9c%b0%e9%a1%b9%e7%9b%ae" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ol>
+<li>在本地项目文件夹中初始化一个.git文件
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git init</span></span></code></pre></td></tr></table>
+</div>
+</div>之后就得到一个.git的隐藏文件</li>
+<li>在远程仓库里面加入我要上传的仓库[相当于连接远程仓库]
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git remote add origin https://github.com/你的github名字/仓库名.git</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>查看当前本地仓库状态
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git status</span></span></code></pre></td></tr></table>
+</div>
+</div>被标红色的文件就是修改的文件</li>
+<li>提交本地代码到本地git的缓存区
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git add xxx
+</span></span><span class="line"><span class="cl">git add . //全部提交</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>推送代码到本地的git库
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git commit -m &#34;注释&#34;</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>把本地的代码提交到远程仓库
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/* 如果仓库为空 */
+</span></span><span class="line"><span class="cl">git push -u 远程主机名orign 远程分支名main/master
+</span></span><span class="line"><span class="cl">/* 如果仓库不为空 */
+</span></span><span class="line"><span class="cl">git push 远程主机名orign 远程分支名main/master</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h3 id="其它指令" class="heading-element"><span>其它指令</span>
+  <a href="#%e5%85%b6%e5%ae%83%e6%8c%87%e4%bb%a4" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
 </h3><div class="highlight"><div class="chroma">
@@ -166,125 +351,31 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">tensorboard --logdir=./runs</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="本地使用" class="heading-element"><span>本地使用</span>
-  <a href="#%e6%9c%ac%e5%9c%b0%e4%bd%bf%e7%94%a8" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><p>ssh连接，把服务器6006端口映射到本地的16006端口</p></div><div class="post-footer">
-    <a href="/posts/yolov9_tensorbord%E4%BD%BF%E7%94%A8/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/yolov9/' class="post-tag">YOLOv9</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/reading-yoloworld%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">YOLO-World:Real-Time Open-Vocabulary Object Detection</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2024-01-01 11:25:40'>published on <time datetime="2024-01-01">2024-01-01</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/paper-reading/" class="post-category" title="Category - Paper Reading"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Paper Reading</a></span></div><div class="content"><h3 id="abstract" class="heading-element"><span>Abstract</span>
-  <a href="#abstract" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><h3 id="提出问题" class="heading-element"><span>提出问题</span>
-  <a href="#%e6%8f%90%e5%87%ba%e9%97%ae%e9%a2%98" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><ul>
-<li>由于预定义和训练过的对象一般是图像类，YOLO系列在开放场景适用性低</li>
-</ul>
-<h3 id="成果" class="heading-element"><span>成果</span>
-  <a href="#%e6%88%90%e6%9e%9c" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><ul>
-<li>团队通过在较大数据集的视觉语言建模和预训练增强了YOLO开放词汇表检测功能</li>
-<li>RepVL-PAN &amp; region-text contrasitive loss
-增强了视觉和语言信息的交互</li>
-<li>在没有直接训练样本的情况下，模型能高效地识别或检测较大范围内的新的对象类别</li>
-</ul>
-<h3 id="数据集" class="heading-element"><span>数据集</span>
-  <a href="#%e6%95%b0%e6%8d%ae%e9%9b%86" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><ul>
-<li>使用LVIS dataset</li>
-<li>结果：在LVIS数据集上取得了35.4的平均精度（AP），同时在V100硬件上达到了52.0帧每秒（FPS）</li>
-<li>对比：在准确性和处理速度上都优于许多当前最先进的方法</li>
-</ul>
-<h3 id="introduction" class="heading-element"><span>Introduction</span>
-  <a href="#introduction" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><ul>
-<li>主流的视觉-语言检测模型和YOLO-World对比，YOLO-World在FPS（v100）上提速20倍，并且在平均精度上和主流模型差不多甚至更好。</li>
-</ul>
-<blockquote>
-<p>数据评估方法：1. 精度——LVIS minival的固定的AP 2. 推理速度——NVIDIA V100 w/o TensorRT</p></div><div class="post-footer">
-    <a href="/posts/reading-yoloworld%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/yoloworld/' class="post-tag">YOLOWorld</a><a href='/tags/%E7%BB%84%E4%BC%9A/' class="post-tag">组会</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/yolov9_bug%E8%AE%B0%E5%BD%95/">YOLOv9环境配置心路</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2024-01-01 11:25:40'>published on <time datetime="2024-01-01">2024-01-01</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/yolov9/" class="post-category" title="Category - YOLOv9"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> YOLOv9</a></span></div><div class="content"><h3 id="yolov9--bugs" class="heading-element"><span>YOLOv9 &amp; BUGs</span>
-  <a href="#yolov9--bugs" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><h3 id="loss_talpy报错" class="heading-element"><span>loss_tal.py报错</span>
-  <a href="#loss_talpy%e6%8a%a5%e9%94%99" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><p>cfg使用的glane-c.yaml</p></div><div class="post-footer">
-    <a href="/posts/yolov9_bug%E8%AE%B0%E5%BD%95/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/yolov9/' class="post-tag">YOLOv9</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/yolov9_%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83/">YOLO系列环境配置心路</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2024-01-01 11:25:40'>published on <time datetime="2024-01-01">2024-01-01</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/yolov9/" class="post-category" title="Category - YOLOv9"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> YOLOv9</a></span></div><div class="content"><h3 id="创建虚拟环境" class="heading-element"><span>创建虚拟环境</span>
-  <a href="#%e5%88%9b%e5%bb%ba%e8%99%9a%e6%8b%9f%e7%8e%af%e5%a2%83" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><h4 id="法一conda" class="heading-element"><span>法一：conda</span>
-  <a href="#%e6%b3%95%e4%b8%80conda" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h4><ul>
-<li>创建</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">conda create -n your_env_name python=3.7</span></span></code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>激活Linux</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">conda activate your_env_name</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git pull // 把远程仓库同步到本地仓库=&gt;谨防覆盖自己的本地</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">source activate your_env_name</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git remote -v // 查看远程仓库详细信息，可以看到仓库名称，关联地址</span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="法二virturalenvs" class="heading-element"><span>法二：virturalenvs</span>
-  <a href="#%e6%b3%95%e4%ba%8cvirturalenvs" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h4><ul>
-<li>创建<br>
-直接用pycharm创建的环境就在这个.virturalenvs文件里面</li>
-<li>激活(找bin下的activate)</li>
-</ul>
-<div class="highlight"><div class="chroma">
+</div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">source /home/lzh/.virtualenvs/t_yolov7Oral/bin/activate</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git remote remove orign // 删除orign仓库（比如名称错误）</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="配置package" class="heading-element"><span>配置package</span>
-  <a href="#%e9%85%8d%e7%bd%aepackage" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><p>一般项目会有requirements.txt<br>
-进项目文件</p></div><div class="post-footer">
-    <a href="/posts/yolov9_%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/yolov9/' class="post-tag">YOLOv9</a></div></div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git remote add origin 仓库地址// 重新添加远程仓库地址</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer">
+    <a href="/posts/git%E4%B8%8A%E4%BC%A0%E9%A1%B9%E7%9B%AE/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/%E6%8A%80%E5%B7%A7/' class="post-tag">技巧</a><a href='/tags/gitgithub/' class="post-tag">Git&amp;github</a></div></div>
 </article><ul class="pagination"><li class="page-item">
           <span class="page-link">
             <a href="/">1</a>
@@ -306,6 +397,16 @@
         </li><li class="page-item">
           <span class="page-link">
             <a href="/page/9/">9</a>
+          </span>
+        </li><li class="page-item">
+          <span class="page-link">
+            <a href="/page/10/">10</a>
+          </span>
+        </li><li class="page-item">
+          <span class="page-link" aria-hidden="true">&hellip;</span>
+        </li><li class="page-item">
+          <span class="page-link">
+            <a href="/page/13/">13</a>
           </span>
         </li></ul></div></main><footer class="footer">
     <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.136.5">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
