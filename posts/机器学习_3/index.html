@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>机器学习 · 特征工程 - Ting BLOG🐈</title><meta name="author" content="Ting">
+<meta name="description" content="特征工程为什么需要数据和特征决定了机器学习的上限，模型和算法知识逼近这个上限。
+"><meta name="keywords" content='机器学习, 学习'>
+  <meta itemprop="name" content="机器学习 · 特征工程">
+  <meta itemprop="description" content="特征工程为什么需要数据和特征决定了机器学习的上限，模型和算法知识逼近这个上限。">
+  <meta itemprop="datePublished" content="2024-03-01T11:25:40+08:00">
+  <meta itemprop="dateModified" content="2024-03-01T11:25:40+08:00">
+  <meta itemprop="wordCount" content="759">
+  <meta itemprop="keywords" content="机器学习,学习"><meta property="og:url" content="http://localhost:1313/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_3/">
+  <meta property="og:site_name" content="Ting BLOG🐈">
+  <meta property="og:title" content="机器学习 · 特征工程">
+  <meta property="og:description" content="特征工程为什么需要数据和特征决定了机器学习的上限，模型和算法知识逼近这个上限。">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-03-01T11:25:40+08:00">
+    <meta property="article:modified_time" content="2024-03-01T11:25:40+08:00">
+    <meta property="article:tag" content="机器学习">
+    <meta property="article:tag" content="学习">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="机器学习 · 特征工程">
+  <meta name="twitter:description" content="特征工程为什么需要数据和特征决定了机器学习的上限，模型和算法知识逼近这个上限。">
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_3/" title="机器学习 · 特征工程 - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/yolov9_tensorbord%E4%BD%BF%E7%94%A8/" title="tensorbord 使用" /><link rel="next" type="text/html" href="http://localhost:1313/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_2/" title="机器学习 · 数据集" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_3/index.md" title="机器学习 · 特征工程 - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "机器学习 · 特征工程",
+    "inLanguage": "en",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/posts\/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_3\/"
+    },"genre": "posts","keywords": "机器学习, 学习","wordcount":  759 ,
+    "url": "http:\/\/localhost:1313\/posts\/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_3\/","datePublished": "2024-03-01T11:25:40+08:00","dateModified": "2024-03-01T11:25:40+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Ting"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/archives/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/archives/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>机器学习 · 特征工程</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category" title="Category - 机器学习"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 机器学习</a></span></div><div class="post-meta-line"><span title="published on 2024-03-01 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-01">2024-03-01</time></span>&nbsp;<span title="759 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 800 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>4 minutes</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#为什么需要">为什么需要</a></li>
+    <li><a href="#是什么">是什么</a></li>
+    <li><a href="#特征工程的位置与数据比较">特征工程的位置与数据比较</a></li>
+    <li><a href="#特征工程基本类型">特征工程基本类型</a>
+      <ul>
+        <li><a href="#特征抽取提取">特征抽取（提取）</a></li>
+        <li><a href="#文本特征提取">文本特征提取</a></li>
+      </ul>
+    </li>
+    <li><a href="#特征工程预处理">特征工程预处理</a>
+      <ul>
+        <li><a href="#方法">方法</a></li>
+        <li><a href="#为什么">为什么</a></li>
+        <li><a href="#归一化">归一化</a></li>
+        <li><a href="#标准化">标准化</a></li>
+      </ul>
+    </li>
+    <li><a href="#特征降维">特征降维</a>
+      <ul>
+        <li><a href="#特征选择">特征选择</a></li>
+        <li><a href="#主成分分析">主成分分析</a></li>
+      </ul>
+    </li>
+    <li><a href="#案例探究用户对武平类别的喜好分类降维">案例：探究用户对武平类别的喜好分类降维</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 id="特征工程" class="heading-element"><span>特征工程</span>
+  <a href="#%e7%89%b9%e5%be%81%e5%b7%a5%e7%a8%8b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h2 id="为什么需要" class="heading-element"><span>为什么需要</span>
+  <a href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e9%9c%80%e8%a6%81" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>数据和特征决定了机器学习的上限，模型和算法知识逼近这个上限。</p>
+<h2 id="是什么" class="heading-element"><span>是什么</span>
+  <a href="#%e6%98%af%e4%bb%80%e4%b9%88" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>用专业背景知识和技巧处理数据，使特征能在机器学习算法上发挥更好的作用。</p>
+<h2 id="特征工程的位置与数据比较" class="heading-element"><span>特征工程的位置与数据比较</span>
+  <a href="#%e7%89%b9%e5%be%81%e5%b7%a5%e7%a8%8b%e7%9a%84%e4%bd%8d%e7%bd%ae%e4%b8%8e%e6%95%b0%e6%8d%ae%e6%af%94%e8%be%83" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>sklearn: 对于特征的处理提供强大的接口</li>
+<li>pandas: 一个数据读取非常方便以及基本的处理格式的工具</li>
+</ul>
+<h2 id="特征工程基本类型" class="heading-element"><span>特征工程基本类型</span>
+  <a href="#%e7%89%b9%e5%be%81%e5%b7%a5%e7%a8%8b%e5%9f%ba%e6%9c%ac%e7%b1%bb%e5%9e%8b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h3 id="特征抽取提取" class="heading-element"><span>特征抽取（提取）</span>
+  <a href="#%e7%89%b9%e5%be%81%e6%8a%bd%e5%8f%96%e6%8f%90%e5%8f%96" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ol>
+<li>讲任意数据转换为可用于机器学习的数字特征</li>
+</ol>
+<blockquote>
+<p>特征值化为例计算机理解数据</p>
+</blockquote>
+<ul>
+<li>字典特征提取：特征离散化</li>
+<li>文本特征提取</li>
+<li>图像特征提取</li>
+</ul>
+<ol start="2">
+<li>使用</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sklean.feature_extraction</span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>字典特征提取</li>
+</ol>
+<blockquote>
+<p>类别 -&gt; one-hot编码<br>
+sparse矩阵&ndash;稀疏矩阵</p>
+</blockquote>
+<ul>
+<li><code>DictVectorizer.inverse_transform(X)</code>：array数组或者sparse矩阵，返回转换之前的数据格式</li>
+<li><code>DictVectorizer.fit_transform(X)</code>：字典或者包含字典的迭代器放回置，返回sparse矩阵</li>
+<li><code>DictVectorizer.get_feature_names()</code>：返回类名</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">def dict_demo():
+</span></span><span class="line"><span class="cl">    &#34;&#34;&#34;
+</span></span><span class="line"><span class="cl">    字典特征提取
+</span></span><span class="line"><span class="cl">    :return:
+</span></span><span class="line"><span class="cl">    &#34;&#34;&#34;
+</span></span><span class="line"><span class="cl">    data = [{&#39;city&#39;: &#39;北京&#39;, &#39;temperrature&#39;:100}, {&#39;city&#39;: &#39;上海&#39;, &#39;temperrature&#39;: 60}, {&#39;city&#39;: &#39;深圳&#39;, &#39;temperrature&#39;:30}]
+</span></span><span class="line"><span class="cl">    # 实例化一个转换类器
+</span></span><span class="line"><span class="cl">    # Ture返回sparse矩阵
+</span></span><span class="line"><span class="cl">    transfer = DictVectorizer(sparse=False)
+</span></span><span class="line"><span class="cl">    # 调用fit_transform()
+</span></span><span class="line"><span class="cl">    data_new = transfer.fit_transform(data)
+</span></span><span class="line"><span class="cl">    print(&#34;data_new:\n&#34;, data_new)
+</span></span><span class="line"><span class="cl">    print(&#34;feature_name:\n&#34;, transfer.get_feature_names_out())
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    return None</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="文本特征提取" class="heading-element"><span>文本特征提取</span>
+  <a href="#%e6%96%87%e6%9c%ac%e7%89%b9%e5%be%81%e6%8f%90%e5%8f%96" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ol>
+<li>单词作为特征</li>
+<li><code>sklearn.feature_extraction.text.CountVertorizer(stop_words=[])</code></li>
+</ol>
+<blockquote>
+<p>返回词频矩阵
+中文会把一个句子、短语作为一个特征，需要划分短语【工具】</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">def text_demo():
+</span></span><span class="line"><span class="cl">    &#34;&#34;&#34;
+</span></span><span class="line"><span class="cl">    文本特征提取
+</span></span><span class="line"><span class="cl">    :return:
+</span></span><span class="line"><span class="cl">    &#34;&#34;&#34;
+</span></span><span class="line"><span class="cl">    data = [&#34;life is short, i like like python&#34;, &#34;life is long, i like like python&#34;]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    # 实例化一个转换器
+</span></span><span class="line"><span class="cl">    transfer = CountVectorizer()
+</span></span><span class="line"><span class="cl">    # 调用函数
+</span></span><span class="line"><span class="cl">    data_new = transfer.fit_transform(data)
+</span></span><span class="line"><span class="cl">    data_new1 = data_new.toarray()
+</span></span><span class="line"><span class="cl">    print(&#34;data_new:\n&#34;, data_new)
+</span></span><span class="line"><span class="cl">    print(&#34;data_new:\n&#34;, data_new1)
+</span></span><span class="line"><span class="cl">    print(&#34;特征:\n&#34;, transfer.get_feature_names_out())
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    return None</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>中文文本特征提取
+<blockquote>
+<p>自动划分中文工具&ndash;jieba.cut</p>
+</blockquote>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">def text_Chinese_demo():
+</span></span><span class="line"><span class="cl">    &#34;&#34;&#34;
+</span></span><span class="line"><span class="cl">    中文文本特征提取（加入自动划分短语）
+</span></span><span class="line"><span class="cl">    :return:
+</span></span><span class="line"><span class="cl">    &#34;&#34;&#34;
+</span></span><span class="line"><span class="cl">    data = [&#34;努力了，就没有后悔。谋事在人，成事在天。只要自己努力了，没有错过你面前的每一个机会，你就对得起自己。&#34;, &#34;即使失败也无怨无悔。&#34;, &#34;人生重在态度，重在过程，结果都是次要的&#34;]
+</span></span><span class="line"><span class="cl">    # 实例化一个转换器
+</span></span><span class="line"><span class="cl">    transfer = CountVectorizer()
+</span></span><span class="line"><span class="cl">    # 自动分词
+</span></span><span class="line"><span class="cl">    data_1 = []
+</span></span><span class="line"><span class="cl">    for sentence in data:
+</span></span><span class="line"><span class="cl">        data_1.append(cut_word(sentence))
+</span></span><span class="line"><span class="cl">    # 调用函数
+</span></span><span class="line"><span class="cl">    data_new = transfer.fit_transform(data_1)
+</span></span><span class="line"><span class="cl">    print(&#34;data_new:\n&#34;, data_new)
+</span></span><span class="line"><span class="cl">    print(&#34;特征:\n&#34;, transfer.get_feature_names_out())
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    return None
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">def cut_word(text):
+</span></span><span class="line"><span class="cl">    &#34;&#34;&#34;
+</span></span><span class="line"><span class="cl">    中文分词
+</span></span><span class="line"><span class="cl">    :param text:
+</span></span><span class="line"><span class="cl">    :return:
+</span></span><span class="line"><span class="cl">    &#34;&#34;&#34;
+</span></span><span class="line"><span class="cl">    text_new = jieba.cut(text)
+</span></span><span class="line"><span class="cl">    # print(text_new)
+</span></span><span class="line"><span class="cl">    # 强转
+</span></span><span class="line"><span class="cl">    text_new = &#34; &#34;.join(list(text_new))
+</span></span><span class="line"><span class="cl">    # print(text_new)
+</span></span><span class="line"><span class="cl">    return text</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>Tf-idf文本特征提取
+<ul>
+<li>TF-IDF &ndash; 重要程度 &ndash; 某个词或短语在一篇文章中出现的概率高而且在其他文章中出现少</li>
+<li>TF &ndash; 词频 &ndash; 以总文件数目除以保护该词语的文件数目<br>
+找某类文章中出现最多的词语，同时在别的文章中出现少（关键词）</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"> def tfidf_demo():
+</span></span><span class="line"><span class="cl"> &#34;&#34;&#34;
+</span></span><span class="line"><span class="cl"> TF-IDF进行关键词提取
+</span></span><span class="line"><span class="cl"> :return:
+</span></span><span class="line"><span class="cl"> &#34;&#34;&#34;
+</span></span><span class="line"><span class="cl"> data = [&#34;努力了，就没有后悔，努力了。&#34;, &#34;谋事在人，成事在天。&#34;, &#34;只要自己努力了，没有错过你面前的每一个机会，&#34;, &#34;你就对得起自己。&#34;,
+</span></span><span class="line"><span class="cl">         &#34;即使失败也无怨无悔。&#34;, &#34;人生重在态度，重在过程，结果都是次要的&#34;]
+</span></span><span class="line"><span class="cl"> # 实例化一个转换器
+</span></span><span class="line"><span class="cl"> transfer = TfidfVectorizer()
+</span></span><span class="line"><span class="cl"> # 自动分词
+</span></span><span class="line"><span class="cl"> data_1 = []
+</span></span><span class="line"><span class="cl"> for sentence in data:
+</span></span><span class="line"><span class="cl">     data_1.append(cut_word(sentence))
+</span></span><span class="line"><span class="cl"> # 调用函数
+</span></span><span class="line"><span class="cl"> data_new = transfer.fit_transform(data_1)
+</span></span><span class="line"><span class="cl"> print(&#34;data_new:\n&#34;, data_new)
+</span></span><span class="line"><span class="cl"> print(&#34;data_new:\n&#34;, data_new.toarray())
+</span></span><span class="line"><span class="cl"> print(&#34;特征:\n&#34;, transfer.get_feature_names_out())
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> return None</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h2 id="特征工程预处理" class="heading-element"><span>特征工程预处理</span>
+  <a href="#%e7%89%b9%e5%be%81%e5%b7%a5%e7%a8%8b%e9%a2%84%e5%a4%84%e7%90%86" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>通过一些转换函数，将特征数据转换成更加适合算法模型的特征数据过程</p>
+<h3 id="方法" class="heading-element"><span>方法</span>
+  <a href="#%e6%96%b9%e6%b3%95" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>数值型数据的无量纲化</p>
+<blockquote>
+<p>量纲不统一会导致计算中某一特征数据影响过大</p>
+</blockquote>
+<ul>
+<li>归一化</li>
+<li>标准化</li>
+</ul>
+<blockquote>
+<p>一般使用标准化，由于异常值对总体影响较小</p>
+</blockquote>
+<h3 id="为什么" class="heading-element"><span>为什么</span>
+  <a href="#%e4%b8%ba%e4%bb%80%e4%b9%88" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>特征单位或者大小相差较大或者某特征的方差相比其它的特征要打出几个数量级，容易影响目标结果，使算法无法学习到其它特征</p>
+<h3 id="归一化" class="heading-element"><span>归一化</span>
+  <a href="#%e5%bd%92%e4%b8%80%e5%8c%96" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ol>
+<li>通过对原始数据进行变换把数据映射到某一段数据之间（默认[0,1]）</li>
+<li>原理<br>
+$$X&rsquo; = \frac{x - \text{min}}{\text{max} - \text{min}}$$<br>
+$$X&rsquo;&rsquo; = X&rsquo; * (\text{mx} - \text{mi}) + \text{mi}$$</li>
+<li>使用
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sklearn.preprocessing.MinMaxScaler(feature_rang=(0,1)...)
+</span></span><span class="line"><span class="cl">MinMaxScalar.fit_transform(X)
+</span></span><span class="line"><span class="cl"># X格式numpy_array格式的数据
+</span></span><span class="line"><span class="cl"># 返回array</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">def minmax_demo():
+</span></span><span class="line"><span class="cl"> &#34;&#34;&#34;
+</span></span><span class="line"><span class="cl"> 归一化处理
+</span></span><span class="line"><span class="cl"> :return:
+</span></span><span class="line"><span class="cl"> &#34;&#34;&#34;
+</span></span><span class="line"><span class="cl"> # 获取数据
+</span></span><span class="line"><span class="cl"> data = pd.read_csv(&#34;data1.txt&#34;)
+</span></span><span class="line"><span class="cl"> data = data.iloc[:, :3]
+</span></span><span class="line"><span class="cl"> # print(data)
+</span></span><span class="line"><span class="cl"> # 实例化转换器类
+</span></span><span class="line"><span class="cl"> transfer = MinMaxScaler(feature_range=(2,3))
+</span></span><span class="line"><span class="cl"> #  使用
+</span></span><span class="line"><span class="cl"> data_new = transfer.fit_transform(data)
+</span></span><span class="line"><span class="cl"> print(&#34;data_new:\n&#34;, data_new)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> return None</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>缺点<br>
+如果异常值为最大值和最小值，会影响结构。
+<blockquote>
+<p>归一化鲁棒性较差，知识和传统精确小数据场景</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="标准化" class="heading-element"><span>标准化</span>
+  <a href="#%e6%a0%87%e5%87%86%e5%8c%96" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ol>
+<li>定义<br>
+通过对原始数据进行变换把数据变换到均值为0，标准差为1范围内。</li>
+<li>公式
+$$X&rsquo; = \frac{x - \text{mean}}{\delta}$$
+<blockquote>
+<p>mean为平均值，$\delta$为标准差</p>
+</blockquote>
+</li>
+<li>对标准化来说，少量的异常点对整体影响小</li>
+<li>使用
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sklearn.processiong.StamdardSclaer</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">def stand_demo():
+</span></span><span class="line"><span class="cl"> &#34;&#34;&#34;
+</span></span><span class="line"><span class="cl"> 标准化处理
+</span></span><span class="line"><span class="cl"> :return:
+</span></span><span class="line"><span class="cl"> &#34;&#34;&#34;
+</span></span><span class="line"><span class="cl"> # 获取数据
+</span></span><span class="line"><span class="cl"> data = pd.read_csv(&#34;data1.txt&#34;)
+</span></span><span class="line"><span class="cl"> data = data.iloc[:, :3]
+</span></span><span class="line"><span class="cl"> # 实例化转换器
+</span></span><span class="line"><span class="cl"> transfer = StandardScaler()
+</span></span><span class="line"><span class="cl"> # 使用
+</span></span><span class="line"><span class="cl"> data_new = transfer.fit_transform(data)
+</span></span><span class="line"><span class="cl"> print(&#34;data_new:\n&#34;, data_new)
+</span></span><span class="line"><span class="cl"> return None</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h2 id="特征降维" class="heading-element"><span>特征降维</span>
+  <a href="#%e7%89%b9%e5%be%81%e9%99%8d%e7%bb%b4" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><table>
+  <thead>
+      <tr>
+          <th>维数</th>
+          <th>嵌套层数</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0维</td>
+          <td>标量</td>
+      </tr>
+      <tr>
+          <td>1维</td>
+          <td>向量</td>
+      </tr>
+      <tr>
+          <td>2维</td>
+          <td>矩阵</td>
+      </tr>
+      <tr>
+          <td>n维</td>
+          <td></td>
+      </tr>
+  </tbody>
+</table>
+<ol>
+<li>定义
+<ul>
+<li>对象：二维数组</li>
+<li>要求：降低特征（变量）的个数</li>
+<li>结果：特征和特征不相关</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>为了减少冗余信息</p>
+</blockquote>
+<ol start="2">
+<li>方法
+<ul>
+<li>特征选择</li>
+<li>主成分分析</li>
+</ul>
+</li>
+</ol>
+<h3 id="特征选择" class="heading-element"><span>特征选择</span>
+  <a href="#%e7%89%b9%e5%be%81%e9%80%89%e6%8b%a9" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ol>
+<li>
+<p>定义<br>
+从数据中包含的冗余的相关变量中找出主要特征。</p>
+</li>
+<li>
+<p>方法</p>
+<ul>
+<li>Filter过滤式
+<ul>
+<li>方差选择法：低方差特征过滤</li>
+<li>相关系数：特征与特征的相关程度</li>
+</ul>
+</li>
+<li>Embedded嵌入式
+<ul>
+<li>决策树：信息熵、信息增益</li>
+<li>正则化：L1、L2</li>
+<li>深度学习：卷积</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>模块</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sklearn.feature_selection</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>低方差特征过滤</p>
+<ul>
+<li>特征方差小：某个特征大多样本的值比较相近</li>
+<li>特征方差大：某个特征大多样本的值有差别</li>
+</ul>
+<ol>
+<li>API</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sklearn.feature_selection.VaroamceThreshold(threshold=0.0)</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>相关系数<br>
+皮尔森相关系数r</p>
+<blockquote>
+<p>当-1&lt;= r &lt;=1，有以下规律</p>
+</blockquote>
+<ul>
+<li>当 r&gt;0 两变量正相关，反之 r&lt;0 负相关</li>
+<li>当 |r|=1 两变量完全相关；当r=0，两 变量无相关关系</li>
+<li>当 0&lt;|r|&lt;1 表示两变量存在一定程度的相关，而且 |r| 越接近0，相关越弱</li>
+<li>一般三级划分：|r|&lt;0.4低度相关，0.4&lt;=|r|&lt;0.7显著性相关，0.7&lt;=|r|&lt;1为高度相关</li>
+</ul>
+<ol>
+<li>API</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">from scipy.stats import pearsonr</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h3 id="主成分分析" class="heading-element"><span>主成分分析</span>
+  <a href="#%e4%b8%bb%e6%88%90%e5%88%86%e5%88%86%e6%9e%90" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ol>
+<li>定义
+将高维数据转换为低维数据过程，可能会舍弃原有的数据，创造新的变量</li>
+<li>作用
+数据维数压缩，尽可能降低原数据的维数（复杂度），损失少量信息。</li>
+<li>应用
+回归分析或者聚类分析</li>
+</ol>
+<blockquote>
+<p>三维物体只选择最明显体现物体特征的拍为的二维图片</p>
+</blockquote>
+<ol start="4">
+<li>模块
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sklearn.decomposition.PCA(n_components=None)</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>将数据分解为低维空间</li>
+<li>n_components=None：小数-保留百分之多少信息；整数-减少多少特征</li>
+<li><code>PCA.fit_transform(X) X: numpy array格式的数据</code></li>
+</ul>
+</li>
+<li>代码</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">def pca_demo():
+</span></span><span class="line"><span class="cl">    &#34;&#34;&#34;
+</span></span><span class="line"><span class="cl">    PCA降维
+</span></span><span class="line"><span class="cl">    :return:
+</span></span><span class="line"><span class="cl">    &#34;&#34;&#34;
+</span></span><span class="line"><span class="cl">    data = [[2,8,4,5], [6,3,0,8], [5,4,9,1]]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    # 调用转换器类
+</span></span><span class="line"><span class="cl">    transformers = PCA(n_components=0.95)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    # 调用fit_transform
+</span></span><span class="line"><span class="cl">    data_new = transformers.fit_transform(data)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    print(data_new)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    return None</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="案例探究用户对武平类别的喜好分类降维" class="heading-element"><span>案例：探究用户对武平类别的喜好分类降维</span>
+  <a href="#%e6%a1%88%e4%be%8b%e6%8e%a2%e7%a9%b6%e7%94%a8%e6%88%b7%e5%af%b9%e6%ad%a6%e5%b9%b3%e7%b1%bb%e5%88%ab%e7%9a%84%e5%96%9c%e5%a5%bd%e5%88%86%e7%b1%bb%e9%99%8d%e7%bb%b4" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>对象：物品类别和用户的关系 =&gt; user_id和aisle的关系</li>
+</ul>
+<blockquote>
+<p>需要将user_id和aisle放到同一个表中 - 合并<br>
+找二者的关系 - 交叉表和透视表<br>
+特征冗余过多 - PCA降维</p>
+</blockquote>
+<ul>
+<li>数据信息
+<ul>
+<li>order_products_prior.csv 订单与商品信息
+<ul>
+<li>order_id</li>
+<li>product_id</li>
+<li>add_to_cart_order</li>
+<li>departmentt_id</li>
+</ul>
+</li>
+<li>products.csv 商品信息
+<ul>
+<li>product_id</li>
+<li>product_name</li>
+<li>aisle_id</li>
+<li>department_id</li>
+</ul>
+</li>
+<li>orders.csv 用户订单信息
+<ul>
+<li>product_id</li>
+<li>product_name</li>
+<li>aisle_id</li>
+<li>department_id</li>
+</ul>
+</li>
+<li>aisles.csv 商品所属具体物品的类别
+<ul>
+<li>aisles_id</li>
+<li>aisle</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 获取数据
+</span></span><span class="line"><span class="cl"># 合并表
+</span></span><span class="line"><span class="cl"># 找到user_id和aisel的关系
+</span></span><span class="line"><span class="cl"># PCA降维
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">import pandas as pd
+</span></span><span class="line"><span class="cl">from sklearn import PCA
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 获取数据
+</span></span><span class="line"><span class="cl">order_products = pd.read_csv(&#34;/order_product_prior.csv&#34;)
+</span></span><span class="line"><span class="cl">products = pd.read_csv(&#34;/products.csv&#34;)
+</span></span><span class="line"><span class="cl">orders = pd.read_csv(&#34;/orders.csv&#34;)
+</span></span><span class="line"><span class="cl">aisles = pd.read_csv(&#34;/aisles.csv&#34;)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 合并表
+</span></span><span class="line"><span class="cl"># 按索引合并
+</span></span><span class="line"><span class="cl"># order_products_prior.csv 订单与商品信息
+</span></span><span class="line"><span class="cl">    # 字段 order_id,product_id,add_to_cart_order,department_id
+</span></span><span class="line"><span class="cl"># products.csv 商品信息
+</span></span><span class="line"><span class="cl">    # 字段 product_id,product_name,aisle_id,department_id
+</span></span><span class="line"><span class="cl"># orders.csv 用户订单信息
+</span></span><span class="line"><span class="cl">    # 字段 product_id,product_name,aisle_id,department_id
+</span></span><span class="line"><span class="cl"># aisles.csv 商品所属具体物品的类别
+</span></span><span class="line"><span class="cl">    # 字段 aisles_id,aisle
+</span></span><span class="line"><span class="cl"># 合并ailses和products
+</span></span><span class="line"><span class="cl">tab1 = pd.merge(aisles, products, on=[&#34;aisle_id&#34;, &#34;aisle_id&#34;])
+</span></span><span class="line"><span class="cl"># 合并tab1和order_products_prior
+</span></span><span class="line"><span class="cl">tab2 = pd.merge(tab1, order_products, on=[&#34;product_id&#34;, &#34;product_id&#34;])
+</span></span><span class="line"><span class="cl"># 合并tab2和orders
+</span></span><span class="line"><span class="cl">tab3 = pd.merge(tab2, orders, on=[&#34;order_id&#34;, &#34;order_id&#34;])
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 找到user_id和aisel的关系
+</span></span><span class="line"><span class="cl"># 交叉表和透视表
+</span></span><span class="line"><span class="cl">table = pd.crostab(tab3[&#34;user-id&#34;], tab3[&#34;aisle&#34;])
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># PCA降维
+</span></span><span class="line"><span class="cl"># 实例化
+</span></span><span class="line"><span class="cl">transfer = PCA(n_components = 0.95)
+</span></span><span class="line"><span class="cl"># 调用fit_transfer
+</span></span><span class="line"><span class="cl">data= transfer.fit_transform(table)</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2024-03-01 11:25:40">Updated on 2024-03-01&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_3/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="Share on X" data-sharer="twitter" data-url="http://localhost:1313/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_3/" data-title="机器学习 · 特征工程" data-hashtags="机器学习,学习"><i class="fa-brands fa-x-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_3/" data-hashtag="机器学习"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_3/" data-title="机器学习 · 特征工程"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  </span>
+        </div>
+      </div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-tag" title="Tags - 机器学习">机器学习</a><a href="/tags/%E5%AD%A6%E4%B9%A0/" class="post-tag" title="Tags - 学习">学习</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/yolov9_tensorbord%E4%BD%BF%E7%94%A8/" class="post-nav-item" rel="prev" title="Tensorbord 使用"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Tensorbord 使用</a><a href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_2/" class="post-nav-item" rel="next" title="机器学习 · 数据集">机器学习 · 数据集<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.136.5">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024 - 2025</span><span class="author" itemprop="copyrightHolder">
+              <a href="Tin10g.github.io">Ting</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">This website works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":1000},"comment":{"enable":false},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"typeit":{"cursorChar":"|","cursorSpeed":1000,"duration":-1,"loop":false,"speed":100},"version":"v0.3.13"};console.log('Page config:', window.config);</script><script src="/js/theme.min.js" defer></script></body>
+</html>

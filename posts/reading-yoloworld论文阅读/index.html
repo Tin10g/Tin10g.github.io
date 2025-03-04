@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>YOLO-World:Real-Time Open-Vocabulary Object Detection - Ting BLOG🐈</title><meta name="author" content="Ting">
+<meta name="description" content="Abstract提出问题由于预定义和训练过的对象一般是图像类，YOLO系列在开放场景适用性低 成果团队通过在较大数据集的视觉语言建模和预训练增强了YOLO开放词汇表检测功能 RepVL-PAN &amp; region-text contrasitive loss 增强了视觉和语言信息的交互 在没有直接训练样本的情况下，模型能高效地识别或检测较大范围内的新的对象类别 数据集使用LVIS dataset 结果：在LVIS数据集上取得了35.4的平均精度（AP），同时在V100硬件上达到了52.0帧每秒（FPS） 对比：在准确性和处理速度上都优于许多当前最先进的方法 Introduction主流的视觉-语言检测模型和YOLO-World对比，YOLO-World在FPS（v100）上提速20倍，并且在平均精度上和主流模型差不多甚至更好。 数据评估方法：1. 精度——LVIS minival的固定的AP 2. 推理速度——NVIDIA V100 w/o TensorRT
+"><meta name="keywords" content='YOLOWorld, 组会'>
+  <meta itemprop="name" content="YOLO-World:Real-Time Open-Vocabulary Object Detection">
+  <meta itemprop="description" content="Abstract提出问题由于预定义和训练过的对象一般是图像类，YOLO系列在开放场景适用性低 成果团队通过在较大数据集的视觉语言建模和预训练增强了YOLO开放词汇表检测功能 RepVL-PAN &amp; region-text contrasitive loss 增强了视觉和语言信息的交互 在没有直接训练样本的情况下，模型能高效地识别或检测较大范围内的新的对象类别 数据集使用LVIS dataset 结果：在LVIS数据集上取得了35.4的平均精度（AP），同时在V100硬件上达到了52.0帧每秒（FPS） 对比：在准确性和处理速度上都优于许多当前最先进的方法 Introduction主流的视觉-语言检测模型和YOLO-World对比，YOLO-World在FPS（v100）上提速20倍，并且在平均精度上和主流模型差不多甚至更好。 数据评估方法：1. 精度——LVIS minival的固定的AP 2. 推理速度——NVIDIA V100 w/o TensorRT">
+  <meta itemprop="datePublished" content="2024-01-01T11:25:40+08:00">
+  <meta itemprop="dateModified" content="2024-01-01T11:25:40+08:00">
+  <meta itemprop="wordCount" content="170">
+  <meta itemprop="keywords" content="YOLOWorld,组会"><meta property="og:url" content="http://localhost:1313/posts/reading-yoloworld%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">
+  <meta property="og:site_name" content="Ting BLOG🐈">
+  <meta property="og:title" content="YOLO-World:Real-Time Open-Vocabulary Object Detection">
+  <meta property="og:description" content="Abstract提出问题由于预定义和训练过的对象一般是图像类，YOLO系列在开放场景适用性低 成果团队通过在较大数据集的视觉语言建模和预训练增强了YOLO开放词汇表检测功能 RepVL-PAN &amp; region-text contrasitive loss 增强了视觉和语言信息的交互 在没有直接训练样本的情况下，模型能高效地识别或检测较大范围内的新的对象类别 数据集使用LVIS dataset 结果：在LVIS数据集上取得了35.4的平均精度（AP），同时在V100硬件上达到了52.0帧每秒（FPS） 对比：在准确性和处理速度上都优于许多当前最先进的方法 Introduction主流的视觉-语言检测模型和YOLO-World对比，YOLO-World在FPS（v100）上提速20倍，并且在平均精度上和主流模型差不多甚至更好。 数据评估方法：1. 精度——LVIS minival的固定的AP 2. 推理速度——NVIDIA V100 w/o TensorRT">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-01-01T11:25:40+08:00">
+    <meta property="article:modified_time" content="2024-01-01T11:25:40+08:00">
+    <meta property="article:tag" content="YOLOWorld">
+    <meta property="article:tag" content="组会">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="YOLO-World:Real-Time Open-Vocabulary Object Detection">
+  <meta name="twitter:description" content="Abstract提出问题由于预定义和训练过的对象一般是图像类，YOLO系列在开放场景适用性低 成果团队通过在较大数据集的视觉语言建模和预训练增强了YOLO开放词汇表检测功能 RepVL-PAN &amp; region-text contrasitive loss 增强了视觉和语言信息的交互 在没有直接训练样本的情况下，模型能高效地识别或检测较大范围内的新的对象类别 数据集使用LVIS dataset 结果：在LVIS数据集上取得了35.4的平均精度（AP），同时在V100硬件上达到了52.0帧每秒（FPS） 对比：在准确性和处理速度上都优于许多当前最先进的方法 Introduction主流的视觉-语言检测模型和YOLO-World对比，YOLO-World在FPS（v100）上提速20倍，并且在平均精度上和主流模型差不多甚至更好。 数据评估方法：1. 精度——LVIS minival的固定的AP 2. 推理速度——NVIDIA V100 w/o TensorRT">
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/reading-yoloworld%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" title="YOLO-World:Real-Time Open-Vocabulary Object Detection - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/yolov9_bug%E8%AE%B0%E5%BD%95/" title="YOLOv9环境配置心路" /><link rel="next" type="text/html" href="http://localhost:1313/posts/yolov9_tensorbord%E4%BD%BF%E7%94%A8/" title="tensorbord 使用" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/reading-yoloworld%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/index.md" title="YOLO-World:Real-Time Open-Vocabulary Object Detection - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "YOLO-World:Real-Time Open-Vocabulary Object Detection",
+    "inLanguage": "en",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/posts\/reading-yoloworld%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB\/"
+    },"genre": "posts","keywords": "YOLOWorld, 组会","wordcount":  170 ,
+    "url": "http:\/\/localhost:1313\/posts\/reading-yoloworld%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB\/","datePublished": "2024-01-01T11:25:40+08:00","dateModified": "2024-01-01T11:25:40+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Ting"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/archives/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/archives/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>YOLO-World:Real-Time Open-Vocabulary Object Detection</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/paper-reading/" class="post-category" title="Category - Paper Reading"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Paper Reading</a></span></div><div class="post-meta-line"><span title="published on 2024-01-01 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-01">2024-01-01</time></span>&nbsp;<span title="170 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 200 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>One minute</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#提出问题">提出问题</a></li>
+    <li><a href="#成果">成果</a></li>
+    <li><a href="#数据集">数据集</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#传统目标检测">传统目标检测</a></li>
+    <li><a href="#开放词表目标检测">开放词表目标检测</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#预训练公式区域-文本对">预训练公式:区域-文本对</a></li>
+    <li><a href="#模型架构">模型架构</a></li>
+    <li><a href="#可重参数化的视觉-语言路径聚合网络">可重参数化的视觉-语言路径聚合网络</a></li>
+    <li><a href="#预训练方案">预训练方案</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#实现细节">实现细节</a></li>
+    <li><a href="#预训练">预训练</a></li>
+    <li><a href="#消融实验">消融实验</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 id="abstract" class="heading-element"><span>Abstract</span>
+  <a href="#abstract" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h2 id="提出问题" class="heading-element"><span>提出问题</span>
+  <a href="#%e6%8f%90%e5%87%ba%e9%97%ae%e9%a2%98" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>由于预定义和训练过的对象一般是图像类，YOLO系列在开放场景适用性低</li>
+</ul>
+<h2 id="成果" class="heading-element"><span>成果</span>
+  <a href="#%e6%88%90%e6%9e%9c" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>团队通过在较大数据集的视觉语言建模和预训练增强了YOLO开放词汇表检测功能</li>
+<li>RepVL-PAN &amp; region-text contrasitive loss
+增强了视觉和语言信息的交互</li>
+<li>在没有直接训练样本的情况下，模型能高效地识别或检测较大范围内的新的对象类别</li>
+</ul>
+<h2 id="数据集" class="heading-element"><span>数据集</span>
+  <a href="#%e6%95%b0%e6%8d%ae%e9%9b%86" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>使用LVIS dataset</li>
+<li>结果：在LVIS数据集上取得了35.4的平均精度（AP），同时在V100硬件上达到了52.0帧每秒（FPS）</li>
+<li>对比：在准确性和处理速度上都优于许多当前最先进的方法</li>
+</ul>
+<h2 id="introduction" class="heading-element"><span>Introduction</span>
+  <a href="#introduction" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>主流的视觉-语言检测模型和YOLO-World对比，YOLO-World在FPS（v100）上提速20倍，并且在平均精度上和主流模型差不多甚至更好。</li>
+</ul>
+<blockquote>
+<p>数据评估方法：1. 精度——LVIS minival的固定的AP 2. 推理速度——NVIDIA V100 w/o TensorRT</p>
+</blockquote>
+<ul>
+<li>基于蒸馏方法的局限性：训练数据的稀缺性和又献策i会的多样性</li>
+<li>一般的区域级视觉-语言比你高大规模训练开放词汇目标检测器的局限性
+<ul>
+<li>计算负担大</li>
+<li>边缘设备部署复杂</li>
+</ul>
+</li>
+<li>YOLOWorld主要结构还是YOLO的结构，但是加入了与训练的CLIP文本编译器区编译输入的文本</li>
+<li>提出RepVL-PAN，把文本特征和图像特征结合，得到更好的视觉-语义表现</li>
+<li>预训练后的YOLOWorld具有丰富的区域-文本组，它具有更好的对开放词表检测能力，并且训练的数据越多，开放此表能力提升越大</li>
+<li>提出一种提示后检测范式</li>
+</ul>
+<h2 id="related-work" class="heading-element"><span>Related Work</span>
+  <a href="#related-work" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h2 id="传统目标检测" class="heading-element"><span>传统目标检测</span>
+  <a href="#%e4%bc%a0%e7%bb%9f%e7%9b%ae%e6%a0%87%e6%a3%80%e6%b5%8b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>传统的三种目标检测
+<ol>
+<li>基于区域的方法（Faster-RCNN，RoI-wise）</li>
+<li>基于像素的方法（一阶段检测YOLOs&ndash;推理速度快）</li>
+<li>基于查询的方法（起源于DETR）</li>
+</ol>
+</li>
+</ul>
+<h2 id="开放词表目标检测" class="heading-element"><span>开放词表目标检测</span>
+  <a href="#%e5%bc%80%e6%94%be%e8%af%8d%e8%a1%a8%e7%9b%ae%e6%a0%87%e6%a3%80%e6%b5%8b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>在基类上训练检测器并评估新的(未知的)类来达到标准的OVD设置</li>
+<li>但是这些方法都有使用较大的解码器</li>
+</ul>
+<h2 id="method" class="heading-element"><span>Method</span>
+  <a href="#method" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h2 id="预训练公式区域-文本对" class="heading-element"><span>预训练公式:区域-文本对</span>
+  <a href="#%e9%a2%84%e8%ae%ad%e7%bb%83%e5%85%ac%e5%bc%8f%e5%8c%ba%e5%9f%9f-%e6%96%87%e6%9c%ac%e5%af%b9" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>相当于把原本传统目标检测的标签（固定值），替换为输入文本（区域对应的文本）。</li>
+</ul>
+<blockquote>
+<p>文本可以时类名，名词短语或对象描述</p>
+</blockquote>
+<h2 id="模型架构" class="heading-element"><span>模型架构</span>
+  <a href="#%e6%a8%a1%e5%9e%8b%e6%9e%b6%e6%9e%84" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>整体结构
+<ul>
+<li>YOLO检测器</li>
+<li>文本编码器</li>
+<li>RepVL-PAN</li>
+</ul>
+</li>
+<li>YOLO-World基于YOLOv8结构开发
+<ul>
+<li>包含一个作为图片编码器的Darknet backbone【多尺度特征金字塔的路径聚合网络】</li>
+<li>一个用于边界框回归和对象嵌入的heading</li>
+</ul>
+</li>
+<li>文本编码器
+<ul>
+<li>CLIP作文本编码器</li>
+</ul>
+</li>
+<li>文本对比头
+<ul>
+<li>依旧采用解耦头和两个3x3卷积来回归边界框和对象嵌入</li>
+<li>用来获得对象-文本相似度</li>
+<li>矩阵乘法</li>
+</ul>
+</li>
+<li>在线词汇训练
+<ul>
+<li>每个包含4张图像的马赛克样本构建一个在线词汇T</li>
+<li>所有肯定名词进行采样，并从相应的数据集中随机抽取一些否定名词</li>
+</ul>
+</li>
+<li>离线词汇训练
+<ul>
+<li>推理阶段，使用离线词汇表提示-检测策略，提高效率。用户可以自定义提示</li>
+<li>利用文本编码器对这些提示进行编码，并获得离线词汇嵌入</li>
+<li>离线词汇嵌入可以重新参数化为卷积层或线性层的权重，以便部署</li>
+</ul>
+</li>
+<li>文本引导的交叉阶段部分层（Text-guided CSPLayer）</li>
+<li>图像池化注意力（Image-Pooling Attention）</li>
+</ul>
+<h2 id="可重参数化的视觉-语言路径聚合网络" class="heading-element"><span>可重参数化的视觉-语言路径聚合网络</span>
+  <a href="#%e5%8f%af%e9%87%8d%e5%8f%82%e6%95%b0%e5%8c%96%e7%9a%84%e8%a7%86%e8%a7%89-%e8%af%ad%e8%a8%80%e8%b7%af%e5%be%84%e8%81%9a%e5%90%88%e7%bd%91%e7%bb%9c" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>自上而下和自下而上的路径</li>
+<li>通过多尺度图像特征{C3, C4, C5}，建立特征金字塔{P3, P4, P5}</li>
+</ul>
+<h2 id="预训练方案" class="heading-element"><span>预训练方案</span>
+  <a href="#%e9%a2%84%e8%ae%ad%e7%bb%83%e6%96%b9%e6%a1%88" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>从区域-文本对比损失中学习
+<ul>
+<li>通过区域-文本对比损失（Lcon），利用摩赛克样本和文本，对模型输出的目标预测与真实标注进行匹配，构建损失函数，其中包含IoU损失和分布式焦点损失</li>
+</ul>
+</li>
+<li>图像-文本数据的伪标记
+<ul>
+<li>提出了一个自动标注方法</li>
+<li>三个步骤
+<ol>
+<li>提取名词短语</li>
+<li>使用预训练的开放词汇检测器生成伪框</li>
+<li>利用CLIP评估和过滤低相关的图像-文本和区域-文本对</li>
+</ol>
+</li>
+<li>该方法从CC3M数据集中提取并标注了246,000张图像，生成821,000个伪标注，构建了CC3M-Lite数据集</li>
+</ul>
+</li>
+</ul>
+<h2 id="experiments" class="heading-element"><span>Experiments</span>
+  <a href="#experiments" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>效能展示：在大规模数据集上预训练过的YOLO-World</li>
+<li>评估方法：在LVIS基准和COCO基准上的一个零样本方法</li>
+<li>同时评估微调的YOLO-World在COCO和LVIS目标检测效果</li>
+</ul>
+<h2 id="实现细节" class="heading-element"><span>实现细节</span>
+  <a href="#%e5%ae%9e%e7%8e%b0%e7%bb%86%e8%8a%82" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>开发基础：MMYOLO工具箱、MMDetection工具箱</li>
+</ul>
+<blockquote>
+<p><strong>MMYOLO toolbox</strong> 一种基于MMDetection<strong>框架</strong>的目标检测工具箱，提供高效的目标模型训练和推理功能。支持多种目标检测算法和一系列功能：模型配置、数据集支持、搞笑训练和推理、丰富工具和功能。</p>
+</blockquote>
+<ul>
+<li>依据不同延迟需求，提供了三种YOLO-World变体【S、M、L】</li>
+<li>NVIDIA V100 GPU上测量所有模型的推理速度，而不需要额外的加速机制</li>
+</ul>
+<h2 id="预训练" class="heading-element"><span>预训练</span>
+  <a href="#%e9%a2%84%e8%ae%ad%e7%bb%83" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ol>
+<li>实验设置
+<ul>
+<li>AdamW优化器</li>
+<li>初始学习率：0.002</li>
+<li>权值衰减：0.05</li>
+<li>初始：在32个NVIDIA V100 gpu上100次预训练，总批次 batch size 512</li>
+<li>数据增强：4张图像颜色增强、随机仿射、随机翻转、拼接等（文本编码器在预训练期间冻结）</li>
+</ul>
+<blockquote>
+<p><strong>冻结文本编码器</strong>意味着在训练过程中，模型不会对其进行反向传播和权重更新，从而保持其原有的特征提取能力</p>
+</blockquote>
+</li>
+<li>预训练数据
+<ul>
+<li>预训练模型，主要使用了一些检测和定位的数据集，比如Objects365、GQA和Flickr30k</li>
+<li>为了避免数据重复或减少模型的偏差，排除了来自COCO数据集的图像，否则容易出现过拟合。同时确保模型学习到更广泛和多样化的数据特征，提高其在真实场景中的表现</li>
+<li>为了让模型在学习时能够获取更多的信息和特征，加了图像-文本对的数据，具体是从CC3M数据集中抽取并标注了246,000张图像，形成了一个新的CC3M-Lite数据集。</li>
+</ul>
+</li>
+<li>零样本评估
+<ul>
+<li>LIVIS 数据集包含1203个对象类</li>
+</ul>
+</li>
+<li>YOLO-World在LVIS目标检测基准上的主要结果
+<ul>
+<li>对比试验： YOLO-World与近期一些最先进的方法进行比较，这些方法在类似的数据集上进行了预训练，并采用了较轻的网络骨干（例如Swin-T）</li>
+<li>YOLO-World在零样本性能和推理速度上均优于之前的方法，尽管它使用的模型参数更少。</li>
+<li>尽管GLIP、GLIPv2和Grounding DINO等方法使用了更多的数据（例如Cap4M），YOLO-World在O365和GolG数据集上预训练后，依然取得了更好的性能</li>
+<li>YOLO-World与DetCLIP的性能相当（35.4对34.4），但推理速度提高了20倍</li>
+<li>小模型能力： 实验结果表明，即使是参数较少的模型（如YOLO-World-S，仅有1300万参数），也能够进行视觉-语言预训练，并具备强大的开放词汇能力。</li>
+</ul>
+</li>
+</ol>
+<h2 id="消融实验" class="heading-element"><span>消融实验</span>
+  <a href="#%e6%b6%88%e8%9e%8d%e5%ae%9e%e9%aa%8c" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><blockquote>
+<p>相对广泛</p>
+</blockquote>
+<ul>
+<li>预训练数据
+<ul>
+<li>YOLO-World使用不同的数据集进行预训练，特别是在Objects365的基础上，加入GQA数据集后，在LVIS上的平均精度（AP）提升了8.4。</li>
+</ul>
+<blockquote>
+<p>因为GQA提供了更丰富的文本信息，有助于模型更好地识别大量词汇的对象</p>
+</blockquote>
+<ul>
+<li>进一步添加CC3M样本（仅8%的完整数据集）带来了0.5 AP的提升，尤其在稀有对象上的提升为1.3 AP。表明数据量能够有效提高在大词汇场景下的检测能力。</li>
+</ul>
+</li>
+<li>RepVL-PAN的消融实验
+<ul>
+<li>展示了RepVL-PAN（包括文本引导的CSPLayers和图像池化注意力）对零样本LVIS检测的有效性</li>
+<li>比较在O365和O365与GQA共同预训练的结果，RepVL-PAN相较于基线模型YOLOv8-PAN提升了1.1 AP，尤其在难以检测的稀有类别上表现更为显著。</li>
+<li>预训练使用GQA数据集时，性能提升更加明显，说明丰富的文本信息对模型的帮助</li>
+</ul>
+</li>
+<li>文本编码器的比较
+<ul>
+<li>比较了不同的文本编码器（BERT-base和CLIP-base）在预训练中的表现。</li>
+<li>实验分为冻结和微调两种设置，微调时学习率为基本学习率的0.01倍</li>
+<li>CLIP文本编码器的表现优于BERT，在稀有类别上提高了10.1 AP</li>
+<li>微调BERT在预训练中显著提升了性能（+3.7 AP），但微调CLIP则导致性能严重下降 =&gt; 因为其类别较少，文本信息也不够丰富</li>
+</ul>
+</li>
+</ul>
+<h2 id="微调yolo-world" class="heading-element"><span>微调YOLO-World</span>
+  <a href="#%e5%be%ae%e8%b0%83yolo-world" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>实验设置
+<ul>
+<li>预训练权重进行初始化，并进行了80个周期的细化训练，采用AdamW优化器，初始学习率为0.0002</li>
+<li>在LVIS数据集上，按照之前的研究，YOLO-World在LVIS-base（常见和频繁的类别）上进行细化训练，并在LVIS-novel（稀有类别）上进行评估。同时，对文本编码器的学习率设置为0.01</li>
+</ul>
+</li>
+<li>COCO目标检测
+<ul>
+<li>在COCO数据集上，YOLO-World与之前的YOLO检测器进行比较。为加快训练过程，由于COCO数据集的词汇量较小，移除了提出的RepVL-PAN</li>
+<li>实验结果显示，YOLO-World在COCO数据集上能够实现相当不错的零样本性能，表明其具有较强的泛化能力。</li>
+<li>此外，经过80个周期的细化训练后，YOLO-World在COCO train2017上表现优于之前从头训练且训练周期≥300的其他方法。</li>
+</ul>
+</li>
+<li>零样本评估在LVIS上的结果
+<ul>
+<li>展示了YOLO-World与其他最新方法在LVIS数据集上的比较，包括模型架构、参数数量、预训练数据、FPS（帧每秒）和AP（平均精度）</li>
+<li>YOLO-World-S、YOLO-World-M和YOLO-World-L在零样本检测中均表现出色，尤其是YOLO-World-L的AP达到35.4，显示了其在大词汇检测中的有效性</li>
+</ul>
+</li>
+<li>预训练数据的消融实验
+<ul>
+<li>展示了使用不同数据进行预训练的影响。增加GQA等数据集显著提升了AP，尤其是在稀有对象上的检测能力得到了改善</li>
+</ul>
+</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2024-01-01 11:25:40">Updated on 2024-01-01&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/reading-yoloworld%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="Share on X" data-sharer="twitter" data-url="http://localhost:1313/posts/reading-yoloworld%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" data-title="YOLO-World:Real-Time Open-Vocabulary Object Detection" data-hashtags="YOLOWorld,组会"><i class="fa-brands fa-x-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/reading-yoloworld%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" data-hashtag="YOLOWorld"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/reading-yoloworld%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" data-title="YOLO-World:Real-Time Open-Vocabulary Object Detection"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  </span>
+        </div>
+      </div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/yoloworld/" class="post-tag" title="Tags - YOLOWorld">YOLOWorld</a><a href="/tags/%E7%BB%84%E4%BC%9A/" class="post-tag" title="Tags - 组会">组会</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/yolov9_bug%E8%AE%B0%E5%BD%95/" class="post-nav-item" rel="prev" title="YOLOv9环境配置心路"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>YOLOv9环境配置心路</a><a href="/posts/yolov9_tensorbord%E4%BD%BF%E7%94%A8/" class="post-nav-item" rel="next" title="Tensorbord 使用">Tensorbord 使用<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.136.5">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024 - 2025</span><span class="author" itemprop="copyrightHolder">
+              <a href="Tin10g.github.io">Ting</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">This website works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":1000},"comment":{"enable":false},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"typeit":{"cursorChar":"|","cursorSpeed":1000,"duration":-1,"loop":false,"speed":100},"version":"v0.3.13"};console.log('Page config:', window.config);</script><script src="/js/theme.min.js" defer></script></body>
+</html>
