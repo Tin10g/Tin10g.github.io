@@ -337,6 +337,12 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>http://localhost:1313/posts/2024web-cve-2021-29454smarty%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/</loc>
+    <lastmod>2024-10-30T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>http://localhost:1313/tags/ssti/</loc>
     <lastmod>2024-10-30T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -392,6 +398,18 @@
   </url>
   <url>
     <loc>http://localhost:1313/posts/2024%E5%81%9A%E9%A2%98-hnctf-2022-week3ssssti/</loc>
+    <lastmod>2024-10-28T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:1313/posts/2024web-fenjing%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</loc>
+    <lastmod>2024-10-28T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:1313/tags/%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2024-10-28T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -583,7 +601,90 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>http://localhost:1313/tags/ctf/</loc>
+    <lastmod>2023-07-01T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:1313/posts/2023web-sql-altershowsql%E7%BA%A6%E6%9D%9F/</loc>
+    <lastmod>2023-07-01T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:1313/posts/2023web-sqlmap/</loc>
+    <lastmod>2023-07-01T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:1313/categories/web--2023%E7%AC%94%E8%AE%B0%E6%9C%AA%E6%95%B4%E7%90%86/</loc>
+    <lastmod>2023-07-01T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:1313/posts/2023web-%E4%B8%8D%E5%8C%85%E5%90%AB%E6%95%B0%E5%AD%97or%E5%AD%97%E6%AF%8Dor%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6%E7%9A%84rce/</loc>
+    <lastmod>2023-07-01T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:1313/posts/2023web-%E5%B8%83%E5%B0%94%E7%9B%B2%E6%B3%A8/</loc>
+    <lastmod>2023-07-01T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:1313/posts/2023web-%E6%94%B6%E9%9B%86%E7%9B%AE%E6%A0%87%E4%BF%A1%E6%81%AF-%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8Fnmap/</loc>
+    <lastmod>2023-07-01T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:1313/posts/2023web-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%80%9D%E8%B7%AF/</loc>
+    <lastmod>2023-07-01T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:1313/posts/2023web-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87/</loc>
+    <lastmod>2023-07-01T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:1313/posts/2023web-%E6%96%87%E4%BB%B6%E5%9E%8B%E6%B3%A8%E5%85%A5/</loc>
+    <lastmod>2023-07-01T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:1313/posts/2023web-%E6%97%A5%E5%BF%97%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/</loc>
+    <lastmod>2023-07-01T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:1313/posts/2023web-%E6%97%B6%E9%97%B4%E7%9B%B2%E6%B3%A8/</loc>
+    <lastmod>2023-07-01T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:1313/posts/2023web-%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E6%8B%BC%E6%8E%A5%E6%BC%8F%E6%B4%9E/</loc>
+    <lastmod>2023-07-01T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>http://localhost:1313/collections/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:1313/posts/2023web-%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
