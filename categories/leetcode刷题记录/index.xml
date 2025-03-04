@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Leetcode刷题记录 - Category - Ting BLOG🐈</title>
+    <link>http://localhost:1313/categories/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/</link>
+    <description>This is Ting&#39;s BLOG ...</description>
+    <generator>Hugo 0.136.5 &amp; FixIt v0.3.13</generator>
+    <language>en</language>
+    <managingEditor>ting10win@gmail.com (Ting)</managingEditor>
+    <webMaster>ting10win@gmail.com (Ting)</webMaster>
+    <lastBuildDate>Sat, 22 Feb 2025 11:25:40 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>leetcode刷题记录1-两数相加</title>
+      <link>http://localhost:1313/posts/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%951-%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%9B%B8%E5%8A%A0/</link>
+      <pubDate>Sat, 22 Feb 2025 11:25:40 +0800</pubDate><author>ting10win@gmail.com (Ting)</author>
+      <guid>http://localhost:1313/posts/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%951-%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%9B%B8%E5%8A%A0/</guid>
+      <category domain="http://localhost:1313/categories/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">Leetcode刷题记录</category>
+      <description>&lt;h2 id=&#34;原题&#34; class=&#34;heading-element&#34;&gt;&lt;span&gt;原题&lt;/span&gt;&#xD;&#xA;  &lt;a href=&#34;#%e5%8e%9f%e9%a2%98&#34; class=&#34;heading-mark&#34;&gt;&#xD;&#xA;    &lt;svg class=&#34;octicon octicon-link&#34; viewBox=&#34;0 0 16 16&#34; version=&#34;1.1&#34; width=&#34;16&#34; height=&#34;16&#34; aria-hidden=&#34;true&#34;&gt;&lt;path d=&#34;m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&lt;p&gt;给定一个整数数组 &lt;code&gt;nums&lt;/code&gt; 和一个整数目标值 &lt;code&gt;target&lt;/code&gt;，请你在该数组中找出 和为目标值target的那两个整数，并返回它们的数组下标。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>leetcode刷题记录2-回文数</title>
+      <link>http://localhost:1313/posts/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%952-%E5%9B%9E%E6%96%87%E6%95%B0/</link>
+      <pubDate>Sat, 22 Feb 2025 11:25:40 +0800</pubDate><author>ting10win@gmail.com (Ting)</author>
+      <guid>http://localhost:1313/posts/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%952-%E5%9B%9E%E6%96%87%E6%95%B0/</guid>
+      <category domain="http://localhost:1313/categories/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">Leetcode刷题记录</category>
+      <description>&lt;h2 id=&#34;原题&#34; class=&#34;heading-element&#34;&gt;&lt;span&gt;原题&lt;/span&gt;&#xD;&#xA;  &lt;a href=&#34;#%e5%8e%9f%e9%a2%98&#34; class=&#34;heading-mark&#34;&gt;&#xD;&#xA;    &lt;svg class=&#34;octicon octicon-link&#34; viewBox=&#34;0 0 16 16&#34; version=&#34;1.1&#34; width=&#34;16&#34; height=&#34;16&#34; aria-hidden=&#34;true&#34;&gt;&lt;path d=&#34;m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&lt;p&gt;给你一个整数 &lt;code&gt;x&lt;/code&gt; ，如果 &lt;code&gt;x&lt;/code&gt; 是一个回文整数，返回 &lt;code&gt;true&lt;/code&gt; ；否则，返回 &lt;code&gt;false&lt;/code&gt; 。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>leetcode刷题记录3-罗马数字转整数</title>
+      <link>http://localhost:1313/posts/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%953-%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%95%B4%E6%95%B0/</link>
+      <pubDate>Sat, 22 Feb 2025 11:25:40 +0800</pubDate><author>ting10win@gmail.com (Ting)</author>
+      <guid>http://localhost:1313/posts/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%953-%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%95%B4%E6%95%B0/</guid>
+      <category domain="http://localhost:1313/categories/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">Leetcode刷题记录</category>
+      <description>&lt;h2 id=&#34;原题&#34; class=&#34;heading-element&#34;&gt;&lt;span&gt;原题&lt;/span&gt;&#xD;&#xA;  &lt;a href=&#34;#%e5%8e%9f%e9%a2%98&#34; class=&#34;heading-mark&#34;&gt;&#xD;&#xA;    &lt;svg class=&#34;octicon octicon-link&#34; viewBox=&#34;0 0 16 16&#34; version=&#34;1.1&#34; width=&#34;16&#34; height=&#34;16&#34; aria-hidden=&#34;true&#34;&gt;&lt;path d=&#34;m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;罗马数字包含以下七种字符: &lt;code&gt;I&lt;/code&gt;， &lt;code&gt;V&lt;/code&gt;， &lt;code&gt;X&lt;/code&gt;， &lt;code&gt;L&lt;/code&gt;，&lt;code&gt;C&lt;/code&gt;，&lt;code&gt;D&lt;/code&gt; 和 &lt;code&gt;M&lt;/code&gt;。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>leetcode刷题记录4-最长公共前缀</title>
+      <link>http://localhost:1313/posts/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%954-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80/</link>
+      <pubDate>Sat, 22 Feb 2025 11:25:40 +0800</pubDate><author>ting10win@gmail.com (Ting)</author>
+      <guid>http://localhost:1313/posts/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%954-%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80/</guid>
+      <category domain="http://localhost:1313/categories/leetcode%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">Leetcode刷题记录</category>
+      <description>&lt;h2 id=&#34;原题&#34; class=&#34;heading-element&#34;&gt;&lt;span&gt;原题&lt;/span&gt;&#xD;&#xA;  &lt;a href=&#34;#%e5%8e%9f%e9%a2%98&#34; class=&#34;heading-mark&#34;&gt;&#xD;&#xA;    &lt;svg class=&#34;octicon octicon-link&#34; viewBox=&#34;0 0 16 16&#34; version=&#34;1.1&#34; width=&#34;16&#34; height=&#34;16&#34; aria-hidden=&#34;true&#34;&gt;&lt;path d=&#34;m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&lt;p&gt;编写一个函数来查找字符串数组中的最长公共前缀。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

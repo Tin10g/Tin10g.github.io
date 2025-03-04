@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>Vue3&#43;ts开发学习 · 小兔鲜儿3 - Ting BLOG🐈</title><meta name="author" content="Ting">
+<meta name="description" content=" 黑马的视频学习
+首页组件封装只有一个页面需要使用以首页导航栏示例 /index/index.vue
+"><meta name="keywords" content='Vue3, uni-app, 开发'>
+  <meta itemprop="name" content="vue3&#43;ts开发学习 · 小兔鲜儿3">
+  <meta itemprop="description" content="黑马的视频学习
+首页组件封装只有一个页面需要使用以首页导航栏示例 /index/index.vue">
+  <meta itemprop="datePublished" content="2024-04-01T11:25:40+08:00">
+  <meta itemprop="dateModified" content="2024-04-01T11:25:40+08:00">
+  <meta itemprop="wordCount" content="1205">
+  <meta itemprop="keywords" content="Vue3,Uni-App,开发"><meta property="og:url" content="http://localhost:1313/posts/uni-app%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0_3/">
+  <meta property="og:site_name" content="Ting BLOG🐈">
+  <meta property="og:title" content="vue3&#43;ts开发学习 · 小兔鲜儿3">
+  <meta property="og:description" content="黑马的视频学习
+首页组件封装只有一个页面需要使用以首页导航栏示例 /index/index.vue">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-04-01T11:25:40+08:00">
+    <meta property="article:modified_time" content="2024-04-01T11:25:40+08:00">
+    <meta property="article:tag" content="Vue3">
+    <meta property="article:tag" content="Uni-App">
+    <meta property="article:tag" content="开发">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="vue3&#43;ts开发学习 · 小兔鲜儿3">
+  <meta name="twitter:description" content="黑马的视频学习
+首页组件封装只有一个页面需要使用以首页导航栏示例 /index/index.vue">
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/uni-app%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0_3/" title="vue3&#43;ts开发学习 · 小兔鲜儿3 - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/uni-app%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0_2/" title="vue3&#43;ts开发学习——小兔鲜儿2" /><link rel="next" type="text/html" href="http://localhost:1313/posts/uni-app%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0_1/" title="vue3&#43;ts开发学习 · 基础准备" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/uni-app%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0_3/index.md" title="vue3+ts开发学习 · 小兔鲜儿3 - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "vue3+ts开发学习 · 小兔鲜儿3",
+    "inLanguage": "en",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/posts\/uni-app%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0_3\/"
+    },"genre": "posts","keywords": "Vue3, uni-app, 开发","wordcount":  1205 ,
+    "url": "http:\/\/localhost:1313\/posts\/uni-app%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0_3\/","datePublished": "2024-04-01T11:25:40+08:00","dateModified": "2024-04-01T11:25:40+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Ting"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/archives/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/archives/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>Vue3&#43;ts开发学习 · 小兔鲜儿3</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/vue3+ts%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0/" class="post-category" title="Category - Vue3+ts开发学习"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Vue3+ts开发学习</a></span></div><div class="post-meta-line"><span title="published on 2024-04-01 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-01">2024-04-01</time></span>&nbsp;<span title="1205 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 1300 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>6 minutes</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#组件封装">组件封装</a>
+      <ul>
+        <li><a href="#只有一个页面需要使用">只有一个页面需要使用</a></li>
+        <li><a href="#需要多个页面使用全局组件">需要多个页面使用【全局组件】</a></li>
+      </ul>
+    </li>
+    <li><a href="#轮播图指示点高光跟随">轮播图指示点高光跟随</a></li>
+    <li><a href="#各模块加入到主页并渲染等步骤">各模块加入到主页并渲染等步骤</a></li>
+    <li><a href="#自动导入公用组件">自动导入公用组件</a></li>
+    <li><a href="#页面滚动设置">页面滚动设置</a></li>
+    <li><a href="#调用组件对应后端api">调用组件对应后端API</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><blockquote>
+<p>黑马的视频学习</p>
+</blockquote>
+<h2 id="首页" class="heading-element"><span>首页</span>
+  <a href="#%e9%a6%96%e9%a1%b5" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h2 id="组件封装" class="heading-element"><span>组件封装</span>
+  <a href="#%e7%bb%84%e4%bb%b6%e5%b0%81%e8%a3%85" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h3 id="只有一个页面需要使用" class="heading-element"><span>只有一个页面需要使用</span>
+  <a href="#%e5%8f%aa%e6%9c%89%e4%b8%80%e4%b8%aa%e9%a1%b5%e9%9d%a2%e9%9c%80%e8%a6%81%e4%bd%bf%e7%94%a8" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><blockquote>
+<p>以首页导航栏示例
+/index/index.vue</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;script setup lang=&#34;ts&#34;&gt;
+</span></span><span class="line"><span class="cl">import CustomNavbar from &#39;./componets/CustomNavbar.vue&#39;;
+</span></span><span class="line"><span class="cl">&lt;/script&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;template&gt;
+</span></span><span class="line"><span class="cl">  &lt;!-- 自定义导航栏 --&gt;
+</span></span><span class="line"><span class="cl">  &lt;CustomNavbar /&gt;
+</span></span><span class="line"><span class="cl">&lt;/template&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;style lang=&#34;scss&#34;&gt;
+</span></span><span class="line"><span class="cl">//
+</span></span><span class="line"><span class="cl">&lt;/style&gt;</span></span></code></pre></td></tr></table>
+</div>
+</div><p>/index/components/CustomNavbar.vue</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">script</span> <span class="n">setup</span> <span class="n">lang</span><span class="o">=</span><span class="s2">&#34;ts&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="err">获取屏幕边界到安全区域距离</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="p">{</span> <span class="n">safeAreaInsets</span> <span class="p">}</span> <span class="o">=</span> <span class="n">uni</span><span class="o">.</span><span class="n">getSystemInfoSync</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="n">view</span> <span class="k">class</span><span class="o">=</span><span class="s2">&#34;navbar&#34;</span> <span class="p">:</span><span class="n">style</span><span class="o">=</span><span class="s2">&#34;{ paddingTop: safeAreaInsets?.top + 10 + &#39;px&#39; }&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;!--</span> <span class="n">logo文字</span> <span class="o">--&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="n">view</span> <span class="k">class</span><span class="o">=</span><span class="s2">&#34;logo&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&lt;</span><span class="n">image</span> <span class="k">class</span><span class="o">=</span><span class="s2">&#34;logo-image&#34;</span> <span class="n">src</span><span class="o">=</span><span class="s2">&#34;@/static/images/logo.png&#34;</span><span class="o">&gt;&lt;/</span><span class="n">image</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&lt;</span><span class="n">text</span> <span class="k">class</span><span class="o">=</span><span class="s2">&#34;logo-text&#34;</span><span class="o">&gt;</span><span class="err">新鲜</span> <span class="err">·</span> <span class="err">亲民</span> <span class="err">·</span> <span class="err">快捷</span><span class="o">&lt;/</span><span class="n">text</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;/</span><span class="n">view</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;!--</span> <span class="err">搜索条</span> <span class="o">--&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="n">view</span> <span class="k">class</span><span class="o">=</span><span class="s2">&#34;search&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&lt;</span><span class="n">text</span> <span class="k">class</span><span class="o">=</span><span class="s2">&#34;icon-search&#34;</span><span class="o">&gt;</span><span class="err">搜索商品</span><span class="o">&lt;/</span><span class="n">text</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&lt;</span><span class="n">text</span> <span class="k">class</span><span class="o">=</span><span class="s2">&#34;icon-scan&#34;</span><span class="o">&gt;&lt;/</span><span class="n">text</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;/</span><span class="n">view</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;/</span><span class="n">view</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">style</span> <span class="n">lang</span><span class="o">=</span><span class="s2">&#34;scss&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">/*</span> <span class="err">自定义导航条</span> <span class="o">*/</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">navbar</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">background</span><span class="o">-</span><span class="n">image</span><span class="p">:</span> <span class="n">url</span><span class="p">(</span><span class="err">@</span><span class="o">/</span><span class="k">static</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">navigator_bg</span><span class="o">.</span><span class="n">png</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">background</span><span class="o">-</span><span class="n">size</span><span class="p">:</span> <span class="n">cover</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">position</span><span class="p">:</span> <span class="n">relative</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">flex</span><span class="o">-</span><span class="n">direction</span><span class="p">:</span> <span class="n">column</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">padding</span><span class="o">-</span><span class="n">top</span><span class="p">:</span> <span class="mi">20</span><span class="n">px</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">logo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">align</span><span class="o">-</span><span class="n">items</span><span class="p">:</span> <span class="n">center</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">height</span><span class="p">:</span> <span class="mi">64</span><span class="n">rpx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">padding</span><span class="o">-</span><span class="n">left</span><span class="p">:</span> <span class="mi">30</span><span class="n">rpx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span><span class="n">logo</span><span class="o">-</span><span class="n">image</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">width</span><span class="p">:</span> <span class="mi">166</span><span class="n">rpx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">height</span><span class="p">:</span> <span class="mi">39</span><span class="n">rpx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span><span class="n">logo</span><span class="o">-</span><span class="n">text</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">flex</span><span class="p">:</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">line</span><span class="o">-</span><span class="n">height</span><span class="p">:</span> <span class="mi">28</span><span class="n">rpx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">color</span><span class="p">:</span> <span class="c1">#fff;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">margin</span><span class="p">:</span> <span class="mi">2</span><span class="n">rpx</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">20</span><span class="n">rpx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">padding</span><span class="o">-</span><span class="n">left</span><span class="p">:</span> <span class="mi">20</span><span class="n">rpx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">border</span><span class="o">-</span><span class="n">left</span><span class="p">:</span> <span class="mi">1</span><span class="n">rpx</span> <span class="n">solid</span> <span class="c1">#fff;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">font</span><span class="o">-</span><span class="n">size</span><span class="p">:</span> <span class="mi">26</span><span class="n">rpx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">search</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">align</span><span class="o">-</span><span class="n">items</span><span class="p">:</span> <span class="n">center</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">justify</span><span class="o">-</span><span class="n">content</span><span class="p">:</span> <span class="n">space</span><span class="o">-</span><span class="n">between</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">padding</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">10</span><span class="n">rpx</span> <span class="mi">0</span> <span class="mi">26</span><span class="n">rpx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">height</span><span class="p">:</span> <span class="mi">64</span><span class="n">rpx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">margin</span><span class="p">:</span> <span class="mi">16</span><span class="n">rpx</span> <span class="mi">20</span><span class="n">rpx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">color</span><span class="p">:</span> <span class="c1">#fff;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">font</span><span class="o">-</span><span class="n">size</span><span class="p">:</span> <span class="mi">28</span><span class="n">rpx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">border</span><span class="o">-</span><span class="n">radius</span><span class="p">:</span> <span class="mi">32</span><span class="n">rpx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">icon</span><span class="o">-</span><span class="n">search</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&amp;</span><span class="p">::</span><span class="n">before</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">margin</span><span class="o">-</span><span class="n">right</span><span class="p">:</span> <span class="mi">10</span><span class="n">rpx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">icon</span><span class="o">-</span><span class="n">scan</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">font</span><span class="o">-</span><span class="n">size</span><span class="p">:</span> <span class="mi">30</span><span class="n">rpx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">padding</span><span class="p">:</span> <span class="mi">15</span><span class="n">rpx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">style</span><span class="o">&gt;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>关键代码</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">script</span> <span class="n">setup</span> <span class="n">lang</span><span class="o">=</span><span class="s2">&#34;ts&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="err">获取屏幕边界到安全区域距离</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="p">{</span> <span class="n">safeAreaInsets</span> <span class="p">}</span> <span class="o">=</span> <span class="n">uni</span><span class="o">.</span><span class="n">getSystemInfoSync</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="n">view</span> <span class="k">class</span><span class="o">=</span><span class="s2">&#34;navbar&#34;</span> <span class="p">:</span><span class="n">style</span><span class="o">=</span><span class="s2">&#34;{ paddingTop: safeAreaInsets?.top + 10 + &#39;px&#39; }&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="需要多个页面使用全局组件" class="heading-element"><span>需要多个页面使用【全局组件】</span>
+  <a href="#%e9%9c%80%e8%a6%81%e5%a4%9a%e4%b8%aa%e9%a1%b5%e9%9d%a2%e4%bd%bf%e7%94%a8%e5%85%a8%e5%b1%80%e7%bb%84%e4%bb%b6" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><blockquote>
+<p>轮播图为例
+/src/components/XtxSwiper.vue</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">script</span> <span class="n">setup</span> <span class="n">lang</span><span class="o">=</span><span class="s2">&#34;ts&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">ref</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;vue&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">activeIndex</span> <span class="o">=</span> <span class="n">ref</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="n">view</span> <span class="k">class</span><span class="o">=</span><span class="s2">&#34;carousel&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="n">swiper</span> <span class="p">:</span><span class="n">circular</span><span class="o">=</span><span class="s2">&#34;true&#34;</span> <span class="p">:</span><span class="n">autoplay</span><span class="o">=</span><span class="s2">&#34;false&#34;</span> <span class="p">:</span><span class="n">interval</span><span class="o">=</span><span class="s2">&#34;3000&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&lt;</span><span class="n">swiper</span><span class="o">-</span><span class="n">item</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&lt;</span><span class="n">navigator</span> <span class="n">url</span><span class="o">=</span><span class="s2">&#34;/pages/index/index&#34;</span> <span class="n">hover</span><span class="o">-</span><span class="k">class</span><span class="o">=</span><span class="s2">&#34;none&#34;</span> <span class="k">class</span><span class="o">=</span><span class="s2">&#34;navigator&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="o">&lt;</span><span class="n">image</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mode</span><span class="o">=</span><span class="s2">&#34;aspectFill&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">class</span><span class="o">=</span><span class="s2">&#34;image&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">src</span><span class="o">=</span><span class="s2">&#34;https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/uploads/slider_1.jpg&#34;</span>
+</span></span><span class="line"><span class="cl">          <span class="o">&gt;&lt;/</span><span class="n">image</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&lt;/</span><span class="n">navigator</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&lt;/</span><span class="n">swiper</span><span class="o">-</span><span class="n">item</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&lt;</span><span class="n">swiper</span><span class="o">-</span><span class="n">item</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&lt;</span><span class="n">navigator</span> <span class="n">url</span><span class="o">=</span><span class="s2">&#34;/pages/index/index&#34;</span> <span class="n">hover</span><span class="o">-</span><span class="k">class</span><span class="o">=</span><span class="s2">&#34;none&#34;</span> <span class="k">class</span><span class="o">=</span><span class="s2">&#34;navigator&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="o">&lt;</span><span class="n">image</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mode</span><span class="o">=</span><span class="s2">&#34;aspectFill&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">class</span><span class="o">=</span><span class="s2">&#34;image&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">src</span><span class="o">=</span><span class="s2">&#34;https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/uploads/slider_2.jpg&#34;</span>
+</span></span><span class="line"><span class="cl">          <span class="o">&gt;&lt;/</span><span class="n">image</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&lt;/</span><span class="n">navigator</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&lt;/</span><span class="n">swiper</span><span class="o">-</span><span class="n">item</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&lt;</span><span class="n">swiper</span><span class="o">-</span><span class="n">item</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&lt;</span><span class="n">navigator</span> <span class="n">url</span><span class="o">=</span><span class="s2">&#34;/pages/index/index&#34;</span> <span class="n">hover</span><span class="o">-</span><span class="k">class</span><span class="o">=</span><span class="s2">&#34;none&#34;</span> <span class="k">class</span><span class="o">=</span><span class="s2">&#34;navigator&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">          <span class="o">&lt;</span><span class="n">image</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mode</span><span class="o">=</span><span class="s2">&#34;aspectFill&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">class</span><span class="o">=</span><span class="s2">&#34;image&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">src</span><span class="o">=</span><span class="s2">&#34;https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/uploads/slider_3.jpg&#34;</span>
+</span></span><span class="line"><span class="cl">          <span class="o">&gt;&lt;/</span><span class="n">image</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">&lt;/</span><span class="n">navigator</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&lt;/</span><span class="n">swiper</span><span class="o">-</span><span class="n">item</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;/</span><span class="n">swiper</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;!--</span> <span class="err">指示点</span> <span class="o">--&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="n">view</span> <span class="k">class</span><span class="o">=</span><span class="s2">&#34;indicator&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&lt;</span><span class="n">text</span>
+</span></span><span class="line"><span class="cl">        <span class="n">v</span><span class="o">-</span><span class="k">for</span><span class="o">=</span><span class="s2">&#34;(item, index) in 3&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">:</span><span class="n">key</span><span class="o">=</span><span class="s2">&#34;item&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">class</span><span class="o">=</span><span class="s2">&#34;dot&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">:</span><span class="k">class</span><span class="o">=</span><span class="s2">&#34;{ active: index === activeIndex }&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&gt;&lt;/</span><span class="n">text</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;/</span><span class="n">view</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;/</span><span class="n">view</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">style</span> <span class="n">lang</span><span class="o">=</span><span class="s2">&#34;scss&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">:</span><span class="n">host</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">display</span><span class="p">:</span> <span class="n">block</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">height</span><span class="p">:</span> <span class="mi">280</span><span class="n">rpx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">/*</span> <span class="err">轮播图</span> <span class="o">*/</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">carousel</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">height</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">position</span><span class="p">:</span> <span class="n">relative</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">overflow</span><span class="p">:</span> <span class="n">hidden</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">transform</span><span class="p">:</span> <span class="n">translateY</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="c1">#efefef;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">indicator</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">position</span><span class="p">:</span> <span class="n">absolute</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">left</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">right</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">bottom</span><span class="p">:</span> <span class="mi">16</span><span class="n">rpx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">justify</span><span class="o">-</span><span class="n">content</span><span class="p">:</span> <span class="n">center</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span><span class="n">dot</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">width</span><span class="p">:</span> <span class="mi">30</span><span class="n">rpx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">height</span><span class="p">:</span> <span class="mi">6</span><span class="n">rpx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">margin</span><span class="p">:</span> <span class="mi">0</span> <span class="mi">8</span><span class="n">rpx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">border</span><span class="o">-</span><span class="n">radius</span><span class="p">:</span> <span class="mi">6</span><span class="n">rpx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="n">rgba</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span><span class="n">active</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">background</span><span class="o">-</span><span class="n">color</span><span class="p">:</span> <span class="c1">#fff;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">navigator</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="o">.</span><span class="n">image</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">width</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">height</span><span class="p">:</span> <span class="mi">100</span><span class="o">%</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">style</span><span class="o">&gt;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li><strong>关键代码</strong><br>
+自动导入设置【和uni-app自动导入设置类似】<br>
+使用正则匹配方法<br>
+pages.json</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&#34;easycom&#34;: {
+</span></span><span class="line"><span class="cl">    &#34;autoscan&#34;: true,
+</span></span><span class="line"><span class="cl">    &#34;custom&#34;: {
+</span></span><span class="line"><span class="cl">      // uni-ui 规则如下配置
+</span></span><span class="line"><span class="cl">      &#34;^uni-(.*)&#34;: &#34;@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue&#34;,
+</span></span><span class="line"><span class="cl">      // 以Xtx 开头的组件，在components文件夹中查找引入
+</span></span><span class="line"><span class="cl">      &#34;^Xtx(.*)&#34;: &#34;@/components/Xtx$1.vue&#34;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">  },
+</span></span><span class="line"><span class="cl">  &#34;pages&#34;: 
+</span></span><span class="line"><span class="cl">  ...</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>对全局组件进行类型声明
+模板代码</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">declare</span> <span class="n">module</span> <span class="s1">&#39;@vue/runtime-core&#39;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">export</span> <span class="n">interface</span> <span class="n">GlobalComponents</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>代码使用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="n">XtxSwiper</span> <span class="n">from</span> <span class="s2">&#34;./XtxSwiper.vue&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">declare</span> <span class="n">module</span> <span class="s1">&#39;@vue/runtime-core&#39;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">export</span> <span class="n">interface</span> <span class="n">GlobalComponents</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">XtxSwiper</span><span class="p">:</span> <span class="nb">typeof</span> <span class="n">XtxSwiper</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="轮播图指示点高光跟随" class="heading-element"><span>轮播图指示点高光跟随</span>
+  <a href="#%e8%bd%ae%e6%92%ad%e5%9b%be%e6%8c%87%e7%a4%ba%e7%82%b9%e9%ab%98%e5%85%89%e8%b7%9f%e9%9a%8f" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>原代码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">script</span> <span class="n">setup</span> <span class="n">lang</span><span class="o">=</span><span class="s2">&#34;ts&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">ref</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;vue&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">activeIndex</span> <span class="o">=</span> <span class="n">ref</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">...</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;!--</span> <span class="err">指示点</span> <span class="o">--&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="n">view</span> <span class="k">class</span><span class="o">=</span><span class="s2">&#34;indicator&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&lt;</span><span class="n">text</span>
+</span></span><span class="line"><span class="cl">        <span class="n">v</span><span class="o">-</span><span class="k">for</span><span class="o">=</span><span class="s2">&#34;(item, index) in 3&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">:</span><span class="n">key</span><span class="o">=</span><span class="s2">&#34;item&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">class</span><span class="o">=</span><span class="s2">&#34;dot&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">:</span><span class="k">class</span><span class="o">=</span><span class="s2">&#34;{ active: index === activeIndex }&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">&gt;&lt;/</span><span class="n">text</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;/</span><span class="n">view</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span>\<span class="n">template</span><span class="o">&gt;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>在swiper上绑定change事件</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;swiper :circular=&#34;true&#34; :autoplay=&#34;false&#34; :interval=&#34;3000&#34; @change=&#34;onChange&#34;&gt;</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>获取事件数据，并发现detail里面的current随着变化滑动而变化数字。因此作为滑动指示点的高亮显示记号。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">script</span> <span class="n">setup</span> <span class="n">lang</span><span class="o">=</span><span class="s2">&#34;ts&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="p">{</span> <span class="n">ref</span> <span class="p">}</span> <span class="n">from</span> <span class="s1">&#39;vue&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">activeIndex</span> <span class="o">=</span> <span class="n">ref</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="err">当</span> <span class="n">swiper</span> <span class="err">下标发生变化时触发</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">onChange</span><span class="p">:</span> <span class="n">UniHelper</span><span class="o">.</span><span class="n">SwiperOnChange</span> <span class="o">=</span> <span class="p">(</span><span class="n">ev</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="o">//</span><span class="err">不用?用</span><span class="o">!</span><span class="err">，是非空断言，主观上排除空的情况</span>
+</span></span><span class="line"><span class="cl">  <span class="n">activeIndex</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">ev</span><span class="o">.</span><span class="n">detail</span><span class="o">!.</span><span class="n">current</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>ev的类型使用了UniHelper.SwiperOnChange</p>
+</blockquote>
+<h2 id="各模块加入到主页并渲染等步骤" class="heading-element"><span>各模块加入到主页并渲染等步骤</span>
+  <a href="#%e5%90%84%e6%a8%a1%e5%9d%97%e5%8a%a0%e5%85%a5%e5%88%b0%e4%b8%bb%e9%a1%b5%e5%b9%b6%e6%b8%b2%e6%9f%93%e7%ad%89%e6%ad%a5%e9%aa%a4" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ol>
+<li>在 /index/components 中保存对应模块的封装文件(.vue)</li>
+<li>查看对应组件的AIP文档相关信息，在 /service/home.ts 中封装组件AIP</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">/**</span>
+</span></span><span class="line"><span class="cl"> <span class="o">*</span> <span class="err">首页</span><span class="o">-</span><span class="err">热门推荐</span><span class="o">-</span><span class="err">小程序</span>
+</span></span><span class="line"><span class="cl"> <span class="o">*</span> <span class="n">GET</span>
+</span></span><span class="line"><span class="cl"> <span class="o">*</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">hot</span><span class="o">/</span><span class="n">mutli</span>
+</span></span><span class="line"><span class="cl"> <span class="o">*/</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">const</span> <span class="n">getHomeHotAPI</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">http</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="n">method</span><span class="p">:</span> <span class="s1">&#39;GET&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">url</span><span class="p">:</span> <span class="s1">&#39;/home/hot/mutli&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>在 index.vue 中的 template 标签里调用组件。并获取数据以及载入页面。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">//</span> <span class="err">获取热门推荐数据</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">getHomeHotData</span> <span class="o">=</span> <span class="n">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">const</span> <span class="n">res</span> <span class="o">=</span> <span class="n">await</span> <span class="n">getHomeHotAPI</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="n">onLoad</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">getHomeBannerData</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="n">getHomeCategoryAPIData</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="n">getHomeHotData</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>在 /types/home.d.ts 中定义数据类型</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">/**</span> <span class="err">首页</span><span class="o">-</span><span class="err">热门推荐数据类型</span> <span class="o">*/</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="n">type</span> <span class="n">HotItem</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="o">/**</span> <span class="err">说明</span> <span class="o">*/</span>
+</span></span><span class="line"><span class="cl">  <span class="n">alt</span><span class="p">:</span> <span class="n">string</span>
+</span></span><span class="line"><span class="cl">  <span class="o">/**</span> <span class="n">id</span> <span class="o">*/</span>
+</span></span><span class="line"><span class="cl">  <span class="n">id</span><span class="p">:</span> <span class="n">string</span>
+</span></span><span class="line"><span class="cl">  <span class="o">/**</span> <span class="err">图片集合</span><span class="p">[</span> <span class="err">图片路径</span> <span class="p">]</span> <span class="o">*/</span>
+</span></span><span class="line"><span class="cl">  <span class="n">pictures</span><span class="p">:</span> <span class="n">string</span><span class="p">[]</span>
+</span></span><span class="line"><span class="cl">  <span class="o">/**</span> <span class="err">跳转地址</span> <span class="o">*/</span>
+</span></span><span class="line"><span class="cl">  <span class="n">target</span><span class="p">:</span> <span class="n">string</span>
+</span></span><span class="line"><span class="cl">  <span class="o">/**</span> <span class="err">标题</span> <span class="o">*/</span>
+</span></span><span class="line"><span class="cl">  <span class="n">title</span><span class="p">:</span> <span class="n">string</span>
+</span></span><span class="line"><span class="cl">  <span class="o">/**</span> <span class="err">推荐类型</span> <span class="o">*/</span>
+</span></span><span class="line"><span class="cl">  <span class="n">type</span><span class="p">:</span> <span class="n">string</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="5">
+<li>此数据类型即为封装API中http的类型，但是http的内容是数组</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">/**</span>
+</span></span><span class="line"><span class="cl"> <span class="o">*</span> <span class="err">首页</span><span class="o">-</span><span class="err">热门推荐</span><span class="o">-</span><span class="err">小程序</span>
+</span></span><span class="line"><span class="cl"> <span class="o">*</span> <span class="n">GET</span>
+</span></span><span class="line"><span class="cl"> <span class="o">*</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">hot</span><span class="o">/</span><span class="n">mutli</span>
+</span></span><span class="line"><span class="cl"> <span class="o">*/</span>
+</span></span><span class="line"><span class="cl"><span class="k">export</span> <span class="k">const</span> <span class="n">getHomeHotAPI</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">http</span><span class="o">&lt;</span><span class="n">HotItem</span><span class="o">&gt;</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="n">method</span><span class="p">:</span> <span class="s1">&#39;GET&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">url</span><span class="p">:</span> <span class="s1">&#39;/home/hot/mutli&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="6">
+<li>在 index.vue 中得到具体的数据并把数据传到组件中</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">script</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="err">获取热门推荐数据</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">hotList</span> <span class="o">=</span> <span class="n">ref</span><span class="o">&lt;</span><span class="n">HotItem</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">([])</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">getHomeHotData</span> <span class="o">=</span> <span class="n">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">const</span> <span class="n">res</span> <span class="o">=</span> <span class="n">await</span> <span class="n">getHomeHotAPI</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="n">hotList</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">result</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;!--</span> <span class="err">热门推荐</span> <span class="o">--&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="n">HotPanel</span> <span class="p">:</span><span class="n">list</span><span class="o">=</span><span class="s2">&#34;hotList&#34;</span> <span class="o">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;/</span><span class="n">template</span><span class="o">&gt;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="7">
+<li>在组件的vue文件中定义props接收数据</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;script setup lang=&#34;ts&#34;&gt;
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">// 定义props接收数据,一般是列表
+</span></span><span class="line"><span class="cl">defineProps&lt;{
+</span></span><span class="line"><span class="cl">    list: HotItem[]
+</span></span><span class="line"><span class="cl">}&gt;()
+</span></span><span class="line"><span class="cl">&lt;/script&gt;</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="8">
+<li>把组件中静态数据换成当前调用的数据(一般通过v-for循环)</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;template&gt;
+</span></span><span class="line"><span class="cl">    &lt;!-- 推荐专区 --&gt;
+</span></span><span class="line"><span class="cl">    &lt;view class=&#34;panel hot&#34;&gt;
+</span></span><span class="line"><span class="cl">        &lt;view class=&#34;item&#34; v-for=&#34;item in list&#34; :key=&#34;item.id&#34;&gt;
+</span></span><span class="line"><span class="cl">            &lt;view class=&#34;title&#34;&gt;
+</span></span><span class="line"><span class="cl">                &lt;text class=&#34;title-text&#34;&gt;{{ item.title }}&lt;/text&gt;
+</span></span><span class="line"><span class="cl">                &lt;text class=&#34;title-desc&#34;&gt;{{ item.alt }}&lt;/text&gt;
+</span></span><span class="line"><span class="cl">            &lt;/view&gt;
+</span></span><span class="line"><span class="cl">            &lt;navigator hover-class=&#34;none&#34; url=&#34;/pages/hot/hot&#34; class=&#34;cards&#34;&gt;
+</span></span><span class="line"><span class="cl">                &lt;image v-for=&#34;src in item.pictures&#34; :key=&#34;src&#34; class=&#34;image&#34; mode=&#34;aspectFit&#34; :src=&#34;src&#34;&gt;
+</span></span><span class="line"><span class="cl">                &lt;/image&gt;
+</span></span><span class="line"><span class="cl">            &lt;/navigator&gt;
+</span></span><span class="line"><span class="cl">        &lt;/view&gt;
+</span></span><span class="line"><span class="cl">    &lt;/view&gt;
+</span></span><span class="line"><span class="cl">&lt;/template&gt;</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="自动导入公用组件" class="heading-element"><span>自动导入公用组件</span>
+  <a href="#%e8%87%aa%e5%8a%a8%e5%af%bc%e5%85%a5%e5%85%ac%e7%94%a8%e7%bb%84%e4%bb%b6" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><blockquote>
+<p>可以不用import导入就能使用，但是需要定义类型在 /types/conponents.d.ts</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">import</span> <span class="n">XtxSwiper</span> <span class="n">from</span> <span class="s2">&#34;@/components/XtxSwiper.vue&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">XtxGuess</span> <span class="n">from</span> <span class="s2">&#34;@/components/XtxGuess.vue&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">declare</span> <span class="n">module</span> <span class="s1">&#39;@vue/runtime-core&#39;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">export</span> <span class="n">interface</span> <span class="n">GlobalComponents</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">XtxSwiper</span><span class="p">:</span> <span class="nb">typeof</span> <span class="n">XtxSwiper</span>
+</span></span><span class="line"><span class="cl">        <span class="n">XtxGuess</span><span class="p">:</span> <span class="nb">typeof</span> <span class="n">XtxGuess</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>定义自动导入，在 /src/page.json</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  &#34;easycom&#34;: {
+</span></span><span class="line"><span class="cl">    &#34;autoscan&#34;: true,
+</span></span><span class="line"><span class="cl">    &#34;custom&#34;: {
+</span></span><span class="line"><span class="cl">      // uni-ui 规则如下配置
+</span></span><span class="line"><span class="cl">      &#34;^uni-(.*)&#34;: &#34;@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue&#34;,
+</span></span><span class="line"><span class="cl">      // 以Xtx 开头的组件，在components文件夹中查找引入
+</span></span><span class="line"><span class="cl">      &#34;^Xtx(.*)&#34;: &#34;@/components/Xtx$1.vue&#34;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">  },
+</span></span><span class="line"><span class="cl">  &#34;pages&#34;: [...]
+</span></span><span class="line"><span class="cl">}</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="页面滚动设置" class="heading-element"><span>页面滚动设置</span>
+  <a href="#%e9%a1%b5%e9%9d%a2%e6%bb%9a%e5%8a%a8%e8%ae%be%e7%bd%ae" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><blockquote>
+<p>flexBox使用<br>
+scoll-view使用</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;template&gt;
+</span></span><span class="line"><span class="cl">  &lt;!-- 自定义导航栏 --&gt;
+</span></span><span class="line"><span class="cl">  &lt;CustomNavbar /&gt;
+</span></span><span class="line"><span class="cl">  &lt;scroll-view class=&#34;scroll-view&#34; scroll-y&gt;
+</span></span><span class="line"><span class="cl">    &lt;!-- 自定义轮播图 --&gt;
+</span></span><span class="line"><span class="cl">    &lt;XtxSwiper :list=&#34;bannerList&#34; /&gt;
+</span></span><span class="line"><span class="cl">    &lt;!-- 分类面板 --&gt;
+</span></span><span class="line"><span class="cl">    &lt;CategoryPanel :list=&#34;categoryList&#34; /&gt;
+</span></span><span class="line"><span class="cl">    &lt;!-- 热门推荐 --&gt;
+</span></span><span class="line"><span class="cl">    &lt;HotPanel :list=&#34;hotList&#34; /&gt;
+</span></span><span class="line"><span class="cl">    &lt;!-- 猜你喜欢 --&gt;
+</span></span><span class="line"><span class="cl">    &lt;XtxGuess /&gt;
+</span></span><span class="line"><span class="cl">  &lt;/scroll-view&gt;
+</span></span><span class="line"><span class="cl">&lt;/template&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;style lang=&#34;scss&#34;&gt;
+</span></span><span class="line"><span class="cl">page {
+</span></span><span class="line"><span class="cl">  background-color: #f7f7f7;
+</span></span><span class="line"><span class="cl">  height: 100%;
+</span></span><span class="line"><span class="cl">  display: flex;
+</span></span><span class="line"><span class="cl">  flex-direction: column;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">.scroll-view {
+</span></span><span class="line"><span class="cl">  flex: 1;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">&lt;/style&gt;</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="调用组件对应后端api" class="heading-element"><span>调用组件对应后端API</span>
+  <a href="#%e8%b0%83%e7%94%a8%e7%bb%84%e4%bb%b6%e5%af%b9%e5%ba%94%e5%90%8e%e7%ab%afapi" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>单个页面内部使用组件采用页面内部调用API</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">//页面加载
+</span></span><span class="line"><span class="cl">onLoad(() =&gt; {
+</span></span><span class="line"><span class="cl">  getHomeBannerData()
+</span></span><span class="line"><span class="cl">  getHomeCategoryAPIData()
+</span></span><span class="line"><span class="cl">  getHomeHotData()
+</span></span><span class="line"><span class="cl">})</span></span></code></pre></td></tr></table>
+</div>
+</div><p>多个页面内部都会用到的组件采用组件内部调用API</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// 组件挂载完毕
+</span></span><span class="line"><span class="cl">onMounted(() =&gt; {
+</span></span><span class="line"><span class="cl">    getHomeGoodsGuessLikeAPI()
+</span></span><span class="line"><span class="cl">})</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2024-04-01 11:25:40">Updated on 2024-04-01&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/uni-app%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0_3/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="Share on X" data-sharer="twitter" data-url="http://localhost:1313/posts/uni-app%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0_3/" data-title="Vue3&#43;ts开发学习 · 小兔鲜儿3" data-hashtags="Vue3,uni-app,开发"><i class="fa-brands fa-x-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/uni-app%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0_3/" data-hashtag="Vue3"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/uni-app%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0_3/" data-title="Vue3&#43;ts开发学习 · 小兔鲜儿3"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  </span>
+        </div>
+      </div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/vue3/" class="post-tag" title="Tags - Vue3">Vue3</a><a href="/tags/uni-app/" class="post-tag" title="Tags - Uni-App">Uni-App</a><a href="/tags/%E5%BC%80%E5%8F%91/" class="post-tag" title="Tags - 开发">开发</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/uni-app%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0_2/" class="post-nav-item" rel="prev" title="Vue3&#43;ts开发学习——小兔鲜儿2"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Vue3&#43;ts开发学习——小兔鲜儿2</a><a href="/posts/uni-app%E5%BC%80%E5%8F%91%E5%AD%A6%E4%B9%A0_1/" class="post-nav-item" rel="next" title="Vue3&#43;ts开发学习 · 基础准备">Vue3&#43;ts开发学习 · 基础准备<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.136.5">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024 - 2025</span><span class="author" itemprop="copyrightHolder">
+              <a href="Tin10g.github.io">Ting</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">This website works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":1000},"comment":{"enable":false},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"typeit":{"cursorChar":"|","cursorSpeed":1000,"duration":-1,"loop":false,"speed":100},"version":"v0.3.13"};console.log('Page config:', window.config);</script><script src="/js/theme.min.js" defer></script></body>
+</html>

