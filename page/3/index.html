@@ -130,79 +130,126 @@
     </a><a href="mailto:ting10win@gmail.com" title="Email"target="_blank" rel="external nofollow noopener noreferrer me"><i class="fa-regular fa-envelope fa-fw" aria-hidden="true"></i>
     </a><a href="/index.xml" title="RSS"target="_blank" rel="external nofollow noopener noreferrer me"><i class="fa-solid fa-rss fa-fw" aria-hidden="true"></i>
     </a></div></div>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/2024%E5%81%9A%E9%A2%98-ciscn-2019%E5%88%9D%E8%B5%9Blove-math/">【CISCN 2019初赛】Love Math</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2024-10-31 11:25:40'>published on <time datetime="2024-10-31">2024-10-31</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/web--2024%E5%81%9A%E9%A2%98/" class="post-category" title="Category - Web · 2024做题"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Web · 2024做题</a></span></div><div class="content"><h3 id="ciscn-2019初赛love-math" class="heading-element"><span>[CISCN 2019初赛]Love Math</span>
-  <a href="#ciscn-2019%e5%88%9d%e8%b5%9blove-math" class="heading-mark">
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/reading-yoloworld%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">YOLO-World:Real-Time Open-Vocabulary Object Detection</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2024-01-01 11:25:40'>published on <time datetime="2024-01-01">2024-01-01</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/paper-reading/" class="post-category" title="Category - Paper Reading"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Paper Reading</a></span></div><div class="content"><h3 id="abstract" class="heading-element"><span>Abstract</span>
+  <a href="#abstract" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><h3 id="思路" class="heading-element"><span>思路</span>
-  <a href="#%e6%80%9d%e8%b7%af" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><ul>
-<li>
-<p>源码</p></div><div class="post-footer">
-    <a href="/posts/2024%E5%81%9A%E9%A2%98-ciscn-2019%E5%88%9D%E8%B5%9Blove-math/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/web/' class="post-tag">Web</a><a href='/tags/%E5%81%9A%E9%A2%98/' class="post-tag">做题</a><a href='/tags/rce/' class="post-tag">RCE</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/2024%E5%81%9A%E9%A2%98-fsctf-2023ez_eval/">【FSCTF 2023】EZ_eval</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2024-10-31 11:25:40'>published on <time datetime="2024-10-31">2024-10-31</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/web--2024%E5%81%9A%E9%A2%98/" class="post-category" title="Category - Web · 2024做题"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Web · 2024做题</a></span></div><div class="content"><h3 id="fsctf-2023ez_eval" class="heading-element"><span>[FSCTF 2023]EZ_eval</span>
-  <a href="#fsctf-2023ez_eval" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><h3 id="思路" class="heading-element"><span>思路</span>
-  <a href="#%e6%80%9d%e8%b7%af" class="heading-mark">
+</h3><h3 id="提出问题" class="heading-element"><span>提出问题</span>
+  <a href="#%e6%8f%90%e5%87%ba%e9%97%ae%e9%a2%98" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
 </h3><ul>
-<li>
-<p>源码</p></div><div class="post-footer">
-    <a href="/posts/2024%E5%81%9A%E9%A2%98-fsctf-2023ez_eval/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/web/' class="post-tag">Web</a><a href='/tags/%E5%81%9A%E9%A2%98/' class="post-tag">做题</a><a href='/tags/rce/' class="post-tag">RCE</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/2024%E5%81%9A%E9%A2%98-fsctf-2023helloyou/">【FSCTF 2023】Hello,you</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2024-10-31 11:25:40'>published on <time datetime="2024-10-31">2024-10-31</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/web--2024%E5%81%9A%E9%A2%98/" class="post-category" title="Category - Web · 2024做题"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Web · 2024做题</a></span></div><div class="content"><h3 id="fsctf-2023helloyou" class="heading-element"><span>[FSCTF 2023]Hello,you</span>
-  <a href="#fsctf-2023helloyou" class="heading-mark">
+<li>由于预定义和训练过的对象一般是图像类，YOLO系列在开放场景适用性低</li>
+</ul>
+<h3 id="成果" class="heading-element"><span>成果</span>
+  <a href="#%e6%88%90%e6%9e%9c" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ul>
+<li>团队通过在较大数据集的视觉语言建模和预训练增强了YOLO开放词汇表检测功能</li>
+<li>RepVL-PAN &amp; region-text contrasitive loss
+增强了视觉和语言信息的交互</li>
+<li>在没有直接训练样本的情况下，模型能高效地识别或检测较大范围内的新的对象类别</li>
+</ul>
+<h3 id="数据集" class="heading-element"><span>数据集</span>
+  <a href="#%e6%95%b0%e6%8d%ae%e9%9b%86" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ul>
+<li>使用LVIS dataset</li>
+<li>结果：在LVIS数据集上取得了35.4的平均精度（AP），同时在V100硬件上达到了52.0帧每秒（FPS）</li>
+<li>对比：在准确性和处理速度上都优于许多当前最先进的方法</li>
+</ul>
+<h3 id="introduction" class="heading-element"><span>Introduction</span>
+  <a href="#introduction" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ul>
+<li>主流的视觉-语言检测模型和YOLO-World对比，YOLO-World在FPS（v100）上提速20倍，并且在平均精度上和主流模型差不多甚至更好。</li>
+</ul>
+<blockquote>
+<p>数据评估方法：1. 精度——LVIS minival的固定的AP 2. 推理速度——NVIDIA V100 w/o TensorRT</p></div><div class="post-footer">
+    <a href="/posts/reading-yoloworld%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/yoloworld/' class="post-tag">YOLOWorld</a><a href='/tags/%E7%BB%84%E4%BC%9A/' class="post-tag">组会</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/yolov9_bug%E8%AE%B0%E5%BD%95/">YOLOv9环境配置心路</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2024-01-01 11:25:40'>published on <time datetime="2024-01-01">2024-01-01</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/yolov9/" class="post-category" title="Category - YOLOv9"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> YOLOv9</a></span></div><div class="content"><h3 id="yolov9--bugs" class="heading-element"><span>YOLOv9 &amp; BUGs</span>
+  <a href="#yolov9--bugs" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><h3 id="loss_talpy报错" class="heading-element"><span>loss_tal.py报错</span>
+  <a href="#loss_talpy%e6%8a%a5%e9%94%99" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>cfg使用的glane-c.yaml</p></div><div class="post-footer">
+    <a href="/posts/yolov9_bug%E8%AE%B0%E5%BD%95/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/yolov9/' class="post-tag">YOLOv9</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/yolov9_%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83/">YOLO系列环境配置心路</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2024-01-01 11:25:40'>published on <time datetime="2024-01-01">2024-01-01</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/yolov9/" class="post-category" title="Category - YOLOv9"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> YOLOv9</a></span></div><div class="content"><h3 id="创建虚拟环境" class="heading-element"><span>创建虚拟环境</span>
+  <a href="#%e5%88%9b%e5%bb%ba%e8%99%9a%e6%8b%9f%e7%8e%af%e5%a2%83" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><h4 id="法一conda" class="heading-element"><span>法一：conda</span>
+  <a href="#%e6%b3%95%e4%b8%80conda" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><ul>
+<li>创建</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">conda create -n your_env_name python=3.7</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>激活Linux</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">conda activate your_env_name</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">source activate your_env_name</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="法二virturalenvs" class="heading-element"><span>法二：virturalenvs</span>
+  <a href="#%e6%b3%95%e4%ba%8cvirturalenvs" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><ul>
+<li>创建<br>
+直接用pycharm创建的环境就在这个.virturalenvs文件里面</li>
+<li>激活(找bin下的activate)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">source /home/lzh/.virtualenvs/t_yolov7Oral/bin/activate</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="配置package" class="heading-element"><span>配置package</span>
+  <a href="#%e9%85%8d%e7%bd%aepackage" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>一般项目会有requirements.txt<br>
+进项目文件</p></div><div class="post-footer">
+    <a href="/posts/yolov9_%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/yolov9/' class="post-tag">YOLOv9</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/yolov9_%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%86%E9%85%8D/">数据集分配一些小tip</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2024-01-01 11:25:40'>published on <time datetime="2024-01-01">2024-01-01</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/yolov9/" class="post-category" title="Category - YOLOv9"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> YOLOv9</a></span></div><div class="content"><h3 id="数据集分配" class="heading-element"><span>数据集分配</span>
+  <a href="#%e6%95%b0%e6%8d%ae%e9%9b%86%e5%88%86%e9%85%8d" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
 </h3><blockquote>
-<p>我是在nss做的，好像原题flag位置不一样。</p></div><div class="post-footer">
-    <a href="/posts/2024%E5%81%9A%E9%A2%98-fsctf-2023helloyou/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/web/' class="post-tag">Web</a><a href='/tags/%E5%81%9A%E9%A2%98/' class="post-tag">做题</a><a href='/tags/rce/' class="post-tag">RCE</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/2024%E5%81%9A%E9%A2%98-fsctf-2023%E7%BB%86%E7%8B%972.0/">【FSCTF 2023】细狗2.0</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2024-10-31 11:25:40'>published on <time datetime="2024-10-31">2024-10-31</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/web--2024%E5%81%9A%E9%A2%98/" class="post-category" title="Category - Web · 2024做题"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Web · 2024做题</a></span></div><div class="content"><h3 id="fsctf-2023细狗20" class="heading-element"><span>[FSCTF 2023]细狗2.0</span>
-  <a href="#fsctf-2023%e7%bb%86%e7%8b%9720" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><h3 id="思路" class="heading-element"><span>思路</span>
-  <a href="#%e6%80%9d%e8%b7%af" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><ul>
-<li>
-<p>输入点东西</p></div><div class="post-footer">
-    <a href="/posts/2024%E5%81%9A%E9%A2%98-fsctf-2023%E7%BB%86%E7%8B%972.0/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/web/' class="post-tag">Web</a><a href='/tags/%E5%81%9A%E9%A2%98/' class="post-tag">做题</a><a href='/tags/rce/' class="post-tag">RCE</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/2024%E5%81%9A%E9%A2%98-moectf-2022ezphp/">【MoeCTF 2022】ezphp</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2024-10-31 11:25:40'>published on <time datetime="2024-10-31">2024-10-31</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/web--2024%E5%81%9A%E9%A2%98/" class="post-category" title="Category - Web · 2024做题"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Web · 2024做题</a></span></div><div class="content"><h3 id="moectf-2022ezphp" class="heading-element"><span>[MoeCTF 2022]ezphp</span>
-  <a href="#moectf-2022ezphp" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><h3 id="思路" class="heading-element"><span>思路</span>
-  <a href="#%e6%80%9d%e8%b7%af" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><ul>
-<li>
-<p>源码</p></div><div class="post-footer">
-    <a href="/posts/2024%E5%81%9A%E9%A2%98-moectf-2022ezphp/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/web/' class="post-tag">Web</a><a href='/tags/%E5%81%9A%E9%A2%98/' class="post-tag">做题</a><a href='/tags/rce/' class="post-tag">RCE</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/2024%E5%81%9A%E9%A2%98-nssround%231-basicbasic_check/">【NSSRound#1 Basic】basic_check</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2024-10-31 11:25:40'>published on <time datetime="2024-10-31">2024-10-31</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/web--2024%E5%81%9A%E9%A2%98/" class="post-category" title="Category - Web · 2024做题"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Web · 2024做题</a></span></div><div class="content"><h3 id="nssround1-basicbasic_check" class="heading-element"><span>[NSSRound#1 Basic]basic_check</span>
-  <a href="#nssround1-basicbasic_check" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><h3 id="思路" class="heading-element"><span>思路</span>
-  <a href="#%e6%80%9d%e8%b7%af" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><ul>
-<li>
-<p>一来就是一句让我自己找</p></div><div class="post-footer">
-    <a href="/posts/2024%E5%81%9A%E9%A2%98-nssround%231-basicbasic_check/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/web/' class="post-tag">Web</a><a href='/tags/%E5%81%9A%E9%A2%98/' class="post-tag">做题</a><a href='/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%94%BB%E5%87%BB/' class="post-tag">中间件攻击</a></div></div>
+<p>本实验使用的是<code>4.2k HRW yolo dataset</code>
+[ https://github.com/Whiffe/SCB-dataset.git ]</p></div><div class="post-footer">
+    <a href="/posts/yolov9_%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%86%E9%85%8D/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/yolov9/' class="post-tag">YOLOv9</a></div></div>
 </article><ul class="pagination"><li class="page-item">
           <span class="page-link">
             <a href="/">1</a>
@@ -214,20 +261,6 @@
         </li><li class="page-item active">
           <span class="page-link">
             <a href="/page/3/">3</a>
-          </span>
-        </li><li class="page-item">
-          <span class="page-link">
-            <a href="/page/4/">4</a>
-          </span>
-        </li><li class="page-item">
-          <span class="page-link">
-            <a href="/page/5/">5</a>
-          </span>
-        </li><li class="page-item">
-          <span class="page-link" aria-hidden="true">&hellip;</span>
-        </li><li class="page-item">
-          <span class="page-link">
-            <a href="/page/13/">13</a>
           </span>
         </li></ul></div></main><footer class="footer">
     <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.137.0">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
