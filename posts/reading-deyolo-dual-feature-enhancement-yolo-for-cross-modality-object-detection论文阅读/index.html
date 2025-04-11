@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>DEYOLO-Dual-Feature-Enhancement YOLO for Cross-Modality Object Detection - Ting BLOG🐈</title><meta name="author" content="Ting">
+<meta name="description" content="😼Abstract翻译在光照不足的环境下进行物体检测是一项具有挑战性的任务，因为物体通常在 RGB 图像中不清晰可见。由于红外图像提供了补充 RGB 图像的额外清晰边缘信息，因此融合 RGB 和红外图像有可能增强光照不足环境下的检测能力。然而，现有的涉及可见光和红外图像的研究只关注图像融合，而不是物体检测。此外，它们直接融合了两种图像模态，忽略了它们之间的相互干扰。为了融合这两种模态以最大限度地发挥跨模态的优势，我们设计了一个基于双增强的跨模态物体检测网络 DEYOLO，其中设计了语义空间跨模态和新颖的双向解耦焦点模块，以实现以检测为中心的 RGB-红外 (RGB-IR) 相互增强。具体来说，首先提出了双语义增强通道权重分配模块（DECA）和双空间增强像素权重分配模块（DEPA），以聚合特征空间中的跨模态信息，以提高特征表示能力，从而使特征融合可以针对目标检测任务。同时，在DECA和DEPA中都设计了一种双增强机制，包括双模态融合和单模态增强，以减少两种图像模态之间的干扰。然后，开发了一种新颖的双向解耦焦点，以扩大骨干网络在不同方向上的感受野，从而提高了DEYOLO的表示质量。在M3FD和LLVIP上进行的大量实验表明，我们的方法明显优于SOTA目标检测算法。
+"><meta name="keywords" content='YOLOWorld, 组会'>
+  <meta itemprop="name" content="DEYOLO-Dual-Feature-Enhancement YOLO for Cross-Modality Object Detection">
+  <meta itemprop="description" content="😼Abstract翻译在光照不足的环境下进行物体检测是一项具有挑战性的任务，因为物体通常在 RGB 图像中不清晰可见。由于红外图像提供了补充 RGB 图像的额外清晰边缘信息，因此融合 RGB 和红外图像有可能增强光照不足环境下的检测能力。然而，现有的涉及可见光和红外图像的研究只关注图像融合，而不是物体检测。此外，它们直接融合了两种图像模态，忽略了它们之间的相互干扰。为了融合这两种模态以最大限度地发挥跨模态的优势，我们设计了一个基于双增强的跨模态物体检测网络 DEYOLO，其中设计了语义空间跨模态和新颖的双向解耦焦点模块，以实现以检测为中心的 RGB-红外 (RGB-IR) 相互增强。具体来说，首先提出了双语义增强通道权重分配模块（DECA）和双空间增强像素权重分配模块（DEPA），以聚合特征空间中的跨模态信息，以提高特征表示能力，从而使特征融合可以针对目标检测任务。同时，在DECA和DEPA中都设计了一种双增强机制，包括双模态融合和单模态增强，以减少两种图像模态之间的干扰。然后，开发了一种新颖的双向解耦焦点，以扩大骨干网络在不同方向上的感受野，从而提高了DEYOLO的表示质量。在M3FD和LLVIP上进行的大量实验表明，我们的方法明显优于SOTA目标检测算法。">
+  <meta itemprop="datePublished" content="2024-01-01T11:25:40+08:00">
+  <meta itemprop="dateModified" content="2024-01-01T11:25:40+08:00">
+  <meta itemprop="wordCount" content="14">
+  <meta itemprop="keywords" content="YOLOWorld,组会"><meta property="og:url" content="http://localhost:1313/posts/reading-deyolo-dual-feature-enhancement-yolo-for-cross-modality-object-detection%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">
+  <meta property="og:site_name" content="Ting BLOG🐈">
+  <meta property="og:title" content="DEYOLO-Dual-Feature-Enhancement YOLO for Cross-Modality Object Detection">
+  <meta property="og:description" content="😼Abstract翻译在光照不足的环境下进行物体检测是一项具有挑战性的任务，因为物体通常在 RGB 图像中不清晰可见。由于红外图像提供了补充 RGB 图像的额外清晰边缘信息，因此融合 RGB 和红外图像有可能增强光照不足环境下的检测能力。然而，现有的涉及可见光和红外图像的研究只关注图像融合，而不是物体检测。此外，它们直接融合了两种图像模态，忽略了它们之间的相互干扰。为了融合这两种模态以最大限度地发挥跨模态的优势，我们设计了一个基于双增强的跨模态物体检测网络 DEYOLO，其中设计了语义空间跨模态和新颖的双向解耦焦点模块，以实现以检测为中心的 RGB-红外 (RGB-IR) 相互增强。具体来说，首先提出了双语义增强通道权重分配模块（DECA）和双空间增强像素权重分配模块（DEPA），以聚合特征空间中的跨模态信息，以提高特征表示能力，从而使特征融合可以针对目标检测任务。同时，在DECA和DEPA中都设计了一种双增强机制，包括双模态融合和单模态增强，以减少两种图像模态之间的干扰。然后，开发了一种新颖的双向解耦焦点，以扩大骨干网络在不同方向上的感受野，从而提高了DEYOLO的表示质量。在M3FD和LLVIP上进行的大量实验表明，我们的方法明显优于SOTA目标检测算法。">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-01-01T11:25:40+08:00">
+    <meta property="article:modified_time" content="2024-01-01T11:25:40+08:00">
+    <meta property="article:tag" content="YOLOWorld">
+    <meta property="article:tag" content="组会">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="DEYOLO-Dual-Feature-Enhancement YOLO for Cross-Modality Object Detection">
+  <meta name="twitter:description" content="😼Abstract翻译在光照不足的环境下进行物体检测是一项具有挑战性的任务，因为物体通常在 RGB 图像中不清晰可见。由于红外图像提供了补充 RGB 图像的额外清晰边缘信息，因此融合 RGB 和红外图像有可能增强光照不足环境下的检测能力。然而，现有的涉及可见光和红外图像的研究只关注图像融合，而不是物体检测。此外，它们直接融合了两种图像模态，忽略了它们之间的相互干扰。为了融合这两种模态以最大限度地发挥跨模态的优势，我们设计了一个基于双增强的跨模态物体检测网络 DEYOLO，其中设计了语义空间跨模态和新颖的双向解耦焦点模块，以实现以检测为中心的 RGB-红外 (RGB-IR) 相互增强。具体来说，首先提出了双语义增强通道权重分配模块（DECA）和双空间增强像素权重分配模块（DEPA），以聚合特征空间中的跨模态信息，以提高特征表示能力，从而使特征融合可以针对目标检测任务。同时，在DECA和DEPA中都设计了一种双增强机制，包括双模态融合和单模态增强，以减少两种图像模态之间的干扰。然后，开发了一种新颖的双向解耦焦点，以扩大骨干网络在不同方向上的感受野，从而提高了DEYOLO的表示质量。在M3FD和LLVIP上进行的大量实验表明，我们的方法明显优于SOTA目标检测算法。">
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/reading-deyolo-dual-feature-enhancement-yolo-for-cross-modality-object-detection%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" title="DEYOLO-Dual-Feature-Enhancement YOLO for Cross-Modality Object Detection - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/yolov9_tensorbord%E4%BD%BF%E7%94%A8/" title="tensorbord 使用" /><link rel="next" type="text/html" href="http://localhost:1313/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_3/" title="机器学习 · 特征工程" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/reading-deyolo-dual-feature-enhancement-yolo-for-cross-modality-object-detection%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/index.md" title="DEYOLO-Dual-Feature-Enhancement YOLO for Cross-Modality Object Detection - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "DEYOLO-Dual-Feature-Enhancement YOLO for Cross-Modality Object Detection",
+    "inLanguage": "en",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/posts\/reading-deyolo-dual-feature-enhancement-yolo-for-cross-modality-object-detection%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB\/"
+    },"genre": "posts","keywords": "YOLOWorld, 组会","wordcount":  14 ,
+    "url": "http:\/\/localhost:1313\/posts\/reading-deyolo-dual-feature-enhancement-yolo-for-cross-modality-object-detection%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB\/","datePublished": "2024-01-01T11:25:40+08:00","dateModified": "2024-01-01T11:25:40+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Ting"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/archives/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/archives/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>DEYOLO-Dual-Feature-Enhancement YOLO for Cross-Modality Object Detection</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/paper-reading/" class="post-category" title="Category - Paper Reading"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Paper Reading</a></span></div><div class="post-meta-line"><span title="published on 2024-01-01 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-01">2024-01-01</time></span>&nbsp;<span title="14 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 100 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>One minute</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#翻译">翻译</a></li>
+        <li><a href="#精读">精读</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 id="abstract" class="heading-element"><span>😼Abstract</span>
+  <a href="#abstract" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h3 id="翻译" class="heading-element"><span>翻译</span>
+  <a href="#%e7%bf%bb%e8%af%91" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>在光照不足的环境下进行物体检测是一项具有挑战性的任务，因为物体通常在 RGB 图像中不清晰可见。由于红外图像提供了补充 RGB 图像的额外清晰边缘信息，因此融合 RGB 和红外图像有可能增强光照不足环境下的检测能力。然而，现有的涉及可见光和红外图像的研究只关注图像融合，而不是物体检测。此外，它们直接融合了两种图像模态，忽略了它们之间的相互干扰。为了融合这两种模态以最大限度地发挥跨模态的优势，我们设计了一个基于双增强的跨模态物体检测网络 DEYOLO，其中设计了语义空间跨模态和新颖的双向解耦焦点模块，以实现以检测为中心的 RGB-红外 (RGB-IR) 相互增强。具体来说，首先提出了双语义增强通道权重分配模块（DECA）和双空间增强像素权重分配模块（DEPA），以聚合特征空间中的跨模态信息，以提高特征表示能力，从而使特征融合可以针对目标检测任务。同时，在DECA和DEPA中都设计了一种双增强机制，包括双模态融合和单模态增强，以减少两种图像模态之间的干扰。然后，开发了一种新颖的双向解耦焦点，以扩大骨干网络在不同方向上的感受野，从而提高了DEYOLO的表示质量。在M3FD和LLVIP上进行的大量实验表明，我们的方法明显优于SOTA目标检测算法。</p>
+<h3 id="精读" class="heading-element"><span>精读</span>
+  <a href="#%e7%b2%be%e8%af%bb" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2024-01-01 11:25:40">Updated on 2024-01-01&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/reading-deyolo-dual-feature-enhancement-yolo-for-cross-modality-object-detection%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="Share on X" data-sharer="twitter" data-url="http://localhost:1313/posts/reading-deyolo-dual-feature-enhancement-yolo-for-cross-modality-object-detection%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" data-title="DEYOLO-Dual-Feature-Enhancement YOLO for Cross-Modality Object Detection" data-hashtags="YOLOWorld,组会"><i class="fa-brands fa-x-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/reading-deyolo-dual-feature-enhancement-yolo-for-cross-modality-object-detection%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" data-hashtag="YOLOWorld"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/reading-deyolo-dual-feature-enhancement-yolo-for-cross-modality-object-detection%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" data-title="DEYOLO-Dual-Feature-Enhancement YOLO for Cross-Modality Object Detection"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  </span>
+        </div>
+      </div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/yoloworld/" class="post-tag" title="Tags - YOLOWorld">YOLOWorld</a><a href="/tags/%E7%BB%84%E4%BC%9A/" class="post-tag" title="Tags - 组会">组会</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/yolov9_tensorbord%E4%BD%BF%E7%94%A8/" class="post-nav-item" rel="prev" title="Tensorbord 使用"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Tensorbord 使用</a><a href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_3/" class="post-nav-item" rel="next" title="机器学习 · 特征工程">机器学习 · 特征工程<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.137.0">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024 - 2025</span><span class="author" itemprop="copyrightHolder">
+              <a href="Tin10g.github.io">Ting</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">This website works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":1000},"comment":{"enable":false},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"typeit":{"cursorChar":"|","cursorSpeed":1000,"duration":-1,"loop":false,"speed":100},"version":"v0.3.13"};console.log('Page config:', window.config);</script><script src="/js/theme.min.js" defer></script></body>
+</html>

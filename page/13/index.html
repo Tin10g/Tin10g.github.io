@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html itemscope itemtype="http://schema.org/WebPage" lang="en">
   <head>
-	<meta name="generator" content="Hugo 0.136.5"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta name="generator" content="Hugo 0.137.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     
       <meta name="theme" content='FixIt v0.3.13'>
     
@@ -130,27 +130,7 @@
     </a><a href="mailto:ting10win@gmail.com" title="Email"target="_blank" rel="external nofollow noopener noreferrer me"><i class="fa-regular fa-envelope fa-fw" aria-hidden="true"></i>
     </a><a href="/index.xml" title="RSS"target="_blank" rel="external nofollow noopener noreferrer me"><i class="fa-solid fa-rss fa-fw" aria-hidden="true"></i>
     </a></div></div>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/2023web-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%80%9D%E8%B7%AF/">文件上传思路</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2023-07-01 11:25:40'>published on <time datetime="2023-07-01">2023-07-01</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/web--2023%E7%AC%94%E8%AE%B0%E6%9C%AA%E6%95%B4%E7%90%86/" class="post-category" title="Category - Web · 2023笔记（未整理）"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Web · 2023笔记（未整理）</a></span></div><div class="content"><ul>
-<li>直接传php
-如果不行，说明有黑名单or白名单验证</li>
-<li>验证是黑名单还是白名单
-文件名修成<code>.pppp</code>之类，如果不行说明是黑名单，并且如果能够验出文件类型是php，则有文件类型校验</li>
-<li>验证是否内容校验
-文件名和文件类型都修改后，依旧验出php则有</li>
-<li>如果内容有校验，修改内容
-例：</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;script language=&#39;php&#39;&gt; @eval($_GET[&#39;cmd&#39;]);&lt;/script&gt;</span></span></code></pre></td></tr></table>
-</div>
-</div></div><div class="post-footer">
-    <a href="/posts/2023web-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%80%9D%E8%B7%AF/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/web/' class="post-tag">Web</a><a href='/tags/ctf/' class="post-tag">CTF</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/2023web-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87/">文件上传绕过</a>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/2023web-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87/">文件上传绕过</a>
   </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2023-07-01 11:25:40'>published on <time datetime="2023-07-01">2023-07-01</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/web--2023%E7%AC%94%E8%AE%B0%E6%9C%AA%E6%95%B4%E7%90%86/" class="post-category" title="Category - Web · 2023笔记（未整理）"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Web · 2023笔记（未整理）</a></span></div><div class="content"><h3 id="1文件上传绕过类型" class="heading-element"><span>1.文件上传绕过类型</span>
   <a href="#1%e6%96%87%e4%bb%b6%e4%b8%8a%e4%bc%a0%e7%bb%95%e8%bf%87%e7%b1%bb%e5%9e%8b" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
@@ -159,18 +139,6 @@
 javascript校验，一般是校验后缀名
 上传木马，蚁剑连接或者禁用javascript</p></div><div class="post-footer">
     <a href="/posts/2023web-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E7%BB%95%E8%BF%87/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/web/' class="post-tag">Web</a><a href='/tags/ctf/' class="post-tag">CTF</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/2023web-%E6%96%87%E4%BB%B6%E5%9E%8B%E6%B3%A8%E5%85%A5/">文件型注入</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2023-07-01 11:25:40'>published on <time datetime="2023-07-01">2023-07-01</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/web--2023%E7%AC%94%E8%AE%B0%E6%9C%AA%E6%95%B4%E7%90%86/" class="post-category" title="Category - Web · 2023笔记（未整理）"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Web · 2023笔记（未整理）</a></span></div><div class="content"><blockquote>
-<p>本文参考博客：https://blog.csdn.net/Kevinhanser/article/details/81592478?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=%E5%AF%BC%E5%85%A5%E6%96%87%E4%BB%B6%E5%9E%8B%E6%B3%A8%E5%85%A5&amp;utm_medium=distribute.pc_search_result.none-task-blog-2<del>all</del>sobaiduweb~default-0-81592478.142^v88^koosearch_v1,239^v2^insert_chatgpt&amp;spm=1018.2226.3001.4187</p>
-</blockquote>
-<h3 id="一基本思路" class="heading-element"><span>一、基本思路</span>
-  <a href="#%e4%b8%80%e5%9f%ba%e6%9c%ac%e6%80%9d%e8%b7%af" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><p>1.通过使用load_file导出访问dnslog平台；
-2.通过hex()对查看的@@basedir mysql的安装目录进行16进制转换，避免url显示不出特殊符号；
-【注：因为url长度有限使用substr()函数截取函数分段显示然后再拼接一起查看】</p></div><div class="post-footer">
-    <a href="/posts/2023web-%E6%96%87%E4%BB%B6%E5%9E%8B%E6%B3%A8%E5%85%A5/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/web/' class="post-tag">Web</a><a href='/tags/ctf/' class="post-tag">CTF</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/2023web-%E6%97%A5%E5%BF%97%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/">日志包含漏洞</a>
   </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2023-07-01 11:25:40'>published on <time datetime="2023-07-01">2023-07-01</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/web--2023%E7%AC%94%E8%AE%B0%E6%9C%AA%E6%95%B4%E7%90%86/" class="post-category" title="Category - Web · 2023笔记（未整理）"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Web · 2023笔记（未整理）</a></span></div><div class="content"><blockquote>
 <p>参考文章：<a href="https://blog.csdn.net/qq_51553814/article/details/121109276"target="_blank" rel="external nofollow noopener noreferrer">日志包含漏洞</a></p>
@@ -195,6 +163,14 @@ javascript校验，一般是校验后缀名
 <p>然而，这个函数有一个特性：
 <strong>如果拼接的某个路径以 / 开头，那么包括基础路径在内的所有前缀路径都将被删除，该路径将视为绝对路径。</strong></p></div><div class="post-footer">
     <a href="/posts/2023web-%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E6%8B%BC%E6%8E%A5%E6%BC%8F%E6%B4%9E/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/web/' class="post-tag">Web</a><a href='/tags/ctf/' class="post-tag">CTF</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/2023web-%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/">报错注入</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='0001-01-01 00:00:00'>published on <time datetime="0001-01-01">0001-01-01</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/web--2023%E7%AC%94%E8%AE%B0%E6%9C%AA%E6%95%B4%E7%90%86/" class="post-category" title="Category - Web · 2023笔记（未整理）"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Web · 2023笔记（未整理）</a></span></div><div class="content"><h3 id="1核心" class="heading-element"><span>1.核心</span>
+  <a href="#1%e6%a0%b8%e5%bf%83" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>路径写入其它格式就会报错并且返回我们写入的非法格式内容，利用这个得到我们要点信息
+一个select语句嵌套另一个select语句，里面的select语句先执行再执行外边的select语句。</p></div><div class="post-footer">
+    <a href="/posts/2023web-%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/web/' class="post-tag">Web</a><a href='/tags/ctf/' class="post-tag">CTF</a></div></div>
 </article><ul class="pagination"><li class="page-item">
           <span class="page-link">
             <a href="/">1</a>
@@ -213,12 +189,8 @@ javascript校验，一般是校验后缀名
           <span class="page-link">
             <a href="/page/13/">13</a>
           </span>
-        </li><li class="page-item">
-          <span class="page-link">
-            <a href="/page/14/">14</a>
-          </span>
         </li></ul></div></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.136.5">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.137.0">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2024 - 2025</span><span class="author" itemprop="copyrightHolder">
               <a href="Tin10g.github.io">Ting</a></span></div></div>

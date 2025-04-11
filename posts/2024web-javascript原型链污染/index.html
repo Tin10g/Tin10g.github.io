@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>JavaScript原型链污染 - Ting BLOG🐈</title><meta name="author" content="Ting">
+<meta name="description" content="JavaScript原型链污染什么是原型链和js中的继承先要掌握几个关键点：
+"><meta name="keywords" content='Web, PHP漏洞'>
+  <meta itemprop="name" content="JavaScript原型链污染">
+  <meta itemprop="description" content="JavaScript原型链污染什么是原型链和js中的继承先要掌握几个关键点：">
+  <meta itemprop="datePublished" content="2024-11-02T11:25:40+08:00">
+  <meta itemprop="dateModified" content="2024-11-02T11:25:40+08:00">
+  <meta itemprop="wordCount" content="389">
+  <meta itemprop="keywords" content="Web,PHP漏洞"><meta property="og:url" content="http://localhost:1313/posts/2024web-javascript%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/">
+  <meta property="og:site_name" content="Ting BLOG🐈">
+  <meta property="og:title" content="JavaScript原型链污染">
+  <meta property="og:description" content="JavaScript原型链污染什么是原型链和js中的继承先要掌握几个关键点：">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-11-02T11:25:40+08:00">
+    <meta property="article:modified_time" content="2024-11-02T11:25:40+08:00">
+    <meta property="article:tag" content="Web">
+    <meta property="article:tag" content="PHP漏洞">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="JavaScript原型链污染">
+  <meta name="twitter:description" content="JavaScript原型链污染什么是原型链和js中的继承先要掌握几个关键点：">
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/2024web-javascript%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/" title="JavaScript原型链污染 - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/2024web-sql-lab/" title="SQL-Lab做题记录" /><link rel="next" type="text/html" href="http://localhost:1313/posts/2024%E5%81%9A%E9%A2%98-nssround%234-swpu1zweb/" title="【NSSRound#4 SWPU】1zweb" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/2024web-javascript%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/index.md" title="JavaScript原型链污染 - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "JavaScript原型链污染",
+    "inLanguage": "en",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/posts\/2024web-javascript%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93\/"
+    },"genre": "posts","keywords": "Web, PHP漏洞","wordcount":  389 ,
+    "url": "http:\/\/localhost:1313\/posts\/2024web-javascript%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93\/","datePublished": "2024-11-02T11:25:40+08:00","dateModified": "2024-11-02T11:25:40+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Ting"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/archives/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/archives/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>JavaScript原型链污染</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/web--2024%E7%AC%94%E8%AE%B0/" class="post-category" title="Category - Web · 2024笔记"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Web · 2024笔记</a></span></div><div class="post-meta-line"><span title="published on 2024-11-02 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-11-02">2024-11-02</time></span>&nbsp;<span title="389 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 400 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>2 minutes</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#什么是原型链和js中的继承">什么是原型链和js中的继承</a></li>
+    <li><a href="#javascript-原型链污染漏洞原理">Javascript 原型链污染漏洞原理</a></li>
+    <li><a href="#merge类导致原型链污染">Merge类导致原型链污染</a>
+      <ul>
+        <li><a href="#merge类操作">Merge类操作</a>
+          <ul>
+            <li><a href="#为什么merge不安全">为什么Merge不安全？</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 id="javascript原型链污染" class="heading-element"><span>JavaScript原型链污染</span>
+  <a href="#javascript%e5%8e%9f%e5%9e%8b%e9%93%be%e6%b1%a1%e6%9f%93" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h2 id="什么是原型链和js中的继承" class="heading-element"><span>什么是原型链和js中的继承</span>
+  <a href="#%e4%bb%80%e4%b9%88%e6%98%af%e5%8e%9f%e5%9e%8b%e9%93%be%e5%92%8cjs%e4%b8%ad%e7%9a%84%e7%bb%a7%e6%89%bf" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>先要掌握几个关键点：</p>
+<ul>
+<li>
+<p>每个构造函数都有一个<code>prototype</code>原型对象</p>
+</li>
+<li>
+<p>每个实例对象都有一个<code>__proto__</code>属性，并指向它的构造函数的原型对象<code>prototype</code></p>
+</li>
+<li>
+<p>对象里面的<code>constructor</code>属性指向其构造函数本身</p>
+</li>
+<li>
+<p>第一个原型对象的<code>__proto__</code>是null</p>
+</li>
+</ul>
+<p>知道上面这些就可以来说继承机制，即原型链继承</p>
+<p><code>a.__proto__</code>和<code>A.prototype</code>等价，指向<code>Object</code></p>
+<p><code>a.__proto__.__proto__</code>和<code>A.prototype.__proto__</code>等价，指向<code>Object.prototype</code></p>
+<p><code>a.__proto__.__proto__.__proto__</code>和<code>A.prototype.prototype.prototype</code>等价，指向<code>Object.prototype.__proto__</code>，即null</p>
+<p>如果需要访问某个示例对象的原型对象可以从以下几个方法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">objectname</span><span class="o">.</span><span class="p">[[</span><span class="n">prototype</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl"><span class="n">objectname</span><span class="o">.</span><span class="n">prototype</span>
+</span></span><span class="line"><span class="cl"><span class="n">objectname</span><span class="p">[</span><span class="s2">&#34;__proto__&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">objectname</span><span class="o">.</span><span class="n">__proto__</span>
+</span></span><span class="line"><span class="cl"><span class="n">objectname</span><span class="o">.</span><span class="n">constructor</span><span class="o">.</span><span class="n">prototype</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>不同对象所生成的原型链例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">var</span> <span class="n">o</span> <span class="o">=</span> <span class="p">{</span><span class="n">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">o对象直接继承于</span> <span class="ne">Object</span><span class="o">.</span><span class="n">prototype</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="err">原型链</span><span class="p">:</span> <span class="n">o</span> <span class="o">---&gt;</span> <span class="ne">Object</span><span class="o">.</span><span class="n">prototype</span> <span class="o">---&gt;</span> <span class="n">null</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">var</span> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;yo&#34;</span><span class="p">,</span> <span class="s2">&#34;whadup&#34;</span><span class="p">,</span> <span class="s2">&#34;?&#34;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="err">数组都继承于</span> <span class="ne">Array</span><span class="o">.</span><span class="n">prototype</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="err">原型链</span><span class="p">:</span> <span class="n">a</span> <span class="o">---&gt;</span> <span class="ne">Array</span><span class="o">.</span><span class="n">prototype</span> <span class="o">---&gt;</span> <span class="ne">Object</span><span class="o">.</span><span class="n">prototype</span> <span class="o">---&gt;</span> <span class="n">null</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">function</span> <span class="n">f</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="err">函数都继承于</span> <span class="n">Function</span><span class="o">.</span><span class="n">prototype</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="err">原型链</span><span class="p">:</span> <span class="n">f</span> <span class="o">---&gt;</span> <span class="n">Function</span><span class="o">.</span><span class="n">prototype</span> <span class="o">---&gt;</span> <span class="ne">Object</span><span class="o">.</span><span class="n">prototype</span> <span class="o">---&gt;</span> <span class="n">null</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果尝试访问属性</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">//</span> <span class="err">让我们从一个函数里创建一个对象</span><span class="n">o</span><span class="p">,</span> <span class="err">它自身拥有属性</span><span class="n">a和b的</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl"><span class="n">let</span> <span class="n">f</span> <span class="o">=</span> <span class="n">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="n">this</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">   <span class="n">this</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">/*</span> <span class="err">等价写法</span>
+</span></span><span class="line"><span class="cl"><span class="n">function</span> <span class="n">f</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">this</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">this</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">*/</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="err">访问</span>
+</span></span><span class="line"><span class="cl"><span class="n">let</span> <span class="n">o</span> <span class="o">=</span> <span class="n">new</span> <span class="n">f</span><span class="p">();</span> <span class="o">//</span> <span class="p">{</span><span class="n">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="err">在</span> <span class="n">f</span> <span class="err">函数的原型对象上定义属性</span>
+</span></span><span class="line"><span class="cl"><span class="n">f</span><span class="o">.</span><span class="n">prototype</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">f</span><span class="o">.</span><span class="n">prototype</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="err">不要在</span> <span class="n">f</span> <span class="err">函数的原型上直接定义</span> <span class="n">f</span><span class="o">.</span><span class="n">prototype</span> <span class="o">=</span> <span class="p">{</span><span class="n">b</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="n">c</span><span class="p">:</span><span class="mi">4</span><span class="p">};,</span> <span class="err">这样会直接打破原型链</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">o</span><span class="o">.</span><span class="p">[[</span><span class="n">Prototype</span><span class="p">]]</span> <span class="err">有属性</span> <span class="n">b</span> <span class="err">和</span> <span class="n">c</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span>  <span class="p">(</span><span class="err">其实就是</span> <span class="n">o</span><span class="o">.</span><span class="n">__proto__</span> <span class="err">或者</span> <span class="n">o</span><span class="o">.</span><span class="n">constructor</span><span class="o">.</span><span class="n">prototype</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">o</span><span class="o">.</span><span class="p">[[</span><span class="n">Prototype</span><span class="p">]]</span><span class="o">.</span><span class="p">[[</span><span class="n">Prototype</span><span class="p">]]</span> <span class="err">是</span> <span class="ne">Object</span><span class="o">.</span><span class="n">prototype</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="err">最后</span><span class="n">o</span><span class="o">.</span><span class="p">[[</span><span class="n">Prototype</span><span class="p">]]</span><span class="o">.</span><span class="p">[[</span><span class="n">Prototype</span><span class="p">]]</span><span class="o">.</span><span class="p">[[</span><span class="n">Prototype</span><span class="p">]]</span><span class="err">是</span><span class="n">null</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="err">这就是原型链的末尾，即</span> <span class="n">null</span><span class="err">，</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="err">根据定义，</span><span class="n">null</span> <span class="err">就是没有</span> <span class="p">[[</span><span class="n">Prototype</span><span class="p">]]</span><span class="err">。</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="err">综上，整个原型链如下</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="p">{</span><span class="n">a</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span><span class="mi">2</span><span class="p">}</span> <span class="o">---&gt;</span> <span class="p">{</span><span class="n">b</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span><span class="mi">4</span><span class="p">}</span> <span class="o">---&gt;</span> <span class="ne">Object</span><span class="o">.</span><span class="n">prototype</span><span class="o">---&gt;</span> <span class="n">null</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">console.log(o.a); // 输出 1
+</span></span><span class="line"><span class="cl">// a是o的自身属性吗？是的，该属性的值为 1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">console.log(o.b); // 输出 2
+</span></span><span class="line"><span class="cl">// b是o的自身属性吗？是的，该属性的值为 2
+</span></span><span class="line"><span class="cl">// 原型上也有一个&#39;b&#39;属性，但是它不会被访问到。
+</span></span><span class="line"><span class="cl">// 这种情况被称为&#34;属性遮蔽 (property shadowing)&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">console.log(o.c); // 输出 4
+</span></span><span class="line"><span class="cl">// c是o的自身属性吗？不是，那看看它的原型上有没有
+</span></span><span class="line"><span class="cl">// c是o.[[Prototype]]的属性吗？是的，该属性的值为 4
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">console.log(o.d); // 输出 undefined
+</span></span><span class="line"><span class="cl">// d 是 o 的自身属性吗？不是，那看看它的原型上有没有
+</span></span><span class="line"><span class="cl">// d 是 o.[[Prototype]] 的属性吗？不是，那看看它的原型上有没有
+</span></span><span class="line"><span class="cl">// o.[[Prototype]].[[Prototype]] 为 null，停止搜索
+</span></span><span class="line"><span class="cl">// 找不到 d 属性，返回 undefined</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="javascript-原型链污染漏洞原理" class="heading-element"><span>Javascript 原型链污染漏洞原理</span>
+  <a href="#javascript-%e5%8e%9f%e5%9e%8b%e9%93%be%e6%b1%a1%e6%9f%93%e6%bc%8f%e6%b4%9e%e5%8e%9f%e7%90%86" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">object1 = {&#34;a&#34;:1, &#34;b&#34;:2};
+</span></span><span class="line"><span class="cl">object1.__proto__.foo = &#34;Hello World&#34;;
+</span></span><span class="line"><span class="cl">console.log(object1.foo);
+</span></span><span class="line"><span class="cl">object2 = {&#34;c&#34;:1, &#34;d&#34;:2};
+</span></span><span class="line"><span class="cl">console.log(object2.foo);</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里的输出是两个HelloWorld</p>
+<p>原因是object1和object2的原型对象都是Object.prototype</p>
+<p>object1修改这个原型对象的foo属性，则object2的原型对象也是同一个具备foo属性</p>
+<p>并且由于object1和object2本身不具备foo属性，因此直接调用他们的foo属性会用他们原型链从下到上找。</p>
+<p>这个就是造成原型链污染，通过修改object1的原型对象属性，影响了obejct2的原型对象属性</p>
+<p><strong>控制并修改一个对象的原型，就可以影响到所有和这个对象同一个原型的对象</strong></p>
+<h2 id="merge类导致原型链污染" class="heading-element"><span>Merge类导致原型链污染</span>
+  <a href="#merge%e7%b1%bb%e5%af%bc%e8%87%b4%e5%8e%9f%e5%9e%8b%e9%93%be%e6%b1%a1%e6%9f%93" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h3 id="merge类操作" class="heading-element"><span>Merge类操作</span>
+  <a href="#merge%e7%b1%bb%e6%93%8d%e4%bd%9c" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">function merge(target, source) {
+</span></span><span class="line"><span class="cl">    for (let key in source) {
+</span></span><span class="line"><span class="cl">        if (key in source &amp;&amp; key in target) {
+</span></span><span class="line"><span class="cl">            merge(target[key], source[key])
+</span></span><span class="line"><span class="cl">        } else {
+</span></span><span class="line"><span class="cl">            target[key] = source[key]
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">let object1 = {}
+</span></span><span class="line"><span class="cl">let object2 = JSON.parse(&#39;{&#34;a&#34;: 1, &#34;__proto__&#34;: {&#34;b&#34;: 2}}&#39;)
+</span></span><span class="line"><span class="cl">merge(object1, object2)
+</span></span><span class="line"><span class="cl">console.log(object1.a, object1.b)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">object3 = {}
+</span></span><span class="line"><span class="cl">console.log(object3.b)</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输出</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">1 2
+</span></span><span class="line"><span class="cl">2</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里从object3.b输出2发现，原型对Object已经被污染。</p>
+<p>从object1.a和object1.b可以看出来object1通过merge函数得到了object2的所有属性</p>
+<h4 id="为什么merge不安全" class="heading-element"><span>为什么Merge不安全？</span>
+  <a href="#%e4%b8%ba%e4%bb%80%e4%b9%88merge%e4%b8%8d%e5%ae%89%e5%85%a8" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p>因为这个函数对source对象中所有属性进行迭代，即覆盖了原本的所有属性</p>
+<p>如果属性同时存在于第一个和第二个参数中，并且他们都是object，他们就会递归合并这个属性</p>
+<p>如果我们能够控制source中的key值。让其值变成<code>__proto__</code>，且我们能够控制source中<code>__proto__</code>的属性值</p>
+<p>那么在递归的过程中，target[key]在某个特定的时候会指向对象target的prototype中，相当于我们新添加了一个新的助兴到该对象的原型链中</p>
+</div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2024-11-02 11:25:40">Updated on 2024-11-02&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/2024web-javascript%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="Share on X" data-sharer="twitter" data-url="http://localhost:1313/posts/2024web-javascript%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/" data-title="JavaScript原型链污染" data-hashtags="Web,PHP漏洞"><i class="fa-brands fa-x-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://localhost:1313/posts/2024web-javascript%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/" data-hashtag="Web"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/2024web-javascript%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/" data-title="JavaScript原型链污染"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  </span>
+        </div>
+      </div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/web/" class="post-tag" title="Tags - Web">Web</a><a href="/tags/php%E6%BC%8F%E6%B4%9E/" class="post-tag" title="Tags - PHP漏洞">PHP漏洞</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/2024web-sql-lab/" class="post-nav-item" rel="prev" title="SQL-Lab做题记录"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>SQL-Lab做题记录</a><a href="/posts/2024%E5%81%9A%E9%A2%98-nssround%234-swpu1zweb/" class="post-nav-item" rel="next" title="【NSSRound#4 SWPU】1zweb">【NSSRound#4 SWPU】1zweb<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.137.0">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024 - 2025</span><span class="author" itemprop="copyrightHolder">
+              <a href="Tin10g.github.io">Ting</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">This website works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":1000},"comment":{"enable":false},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"typeit":{"cursorChar":"|","cursorSpeed":1000,"duration":-1,"loop":false,"speed":100},"version":"v0.3.13"};console.log('Page config:', window.config);</script><script src="/js/theme.min.js" defer></script></body>
+</html>

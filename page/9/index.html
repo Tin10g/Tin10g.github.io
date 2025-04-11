@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html itemscope itemtype="http://schema.org/WebPage" lang="en">
   <head>
-	<meta name="generator" content="Hugo 0.136.5"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta name="generator" content="Hugo 0.137.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     
       <meta name="theme" content='FixIt v0.3.13'>
     
@@ -130,7 +130,145 @@
     </a><a href="mailto:ting10win@gmail.com" title="Email"target="_blank" rel="external nofollow noopener noreferrer me"><i class="fa-regular fa-envelope fa-fw" aria-hidden="true"></i>
     </a><a href="/index.xml" title="RSS"target="_blank" rel="external nofollow noopener noreferrer me"><i class="fa-solid fa-rss fa-fw" aria-hidden="true"></i>
     </a></div></div>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_1/">机器学习 · 人工智能与机器学习概述</a>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/plotneuralnet%E4%BD%BF%E7%94%A8/">杂记 · PlotNeuralNet使用</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2024-04-01 11:25:40'>published on <time datetime="2024-04-01">2024-04-01</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E6%9D%82%E8%AE%B0/" class="post-category" title="Category - 杂记"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 杂记</a></span></div><div class="content"><h3 id="plotneuralnet使用" class="heading-element"><span>PlotNeuralNet使用</span>
+  <a href="#plotneuralnet%e4%bd%bf%e7%94%a8" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ol>
+<li>在PlotNeuralNet源代码中新建my_project把自己的python程序放里面</li>
+<li>写Unet.py脚本，存储在my_project中</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">import sys
+</span></span><span class="line"><span class="cl">sys.path.append(&#39;../&#39;)
+</span></span><span class="line"><span class="cl">from pycore.tikzeng import *
+</span></span><span class="line"><span class="cl">from pycore.blocks  import *
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">arch = [ 
+</span></span><span class="line"><span class="cl">    # 开头
+</span></span><span class="line"><span class="cl">    to_head(&#39;..&#39;), 
+</span></span><span class="line"><span class="cl">    to_cor(),
+</span></span><span class="line"><span class="cl">    to_begin(),
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    #　添加输入层
+</span></span><span class="line"><span class="cl">    to_input( &#39;../examples/fcn8s/cats.jpg&#39; ),
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    #  添加block1包含一个二重卷积接relu
+</span></span><span class="line"><span class="cl">    to_ConvConvRelu( name=&#39;ccr_b1&#39;, s_filer=500, n_filer=(64,64), offset=&#34;(0,0,0)&#34;, to=&#34;(0,0,0)&#34;, width=(2,2), height=40, depth=40  ),
+</span></span><span class="line"><span class="cl">    to_Pool(name=&#34;pool_b1&#34;, offset=&#34;(0,0,0)&#34;, to=&#34;(ccr_b1-east)&#34;, width=1, height=32, depth=32, opacity=0.5),
+</span></span><span class="line"><span class="cl">    #  添加三个block，每个包含三个二卷积加一池化
+</span></span><span class="line"><span class="cl">    *block_2ConvPool( name=&#39;b2&#39;, botton=&#39;pool_b1&#39;, top=&#39;pool_b2&#39;, s_filer=256, n_filer=128, offset=&#34;(1,0,0)&#34;, size=(32,32,3.5), opacity=0.5 ),
+</span></span><span class="line"><span class="cl">    *block_2ConvPool( name=&#39;b3&#39;, botton=&#39;pool_b2&#39;, top=&#39;pool_b3&#39;, s_filer=128, n_filer=256, offset=&#34;(1,0,0)&#34;, size=(25,25,4.5), opacity=0.5 ),
+</span></span><span class="line"><span class="cl">    *block_2ConvPool( name=&#39;b4&#39;, botton=&#39;pool_b3&#39;, top=&#39;pool_b4&#39;, s_filer=64,  n_filer=512, offset=&#34;(1,0,0)&#34;, size=(16,16,5.5), opacity=0.5 ),
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    #  瓶颈，为block5
+</span></span><span class="line"><span class="cl">    to_ConvConvRelu( name=&#39;ccr_b5&#39;, s_filer=32, n_filer=(1024,1024), offset=&#34;(2,0,0)&#34;, to=&#34;(pool_b4-east)&#34;, width=(8,8), height=8, depth=8, caption=&#34;Bottleneck&#34;  ),
+</span></span><span class="line"><span class="cl">    to_connection( &#34;pool_b4&#34;, &#34;ccr_b5&#34;),
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    #　解码器
+</span></span><span class="line"><span class="cl">    #  多个block，每个为unconv
+</span></span><span class="line"><span class="cl">    *block_Unconv( name=&#34;b6&#34;, botton=&#34;ccr_b5&#34;, top=&#39;end_b6&#39;, s_filer=64,  n_filer=512, offset=&#34;(2.1,0,0)&#34;, size=(16,16,5.0), opacity=0.5 ),
+</span></span><span class="line"><span class="cl">    to_skip( of=&#39;ccr_b4&#39;, to=&#39;ccr_res_b6&#39;, pos=1.25),
+</span></span><span class="line"><span class="cl">    *block_Unconv( name=&#34;b7&#34;, botton=&#34;end_b6&#34;, top=&#39;end_b7&#39;, s_filer=128, n_filer=256, offset=&#34;(2.1,0,0)&#34;, size=(25,25,4.5), opacity=0.5 ),
+</span></span><span class="line"><span class="cl">    to_skip( of=&#39;ccr_b3&#39;, to=&#39;ccr_res_b7&#39;, pos=1.25),    
+</span></span><span class="line"><span class="cl">    *block_Unconv( name=&#34;b8&#34;, botton=&#34;end_b7&#34;, top=&#39;end_b8&#39;, s_filer=256, n_filer=128, offset=&#34;(2.1,0,0)&#34;, size=(32,32,3.5), opacity=0.5 ),
+</span></span><span class="line"><span class="cl">    to_skip( of=&#39;ccr_b2&#39;, to=&#39;ccr_res_b8&#39;, pos=1.25),    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    *block_Unconv( name=&#34;b9&#34;, botton=&#34;end_b8&#34;, top=&#39;end_b9&#39;, s_filer=512, n_filer=64,  offset=&#34;(2.1,0,0)&#34;, size=(40,40,2.5), opacity=0.5 ),
+</span></span><span class="line"><span class="cl">    to_skip( of=&#39;ccr_b1&#39;, to=&#39;ccr_res_b9&#39;, pos=1.25),
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    to_ConvSoftMax( name=&#34;soft1&#34;, s_filer=512, offset=&#34;(0.75,0,0)&#34;, to=&#34;(end_b9-east)&#34;, width=1, height=40, depth=40, caption=&#34;SOFT&#34; ),
+</span></span><span class="line"><span class="cl">    to_connection( &#34;end_b9&#34;, &#34;soft1&#34;),
+</span></span><span class="line"><span class="cl">    #  结束
+</span></span><span class="line"><span class="cl">    to_end() 
+</span></span><span class="line"><span class="cl">    ]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">def main():
+</span></span><span class="line"><span class="cl">    namefile = str(sys.argv[0]).split(&#39;.&#39;)[0]
+</span></span><span class="line"><span class="cl">    to_generate(arch, namefile + &#39;.tex&#39; )
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">if __name__ == &#39;__main__&#39;:
+</span></span><span class="line"><span class="cl">    main() </span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>执行后生成 Unet.tex，这个是latex代码</li>
+<li>用 git bash 进入my_project文件中，解析Unet得到模型图片的pdf
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">bash ../tikzmake.sh Unet</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h3 id="bug记录" class="heading-element"><span>Bug记录</span>
+  <a href="#bug%e8%ae%b0%e5%bd%95" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><h4 id="tikzmakesh-line-13-xdg-open-command-not-found报错" class="heading-element"><span><code>../tikzmake.sh: line 13: xdg-open: command not found</code>报错</span>
+  <a href="#tikzmakesh-line-13-xdg-open-command-not-found%e6%8a%a5%e9%94%99" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p>修改 tikzmake.sh 的代码</p></div><div class="post-footer">
+    <a href="/posts/plotneuralnet%E4%BD%BF%E7%94%A8/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/%E6%8A%80%E5%B7%A7/' class="post-tag">技巧</a><a href='/tags/gitgithub/' class="post-tag">Git&amp;github</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_1/">机器学习 · 人工智能与机器学习概述</a>
   </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2024-03-01 11:25:40'>published on <time datetime="2024-03-01">2024-03-01</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category" title="Category - 机器学习"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 机器学习</a></span></div><div class="content"><h3 id="概述与基础知识" class="heading-element"><span>概述与基础知识</span>
   <a href="#%e6%a6%82%e8%bf%b0%e4%b8%8e%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
@@ -200,69 +338,17 @@
   </a>
 </h3><p>数据和特征决定了机器学习的上限，模型和算法知识逼近这个上限。</p></div><div class="post-footer">
     <a href="/posts/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0_3/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/' class="post-tag">机器学习</a><a href='/tags/%E5%AD%A6%E4%B9%A0/' class="post-tag">学习</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/yolov9_tensorbord%E4%BD%BF%E7%94%A8/">Tensorbord 使用</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2024-01-01 11:25:40'>published on <time datetime="2024-01-01">2024-01-01</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/yolov9/" class="post-category" title="Category - YOLOv9"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> YOLOv9</a></span></div><div class="content"><h3 id="tensorbord" class="heading-element"><span>tensorbord</span>
-  <a href="#tensorbord" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><h3 id="服务器启动" class="heading-element"><span>服务器启动</span>
-  <a href="#%e6%9c%8d%e5%8a%a1%e5%99%a8%e5%90%af%e5%8a%a8" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">tensorboard --logdir=./runs</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="本地使用" class="heading-element"><span>本地使用</span>
-  <a href="#%e6%9c%ac%e5%9c%b0%e4%bd%bf%e7%94%a8" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><p>ssh连接，把服务器6006端口映射到本地的16006端口</p></div><div class="post-footer">
-    <a href="/posts/yolov9_tensorbord%E4%BD%BF%E7%94%A8/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/yolov9/' class="post-tag">YOLOv9</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/reading-yoloworld%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">YOLO-World:Real-Time Open-Vocabulary Object Detection</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2024-01-01 11:25:40'>published on <time datetime="2024-01-01">2024-01-01</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/paper-reading/" class="post-category" title="Category - Paper Reading"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Paper Reading</a></span></div><div class="content"><h3 id="abstract" class="heading-element"><span>Abstract</span>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/reading-deyolo-dual-feature-enhancement-yolo-for-cross-modality-object-detection%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">DEYOLO-Dual-Feature-Enhancement YOLO for Cross-Modality Object Detection</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="https://img.picui.cn/free/2024/10/25/671b813cb6b0a.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2024-01-01 11:25:40'>published on <time datetime="2024-01-01">2024-01-01</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/paper-reading/" class="post-category" title="Category - Paper Reading"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Paper Reading</a></span></div><div class="content"><h3 id="abstract" class="heading-element"><span>😼Abstract</span>
   <a href="#abstract" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><h3 id="提出问题" class="heading-element"><span>提出问题</span>
-  <a href="#%e6%8f%90%e5%87%ba%e9%97%ae%e9%a2%98" class="heading-mark">
+</h3><h4 id="翻译" class="heading-element"><span>翻译</span>
+  <a href="#%e7%bf%bb%e8%af%91" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><ul>
-<li>由于预定义和训练过的对象一般是图像类，YOLO系列在开放场景适用性低</li>
-</ul>
-<h3 id="成果" class="heading-element"><span>成果</span>
-  <a href="#%e6%88%90%e6%9e%9c" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><ul>
-<li>团队通过在较大数据集的视觉语言建模和预训练增强了YOLO开放词汇表检测功能</li>
-<li>RepVL-PAN &amp; region-text contrasitive loss
-增强了视觉和语言信息的交互</li>
-<li>在没有直接训练样本的情况下，模型能高效地识别或检测较大范围内的新的对象类别</li>
-</ul>
-<h3 id="数据集" class="heading-element"><span>数据集</span>
-  <a href="#%e6%95%b0%e6%8d%ae%e9%9b%86" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><ul>
-<li>使用LVIS dataset</li>
-<li>结果：在LVIS数据集上取得了35.4的平均精度（AP），同时在V100硬件上达到了52.0帧每秒（FPS）</li>
-<li>对比：在准确性和处理速度上都优于许多当前最先进的方法</li>
-</ul>
-<h3 id="introduction" class="heading-element"><span>Introduction</span>
-  <a href="#introduction" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><ul>
-<li>主流的视觉-语言检测模型和YOLO-World对比，YOLO-World在FPS（v100）上提速20倍，并且在平均精度上和主流模型差不多甚至更好。</li>
-</ul>
-<blockquote>
-<p>数据评估方法：1. 精度——LVIS minival的固定的AP 2. 推理速度——NVIDIA V100 w/o TensorRT</p></div><div class="post-footer">
-    <a href="/posts/reading-yoloworld%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/yoloworld/' class="post-tag">YOLOWorld</a><a href='/tags/%E7%BB%84%E4%BC%9A/' class="post-tag">组会</a></div></div>
+</h4><p>在光照不足的环境下进行物体检测是一项具有挑战性的任务，因为物体通常在 RGB 图像中不清晰可见。由于红外图像提供了补充 RGB 图像的额外清晰边缘信息，因此融合 RGB 和红外图像有可能增强光照不足环境下的检测能力。然而，现有的涉及可见光和红外图像的研究只关注图像融合，而不是物体检测。此外，它们直接融合了两种图像模态，忽略了它们之间的相互干扰。为了融合这两种模态以最大限度地发挥跨模态的优势，我们设计了一个基于双增强的跨模态物体检测网络 DEYOLO，其中设计了语义空间跨模态和新颖的双向解耦焦点模块，以实现以检测为中心的 RGB-红外 (RGB-IR) 相互增强。具体来说，首先提出了双语义增强通道权重分配模块（DECA）和双空间增强像素权重分配模块（DEPA），以聚合特征空间中的跨模态信息，以提高特征表示能力，从而使特征融合可以针对目标检测任务。同时，在DECA和DEPA中都设计了一种双增强机制，包括双模态融合和单模态增强，以减少两种图像模态之间的干扰。然后，开发了一种新颖的双向解耦焦点，以扩大骨干网络在不同方向上的感受野，从而提高了DEYOLO的表示质量。在M3FD和LLVIP上进行的大量实验表明，我们的方法明显优于SOTA目标检测算法。</p></div><div class="post-footer">
+    <a href="/posts/reading-deyolo-dual-feature-enhancement-yolo-for-cross-modality-object-detection%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/yoloworld/' class="post-tag">YOLOWorld</a><a href='/tags/%E7%BB%84%E4%BC%9A/' class="post-tag">组会</a></div></div>
 </article><ul class="pagination"><li class="page-item">
           <span class="page-link">
             <a href="/">1</a>
@@ -293,10 +379,10 @@
           <span class="page-link" aria-hidden="true">&hellip;</span>
         </li><li class="page-item">
           <span class="page-link">
-            <a href="/page/14/">14</a>
+            <a href="/page/13/">13</a>
           </span>
         </li></ul></div></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.136.5">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.137.0">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2024 - 2025</span><span class="author" itemprop="copyrightHolder">
               <a href="Tin10g.github.io">Ting</a></span></div></div>
