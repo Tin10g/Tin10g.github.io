@@ -15,7 +15,7 @@
 # 😺Contact
 
 * **Email**  
-  ting10win@gmail.com
+  tin10win@126.com
   
 * **GitHub**  
 http://github.com/Tin10g  
@@ -29,5 +29,5 @@ http://github.com/Tin10g
 ---
 
 > Author:   
-> URL: http://localhost:1313/about/  
+> URL: https://Tin10g.github.io/about/  
 

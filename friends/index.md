@@ -22,5 +22,5 @@
 ---
 
 > Author:   
-> URL: http://localhost:1313/friends/  
+> URL: https://Tin10g.github.io/friends/  
 

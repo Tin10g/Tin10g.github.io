@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>All Posts - Ting BLOG🐈</title>
-    <link>https://Tin10g.github.io/posts/</link>
+    <title>工具使用 - Category - Ting BLOG🐈</title>
+    <link>https://Tin10g.github.io/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</link>
     <description>This is Ting&#39;s BLOG ...</description>
     <generator>Hugo 0.137.0 &amp; FixIt v0.3.13</generator>
     <language>en</language>
     <managingEditor>ting10win@gmail.com (Ting)</managingEditor>
     <webMaster>ting10win@gmail.com (Ting)</webMaster>
     <lastBuildDate>Mon, 01 Apr 2024 11:25:40 +0800</lastBuildDate>
-    <atom:link href="https://Tin10g.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://Tin10g.github.io/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Git指令之对项目进行相关操作</title>
       <link>https://Tin10g.github.io/posts/git%E4%B8%8A%E4%BC%A0%E9%A1%B9%E7%9B%AE/</link>
