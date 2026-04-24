@@ -30,5 +30,5 @@
 ---
 
 > Author: [Ting](Tin10g.github.io)  
-> URL: https://Tin10g.github.io/posts/todo-list/  
+> URL: http://localhost:1313/posts/todo-list/  
 

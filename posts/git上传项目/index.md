@@ -50,5 +50,5 @@ git remote add origin 仓库地址// 重新添加远程仓库地址
 ---
 
 > Author: [Ting](Tin10g.github.io)  
-> URL: https://Tin10g.github.io/posts/git%E4%B8%8A%E4%BC%A0%E9%A1%B9%E7%9B%AE/  
+> URL: http://localhost:1313/posts/git%E4%B8%8A%E4%BC%A0%E9%A1%B9%E7%9B%AE/  
 
