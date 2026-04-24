@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>NLP · 文本表示 - Ting BLOG🐈</title><meta name="author" content="Ting">
+<meta name="description" content=" 本文参考b站视频教程学习
+分词&#43;词表构建基础概念流程：语料（Corpus）&mdash;&gt; 分词（Tokenization）&mdash;&gt; 词汇表（Vocabulary）
+">
+  <meta itemprop="name" content="NLP · 文本表示">
+  <meta itemprop="description" content="本文参考b站视频教程学习
+分词&#43;词表构建基础概念流程：语料（Corpus）—&gt; 分词（Tokenization）—&gt; 词汇表（Vocabulary）">
+  <meta itemprop="datePublished" content="2026-04-22T11:25:40+08:00">
+  <meta itemprop="dateModified" content="2026-04-22T11:25:40+08:00">
+  <meta itemprop="wordCount" content="364">
+  <meta itemprop="keywords" content="NLP"><meta property="og:url" content="http://localhost:1313/posts/nlp-%E6%96%87%E6%9C%AC%E8%A1%A8%E7%A4%BA/">
+  <meta property="og:site_name" content="Ting BLOG🐈">
+  <meta property="og:title" content="NLP · 文本表示">
+  <meta property="og:description" content="本文参考b站视频教程学习
+分词&#43;词表构建基础概念流程：语料（Corpus）—&gt; 分词（Tokenization）—&gt; 词汇表（Vocabulary）">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-04-22T11:25:40+08:00">
+    <meta property="article:modified_time" content="2026-04-22T11:25:40+08:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="NLP · 文本表示">
+  <meta name="twitter:description" content="本文参考b站视频教程学习
+分词&#43;词表构建基础概念流程：语料（Corpus）—&gt; 分词（Tokenization）—&gt; 词汇表（Vocabulary）">
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/nlp-%E6%96%87%E6%9C%AC%E8%A1%A8%E7%A4%BA/" title="NLP · 文本表示 - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/%E5%B7%A5%E4%BD%9C%E6%97%A5%E5%BF%97-todo-list/" title="TODO List Pre for graduated life" /><link rel="next" type="text/html" href="http://localhost:1313/about/" title="About" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/nlp-%E6%96%87%E6%9C%AC%E8%A1%A8%E7%A4%BA/index.md" title="NLP · 文本表示 - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "NLP · 文本表示",
+    "inLanguage": "en",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/posts\/nlp-%E6%96%87%E6%9C%AC%E8%A1%A8%E7%A4%BA\/"
+    },"genre": "posts","wordcount":  364 ,
+    "url": "http:\/\/localhost:1313\/posts\/nlp-%E6%96%87%E6%9C%AC%E8%A1%A8%E7%A4%BA\/","datePublished": "2026-04-22T11:25:40+08:00","dateModified": "2026-04-22T11:25:40+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Ting"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/archives/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/archives/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>NLP · 文本表示</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/nlp/" class="post-category" title="Category - NLP"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> NLP</a></span></div><div class="post-meta-line"><span title="published on 2026-04-22 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2026-04-22">2026-04-22</time></span>&nbsp;<span title="364 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 400 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>2 minutes</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#分词词表构建">分词+词表构建</a></li>
+    <li><a href="#基础概念">基础概念</a></li>
+    <li><a href="#后续的训练预测过程">后续的训练/预测过程</a></li>
+    <li><a href="#分词">分词</a>
+      <ul>
+        <li><a href="#英文分词">英文分词</a></li>
+        <li><a href="#中文分词">中文分词</a></li>
+        <li><a href="#分词工具">分词工具</a></li>
+      </ul>
+    </li>
+    <li><a href="#词表示">词表示</a>
+      <ul>
+        <li><a href="#one-hot编码">One-hot编码</a></li>
+        <li><a href="#语义化向量">语义化向量</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><blockquote>
+<p>本文参考b站视频教程学习</p>
+</blockquote>
+<h2 id="分词词表构建" class="heading-element"><span>分词+词表构建</span>
+  <a href="#%e5%88%86%e8%af%8d%e8%af%8d%e8%a1%a8%e6%9e%84%e5%bb%ba" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h2 id="基础概念" class="heading-element"><span>基础概念</span>
+  <a href="#%e5%9f%ba%e7%a1%80%e6%a6%82%e5%bf%b5" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><blockquote>
+<p>流程：语料（Corpus）&mdash;&gt; 分词（Tokenization）&mdash;&gt; 词汇表（Vocabulary）</p>
+</blockquote>
+<ul>
+<li><strong>分词</strong>是将原始文本切分为若干个具有独立意义的最小单元（token）的过程</li>
+<li><strong>词表</strong>是为每个token设置 唯一确定的id，id和token之间可以双向映射</li>
+</ul>
+<h2 id="后续的训练预测过程" class="heading-element"><span>后续的训练/预测过程</span>
+  <a href="#%e5%90%8e%e7%bb%ad%e7%9a%84%e8%ae%ad%e7%bb%83%e9%a2%84%e6%b5%8b%e8%bf%87%e7%a8%8b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>语料（Corpus）&mdash;&gt; 分词（Tokenization）&mdash;&gt; 词汇表（Vocabulary）&mdash;&gt; token的ID进入嵌入层（embedding layer），转为低维稠密的向量表示（词向量）&mdash;&gt; 隐藏层&mdash;&gt; 输出（神经元）</p>
+<h2 id="分词" class="heading-element"><span>分词</span>
+  <a href="#%e5%88%86%e8%af%8d" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><blockquote>
+<p>对于不同的语言，由于语言结构和词边界的差异，<strong>分词策略和算法</strong>会不同</p>
+</blockquote>
+<h3 id="英文分词" class="heading-element"><span>英文分词</span>
+  <a href="#%e8%8b%b1%e6%96%87%e5%88%86%e8%af%8d" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><blockquote>
+<p>按分词粒度的大小分类分词方法</p>
+</blockquote>
+<ol>
+<li>
+<p><strong>词级分词 World Level</strong></p>
+<ul>
+<li>**主要思想：**最原始的分词方法，以空格标点为标志分词</li>
+<li>**优点：**简单</li>
+<li>**缺点：**容易出现OOV（Out-Of-Vocabulary，未登录词）问题，即文本中出现词表外的词</li>
+<li>出现OOV后模型会对这些词换为统一的特殊标记（eg. &lt; UNK &gt;），从而导致语义信息的丢失，影响模型的理解和预测</li>
+</ul>
+</li>
+<li>
+<p><strong>字符级分词 Character-Level</strong></p>
+<ul>
+<li>
+<p>**主要思想：**每一个字母、数字、标点、空格都被当做独立的token</p>
+</li>
+<li>
+<p>**优点：**词表规模很小，覆盖率高，几乎不可能OOV</p>
+</li>
+<li>
+<p>**缺点：**模型需要更长的上下文推断词义和结构，显著增加建模难度和成本。同时，输入序列边长，影响模型效率</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>子词级分词 Subword-Level</strong></p>
+<blockquote>
+<p>介于词级和字符级，英文分词最常用 eg. GPT、BERT</p>
+<p>看具体效果网站：Tiktoken</p>
+</blockquote>
+<ul>
+<li>**主要思想：**语料 -&gt; 子词 -&gt; token ，只要一个词能被拆分为词表中存在的子词单元（eg. 词根、前缀、后缀）就可以被模型识别和表示</li>
+<li>**优点：**不会直接把所有的词表外的词做特殊标记</li>
+<li>**常见子词分词算法：**BPE(Byte Pair Encoding)，WordPiece，Unigram Language Model
+<ul>
+<li>BPE：训练&ndash;把语料的词汇拆分为单个字符构建初始词表；迭代<strong>统计预料中出现频率最高</strong>的相邻字符对，将其合并为新子词单元，加入词表，持续这个过程到词表到Maxsize；分词&ndash;会对构建好的词表和合并规则对新的输入文本处理&ndash;文本拆分为最小单元，按顺序应用训练中学习到的合并规则，逐步合并到无法继续&ndash;得到分词结果。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="中文分词" class="heading-element"><span>中文分词</span>
+  <a href="#%e4%b8%ad%e6%96%87%e5%88%86%e8%af%8d" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ol>
+<li>
+<p><strong>字符级分词</strong></p>
+<ul>
+<li>**主要思想：**以独立的每个汉字视为独立的token</li>
+<li>**特点：**因为每个汉字有独立的意思，所以比起英文，中文不易OOV</li>
+</ul>
+</li>
+<li>
+<p><strong>词级分词</strong></p>
+<ul>
+<li>**主要思想：**中文文本按完整词语切分，切分结果贴近人阅读</li>
+<li>**特点：**没有天然词边界，一般依赖于词典、规则、模型来识别词边界</li>
+</ul>
+</li>
+<li>
+<p><strong>子词级分词</strong>（eg. Deepseek、千问）</p>
+<ul>
+<li>**主要思想：**类似英文，学习语料中高频的字组合，构建子词词表。</li>
+<li>**特点：**无需人工词典，自适应能力强</li>
+</ul>
+</li>
+</ol>
+<h3 id="分词工具" class="heading-element"><span>分词工具</span>
+  <a href="#%e5%88%86%e8%af%8d%e5%b7%a5%e5%85%b7" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ol>
+<li>
+<p><strong>中文分词工具分类：</strong></p>
+<ul>
+<li>基于词典或模型的传统方法：以词为单位切分（eg. jieba, HanLP）</li>
+<li>基于子词建模算法（eg. BPE, Hugging Face Tokenizer, SentencePiece, tiktoken）：常用于大规模预训练语言模型</li>
+</ul>
+</li>
+<li>
+<p><strong>jieba分词器</strong></p>
+<ul>
+<li>
+<p>**精确模式：**最精确的切开句子，适合文本分析</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">jieba</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">text</span> <span class="o">=</span> <span class="s2">&#34;我毕业于清华大学的计算机系&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">words_generator</span> <span class="o">=</span> <span class="n">jieba</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="c1"># 若改为lcut则是返回列表，cut是生成器</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words_generator</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">我
+</span></span></span><span class="line"><span class="cl"><span class="s1">毕业
+</span></span></span><span class="line"><span class="cl"><span class="s1">于
+</span></span></span><span class="line"><span class="cl"><span class="s1">清华大学
+</span></span></span><span class="line"><span class="cl"><span class="s1">的
+</span></span></span><span class="line"><span class="cl"><span class="s1">计算机系
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39;&#39;&#39;</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>**全模式：**把所有可以成词的词语扫描出来</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">jieba</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">text</span> <span class="o">=</span> <span class="s2">&#34;我毕业于清华大学的计算机系&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">words_generator</span> <span class="o">=</span> <span class="n">jieba</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">cut_all</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words_generator</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">我
+</span></span></span><span class="line"><span class="cl"><span class="s1">毕业
+</span></span></span><span class="line"><span class="cl"><span class="s1">于清华
+</span></span></span><span class="line"><span class="cl"><span class="s1">清华
+</span></span></span><span class="line"><span class="cl"><span class="s1">清华大学
+</span></span></span><span class="line"><span class="cl"><span class="s1">华大
+</span></span></span><span class="line"><span class="cl"><span class="s1">大学
+</span></span></span><span class="line"><span class="cl"><span class="s1">的
+</span></span></span><span class="line"><span class="cl"><span class="s1">计算
+</span></span></span><span class="line"><span class="cl"><span class="s1">计算机
+</span></span></span><span class="line"><span class="cl"><span class="s1">计算机系
+</span></span></span><span class="line"><span class="cl"><span class="s1">算机
+</span></span></span><span class="line"><span class="cl"><span class="s1">系
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39;&#39;&#39;</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>**搜索引擎模式：**精确模式基础上进一步对长词切分，适用于搜索引擎分词</p>
+</li>
+<li>
+<p>**自定义词典：**用户可以自定义词典，包含jieba词库没有的词，用于增强特定领域词汇识别</p>
+<p>（每行格式：词语-词频-词标签）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">jieba</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">jieba</span><span class="o">.</span><span class="n">load_userdict</span><span class="p">(</span><span class="s1">&#39;dict.txt&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">word_list</span> <span class="o">=</span> <span class="n">jieba</span><span class="o">.</span><span class="n">lcut</span><span class="p">(</span><span class="s2">&#34;黄狸花猫和白狸花猫都是狸花猫的一种类型，但是彩狸花猫是相比于黄狸花猫和白狸花猫在猫界中更受猫儿的欢迎的类型，是狸花猫里的大美女&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">word_list</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">不加词典 [&#39;黄狸&#39;, &#39;花猫&#39;, &#39;和&#39;, &#39;白狸&#39;, &#39;花猫&#39;, &#39;都&#39;, &#39;是&#39;, &#39;狸&#39;, &#39;花猫&#39;, &#39;的&#39;, &#39;一种&#39;, &#39;类型&#39;, &#39;，&#39;, &#39;但是&#39;, &#39;彩狸&#39;, &#39;花猫&#39;, &#39;是&#39;, &#39;相比&#39;, &#39;于&#39;, &#39;黄狸&#39;, &#39;花猫&#39;, &#39;和&#39;, &#39;白狸&#39;, &#39;花猫&#39;, &#39;在&#39;, &#39;猫界&#39;, &#39;中&#39;, &#39;更&#39;, &#39;受&#39;, &#39;猫儿&#39;, &#39;的&#39;, &#39;欢迎&#39;, &#39;的&#39;, &#39;类型&#39;, &#39;，&#39;, &#39;是&#39;, &#39;狸&#39;, &#39;花猫&#39;, &#39;里&#39;, &#39;的&#39;, &#39;大美女&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s1">
+</span></span></span><span class="line"><span class="cl"><span class="s1">加词典 [&#39;黄狸花猫&#39;, &#39;和&#39;, &#39;白狸花猫&#39;, &#39;都&#39;, &#39;是&#39;, &#39;狸花猫&#39;, &#39;的&#39;, &#39;一种&#39;, &#39;类型&#39;, &#39;，&#39;, &#39;但是&#39;, &#39;彩狸花猫&#39;, &#39;是&#39;, &#39;相比&#39;, &#39;于&#39;, &#39;黄狸花猫&#39;, &#39;和&#39;, &#39;白狸花猫&#39;, &#39;在&#39;, &#39;猫界&#39;, &#39;中&#39;, &#39;更&#39;, &#39;受&#39;, &#39;猫儿&#39;, &#39;的&#39;, &#39;欢迎&#39;, &#39;的&#39;, &#39;类型&#39;, &#39;，&#39;, &#39;是&#39;, &#39;狸花猫&#39;, &#39;里&#39;, &#39;的&#39;, &#39;大美女&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39;&#39;&#39;</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ol>
+<h2 id="词表示" class="heading-element"><span>词表示</span>
+  <a href="#%e8%af%8d%e8%a1%a8%e7%a4%ba" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><blockquote>
+<p>token =&gt; 计算机可操作的数值形式</p>
+<p>发展：one-hot编码（稀疏）=&gt; 语义化词向量（稠密）</p>
+</blockquote>
+<h3 id="one-hot编码" class="heading-element"><span>One-hot编码</span>
+  <a href="#one-hot%e7%bc%96%e7%a0%81" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ul>
+<li>**主要思想：**词汇表中的每个词映射为一个稀疏向量（二维数组：行列数值为向量大小），向量长=词表大小，该词在对应位置为1</li>
+<li>**优点：**简单直观</li>
+<li>**缺点：**无法体现词和词的语义关系；并且词表越大</li>
+</ul>
+<h3 id="语义化向量" class="heading-element"><span>语义化向量</span>
+  <a href="#%e8%af%ad%e4%b9%89%e5%8c%96%e5%90%91%e9%87%8f" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>每个词生成一个具有语义意义的稠密向量表示，让向量能够在连续空间中表达此与词之间的关系，“意思相近”的词在空间中距离更近。</p>
+<p><img loading="lazy" src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260424230136991.png" alt="语义化向量" srcset="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260424230136991.png?size=small, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260424230136991.png?size=medium 1.5x, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260424230136991.png?size=large 2x" data-title="语义化向量" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+<ol>
+<li>
+<p><strong>Word2Vec</strong></p>
+<p>一个词的含义由它周围的词决定（分布假设）</p>
+<ul>
+<li>
+<p><strong>模型</strong></p>
+<ul>
+<li>
+<p><strong>CBOW（Continueous Bag-of-Words）模型</strong></p>
+<blockquote>
+<p>前后若干个词预测中间的目标词</p>
+</blockquote>
+<p>如图，前向传播过程：</p>
+<p><img loading="lazy" src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260424230247784.png" alt="CBOW" srcset="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260424230247784.png?size=small, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260424230247784.png?size=medium 1.5x, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260424230247784.png?size=large 2x" data-title="CBOW" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+<p>做反向传播，更新的值为W_in绿色两行</p>
+</li>
+<li>
+<p><strong>Skip-gram模型</strong></p>
+<blockquote>
+<p>从中心词预测上下文的词</p>
+</blockquote>
+<p>滑动窗口确定中间的词为中心词（输入），两边的词为要推理的（输出），以此训练。</p>
+<p>如图，前向传播过程：</p>
+<p><img loading="lazy" src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260424230224313.png" alt="Skip-gram模型*" srcset="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260424230224313.png?size=small, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260424230224313.png?size=medium 1.5x, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260424230224313.png?size=large 2x" data-title="Skip-gram模型*" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+<blockquote>
+<p>CrossEntropy函数：多分类（一个词找到多个词）</p>
+<p>SoftMax函数：转化为概率分布</p>
+</blockquote>
+<p>做反向传播更新的值是W_in粉色两行</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>原理</strong></p>
+<ul>
+<li>
+<p>数据集：不用人工标注，直接可以用大规模原始文本作为数据源</p>
+</li>
+<li>
+<p>流程：</p>
+<p>语料 =&gt; 分词=&gt;one-hot编码=&gt;Skip-Gram</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Word2Vec应用</strong>（eg. Gensim&ndash;Generate Similarity）</p>
+<ul>
+<li>
+<p>公开数据集（Chinese-Word-Vectors）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">gensim.models</span> <span class="kn">import</span> <span class="n">KeyedVectors</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">model_path</span> <span class="o">=</span> <span class="s1">&#39;./data/sgns.weibo.word.bz2&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">model</span> <span class="o">=</span> <span class="n">KeyedVectors</span><span class="o">.</span><span class="n">load_word2vec_format</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">vector_size</span><span class="p">)</span> <span class="c1">#看维度</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;地铁&#39;</span><span class="p">])</span> <span class="c1"># 查向量</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查相似度(两个向量的余弦值[-1,1])</span>
+</span></span><span class="line"><span class="cl"><span class="n">similarity</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="s1">&#39;地铁&#39;</span><span class="p">,</span><span class="s1">&#39;公交&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;地铁和公交相似度：&#39;</span><span class="p">,</span><span class="n">similarity</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#找与某个词最相似的词</span>
+</span></span><span class="line"><span class="cl"><span class="n">similar_words</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">most_similar</span><span class="p">(</span><span class="n">positive</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;上班&#39;</span><span class="p">],</span> <span class="n">topn</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">similar_words</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2026-04-22 11:25:40">Updated on 2026-04-22&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/nlp-%E6%96%87%E6%9C%AC%E8%A1%A8%E7%A4%BA/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div></div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/%E5%B7%A5%E4%BD%9C%E6%97%A5%E5%BF%97-todo-list/" class="post-nav-item" rel="prev" title="TODO List Pre for Graduated Life"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>TODO List Pre for Graduated Life</a></div>
+</div>
+<div class="post-reward">
+    <div class="comment"></div>
+    <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
+    <label class="reward-button" for="fi-reward"><?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1776434267563" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2715" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M377.596784 791.989528s-39.199482 22.799699 27.799633 30.399598c81.198926 9.199878 122.598379 7.999894 211.997197-8.999881 0 0 23.599688 14.799804 56.399254 27.599635C473.395518 926.787745 220.198866 835.988946 377.596784 791.989528m-24.399677-112.198517s-43.799421 32.399572 23.199693 39.399479c86.598855 8.999881 155.197948 9.599873 273.596382-13.199825 0 0 16.399783 16.599781 42.199442 25.599661-242.596792 70.999061-512.593222 5.799923-338.995517-51.799315m206.397271-190.197485c49.399347 56.799249-12.999828 107.998572-12.999828 107.998572s125.398342-64.799143 67.799103-145.798072c-53.799289-75.599-94.998744-113.198503 128.198305-242.596792 0.199997 0-350.395367 87.598842-182.99758 280.396292m265.196493 385.194907s28.999617 23.799685-31.799579 42.399439c-115.798469 34.999537-481.593632 45.599397-583.192289 1.399982-36.599516-15.799791 31.999577-37.999498 53.599291-42.599437 22.399704-4.799937 35.399532-3.999947 35.399532-3.999947-40.599463-28.599622-262.596528 56.199257-112.798508 80.398937 408.3946 66.399122 744.790152-29.799606 638.791553-77.598974M396.396536 563.592548s-186.197538 44.199416-65.999128 60.199204c50.799328 6.79991 151.99799 5.199931 246.196745-2.599966 76.998982-6.399915 154.397958-20.39973 154.397958-20.39973s-27.19964 11.599847-46.799381 24.999669c-188.997501 49.799342-553.992675 26.599648-448.994063-24.19968 88.998823-42.799434 161.197869-37.999498 161.197869-37.999497m333.995583 186.597532c192.197459-99.79868 103.198635-195.797411 41.199456-182.797582-15.199799 3.199958-21.999709 5.999921-21.999709 5.99992s5.599926-8.799884 16.399783-12.599833c122.598379-43.199429 216.997131 127.198318-39.599477 194.597427 0-0.199997 2.99996-2.799963 3.999947-5.199932M614.393653 0s106.398593 106.398593-100.998664 269.99643c-166.197802 131.198265-37.999498 206.197274 0 291.596144-96.998717-87.598842-168.197776-164.597824-120.398408-236.396874C463.195652 220.197088 657.393085 168.997765 614.393653 0m-198.997369 1020.786502c184.397562 11.799844 467.593817-6.599913 474.19373-93.798759 0 0-12.799831 32.999564-152.397985 59.399214-157.397919 29.599609-351.595351 26.199654-466.59383 7.199905 0-0.199997 23.599688 19.399743 144.798085 27.19964" fill="" p-id="2716"></path></svg>为博主买一杯java</label>
+    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/wechatpay.jpg" alt="Ting WeChat Pay" data-title="Ting WeChat Pay" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>WeChat Pay</span>
+          </div></div>
+  </div></article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.137.0">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024 - 2026</span><span class="author" itemprop="copyrightHolder">
+              <a href="Tin10g.github.io">Ting</a></span></div><div class="footer-line statistics"><span class="site-time" title='Website running ...'><i class="fa-solid fa-heartbeat fa-fw animate-icon" aria-hidden="true"></i><span class="ms-1 d-none">Runing</span><span class="run-times ms-1">Website running ...</span></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">This website works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":1000},"comment":{"enable":false},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"siteTime":"2024-04-01T11:25:40+08:00","typeit":{"cursorChar":"|","cursorSpeed":1000,"duration":-1,"loop":false,"speed":100},"version":"v0.3.13"};console.log('Page config:', window.config);</script><script src="/js/theme.min.js" defer></script><script src="/js/custom.min.js" defer></script></body>
+</html>
