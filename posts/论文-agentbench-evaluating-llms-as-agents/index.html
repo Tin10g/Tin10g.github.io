@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>论文 · AGENTBENCH: EVALUATING LLMS as AGENTS - Ting BLOG🐈</title><meta name="author" content="Ting">
+<meta name="description" content="基础信息期刊 ICLR 2024 学习内容文章是哪个领域的？研究什么具体问题？
+">
+  <meta itemprop="name" content="论文 · AGENTBENCH: EVALUATING LLMS AS AGENTS">
+  <meta itemprop="description" content="基础信息期刊 ICLR 2024 学习内容文章是哪个领域的？研究什么具体问题？">
+  <meta itemprop="datePublished" content="2026-06-25T11:25:40+08:00">
+  <meta itemprop="dateModified" content="2026-06-25T11:25:40+08:00">
+  <meta itemprop="wordCount" content="126">
+  <meta itemprop="keywords" content="Agent Benchmark"><meta property="og:url" content="http://localhost:1313/posts/%E8%AE%BA%E6%96%87-agentbench-evaluating-llms-as-agents/">
+  <meta property="og:site_name" content="Ting BLOG🐈">
+  <meta property="og:title" content="论文 · AGENTBENCH: EVALUATING LLMS AS AGENTS">
+  <meta property="og:description" content="基础信息期刊 ICLR 2024 学习内容文章是哪个领域的？研究什么具体问题？">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-06-25T11:25:40+08:00">
+    <meta property="article:modified_time" content="2026-06-25T11:25:40+08:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="论文 · AGENTBENCH: EVALUATING LLMS AS AGENTS">
+  <meta name="twitter:description" content="基础信息期刊 ICLR 2024 学习内容文章是哪个领域的？研究什么具体问题？">
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87-agentbench-evaluating-llms-as-agents/" title="论文 · AGENTBENCH: EVALUATING LLMS AS AGENTS - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87-react-synergizing-reasoning-and-acting-in-language-models/" title="论文 · REACT: SYNERGIZING REASONING AND ACTING IN  LANGUAGE MODELS" /><link rel="next" type="text/html" href="http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent2%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第二讲 LLM大模型内部运作原理" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87-agentbench-evaluating-llms-as-agents/index.md" title="论文 · AGENTBENCH: EVALUATING LLMS AS AGENTS - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "论文 · AGENTBENCH: EVALUATING LLMS AS AGENTS",
+    "inLanguage": "en",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/posts\/%E8%AE%BA%E6%96%87-agentbench-evaluating-llms-as-agents\/"
+    },"genre": "posts","wordcount":  126 ,
+    "url": "http:\/\/localhost:1313\/posts\/%E8%AE%BA%E6%96%87-agentbench-evaluating-llms-as-agents\/","datePublished": "2026-06-25T11:25:40+08:00","dateModified": "2026-06-25T11:25:40+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Ting"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/archives/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/archives/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>论文 · AGENTBENCH: EVALUATING LLMS as AGENTS</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/agent-benchmark/" class="post-category" title="Category - Agent Benchmark"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Agent Benchmark</a></span></div><div class="post-meta-line"><span title="published on 2026-06-25 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2026-06-25">2026-06-25</time></span>&nbsp;<span title="126 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 200 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>One minute</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#基础信息">基础信息</a></li>
+    <li><a href="#学习内容">学习内容</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 id="基础信息" class="heading-element"><span>基础信息</span>
+  <a href="#%e5%9f%ba%e7%a1%80%e4%bf%a1%e6%81%af" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>期刊 ICLR 2024</li>
+</ul>
+<h2 id="学习内容" class="heading-element"><span>学习内容</span>
+  <a href="#%e5%ad%a6%e4%b9%a0%e5%86%85%e5%ae%b9" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ol>
+<li>
+<p>文章是哪个领域的？研究什么具体问题？</p>
+<p>领域是：LLM Agent 智能体评测</p>
+<p>传统 benchmark 多测“模型会不会答题”；AgentBench 测的是“模型能不能观察环境、规划下一步、调用动作、根据反馈继续行动，直到把任务做完”。</p>
+<p>本文LLM Agent 看成一个多轮交互系统：用户目标→LLM 推理→动作→环境反馈→下一轮推理</p>
+<p>用 POMDP 来形式化这个过程：环境有状态、模型只能看到部分观察、选择动作后环境改变，并得到奖励或任务结果。</p>
+<p>核心评估点：</p>
+<ul>
+<li>
+<p>能否持续理解任务；</p>
+</li>
+<li>
+<p>能否遵守动作格式；</p>
+</li>
+<li>
+<p>能否在环境反馈后调整策略；</p>
+</li>
+<li>
+<p>能否在长轨迹中保持目标；</p>
+</li>
+<li>
+<p>能否真正完成任务，而非只生成看似合理的文本。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>作者对已有方法的问题或当前挑战的分析？</p>
+<ul>
+<li>
+<p>一些benchmark 是静态题目</p>
+<p>模型只要一次生成答案即可，不需要实际执行、观察反馈或修正错误，所以无法测出 Agent 最关键的多轮决策能力。</p>
+</li>
+<li>
+<p>早期文本游戏的动作空间太封闭</p>
+<p>文本游戏的动作少，更类似于分类学习和策略学习，和开放任务不一样</p>
+</li>
+<li>
+<p>已有 Agent benchmark 往往只测单一环境</p>
+<p>需要在不同操作系统或者不同数据库等环境下的稳定。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>文中提出解决问题的方法或主要贡献或创新？</p>
+<p><img loading="lazy" src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260625105855094.png" alt="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260625105855094.png" srcset="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260625105855094.png?size=small, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260625105855094.png?size=medium 1.5x, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260625105855094.png?size=large 2x" data-title="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260625105855094.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+<ul>
+<li>使用真实生活的问题挑战</li>
+<li>模拟出8个环境来测试</li>
+</ul>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center">类型</th>
+          <th style="text-align: center">环境</th>
+          <th style="text-align: center">主要能力</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">code</td>
+          <td style="text-align: center">Operating System</td>
+          <td style="text-align: center">Bash操作、文件系统</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">code</td>
+          <td style="text-align: center">Database</td>
+          <td style="text-align: center">SQL查改</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">code</td>
+          <td style="text-align: center">Knowledge Graph</td>
+          <td style="text-align: center">调用工具、规划、信息检索</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">code</td>
+          <td style="text-align: center">Digital Card Game</td>
+          <td style="text-align: center">策略、规则理解、决策</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">code</td>
+          <td style="text-align: center">Lateral Thinking Puzzles</td>
+          <td style="text-align: center">发散推理、持续提问</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">code</td>
+          <td style="text-align: center">House Holding</td>
+          <td style="text-align: center">常识、物体操作、长程规划</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Web</td>
+          <td style="text-align: center">Web Shopping</td>
+          <td style="text-align: center">搜索、筛选、购买决策</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">Web</td>
+          <td style="text-align: center">Web Browsing</td>
+          <td style="text-align: center">网页上的操作</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>
+<p>评价标准</p>
+<p>在不同环境的指标不同。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>效果如何？</p>
+<p>GPT-4 等头部商业模型明显领先开源模型，但仍频繁出现长程任务超限、动作无效、格式不遵循等失败；任务限额超限是最主要失败原因。</p>
+<p><img loading="lazy" src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260625111558014.png" alt="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260625111558014.png" srcset="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260625111558014.png?size=small, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260625111558014.png?size=medium 1.5x, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260625111558014.png?size=large 2x" data-title="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260625111558014.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+</li>
+<li>
+<p>推论</p>
+<ul>
+<li>
+<p>高质量、多轮、面向指令遵循的对齐数据对 Agent 能力很关键。</p>
+</li>
+<li>
+<p>代码训练似乎能帮助模型处理更流程化、步骤较固定的任务</p>
+<p>例如 Web Shopping；但在需要更灵活策略或与环境持续交互的任务中，CodeLlama 并不一定更强，例如卡牌游戏、操作系统环境。</p>
+</li>
+<li>
+<p>LLM作为Agent失败的类别：</p>
+<ul>
+<li>完成：正常完成任务。</li>
+<li>Context Limit Exceeded：上下文过长</li>
+<li>Invalid Format：不按规定格式输出</li>
+<li>Invalid Action：格式正确，但动作不合法</li>
+<li>Task Limit Exceeded：到最大轮数还没做完，或者陷入重复（最主要失败原因）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>优缺点和未来工作？</p>
+<ul>
+<li>
+<p>缺点：</p>
+<ul>
+<li>
+<p>环境仍然是模拟环境或受控基准</p>
+<p>真实环境会有权限、延迟、异常页面、对抗内容和安全风险。</p>
+</li>
+<li>
+<p>只评测基础 CoT Agent</p>
+<p>不加入反思、搜索、记忆、规划器、多 Agent 协作等机制。只测试“基础模型 + 简单提示”的能力，不是现代完整 Agent 系统的上限。</p>
+</li>
+<li>
+<p>Overall Score 不是绝对客观</p>
+</li>
+<li>
+<p>模型结果具有时间性</p>
+</li>
+</ul>
+</li>
+<li>
+<p>未来工作</p>
+<p>提升 Agent 不应只靠扩大模型或增强代码能力，还应重点改善多轮对齐、指令遵循、状态追踪、规划与纠错能力。</p>
+</li>
+</ul>
+</li>
+</ol>
+</div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2026-06-25 11:25:40">Updated on 2026-06-25&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/%E8%AE%BA%E6%96%87-agentbench-evaluating-llms-as-agents/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div></div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/%E8%AE%BA%E6%96%87-react-synergizing-reasoning-and-acting-in-language-models/" class="post-nav-item" rel="prev" title="论文 · REACT: SYNERGIZING REASONING and ACTING in  LANGUAGE MODELS"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>论文 · REACT: SYNERGIZING REASONING and ACTING in  LANGUAGE MODELS</a><a href="/posts/%E8%AF%BE%E7%A8%8B-ai-agent2%E6%9D%8E%E5%AE%8F%E6%AF%85/" class="post-nav-item" rel="next" title="AI Agent· 第二讲 LLM大模型内部运作原理">AI Agent· 第二讲 LLM大模型内部运作原理<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div class="post-reward">
+    <div class="comment"></div>
+    <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
+    <label class="reward-button" for="fi-reward"><?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1776434267563" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2715" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M377.596784 791.989528s-39.199482 22.799699 27.799633 30.399598c81.198926 9.199878 122.598379 7.999894 211.997197-8.999881 0 0 23.599688 14.799804 56.399254 27.599635C473.395518 926.787745 220.198866 835.988946 377.596784 791.989528m-24.399677-112.198517s-43.799421 32.399572 23.199693 39.399479c86.598855 8.999881 155.197948 9.599873 273.596382-13.199825 0 0 16.399783 16.599781 42.199442 25.599661-242.596792 70.999061-512.593222 5.799923-338.995517-51.799315m206.397271-190.197485c49.399347 56.799249-12.999828 107.998572-12.999828 107.998572s125.398342-64.799143 67.799103-145.798072c-53.799289-75.599-94.998744-113.198503 128.198305-242.596792 0.199997 0-350.395367 87.598842-182.99758 280.396292m265.196493 385.194907s28.999617 23.799685-31.799579 42.399439c-115.798469 34.999537-481.593632 45.599397-583.192289 1.399982-36.599516-15.799791 31.999577-37.999498 53.599291-42.599437 22.399704-4.799937 35.399532-3.999947 35.399532-3.999947-40.599463-28.599622-262.596528 56.199257-112.798508 80.398937 408.3946 66.399122 744.790152-29.799606 638.791553-77.598974M396.396536 563.592548s-186.197538 44.199416-65.999128 60.199204c50.799328 6.79991 151.99799 5.199931 246.196745-2.599966 76.998982-6.399915 154.397958-20.39973 154.397958-20.39973s-27.19964 11.599847-46.799381 24.999669c-188.997501 49.799342-553.992675 26.599648-448.994063-24.19968 88.998823-42.799434 161.197869-37.999498 161.197869-37.999497m333.995583 186.597532c192.197459-99.79868 103.198635-195.797411 41.199456-182.797582-15.199799 3.199958-21.999709 5.999921-21.999709 5.99992s5.599926-8.799884 16.399783-12.599833c122.598379-43.199429 216.997131 127.198318-39.599477 194.597427 0-0.199997 2.99996-2.799963 3.999947-5.199932M614.393653 0s106.398593 106.398593-100.998664 269.99643c-166.197802 131.198265-37.999498 206.197274 0 291.596144-96.998717-87.598842-168.197776-164.597824-120.398408-236.396874C463.195652 220.197088 657.393085 168.997765 614.393653 0m-198.997369 1020.786502c184.397562 11.799844 467.593817-6.599913 474.19373-93.798759 0 0-12.799831 32.999564-152.397985 59.399214-157.397919 29.599609-351.595351 26.199654-466.59383 7.199905 0-0.199997 23.599688 19.399743 144.798085 27.19964" fill="" p-id="2716"></path></svg>为博主买一杯java</label>
+    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/wechatpay.jpg" alt="Ting WeChat Pay" data-title="Ting WeChat Pay" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>WeChat Pay</span>
+          </div></div>
+  </div></article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.137.0">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024 - 2026</span><span class="author" itemprop="copyrightHolder">
+              <a href="Tin10g.github.io">Ting</a></span></div><div class="footer-line statistics"><span class="site-time" title='Website running ...'><i class="fa-solid fa-heartbeat fa-fw animate-icon" aria-hidden="true"></i><span class="ms-1 d-none">Runing</span><span class="run-times ms-1">Website running ...</span></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">This website works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":1000},"comment":{"enable":false},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"siteTime":"2024-04-01T11:25:40+08:00","typeit":{"cursorChar":"|","cursorSpeed":1000,"duration":-1,"loop":false,"speed":100},"version":"v0.3.13"};console.log('Page config:', window.config);</script><script src="/js/theme.min.js" defer></script><script src="/js/custom.min.js" defer></script></body>
+</html>
