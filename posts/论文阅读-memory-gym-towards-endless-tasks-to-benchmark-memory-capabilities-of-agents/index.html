@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>论文 · Memory Gym: Towards Endless Tasks to Benchmark Memory Capabilities of Agents - Ting BLOG🐈</title><meta name="author" content="Ting">
+<meta name="description" content="基础信息会议/期刊：Journal of Machine Learning Research 26 (2025), 1-40 关键词：deep reinforcement learning, memory, benchmark, Transformer-XL, GRU, PPO 核心贡献：本文把 Memory Gym 的三个有限 POMDP 任务扩展为 endless cumulative memory tasks，并提供 CleanRL 中基于 PPO 的 Transformer-XL baseline，证明有限任务上的 sample efficiency 不足以衡量长期 memory effectiveness，且 GRU 在 endless 任务中显著优于 TrXL。
+">
+  <meta itemprop="name" content="论文 · Memory Gym: Towards Endless Tasks to Benchmark Memory Capabilities of Agents">
+  <meta itemprop="description" content="基础信息会议/期刊：Journal of Machine Learning Research 26 (2025), 1-40 关键词：deep reinforcement learning, memory, benchmark, Transformer-XL, GRU, PPO 核心贡献：本文把 Memory Gym 的三个有限 POMDP 任务扩展为 endless cumulative memory tasks，并提供 CleanRL 中基于 PPO 的 Transformer-XL baseline，证明有限任务上的 sample efficiency 不足以衡量长期 memory effectiveness，且 GRU 在 endless 任务中显著优于 TrXL。">
+  <meta itemprop="datePublished" content="2026-07-01T11:25:40+08:00">
+  <meta itemprop="dateModified" content="2026-07-01T11:25:40+08:00">
+  <meta itemprop="wordCount" content="420">
+  <meta itemprop="keywords" content="论文阅读"><meta property="og:url" content="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory-gym-towards-endless-tasks-to-benchmark-memory-capabilities-of-agents/">
+  <meta property="og:site_name" content="Ting BLOG🐈">
+  <meta property="og:title" content="论文 · Memory Gym: Towards Endless Tasks to Benchmark Memory Capabilities of Agents">
+  <meta property="og:description" content="基础信息会议/期刊：Journal of Machine Learning Research 26 (2025), 1-40 关键词：deep reinforcement learning, memory, benchmark, Transformer-XL, GRU, PPO 核心贡献：本文把 Memory Gym 的三个有限 POMDP 任务扩展为 endless cumulative memory tasks，并提供 CleanRL 中基于 PPO 的 Transformer-XL baseline，证明有限任务上的 sample efficiency 不足以衡量长期 memory effectiveness，且 GRU 在 endless 任务中显著优于 TrXL。">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-07-01T11:25:40+08:00">
+    <meta property="article:modified_time" content="2026-07-01T11:25:40+08:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="论文 · Memory Gym: Towards Endless Tasks to Benchmark Memory Capabilities of Agents">
+  <meta name="twitter:description" content="基础信息会议/期刊：Journal of Machine Learning Research 26 (2025), 1-40 关键词：deep reinforcement learning, memory, benchmark, Transformer-XL, GRU, PPO 核心贡献：本文把 Memory Gym 的三个有限 POMDP 任务扩展为 endless cumulative memory tasks，并提供 CleanRL 中基于 PPO 的 Transformer-XL baseline，证明有限任务上的 sample efficiency 不足以衡量长期 memory effectiveness，且 GRU 在 endless 任务中显著优于 TrXL。">
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory-gym-towards-endless-tasks-to-benchmark-memory-capabilities-of-agents/" title="论文 · Memory Gym: Towards Endless Tasks to Benchmark Memory Capabilities of Agents - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive/" title="论文 · When to Forget: A Memory Governance Primitive" /><link rel="next" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memgpttowards-llms-as-operating-systems/" title="论文 · MemGPT: Towards LLMs as Operating Systems" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory-gym-towards-endless-tasks-to-benchmark-memory-capabilities-of-agents/index.md" title="论文 · Memory Gym: Towards Endless Tasks to Benchmark Memory Capabilities of Agents - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "论文 · Memory Gym: Towards Endless Tasks to Benchmark Memory Capabilities of Agents",
+    "inLanguage": "en",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory-gym-towards-endless-tasks-to-benchmark-memory-capabilities-of-agents\/"
+    },"genre": "posts","wordcount":  420 ,
+    "url": "http:\/\/localhost:1313\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory-gym-towards-endless-tasks-to-benchmark-memory-capabilities-of-agents\/","datePublished": "2026-07-01T11:25:40+08:00","dateModified": "2026-07-01T11:25:40+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Ting"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/archives/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/archives/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>论文 · Memory Gym: Towards Endless Tasks to Benchmark Memory Capabilities of Agents</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" class="post-category" title="Category - 论文阅读"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 论文阅读</a></span></div><div class="post-meta-line"><span title="published on 2026-07-01 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2026-07-01">2026-07-01</time></span>&nbsp;<span title="420 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 500 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>2 minutes</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#基础信息">基础信息</a></li>
+    <li><a href="#q1-研究动机">Q1. 研究动机</a></li>
+    <li><a href="#q2-核心问题">Q2. 核心问题</a></li>
+    <li><a href="#q3-现有不足--本文改进">Q3. 现有不足 &amp; 本文改进</a></li>
+    <li><a href="#q4-方法流程">Q4. 方法流程</a></li>
+    <li><a href="#q5-实验设计与结论">Q5. 实验设计与结论</a></li>
+    <li><a href="#q6-局限性">Q6. 局限性</a></li>
+    <li><a href="#q7-学术价值">Q7. 学术价值</a></li>
+    <li><a href="#q8-延伸研究方向">Q8. 延伸研究方向</a></li>
+    <li><a href="#q9-反直觉发现与方法失效分析">Q9. 反直觉发现与方法失效分析</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 id="基础信息" class="heading-element"><span>基础信息</span>
+  <a href="#%e5%9f%ba%e7%a1%80%e4%bf%a1%e6%81%af" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>会议/期刊：Journal of Machine Learning Research 26 (2025), 1-40</li>
+<li>关键词：deep reinforcement learning, memory, benchmark, Transformer-XL, GRU, PPO</li>
+</ul>
+<p><strong>核心贡献</strong>：本文把 Memory Gym 的三个有限 POMDP 任务扩展为 endless cumulative memory tasks，并提供 CleanRL 中基于 PPO 的 Transformer-XL baseline，证明有限任务上的 sample efficiency 不足以衡量长期 memory effectiveness，且 GRU 在 endless 任务中显著优于 TrXL。</p>
+<h2 id="q1-研究动机" class="heading-element"><span>Q1. 研究动机</span>
+  <a href="#q1-%e7%a0%94%e7%a9%b6%e5%8a%a8%e6%9c%ba" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>很多 memory benchmark 关注有限任务的 sample efficiency，一旦 agent 能完成任务，就难以继续区分真正的长期记忆能力。作者借鉴“I packed my bag”这类累计记忆游戏，把任务设计为不断增长的记忆负担，以直接测量 agent 能记住多少、记多久。</p>
+<h2 id="q2-核心问题" class="heading-element"><span>Q2. 核心问题</span>
+  <a href="#q2-%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>论文试图解决：如何设计一套能持续拉长记忆跨度的 DRL benchmark，并用它比较 recurrent memory 与 transformer episodic memory 在有限任务和 endless 任务中的真实有效性。</p>
+<h2 id="q3-现有不足--本文改进" class="heading-element"><span>Q3. 现有不足 &amp; 本文改进</span>
+  <a href="#q3-%e7%8e%b0%e6%9c%89%e4%b8%8d%e8%b6%b3--%e6%9c%ac%e6%96%87%e6%94%b9%e8%bf%9b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>传统 partially observable benchmark 往往只测 agent 在固定难度上的学习效率，无法区分“学得快”和“记得久”。Transformer memory baseline 公开实现不足，也影响可复现性。本文将 Mortar Mayhem、Mystery Path、Searing Spotlights 扩展为 endless 版本，并公开 CleanRL TrXL+PPO 实现，同时与 GRU 做系统比较。</p>
+<h2 id="q4-方法流程" class="heading-element"><span>Q4. 方法流程</span>
+  <a href="#q4-%e6%96%b9%e6%b3%95%e6%b5%81%e7%a8%8b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>输入是 2D partially observable visual/vector observation。有限环境被改造成 endless curriculum：Mortar Mayhem 持续追加命令序列；Mystery Path 生成无尽路径并要求 agent 记住可通行轨迹；Searing Spotlights 在长期存活和收集 coin 中测试记忆与避障。agent 使用 PPO actor-critic，分别搭配 GRU 或 Transformer-XL memory；TrXL 采用 sliding memory window，并可加入 observation reconstruction 或 ground-truth auxiliary heads。输出是任务进度、执行命令数、访问 tiles 数、收集 coins 数和归一化分数。</p>
+<h2 id="q5-实验设计与结论" class="heading-element"><span>Q5. 实验设计与结论</span>
+  <a href="#q5-%e5%ae%9e%e9%aa%8c%e8%ae%be%e8%ae%a1%e4%b8%8e%e7%bb%93%e8%ae%ba" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><table>
+  <thead>
+      <tr>
+          <th>实验</th>
+          <th>目的</th>
+          <th>结论</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>有限 Memory Gym 任务</td>
+          <td>比较 GRU 与 TrXL 在传统有限任务中的效率</td>
+          <td>Figure 6 显示 TrXL 依赖 observation reconstruction 才能完成约 99% 任务；无 reconstruction 时平均 task progression 降至 56%，GRU 无 reconstruction 为 83%。</td>
+      </tr>
+      <tr>
+          <td>Endless 任务主实验</td>
+          <td>测量长期 memory effectiveness</td>
+          <td>Figure 7 显示 GRU 在三项 endless 任务中均优于 TrXL：Mortar Mayhem 中 GRU 约 84-120 commands，TrXL 约 17；Mystery Path 最终 GRU 26 tiles，TrXL 20；Searing Spotlights 最终 GRU 23.9 coins，TrXL 6.7。</td>
+      </tr>
+      <tr>
+          <td>TrXL 失败原因分析</td>
+          <td>排查容量、学习信号、初始 query、off-policy episodic memory、positional encoding 等因素</td>
+          <td>若干修改可改善 TrXL，例如 positional encoding 实验中某设置平均完成 56 commands，但仍未达到 GRU 水平。</td>
+      </tr>
+      <tr>
+          <td>Searing Spotlights ablation</td>
+          <td>验证 recurrence 是否容易受 spotlight perturbation 伤害</td>
+          <td>Table 1 显示关键因素不是 observation reconstruction，而是关闭 advantage normalization；GRU 关闭 advantage normalization 后 success rate 1.00。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="q6-局限性" class="heading-element"><span>Q6. 局限性</span>
+  <a href="#q6-%e5%b1%80%e9%99%90%e6%80%a7" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>作者明确指出：TrXL 在 endless 任务中的低效果需要进一步研究，尤其 positional encoding 等设计。论文也承认 endless 不等于 open-ended，任务仍有明确目标和结构。</p>
+<p>以下为分析归纳，非原文明确说明：结论主要围绕 PPO、GRU 和 TrXL 的特定实现，不应直接推广到所有 Transformer memory 架构；部分 ablation 来自训练过程数据，作者说明这偏离标准 evaluation protocol。</p>
+<h2 id="q7-学术价值" class="heading-element"><span>Q7. 学术价值</span>
+  <a href="#q7-%e5%ad%a6%e6%9c%af%e4%bb%b7%e5%80%bc" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>理论价值：区分 memory efficiency 与 memory effectiveness，为 benchmark 评价维度提供清晰概念。</li>
+<li>方法价值：提供可复现 endless memory benchmark 和 CleanRL TrXL baseline。</li>
+<li>应用价值：适合评估需要长时记忆的 embodied agents、游戏 agents 和 POMDP 决策系统。</li>
+</ul>
+<h2 id="q8-延伸研究方向" class="heading-element"><span>Q8. 延伸研究方向</span>
+  <a href="#q8-%e5%bb%b6%e4%bc%b8%e7%a0%94%e7%a9%b6%e6%96%b9%e5%90%91" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ol>
+<li>设计更适合 endless POMDP 的 Transformer memory 与 positional encoding。</li>
+<li>比较 GTrXL、LSTM、state-space models 和 external memory architectures。</li>
+<li>研究 auxiliary losses 在有限任务与 endless 任务中的不同作用。</li>
+<li>分析 PPO advantage normalization 在低 reward scale memory tasks 中的优化影响。</li>
+<li>扩展到更多视觉复杂度和动作复杂度更高的 endless benchmark。</li>
+</ol>
+<h2 id="q9-反直觉发现与方法失效分析" class="heading-element"><span>Q9. 反直觉发现与方法失效分析</span>
+  <a href="#q9-%e5%8f%8d%e7%9b%b4%e8%a7%89%e5%8f%91%e7%8e%b0%e4%b8%8e%e6%96%b9%e6%b3%95%e5%a4%b1%e6%95%88%e5%88%86%e6%9e%90" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>Figure 6 vs Figure 7：TrXL 在有限任务中加 observation reconstruction 后可完成约 99%，但在 endless 任务中被 GRU 明显超过。这是论文最核心的反直觉发现：有限任务成功不能代表长期记忆有效。</li>
+<li>Figure 7(a)：Endless Mortar Mayhem 中 GRU 在约 300M steps 达到 84-120 commands，best mean point 为 115±15，而 TrXL 约 17 commands。作者已讨论为 TrXL 在长期累计记忆上效果不足。</li>
+<li>Figure 7(c)：Searing Spotlights 中 GRU final 23.9 coins，TrXL final 6.7 coins，GRU best 29.8，约为 TrXL maximum 7.5 的近 4 倍。</li>
+<li>Table 1：full observability Searing Spotlights 中，关闭 advantage normalization 的 GRU success rate 为 1.00；No Memory 也有 0.96。作者指出 normalized advantages 带来超过 12 倍 gradient norm，并可能造成过大优化步。这个结果反直觉地说明失败源可能是 PPO 实现细节，而非记忆结构本身。</li>
+<li>整体评价：benchmark 贡献扎实，且实验揭示了“Transformer 不必然比 recurrence 更会记”的重要警示；但模型结论仍依赖具体实现与超参数。</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2026-07-01 11:25:40">Updated on 2026-07-01&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory-gym-towards-endless-tasks-to-benchmark-memory-capabilities-of-agents/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div></div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive/" class="post-nav-item" rel="prev" title="论文 · When to Forget: A Memory Governance Primitive"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>论文 · When to Forget: A Memory Governance Primitive</a><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memgpttowards-llms-as-operating-systems/" class="post-nav-item" rel="next" title="论文 · MemGPT: Towards LLMs as Operating Systems">论文 · MemGPT: Towards LLMs as Operating Systems<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div class="post-reward">
+    <div class="comment"></div>
+    <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
+    <label class="reward-button" for="fi-reward"><?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1776434267563" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2715" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M377.596784 791.989528s-39.199482 22.799699 27.799633 30.399598c81.198926 9.199878 122.598379 7.999894 211.997197-8.999881 0 0 23.599688 14.799804 56.399254 27.599635C473.395518 926.787745 220.198866 835.988946 377.596784 791.989528m-24.399677-112.198517s-43.799421 32.399572 23.199693 39.399479c86.598855 8.999881 155.197948 9.599873 273.596382-13.199825 0 0 16.399783 16.599781 42.199442 25.599661-242.596792 70.999061-512.593222 5.799923-338.995517-51.799315m206.397271-190.197485c49.399347 56.799249-12.999828 107.998572-12.999828 107.998572s125.398342-64.799143 67.799103-145.798072c-53.799289-75.599-94.998744-113.198503 128.198305-242.596792 0.199997 0-350.395367 87.598842-182.99758 280.396292m265.196493 385.194907s28.999617 23.799685-31.799579 42.399439c-115.798469 34.999537-481.593632 45.599397-583.192289 1.399982-36.599516-15.799791 31.999577-37.999498 53.599291-42.599437 22.399704-4.799937 35.399532-3.999947 35.399532-3.999947-40.599463-28.599622-262.596528 56.199257-112.798508 80.398937 408.3946 66.399122 744.790152-29.799606 638.791553-77.598974M396.396536 563.592548s-186.197538 44.199416-65.999128 60.199204c50.799328 6.79991 151.99799 5.199931 246.196745-2.599966 76.998982-6.399915 154.397958-20.39973 154.397958-20.39973s-27.19964 11.599847-46.799381 24.999669c-188.997501 49.799342-553.992675 26.599648-448.994063-24.19968 88.998823-42.799434 161.197869-37.999498 161.197869-37.999497m333.995583 186.597532c192.197459-99.79868 103.198635-195.797411 41.199456-182.797582-15.199799 3.199958-21.999709 5.999921-21.999709 5.99992s5.599926-8.799884 16.399783-12.599833c122.598379-43.199429 216.997131 127.198318-39.599477 194.597427 0-0.199997 2.99996-2.799963 3.999947-5.199932M614.393653 0s106.398593 106.398593-100.998664 269.99643c-166.197802 131.198265-37.999498 206.197274 0 291.596144-96.998717-87.598842-168.197776-164.597824-120.398408-236.396874C463.195652 220.197088 657.393085 168.997765 614.393653 0m-198.997369 1020.786502c184.397562 11.799844 467.593817-6.599913 474.19373-93.798759 0 0-12.799831 32.999564-152.397985 59.399214-157.397919 29.599609-351.595351 26.199654-466.59383 7.199905 0-0.199997 23.599688 19.399743 144.798085 27.19964" fill="" p-id="2716"></path></svg>为博主买一杯java</label>
+    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/wechatpay.jpg" alt="Ting WeChat Pay" data-title="Ting WeChat Pay" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>WeChat Pay</span>
+          </div></div>
+  </div></article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.137.0">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024 - 2026</span><span class="author" itemprop="copyrightHolder">
+              <a href="Tin10g.github.io">Ting</a></span></div><div class="footer-line statistics"><span class="site-time" title='Website running ...'><i class="fa-solid fa-heartbeat fa-fw animate-icon" aria-hidden="true"></i><span class="ms-1 d-none">Runing</span><span class="run-times ms-1">Website running ...</span></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">This website works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":1000},"comment":{"enable":false},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"siteTime":"2024-04-01T11:25:40+08:00","typeit":{"cursorChar":"|","cursorSpeed":1000,"duration":-1,"loop":false,"speed":100},"version":"v0.3.13"};console.log('Page config:', window.config);</script><script src="/js/theme.min.js" defer></script><script src="/js/custom.min.js" defer></script></body>
+</html>

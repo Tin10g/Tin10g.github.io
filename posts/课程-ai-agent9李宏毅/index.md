@@ -1,8 +1,26 @@
-# AI Agent· 第四讲 大型语言模型训练方法
+# AI Agent· 第九讲 大型语言模型能力评估
 
 
-## Transformer架构存在原因
+## 用于评估的题目数据集
 
+* GSM8K
+
+* ARC-AGI
+
+## 评分标准
+
+### Elo Score
+
+&gt; chatbot Arena
+
+* beta：战力
+* Mi：第i个模型
+
+&lt;img src=&#34;https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260702094803534.png&#34; style=&#34;zoom:50%;&#34; /&gt;
+
+GoodHart&#39;s law
+
+一个项目一旦被作为目标，就不会是一个好的结果
 
 
 ---

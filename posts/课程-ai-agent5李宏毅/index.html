@@ -5,41 +5,40 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
-    <title>AI Agent· 第四讲 大型语言模型训练方法 - Ting BLOG🐈</title><meta name="author" content="Ting">
-<meta name="description" content="训练流程alignment：模型微调 内容可以少，但质量很重要 Pretrain不能直接使用
-">
-  <meta itemprop="name" content="AI Agent· 第四讲 大型语言模型训练方法">
-  <meta itemprop="description" content="训练流程alignment：模型微调 内容可以少，但质量很重要 Pretrain不能直接使用">
-  <meta itemprop="datePublished" content="2024-06-29T11:25:40+08:00">
-  <meta itemprop="dateModified" content="2024-06-29T11:25:40+08:00">
-  <meta itemprop="wordCount" content="9">
+    <title>AI Agent· 第五讲 多张GPU训练大语言模型 - Ting BLOG🐈</title><meta name="author" content="Ting">
+<meta name="description" content="常规Pytorch训练1 2 3 4 5 6 7 8 9 for epoch in range(num_epochs): for batch in dataloader: inputs, targets = batch outputs = model(inputs) loss = loss_fn(outputs, targets) optimizer.zero_grad() loss.backward() optimizer.step() LLM训练">
+  <meta itemprop="name" content="AI Agent· 第五讲 多张GPU训练大语言模型">
+  <meta itemprop="description" content="常规Pytorch训练1 2 3 4 5 6 7 8 9 for epoch in range(num_epochs): for batch in dataloader: inputs, targets = batch outputs = model(inputs) loss = loss_fn(outputs, targets) optimizer.zero_grad() loss.backward() optimizer.step() LLM训练">
+  <meta itemprop="datePublished" content="2026-07-01T11:25:40+08:00">
+  <meta itemprop="dateModified" content="2026-07-01T11:25:40+08:00">
+  <meta itemprop="wordCount" content="108">
   <meta itemprop="keywords" content="课程 李宏毅2026"><meta property="og:url" content="http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent5%E6%9D%8E%E5%AE%8F%E6%AF%85/">
   <meta property="og:site_name" content="Ting BLOG🐈">
-  <meta property="og:title" content="AI Agent· 第四讲 大型语言模型训练方法">
-  <meta property="og:description" content="训练流程alignment：模型微调 内容可以少，但质量很重要 Pretrain不能直接使用">
+  <meta property="og:title" content="AI Agent· 第五讲 多张GPU训练大语言模型">
+  <meta property="og:description" content="常规Pytorch训练1 2 3 4 5 6 7 8 9 for epoch in range(num_epochs): for batch in dataloader: inputs, targets = batch outputs = model(inputs) loss = loss_fn(outputs, targets) optimizer.zero_grad() loss.backward() optimizer.step() LLM训练">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-06-29T11:25:40+08:00">
-    <meta property="article:modified_time" content="2024-06-29T11:25:40+08:00">
+    <meta property="article:published_time" content="2026-07-01T11:25:40+08:00">
+    <meta property="article:modified_time" content="2026-07-01T11:25:40+08:00">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="AI Agent· 第四讲 大型语言模型训练方法">
-  <meta name="twitter:description" content="训练流程alignment：模型微调 内容可以少，但质量很重要 Pretrain不能直接使用">
+  <meta name="twitter:title" content="AI Agent· 第五讲 多张GPU训练大语言模型">
+  <meta name="twitter:description" content="常规Pytorch训练1 2 3 4 5 6 7 8 9 for epoch in range(num_epochs): for batch in dataloader: inputs, targets = batch outputs = model(inputs) loss = loss_fn(outputs, targets) optimizer.zero_grad() loss.backward() optimizer.step() LLM训练">
 <meta name="application-name" content="FixIt">
-<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent5%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第四讲 大型语言模型训练方法 - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent6%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第四讲 大型语言模型训练方法" /><link rel="next" type="text/html" href="http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent4%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第四讲 大型语言模型训练方法" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent5%E6%9D%8E%E5%AE%8F%E6%AF%85/index.md" title="AI Agent· 第四讲 大型语言模型训练方法 - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent5%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第五讲 多张GPU训练大语言模型 - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent8%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第八讲 大语言模型的推理过程" /><link rel="next" type="text/html" href="http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent7%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第七讲 深度思考的大语言模型" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent5%E6%9D%8E%E5%AE%8F%E6%AF%85/index.md" title="AI Agent· 第五讲 多张GPU训练大语言模型 - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
-    "headline": "AI Agent· 第四讲 大型语言模型训练方法",
+    "headline": "AI Agent· 第五讲 多张GPU训练大语言模型",
     "inLanguage": "en",
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "http:\/\/localhost:1313\/posts\/%E8%AF%BE%E7%A8%8B-ai-agent5%E6%9D%8E%E5%AE%8F%E6%AF%85\/"
-    },"genre": "posts","wordcount":  9 ,
-    "url": "http:\/\/localhost:1313\/posts\/%E8%AF%BE%E7%A8%8B-ai-agent5%E6%9D%8E%E5%AE%8F%E6%AF%85\/","datePublished": "2024-06-29T11:25:40+08:00","dateModified": "2024-06-29T11:25:40+08:00","publisher": {
+    },"genre": "posts","wordcount":  108 ,
+    "url": "http:\/\/localhost:1313\/posts\/%E8%AF%BE%E7%A8%8B-ai-agent5%E6%9D%8E%E5%AE%8F%E6%AF%85\/","datePublished": "2026-07-01T11:25:40+08:00","dateModified": "2026-07-01T11:25:40+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -127,9 +126,9 @@
 </header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
 
   <article class="page single">
-    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>AI Agent· 第四讲 大型语言模型训练方法</span>
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>AI Agent· 第五讲 多张GPU训练大语言模型</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AF%BE%E7%A8%8B-%E6%9D%8E%E5%AE%8F%E6%AF%852026/" class="post-category" title="Category - 课程 李宏毅2026"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 课程 李宏毅2026</a></span></div><div class="post-meta-line"><span title="published on 2024-06-29 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-29">2024-06-29</time></span>&nbsp;<span title="9 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 100 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>One minute</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AF%BE%E7%A8%8B-%E6%9D%8E%E5%AE%8F%E6%AF%852026/" class="post-category" title="Category - 课程 李宏毅2026"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 课程 李宏毅2026</a></span></div><div class="post-meta-line"><span title="published on 2026-07-01 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2026-07-01">2026-07-01</time></span>&nbsp;<span title="108 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 200 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>One minute</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>Contents</span>
@@ -137,49 +136,175 @@
         </div>
         <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#训练流程">训练流程</a>
+    <li><a href="#常规pytorch训练">常规Pytorch训练</a></li>
+    <li><a href="#llm训练">LLM训练</a>
       <ul>
-        <li><a href="#pretrain">Pretrain</a></li>
-        <li><a href="#alignment">Alignment</a></li>
+        <li><a href="#需要的内存">需要的内存</a></li>
+        <li><a href="#多gpu训练问题">多GPU训练问题</a></li>
+        <li><a href="#长上下文128k以上问题">长上下文（128K以上）问题</a></li>
+        <li><a href="#quantization">Quantization</a></li>
       </ul>
     </li>
   </ul>
 </nav></div>
-      </div><div class="content" id="content"><h2 id="训练流程" class="heading-element"><span>训练流程</span>
-  <a href="#%e8%ae%ad%e7%bb%83%e6%b5%81%e7%a8%8b" class="heading-mark">
+      </div><div class="content" id="content"><h2 id="常规pytorch训练" class="heading-element"><span>常规Pytorch训练</span>
+  <a href="#%e5%b8%b8%e8%a7%84pytorch%e8%ae%ad%e7%bb%83" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><ul>
-<li>alignment：模型微调
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">dataloader</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">inputs</span><span class="p">,</span> <span class="n">targets</span> <span class="o">=</span> <span class="n">batch</span>
+</span></span><span class="line"><span class="cl">        <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">targets</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="llm训练" class="heading-element"><span>LLM训练</span>
+  <a href="#llm%e8%ae%ad%e7%bb%83" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p><img loading="lazy" src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701102054226.png" alt="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701102054226.png" srcset="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701102054226.png?size=small, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701102054226.png?size=medium 1.5x, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701102054226.png?size=large 2x" data-title="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701102054226.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
 <ul>
-<li>内容可以少，但质量很重要</li>
-</ul>
+<li>
+<p>activations：模型某一层对于input的输出</p>
+</li>
+<li>
+<p>batch size：通常1个batch要有4-60M</p>
+</li>
+<li>
+<p>gradiaent accumulation：</p>
+<p>把batch size分为若干个mini batch size（GPU一次可以装的下的forward backward的大小），然后每一次loss保留，要保留gradient accumulation轮，接着把这些一起拿到global model里面backward</p>
+<p>global batch size = mini batch size * gradient accumulation</p>
 </li>
 </ul>
-<img src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260629115215400.png" style="zoom:50%;" />
-<h3 id="pretrain" class="heading-element"><span>Pretrain</span>
-  <a href="#pretrain" class="heading-mark">
+<h3 id="需要的内存" class="heading-element"><span>需要的内存</span>
+  <a href="#%e9%9c%80%e8%a6%81%e7%9a%84%e5%86%85%e5%ad%98" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><blockquote>
-<p>不能直接使用</p>
-</blockquote>
-<h3 id="alignment" class="heading-element"><span>Alignment</span>
-  <a href="#alignment" class="heading-mark">
+</h3><p>随着context增长指数级增长</p>
+<img src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701103912874.png" style="zoom:50%;" />
+<h3 id="多gpu训练问题" class="heading-element"><span>多GPU训练问题</span>
+  <a href="#%e5%a4%9agpu%e8%ae%ad%e7%bb%83%e9%97%ae%e9%a2%98" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
 </h3><ul>
 <li>
-<p>Knowledge Distillation</p>
-<p>利用已有的模型作为老师，能够用很少的data的得到很好的结果。</p>
-<img src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260629120814380.png" style="zoom:50%;" />
+<p>多张gpu一起跑：按照每张GPU大小切片除了inputs以外的内容。</p>
+<ul>
+<li>
+<p>DeepSpeed - Zero Redundancy Optimizer（ZeRO）</p>
+<img src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701104737956.png" style="zoom:50%;" />
+<ul>
+<li>
+<p>ZeRO-1：切片最大的optimizer</p>
+<p><img loading="lazy" src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701104343076.png" alt="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701104343076.png" srcset="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701104343076.png?size=small, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701104343076.png?size=medium 1.5x, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701104343076.png?size=large 2x" data-title="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701104343076.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+</li>
+<li>
+<p>Zero-2：切片第二大的</p>
+<p><img loading="lazy" src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701104513410.png" alt="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701104513410.png" srcset="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701104513410.png?size=small, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701104513410.png?size=medium 1.5x, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701104513410.png?size=large 2x" data-title="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701104513410.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+</li>
+<li>
+<p>Zero-3：所有的部分都要切片</p>
+<p><img loading="lazy" src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701104648265.png" alt="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701104648265.png" srcset="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701104648265.png?size=small, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701104648265.png?size=medium 1.5x, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701104648265.png?size=large 2x" data-title="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701104648265.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+</li>
+<li>
+<p>Zero-offload：一部分工作转移到CPU上</p>
+<p>optimizer offload &amp; optimizer offload+model offload</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="长上下文128k以上问题" class="heading-element"><span>长上下文（128K以上）问题</span>
+  <a href="#%e9%95%bf%e4%b8%8a%e4%b8%8b%e6%96%87128k%e4%bb%a5%e4%b8%8a%e9%97%ae%e9%a2%98" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ol>
+<li>
+<p>Kernel（跑在GPU上面的方式）</p>
+<img src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701105544675.png" style="zoom:50%;" />
+<ul>
+<li>
+<p>效果</p>
+<img src="C:\Users\Tin10g\AppData\Roaming\Typora\typora-user-images\image-20260701110256560.png" alt="image-20260701110256560" style="zoom:50%;" />
+</li>
+</ul>
+</li>
+<li>
+<p>Flash Attention</p>
+<ul>
+<li>
+<p>速度</p>
+<img src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701110025264.png" style="zoom:50%;" />
+</li>
+<li>
+<p>Fused Kernel：把原来多个 GPU 计算步骤合并成一个 GPU kernel 一次性执行。</p>
+<img src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701110116937.png" style="zoom:50%;" />
+</li>
+<li>
+<p>记忆</p>
+<p>通过把大部分计算放到CPU上面，需要的时候调回的时候GPU来加快训练速度</p>
+<img src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701110205476.png" style="zoom:50%;" />
+</li>
+</ul>
+</li>
+<li>
+<p>Liger Kernel</p>
+<ul>
+<li>
+<p>用Triton code替换模型的一些部分来优化原本计算的所以对于</p>
+<blockquote>
+<p>Triton 是 OpenAI 开源的一个 GPU 编程工具。</p>
+</blockquote>
+</li>
+<li>
+<p>使用方法</p>
+<img src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701111513902.png" style="zoom:50%;" />
+</li>
+<li>
+<p>结果</p>
+<p><img loading="lazy" src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701111538318.png" alt="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701111538318.png" srcset="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701111538318.png?size=small, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701111538318.png?size=medium 1.5x, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701111538318.png?size=large 2x" data-title="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701111538318.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="quantization" class="heading-element"><span>Quantization</span>
+  <a href="#quantization" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ol>
+<li>
+<p>压缩大小</p>
+<p><img loading="lazy" src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701112332065.png" alt="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701112332065.png" srcset="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701112332065.png?size=small, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701112332065.png?size=medium 1.5x, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701112332065.png?size=large 2x" data-title="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260701112332065.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+<ul>
+<li>GGML family</li>
+<li>GPTQ</li>
+<li>AWQ</li>
+<li>BitsAndBytes</li>
+</ul>
+</li>
+</ol>
 </li>
 </ul>
 </div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="Updated on 2024-06-29 11:25:40">Updated on 2024-06-29&nbsp;</span>
+        <span title="Updated on 2026-07-01 11:25:40">Updated on 2026-07-01&nbsp;</span>
       </div><div class="post-info-license">
             <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
           </div></div><div class="post-info-line">
@@ -190,7 +315,7 @@
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
     </section>
-  </div><div class="post-nav"><a href="/posts/%E8%AF%BE%E7%A8%8B-ai-agent6%E6%9D%8E%E5%AE%8F%E6%AF%85/" class="post-nav-item" rel="prev" title="AI Agent· 第四讲 大型语言模型训练方法"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>AI Agent· 第四讲 大型语言模型训练方法</a><a href="/posts/%E8%AF%BE%E7%A8%8B-ai-agent4%E6%9D%8E%E5%AE%8F%E6%AF%85/" class="post-nav-item" rel="next" title="AI Agent· 第四讲 大型语言模型训练方法">AI Agent· 第四讲 大型语言模型训练方法<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+  </div><div class="post-nav"><a href="/posts/%E8%AF%BE%E7%A8%8B-ai-agent8%E6%9D%8E%E5%AE%8F%E6%AF%85/" class="post-nav-item" rel="prev" title="AI Agent· 第八讲 大语言模型的推理过程"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>AI Agent· 第八讲 大语言模型的推理过程</a><a href="/posts/%E8%AF%BE%E7%A8%8B-ai-agent7%E6%9D%8E%E5%AE%8F%E6%AF%85/" class="post-nav-item" rel="next" title="AI Agent· 第七讲 深度思考的大语言模型">AI Agent· 第七讲 深度思考的大语言模型<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div class="post-reward">
     <div class="comment"></div>

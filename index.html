@@ -12,8 +12,8 @@
 <meta name="description" content="This is Ting&#39;s BLOG ...">
   <meta itemprop="name" content="Ting BLOG🐈">
   <meta itemprop="description" content="This is Ting&#39;s BLOG ...">
-  <meta itemprop="datePublished" content="2026-06-29T11:25:40+08:00">
-  <meta itemprop="dateModified" content="2026-06-29T11:25:40+08:00"><meta property="og:url" content="http://localhost:1313/">
+  <meta itemprop="datePublished" content="2026-07-02T11:25:40+08:00">
+  <meta itemprop="dateModified" content="2026-07-02T11:25:40+08:00"><meta property="og:url" content="http://localhost:1313/">
   <meta property="og:site_name" content="Ting BLOG🐈">
   <meta property="og:title" content="Ting BLOG🐈">
   <meta property="og:description" content="This is Ting&#39;s BLOG ...">
@@ -117,160 +117,142 @@
     </a><a href="mailto:ting10win@gmail.com" title="Email"target="_blank" rel="external nofollow noopener noreferrer me"><i class="fa-regular fa-envelope fa-fw" aria-hidden="true"></i>
     </a><a href="/index.xml" title="RSS"target="_blank" rel="external nofollow noopener noreferrer me"><i class="fa-solid fa-rss fa-fw" aria-hidden="true"></i>
     </a></div></div>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/%E8%AF%BE%E7%A8%8B-ai-agent3%E6%9D%8E%E5%AE%8F%E6%AF%85/">AI Agent· 第三讲 Transformer架构</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2026-06-29 11:25:40'>published on <time datetime="2026-06-29">2026-06-29</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AF%BE%E7%A8%8B-%E6%9D%8E%E5%AE%8F%E6%AF%852026/" class="post-category" title="Category - 课程 李宏毅2026"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 课程 李宏毅2026</a></span></div><div class="content"><h3 id="transformer架构" class="heading-element"><span>Transformer架构</span>
-  <a href="#transformer%e6%9e%b6%e6%9e%84" class="heading-mark">
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/llm-memory%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/"></a>
+  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2026-07-02 11:25:40'>published on <time datetime="2026-07-02">2026-07-02</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/llm/" class="post-category" title="Category - LLM"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> LLM</a></span></div><div class="content"><h3 id="state-action-reward-轨迹" class="heading-element"><span>&lt;state, action, reward&gt; 轨迹</span>
+  <a href="#state-action-reward-%e8%bd%a8%e8%bf%b9" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><img src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260629100943402.png" style="zoom:50%;" />
-<h3 id="self-attention-vs-rnn" class="heading-element"><span>Self-Attention vs RNN</span>
-  <a href="#self-attention-vs-rnn" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><h4 id="rnn类比memory的过程" class="heading-element"><span>RNN（类比Memory的过程）</span>
-  <a href="#rnn%e7%b1%bb%e6%af%94memory%e7%9a%84%e8%bf%87%e7%a8%8b" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h4><ul>
-<li>Ht：memory</li>
-<li>f(A,t)：Reflection</li>
-<li>f(B,t)：Read</li>
-<li>f(C,t)：Write</li>
-</ul>
-<img src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260629101556239.png" style="zoom:50%;" />
-<h4 id="self-attention" class="heading-element"><span>Self-Attention</span>
-  <a href="#self-attention" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h4><img src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260629102258078.png" style="zoom:50%;" />
-<h4 id="二者区别" class="heading-element"><span>二者区别</span>
-  <a href="#%e4%ba%8c%e8%80%85%e5%8c%ba%e5%88%ab" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h4><ul>
-<li>
-<p>Self-Attention</p></div><div class="post-footer">
-    <a href="/posts/%E8%AF%BE%E7%A8%8B-ai-agent3%E6%9D%8E%E5%AE%8F%E6%AF%85/">Read More</a></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/%E8%AF%BE%E7%A8%8B-ai-agent2%E6%9D%8E%E5%AE%8F%E6%AF%85/">AI Agent· 第二讲 LLM大模型内部运作原理</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2026-06-25 11:25:40'>published on <time datetime="2026-06-25">2026-06-25</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AF%BE%E7%A8%8B-%E6%9D%8E%E5%AE%8F%E6%AF%852026/" class="post-category" title="Category - 课程 李宏毅2026"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 课程 李宏毅2026</a></span></div><div class="content"><h3 id="一个神经元" class="heading-element"><span>一个神经元</span>
-  <a href="#%e4%b8%80%e4%b8%aa%e7%a5%9e%e7%bb%8f%e5%85%83" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><h4 id="神经元的结构" class="heading-element"><span>神经元的结构</span>
-  <a href="#%e7%a5%9e%e7%bb%8f%e5%85%83%e7%9a%84%e7%bb%93%e6%9e%84" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h4><ul>
-<li>
-<p>绿色进去是embeding</p></div><div class="post-footer">
-    <a href="/posts/%E8%AF%BE%E7%A8%8B-ai-agent2%E6%9D%8E%E5%AE%8F%E6%AF%85/">Read More</a></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/%E8%AE%BA%E6%96%87-agentbench-evaluating-llms-as-agents/">论文 · AGENTBENCH: EVALUATING LLMS as AGENTS</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2026-06-25 11:25:40'>published on <time datetime="2026-06-25">2026-06-25</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/agent-benchmark/" class="post-category" title="Category - Agent Benchmark"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Agent Benchmark</a></span></div><div class="content"><h3 id="基础信息" class="heading-element"><span>基础信息</span>
-  <a href="#%e5%9f%ba%e7%a1%80%e4%bf%a1%e6%81%af" class="heading-mark">
+</h3><blockquote>
+<p>参考论文：<a href="">Li Y, Lin Z, Deng A, et al. Just-In-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates[J]. arXiv preprint arXiv:2601.18510, 2026.</a></p></div><div class="post-footer">
+    <a href="/posts/llm-memory%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/">Read More</a></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/%E8%AF%BE%E7%A8%8B-ai-agent9%E6%9D%8E%E5%AE%8F%E6%AF%85/">AI Agent· 第九讲 大型语言模型能力评估</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2026-07-02 11:25:40'>published on <time datetime="2026-07-02">2026-07-02</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AF%BE%E7%A8%8B-%E6%9D%8E%E5%AE%8F%E6%AF%852026/" class="post-category" title="Category - 课程 李宏毅2026"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 课程 李宏毅2026</a></span></div><div class="content"><h3 id="用于评估的题目数据集" class="heading-element"><span>用于评估的题目数据集</span>
+  <a href="#%e7%94%a8%e4%ba%8e%e8%af%84%e4%bc%b0%e7%9a%84%e9%a2%98%e7%9b%ae%e6%95%b0%e6%8d%ae%e9%9b%86" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
 </h3><ul>
-<li>期刊 ICLR 2024</li>
-</ul>
-<h3 id="学习内容" class="heading-element"><span>学习内容</span>
-  <a href="#%e5%ad%a6%e4%b9%a0%e5%86%85%e5%ae%b9" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><ol>
 <li>
-<p>文章是哪个领域的？研究什么具体问题？</p></div><div class="post-footer">
-    <a href="/posts/%E8%AE%BA%E6%96%87-agentbench-evaluating-llms-as-agents/">Read More</a></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/%E8%AE%BA%E6%96%87-react-synergizing-reasoning-and-acting-in-language-models/">论文 · REACT: SYNERGIZING REASONING and ACTING in  LANGUAGE MODELS</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2026-06-25 11:25:40'>published on <time datetime="2026-06-25">2026-06-25</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/interaction-improving/" class="post-category" title="Category - Interaction Improving"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Interaction Improving</a></span></div><div class="content"><h3 id="基础信息" class="heading-element"><span>基础信息</span>
-  <a href="#%e5%9f%ba%e7%a1%80%e4%bf%a1%e6%81%af" class="heading-mark">
+<p>GSM8K</p></div><div class="post-footer">
+    <a href="/posts/%E8%AF%BE%E7%A8%8B-ai-agent9%E6%9D%8E%E5%AE%8F%E6%AF%85/">Read More</a></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/%E8%AF%BE%E7%A8%8B-ai-agent11%E6%9D%8E%E5%AE%8F%E6%AF%85/">AI Agent· 第十一讲 Model Merging</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2026-07-02 11:25:40'>published on <time datetime="2026-07-02">2026-07-02</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AF%BE%E7%A8%8B-%E6%9D%8E%E5%AE%8F%E6%AF%852026/" class="post-category" title="Category - 课程 李宏毅2026"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 课程 李宏毅2026</a></span></div><div class="content"><h3 id="model-merging是什么" class="heading-element"><span>Model Merging是什么</span>
+  <a href="#model-merging%e6%98%af%e4%bb%80%e4%b9%88" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><ul>
-<li>期刊 ICLR 2023</li>
-</ul>
-<h3 id="学习内容" class="heading-element"><span>学习内容</span>
-  <a href="#%e5%ad%a6%e4%b9%a0%e5%86%85%e5%ae%b9" class="heading-mark">
+</h3><img src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260702111323449.png" style="zoom:50%;" />
+<h3 id="操作" class="heading-element"><span>操作</span>
+  <a href="#%e6%93%8d%e4%bd%9c" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><ol>
-<li>
-<p>文章是哪个领域的？研究什么具体问题？</p></div><div class="post-footer">
-    <a href="/posts/%E8%AE%BA%E6%96%87-react-synergizing-reasoning-and-acting-in-language-models/">Read More</a></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/%E8%AF%BE%E7%A8%8B-ai-agent1%E6%9D%8E%E5%AE%8F%E6%AF%85/">AI Agent· 第一讲 AI Agent 原理</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2026-06-24 11:25:40'>published on <time datetime="2026-06-24">2026-06-24</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AF%BE%E7%A8%8B-%E6%9D%8E%E5%AE%8F%E6%AF%852026/" class="post-category" title="Category - 课程 李宏毅2026"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 课程 李宏毅2026</a></span></div><div class="content"><h4 id="ai-agent工作流" class="heading-element"><span>AI Agent工作流</span>
-  <a href="#ai-agent%e5%b7%a5%e4%bd%9c%e6%b5%81" class="heading-mark">
+</h3><h4 id="相加" class="heading-element"><span>相加</span>
+  <a href="#%e7%9b%b8%e5%8a%a0" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h4><ul>
-<li>
-<p>RL（Reinforcement Learning）：Learn to Maximize Reward</p></div><div class="post-footer">
-    <a href="/posts/%E8%AF%BE%E7%A8%8B-ai-agent1%E6%9D%8E%E5%AE%8F%E6%AF%85/">Read More</a></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/codex-agents%E5%85%A5%E8%81%8C%E8%AF%B4%E6%98%8E%E4%B9%A6/">Codex · AGENTS的入职说明书</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2026-06-06 11:25:40'>published on <time datetime="2026-06-06">2026-06-06</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/condex/" class="post-category" title="Category - Condex"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Condex</a></span></div><div class="content"><blockquote>
-<p>AGENTS.md的作用</p>
-<p>告诉他你的项目基本信息，不能动什么，数据怎么走，避免重复 交代信息。</p>
-</blockquote>
-<h3 id="agent内容" class="heading-element"><span>AGENT内容</span>
-  <a href="#agent%e5%86%85%e5%ae%b9" class="heading-mark">
+</h4><img src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260702111948124.png" style="zoom:50%;" />
+<h4 id="相减" class="heading-element"><span>相减</span>
+  <a href="#%e7%9b%b8%e5%87%8f" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><img src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260702112026480.png" style="zoom:50%;" />
+<h4 id="类比" class="heading-element"><span>类比</span>
+  <a href="#%e7%b1%bb%e6%af%94" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><img src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260702112133437.png" style="zoom:50%;" />
+<h3 id="merging-问题" class="heading-element"><span>Merging 问题</span>
+  <a href="#merging-%e9%97%ae%e9%a2%98" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>merging不一定成功</p></div><div class="post-footer">
+    <a href="/posts/%E8%AF%BE%E7%A8%8B-ai-agent11%E6%9D%8E%E5%AE%8F%E6%AF%85/">Read More</a></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/%E8%AF%BE%E7%A8%8B-ai-agent10%E6%9D%8E%E5%AE%8F%E6%AF%85/">AI Agent· 第十讲 Model Editing</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2026-07-02 11:25:40'>published on <time datetime="2026-07-02">2026-07-02</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AF%BE%E7%A8%8B-%E6%9D%8E%E5%AE%8F%E6%AF%852026/" class="post-category" title="Category - 课程 李宏毅2026"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 课程 李宏毅2026</a></span></div><div class="content"><h3 id="model-editing是什么" class="heading-element"><span>Model Editing是什么</span>
+  <a href="#model-editing%e6%98%af%e4%bb%80%e4%b9%88" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>给模型植入一条新的信息。</p></div><div class="post-footer">
+    <a href="/posts/%E8%AF%BE%E7%A8%8B-ai-agent10%E6%9D%8E%E5%AE%8F%E6%AF%85/">Read More</a></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8-ars-skill/">Academic Research Skills（ARS）</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2026-07-01 11:25:40'>published on <time datetime="2026-07-01">2026-07-01</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" class="post-category" title="Category - 工具使用"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 工具使用</a></span></div><div class="content"><h3 id="deep-research7-种模式的文献与研究分析" class="heading-element"><span>deep-research：7 种模式的文献与研究分析</span>
+  <a href="#deep-research7-%e7%a7%8d%e6%a8%a1%e5%bc%8f%e7%9a%84%e6%96%87%e7%8c%ae%e4%b8%8e%e7%a0%94%e7%a9%b6%e5%88%86%e6%9e%90" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><table>
+  <thead>
+      <tr>
+          <th>模式</th>
+          <th>干嘛的</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>full</td>
+          <td>完整学术研究报告，3000-8000 字，APA 7.0 格式</td>
+      </tr>
+      <tr>
+          <td>quick</td>
+          <td>30 分钟快速研究简报，500-1500 字</td>
+      </tr>
+      <tr>
+          <td>socratic</td>
+          <td>苏格拉底对话模式，帮你把模糊的想法磨出清晰的研究问题</td>
+      </tr>
+      <tr>
+          <td>lit-review</td>
+          <td>注释式文献综述 + 综合分析</td>
+      </tr>
+      <tr>
+          <td>fact-check</td>
+          <td>逐条论点核实，验证你引用的证据是否真的支持你的说法</td>
+      </tr>
+      <tr>
+          <td>systematic-review</td>
+          <td>PRISMA 2020 格式的系统综述，5000-15000 字</td>
+      </tr>
+      <tr>
+          <td>review</td>
+          <td>对某篇具体文献的评估报告</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="academic-paper10-种模式的论文写作" class="heading-element"><span>academic-paper：10 种模式的论文写作</span>
+  <a href="#academic-paper10-%e7%a7%8d%e6%a8%a1%e5%bc%8f%e7%9a%84%e8%ae%ba%e6%96%87%e5%86%99%e4%bd%9c" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
 </h3><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># AGENTS.md
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">## 项目概述
-</span></span><span class="line"><span class="cl">这是一个基于 Next.js 14 + Prisma + PostgreSQL 的 SaaS 应用。
-</span></span><span class="line"><span class="cl">使用 App Router，不使用 Pages Router。
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">## 技术栈
-</span></span><span class="line"><span class="cl">- 前端：Next.js 14, React 18, TailwindCSS, shadcn/ui
-</span></span><span class="line"><span class="cl">- 后端：Next.js API Routes, Prisma ORM
-</span></span><span class="line"><span class="cl">- 数据库：PostgreSQL 15
-</span></span><span class="line"><span class="cl">- 认证：NextAuth.js
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">## 重要约定
-</span></span><span class="line"><span class="cl">- 所有数据库操作必须通过 lib/db.ts 中的 prisma 实例
-</span></span><span class="line"><span class="cl">- API 路由错误统一用 lib/api-error.ts 处理
-</span></span><span class="line"><span class="cl">- 环境变量在 .env.local 中，参考 .env.example
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">## 禁止事项
-</span></span><span class="line"><span class="cl">- 不要修改 prisma/schema.prisma，除非我明确要求
-</span></span><span class="line"><span class="cl">- 不要删除任何现有测试
-</span></span><span class="line"><span class="cl">- 生产环境的 .env 文件不要碰</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">&#34;Write a paper on X&#34;                         → full mode（完整论文草稿）
+</span></span><span class="line"><span class="cl">&#34;Guide me through writing a paper&#34;           → plan mode（逐章苏格拉底引导）
+</span></span><span class="line"><span class="cl">&#34;Build a paper outline&#34;                      → outline-only mode
+</span></span><span class="line"><span class="cl">&#34;I have a draft, here are reviewer comments&#34; → revision mode（整合审稿意见）
+</span></span><span class="line"><span class="cl">&#34;Parse these reviewer comments&#34;              → revision-coach mode（修改路线图）
+</span></span><span class="line"><span class="cl">&#34;Write an abstract&#34;                          → abstract-only mode
+</span></span><span class="line"><span class="cl">&#34;Generate an AI disclosure for NeurIPS&#34;      → disclosure mode（生成 AI 使用声明）</span></span></code></pre></td></tr></table>
 </div>
-</div><ul>
-<li>配置层级
-<ul>
-<li>全局层：~/.codex/AGENTS.md</li>
-<li>项目层： repo/AGENTS.md</li>
-<li>覆写层： repo/services/payments/AGENTS.override.md（子目录）</li>
-</ul>
-</li>
-</ul></div><div class="post-footer">
-    <a href="/posts/codex-agents%E5%85%A5%E8%81%8C%E8%AF%B4%E6%98%8E%E4%B9%A6/">Read More</a></div>
+</div><h3 id="academic-paper-reviewer6-种模式的论文审稿" class="heading-element"><span>academic-paper-reviewer：6 种模式的论文审稿</span>
+  <a href="#academic-paper-reviewer6-%e7%a7%8d%e6%a8%a1%e5%bc%8f%e7%9a%84%e8%ae%ba%e6%96%87%e5%ae%a1%e7%a8%bf" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p><code>full</code> 模式会输出：<strong>5 份不同视角的审稿报告 + 主编决定 + 修改路线图</strong>。</p></div><div class="post-footer">
+    <a href="/posts/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8-ars-skill/">Read More</a></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/%E8%AF%BE%E7%A8%8B-ai-agent7%E6%9D%8E%E5%AE%8F%E6%AF%85/">AI Agent· 第七讲 深度思考的大语言模型</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2026-07-01 11:25:40'>published on <time datetime="2026-07-01">2026-07-01</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AF%BE%E7%A8%8B-%E6%9D%8E%E5%AE%8F%E6%AF%852026/" class="post-category" title="Category - 课程 李宏毅2026"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 课程 李宏毅2026</a></span></div><div class="content"><h3 id="深度思考模型" class="heading-element"><span>深度思考模型</span>
+  <a href="#%e6%b7%b1%e5%ba%a6%e6%80%9d%e8%80%83%e6%a8%a1%e5%9e%8b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ul>
+<li>
+<p>特点</p></div><div class="post-footer">
+    <a href="/posts/%E8%AF%BE%E7%A8%8B-ai-agent7%E6%9D%8E%E5%AE%8F%E6%AF%85/">Read More</a></div>
 </article><ul class="pagination"><li class="page-item active">
           <span class="page-link">
             <a href="/">1</a>
@@ -284,8 +266,10 @@
             <a href="/page/3/">3</a>
           </span>
         </li><li class="page-item">
+          <span class="page-link" aria-hidden="true">&hellip;</span>
+        </li><li class="page-item">
           <span class="page-link">
-            <a href="/page/4/">4</a>
+            <a href="/page/5/">5</a>
           </span>
         </li></ul></div></main><footer class="footer">
     <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.137.0">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>

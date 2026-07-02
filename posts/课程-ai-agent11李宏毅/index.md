@@ -1,8 +1,31 @@
-# AI Agent· 第四讲 大型语言模型训练方法
+# AI Agent· 第十一讲 Model Merging
 
 
-## Transformer架构存在原因
+## Model Merging是什么
 
+&lt;img src=&#34;https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260702111323449.png&#34; style=&#34;zoom:50%;&#34; /&gt;
+
+## 操作
+
+### 相加
+
+&lt;img src=&#34;https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260702111948124.png&#34; style=&#34;zoom:50%;&#34; /&gt;
+
+### 相减
+
+&lt;img src=&#34;https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260702112026480.png&#34; style=&#34;zoom:50%;&#34; /&gt;
+
+### 类比
+
+&lt;img src=&#34;https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260702112133437.png&#34; style=&#34;zoom:50%;&#34; /&gt;
+
+## Merging 问题
+
+merging不一定成功
+
+多个神经元之间互相干扰。
+
+因此两个模型越不一样，越不容易干扰，越容易成功。
 
 
 ---
