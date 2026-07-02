@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>LLM · Policy - Ting BLOG🐈</title><meta name="author" content="Ting">
+<meta name="description" content="policy是什么给定当前上下文，模型下一步“会选择什么输出/动作”的概率分布。
+">
+  <meta itemprop="name" content="LLM · policy">
+  <meta itemprop="description" content="policy是什么给定当前上下文，模型下一步“会选择什么输出/动作”的概率分布。">
+  <meta itemprop="datePublished" content="2026-07-02T11:25:40+08:00">
+  <meta itemprop="dateModified" content="2026-07-02T11:25:40+08:00">
+  <meta itemprop="wordCount" content="260">
+  <meta itemprop="keywords" content="LLM"><meta property="og:url" content="http://localhost:1313/posts/llm-policy/">
+  <meta property="og:site_name" content="Ting BLOG🐈">
+  <meta property="og:title" content="LLM · policy">
+  <meta property="og:description" content="policy是什么给定当前上下文，模型下一步“会选择什么输出/动作”的概率分布。">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-07-02T11:25:40+08:00">
+    <meta property="article:modified_time" content="2026-07-02T11:25:40+08:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="LLM · policy">
+  <meta name="twitter:description" content="policy是什么给定当前上下文，模型下一步“会选择什么输出/动作”的概率分布。">
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/llm-policy/" title="LLM · policy - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8-ars-skill/" title="Academic Research Skills（ARS）" /><link rel="next" type="text/html" href="http://localhost:1313/posts/llm-memory%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/" title="LLM · Memory结构分类" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/llm-policy/index.md" title="LLM · policy - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "LLM · policy",
+    "inLanguage": "en",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/posts\/llm-policy\/"
+    },"genre": "posts","wordcount":  260 ,
+    "url": "http:\/\/localhost:1313\/posts\/llm-policy\/","datePublished": "2026-07-02T11:25:40+08:00","dateModified": "2026-07-02T11:25:40+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Ting"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/archives/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/archives/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>LLM · Policy</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/llm/" class="post-category" title="Category - LLM"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> LLM</a></span></div><div class="post-meta-line"><span title="published on 2026-07-02 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2026-07-02">2026-07-02</time></span>&nbsp;<span title="260 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 300 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>2 minutes</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#policy是什么">policy是什么</a>
+      <ul>
+        <li><a href="#最底层token-level-policy">最底层：token-level policy</a></li>
+        <li><a href="#中间层output-level-policy">中间层：output-level policy</a></li>
+        <li><a href="#agent-层action-level-policy">Agent 层：action-level policy</a></li>
+        <li><a href="#rl-语境下的-policy">RL 语境下的 policy</a></li>
+      </ul>
+    </li>
+    <li><a href="#policy的来源">policy的来源</a>
+      <ul>
+        <li><a href="#base-model-policy">base model policy</a></li>
+        <li><a href="#instruction-tuned-policy">instruction-tuned policy</a></li>
+        <li><a href="#rlhf--preference-trained-policy">RLHF / preference-trained policy</a></li>
+        <li><a href="#system-prompt-policy">system prompt policy</a></li>
+        <li><a href="#memory-conditioned-policy">memory-conditioned policy</a></li>
+        <li><a href="#tool-policy">tool policy</a></li>
+        <li><a href="#decoding-policy">decoding policy</a></li>
+      </ul>
+    </li>
+    <li><a href="#safety-rules来源">safety rules来源</a></li>
+    <li><a href="#policy和prompt">policy和prompt</a></li>
+    <li><a href="#policy-和模型参数">policy 和模型参数</a>
+      <ul>
+        <li><a href="#fine-tune-模型">fine-tune 模型</a></li>
+        <li><a href="#用-memoryprompt检索工具控制">用 memory、prompt、检索、工具控制</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 id="policy是什么" class="heading-element"><span>policy是什么</span>
+  <a href="#policy%e6%98%af%e4%bb%80%e4%b9%88" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>给定当前上下文，模型下一步“会选择什么输出/动作”的概率分布。</p>
+<p>数学写法：<code>π(a | s)</code>，即在状态 s 下，选择动作 a 的概率。</p>
+<h3 id="最底层token-level-policy" class="heading-element"><span>最底层：token-level policy</span>
+  <a href="#%e6%9c%80%e5%ba%95%e5%b1%82token-level-policy" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>LLM 本质上是逐 token 生成文本的模型。</p>
+<p>当输入一个问题，模型会去预测下一个token，给所有可能相关的token一个概率，这些概率组成的分布是token-level policy。</p>
+<p><code>πθ(token_t | prompt, previous_tokens)</code></p>
+<p>其中：</p>
+<ul>
+<li><code>πθ</code> = 模型参数 <code>θ</code> 决定的 policy</li>
+<li><code>token_t</code> = 当前要生成的下一个 token</li>
+<li><code>prompt</code> = 输入上下文</li>
+<li><code>previous_tokens</code> = 已经生成的内容</li>
+</ul>
+<h3 id="中间层output-level-policy" class="heading-element"><span>中间层：output-level policy</span>
+  <a href="#%e4%b8%ad%e9%97%b4%e5%b1%82output-level-policy" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>给定上下文，模型生成某种回答的概率。（输出倾向，什么风格）</p>
+<p>但是这个输出倾向的表不是直接被列出的概率分布，而是由从 token 分布组合出来。</p>
+<p><code>π(response | context)</code></p>
+<h3 id="agent-层action-level-policy" class="heading-element"><span>Agent 层：action-level policy</span>
+  <a href="#agent-%e5%b1%82action-level-policy" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><blockquote>
+<p>这个是强化学习和 LLM agent 论文里常说的 policy。</p>
+</blockquote>
+<p>agent 在当前状态下倾向于做什么动作。</p>
+<p>agent在输入后“看到”的是：任务、页面、用户偏好。</p>
+<p>依据这几个内容得到policy，也就是发生action的概率分布。</p>
+<h3 id="rl-语境下的-policy" class="heading-element"><span>RL 语境下的 policy</span>
+  <a href="#rl-%e8%af%ad%e5%a2%83%e4%b8%8b%e7%9a%84-policy" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><blockquote>
+<p>类似Agent 层</p>
+</blockquote>
+<p>在强化学习里，policy 是智能体的行为规则。</p>
+<p>policy 决定每个动作的概率。</p>
+<h2 id="policy的来源" class="heading-element"><span>policy的来源</span>
+  <a href="#policy%e7%9a%84%e6%9d%a5%e6%ba%90" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>一般来说LLM 的实际行为 policy是多层叠加的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">policy</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl"><span class="n">base</span> <span class="n">model</span> <span class="n">policy</span>
+</span></span><span class="line"><span class="cl"><span class="o">+</span> <span class="n">instruction</span> <span class="n">tuning</span>
+</span></span><span class="line"><span class="cl"><span class="o">+</span> <span class="n">RLHF</span> <span class="o">/</span> <span class="n">preference</span> <span class="n">training</span>
+</span></span><span class="line"><span class="cl"><span class="o">+</span> <span class="n">system</span> <span class="n">prompt</span>
+</span></span><span class="line"><span class="cl"><span class="o">+</span> <span class="n">user</span> <span class="n">prompt</span>
+</span></span><span class="line"><span class="cl"><span class="o">+</span> <span class="n">memory</span>
+</span></span><span class="line"><span class="cl"><span class="o">+</span> <span class="k">tool</span> <span class="n">rules</span>
+</span></span><span class="line"><span class="cl"><span class="o">+</span> <span class="n">safety</span> <span class="n">constraints</span>
+</span></span><span class="line"><span class="cl"><span class="o">+</span> <span class="n">decoding</span> <span class="n">strategy</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="base-model-policy" class="heading-element"><span>base model policy</span>
+  <a href="#base-model-policy" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>预训练模型从大量文本中学到的语言分布。</p>
+<p>这是最原始的语言建模 policy。</p>
+<p>例如：“巴黎是法国的&hellip;” 后面大概率是 “首都”</p>
+<h3 id="instruction-tuned-policy" class="heading-element"><span>instruction-tuned policy</span>
+  <a href="#instruction-tuned-policy" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>指令微调后，模型学会的内容，即什么情况下应该怎么做。</p>
+<p>比如：</p>
+<p>用户提问 → 应该回答
+用户要求步骤 → 应该分步骤
+用户要求翻译 → 应该翻译</p>
+<h3 id="rlhf--preference-trained-policy" class="heading-element"><span>RLHF / preference-trained policy</span>
+  <a href="#rlhf--preference-trained-policy" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>通过人类偏好训练，让模型更倾向于某种“性格”。</p>
+<h3 id="system-prompt-policy" class="heading-element"><span>system prompt policy</span>
+  <a href="#system-prompt-policy" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>系统指令会在运行时改变模型行为。这些规则会改变输出分布。</p>
+<p>比如：你是一个专业的写论文专家&hellip;</p>
+<h3 id="memory-conditioned-policy" class="heading-element"><span>memory-conditioned policy</span>
+  <a href="#memory-conditioned-policy" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>如果系统把 memory 放进上下文，模型行为也会改变。</p>
+<p>依据和这个窗口的问答习惯来改变输出的偏好。</p>
+<h3 id="tool-policy" class="heading-element"><span>tool policy</span>
+  <a href="#tool-policy" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>agent 有工具时，policy 还包括是否调用工具。</p>
+<h3 id="decoding-policy" class="heading-element"><span>decoding policy</span>
+  <a href="#decoding-policy" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>通过采样来影响输出。</p>
+<p>采样即是：算出“下一个 token 的概率分布”之后，系统要从这些候选 token 里选一个真正输出。</p>
+<p>影响采样的参数：</p>
+<ul>
+<li>temperature：控制随机性。低则保守，高则随机变化大发散，0就是总选最高概率的token。</li>
+<li>top-k：只从概率最高的 k 个 token 里采样。</li>
+<li>top-p / nucleus sampling：只从累计概率达到 <code>p</code> 的候选里采样。</li>
+</ul>
+<h2 id="safety-rules来源" class="heading-element"><span>safety rules来源</span>
+  <a href="#safety-rules%e6%9d%a5%e6%ba%90" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>safety rules属于 policy constraint</p>
+<p>它们可能存在于不同层。</p>
+<ul>
+<li>训练中学到的安全行为     → learned policy</li>
+<li>system prompt 中的规则   → runtime policy constraint</li>
+<li>外部安全分类器           → policy filter</li>
+<li>解码时屏蔽某些 token     → decoding constraint</li>
+</ul>
+<h2 id="policy和prompt" class="heading-element"><span>policy和prompt</span>
+  <a href="#policy%e5%92%8cprompt" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>prompt 是输入上下文。</p>
+<p>policy 是模型在这个上下文下产生的行为分布。</p>
+<p>关系是：prompt → LLM → policy → output/action</p>
+<p>例如:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Prompt A:
+</span></span><span class="line"><span class="cl">“请随便解释一下 RL。”
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Prompt B:
+</span></span><span class="line"><span class="cl">“你是强化学习教授，请用数学形式严格解释 RL。”</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="policy-和模型参数" class="heading-element"><span>policy 和模型参数</span>
+  <a href="#policy-%e5%92%8c%e6%a8%a1%e5%9e%8b%e5%8f%82%e6%95%b0" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>模型参数 <code>θ</code> 决定基础 policy：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">πθ(a | s)</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="fine-tune-模型" class="heading-element"><span>fine-tune 模型</span>
+  <a href="#fine-tune-%e6%a8%a1%e5%9e%8b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>需要该参数，则改 <code>θ</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">θ → θ&#39;
+</span></span><span class="line"><span class="cl">πθ → πθ&#39;</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="用-memoryprompt检索工具控制" class="heading-element"><span>用 memory、prompt、检索、工具控制</span>
+  <a href="#%e7%94%a8-memoryprompt%e6%a3%80%e7%b4%a2%e5%b7%a5%e5%85%b7%e6%8e%a7%e5%88%b6" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>不改参数，则：</p>
+<p>θ 不变，s 改变，πθ(a | s) 改变</p>
+</div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2026-07-02 11:25:40">Updated on 2026-07-02&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/llm-policy/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div></div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8-ars-skill/" class="post-nav-item" rel="prev" title="Academic Research Skills（ARS）"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Academic Research Skills（ARS）</a><a href="/posts/llm-memory%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/" class="post-nav-item" rel="next" title="LLM · Memory结构分类">LLM · Memory结构分类<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div class="post-reward">
+    <div class="comment"></div>
+    <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
+    <label class="reward-button" for="fi-reward"><?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1776434267563" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2715" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M377.596784 791.989528s-39.199482 22.799699 27.799633 30.399598c81.198926 9.199878 122.598379 7.999894 211.997197-8.999881 0 0 23.599688 14.799804 56.399254 27.599635C473.395518 926.787745 220.198866 835.988946 377.596784 791.989528m-24.399677-112.198517s-43.799421 32.399572 23.199693 39.399479c86.598855 8.999881 155.197948 9.599873 273.596382-13.199825 0 0 16.399783 16.599781 42.199442 25.599661-242.596792 70.999061-512.593222 5.799923-338.995517-51.799315m206.397271-190.197485c49.399347 56.799249-12.999828 107.998572-12.999828 107.998572s125.398342-64.799143 67.799103-145.798072c-53.799289-75.599-94.998744-113.198503 128.198305-242.596792 0.199997 0-350.395367 87.598842-182.99758 280.396292m265.196493 385.194907s28.999617 23.799685-31.799579 42.399439c-115.798469 34.999537-481.593632 45.599397-583.192289 1.399982-36.599516-15.799791 31.999577-37.999498 53.599291-42.599437 22.399704-4.799937 35.399532-3.999947 35.399532-3.999947-40.599463-28.599622-262.596528 56.199257-112.798508 80.398937 408.3946 66.399122 744.790152-29.799606 638.791553-77.598974M396.396536 563.592548s-186.197538 44.199416-65.999128 60.199204c50.799328 6.79991 151.99799 5.199931 246.196745-2.599966 76.998982-6.399915 154.397958-20.39973 154.397958-20.39973s-27.19964 11.599847-46.799381 24.999669c-188.997501 49.799342-553.992675 26.599648-448.994063-24.19968 88.998823-42.799434 161.197869-37.999498 161.197869-37.999497m333.995583 186.597532c192.197459-99.79868 103.198635-195.797411 41.199456-182.797582-15.199799 3.199958-21.999709 5.999921-21.999709 5.99992s5.599926-8.799884 16.399783-12.599833c122.598379-43.199429 216.997131 127.198318-39.599477 194.597427 0-0.199997 2.99996-2.799963 3.999947-5.199932M614.393653 0s106.398593 106.398593-100.998664 269.99643c-166.197802 131.198265-37.999498 206.197274 0 291.596144-96.998717-87.598842-168.197776-164.597824-120.398408-236.396874C463.195652 220.197088 657.393085 168.997765 614.393653 0m-198.997369 1020.786502c184.397562 11.799844 467.593817-6.599913 474.19373-93.798759 0 0-12.799831 32.999564-152.397985 59.399214-157.397919 29.599609-351.595351 26.199654-466.59383 7.199905 0-0.199997 23.599688 19.399743 144.798085 27.19964" fill="" p-id="2716"></path></svg>为博主买一杯java</label>
+    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/wechatpay.jpg" alt="Ting WeChat Pay" data-title="Ting WeChat Pay" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>WeChat Pay</span>
+          </div></div>
+  </div></article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.137.0">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024 - 2026</span><span class="author" itemprop="copyrightHolder">
+              <a href="Tin10g.github.io">Ting</a></span></div><div class="footer-line statistics"><span class="site-time" title='Website running ...'><i class="fa-solid fa-heartbeat fa-fw animate-icon" aria-hidden="true"></i><span class="ms-1 d-none">Runing</span><span class="run-times ms-1">Website running ...</span></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">This website works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":1000},"comment":{"enable":false},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"siteTime":"2024-04-01T11:25:40+08:00","typeit":{"cursorChar":"|","cursorSpeed":1000,"duration":-1,"loop":false,"speed":100},"version":"v0.3.13"};console.log('Page config:', window.config);</script><script src="/js/theme.min.js" defer></script><script src="/js/custom.min.js" defer></script></body>
+</html>

@@ -5,18 +5,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
-    <title> - Ting BLOG🐈</title><meta name="author" content="Ting">
-<meta name="description" content="&lt;state, action, reward&gt; 轨迹参考论文：Li Y, Lin Z, Deng A, et al. Just-In-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates[J]. arXiv preprint arXiv:2601.18510, 2026.
+    <title>LLM · Memory结构分类 - Ting BLOG🐈</title><meta name="author" content="Ting">
+<meta name="description" content="Raw trajectory memory&lt;state, action, reward&gt; 轨迹参考论文：Li Y, Lin Z, Deng A, et al. Just-In-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates[J]. arXiv preprint arXiv:2601.18510, 2026.
 ">
-  <meta itemprop="name" content="Ting BLOG🐈">
-  <meta itemprop="description" content="&lt;state, action, reward&gt; 轨迹参考论文：Li Y, Lin Z, Deng A, et al. Just-In-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates[J]. arXiv preprint arXiv:2601.18510, 2026.">
+  <meta itemprop="name" content="LLM · Memory结构分类">
+  <meta itemprop="description" content="Raw trajectory memory&lt;state, action, reward&gt; 轨迹参考论文：Li Y, Lin Z, Deng A, et al. Just-In-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates[J]. arXiv preprint arXiv:2601.18510, 2026.">
   <meta itemprop="datePublished" content="2026-07-02T11:25:40+08:00">
   <meta itemprop="dateModified" content="2026-07-02T11:25:40+08:00">
-  <meta itemprop="wordCount" content="423">
+  <meta itemprop="wordCount" content="435">
   <meta itemprop="keywords" content="LLM"><meta property="og:url" content="http://localhost:1313/posts/llm-memory%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/">
   <meta property="og:site_name" content="Ting BLOG🐈">
-  <meta property="og:title" content="Ting BLOG🐈">
-  <meta property="og:description" content="&lt;state, action, reward&gt; 轨迹参考论文：Li Y, Lin Z, Deng A, et al. Just-In-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates[J]. arXiv preprint arXiv:2601.18510, 2026.">
+  <meta property="og:title" content="LLM · Memory结构分类">
+  <meta property="og:description" content="Raw trajectory memory&lt;state, action, reward&gt; 轨迹参考论文：Li Y, Lin Z, Deng A, et al. Just-In-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates[J]. arXiv preprint arXiv:2601.18510, 2026.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -24,21 +24,21 @@
     <meta property="article:modified_time" content="2026-07-02T11:25:40+08:00">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Ting BLOG🐈">
-  <meta name="twitter:description" content="&lt;state, action, reward&gt; 轨迹参考论文：Li Y, Lin Z, Deng A, et al. Just-In-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates[J]. arXiv preprint arXiv:2601.18510, 2026.">
+  <meta name="twitter:title" content="LLM · Memory结构分类">
+  <meta name="twitter:description" content="Raw trajectory memory&lt;state, action, reward&gt; 轨迹参考论文：Li Y, Lin Z, Deng A, et al. Just-In-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates[J]. arXiv preprint arXiv:2601.18510, 2026.">
 <meta name="application-name" content="FixIt">
-<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/llm-memory%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/" title=" - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent9%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第九讲 大型语言模型能力评估" /><link rel="next" type="text/html" href="http://localhost:1313/about/" title="About" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/llm-memory%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/index.md" title=" - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/llm-memory%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/" title="LLM · Memory结构分类 - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8-ars-skill/" title="Academic Research Skills（ARS）" /><link rel="next" type="text/html" href="http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent10%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第十讲 Model Editing" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/llm-memory%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/index.md" title="LLM · Memory结构分类 - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
-    "headline": "",
+    "headline": "LLM · Memory结构分类",
     "inLanguage": "en",
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "http:\/\/localhost:1313\/posts\/llm-memory%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB\/"
-    },"genre": "posts","wordcount":  423 ,
+    },"genre": "posts","wordcount":  435 ,
     "url": "http:\/\/localhost:1313\/posts\/llm-memory%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB\/","datePublished": "2026-07-02T11:25:40+08:00","dateModified": "2026-07-02T11:25:40+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -127,9 +127,9 @@
 </header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
 
   <article class="page single">
-    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span></span>
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>LLM · Memory结构分类</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/llm/" class="post-category" title="Category - LLM"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> LLM</a></span></div><div class="post-meta-line"><span title="published on 2026-07-02 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2026-07-02">2026-07-02</time></span>&nbsp;<span title="423 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 500 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>2 minutes</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/llm/" class="post-category" title="Category - LLM"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> LLM</a></span></div><div class="post-meta-line"><span title="published on 2026-07-02 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2026-07-02">2026-07-02</time></span>&nbsp;<span title="435 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 500 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>3 minutes</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>Contents</span>
@@ -137,16 +137,36 @@
         </div>
         <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#state-action-reward-轨迹">&lt;state, action, reward&gt; 轨迹</a></li>
-    <li><a href="#自然语言-reflection">自然语言 reflection</a></li>
-    <li><a href="#skill-library">skill library</a></li>
-    <li><a href="#经验抽象--lessons-learned">经验抽象 / lessons learned</a></li>
-    <li><a href="#policy-level-reflection">policy-level reflection</a></li>
-    <li><a href="#失败案例--debugging-memory">失败案例 / debugging memory</a></li>
-    <li><a href="#用户偏好-memory">用户偏好 memory</a></li>
+    <li><a href="#raw-trajectory-memory">Raw trajectory memory</a>
+      <ul>
+        <li><a href="#state-action-reward-轨迹">&lt;state, action, reward&gt; 轨迹</a></li>
+      </ul>
+    </li>
+    <li><a href="#verbal-reflection-memory">Verbal reflection memory</a>
+      <ul>
+        <li><a href="#自然语言-reflection">自然语言 reflection</a></li>
+        <li><a href="#经验抽象--lessons-learned">经验抽象 / lessons learned</a></li>
+      </ul>
+    </li>
+    <li><a href="#executable-skill-memory">Executable skill memory</a>
+      <ul>
+        <li><a href="#skill-library">skill library</a></li>
+      </ul>
+    </li>
+    <li><a href="#failuredebug-memory">Failure/debug memory</a>
+      <ul>
+        <li><a href="#失败案例--debugging-memory">失败案例 / debugging memory</a></li>
+      </ul>
+    </li>
+    <li><a href="#preferencepersona-memory">Preference/persona memory</a>
+      <ul>
+        <li><a href="#用户偏好-memory">用户偏好 memory</a></li>
+      </ul>
+    </li>
     <li><a href="#分层可控-memory--virtual-context-memory">分层可控 memory / virtual context memory</a></li>
     <li><a href="#隐式用户偏好--agentic-memory">隐式用户偏好 / agentic memory</a></li>
     <li><a href="#memory-stream--episodic-memory">Memory stream / episodic memory</a></li>
+    <li><a href="#policy-level-reflection">policy-level reflection</a></li>
     <li><a href="#混合类的memoryhybrid-memory">混合类的memory（Hybrid memory）</a>
       <ul>
         <li><a href="#完整经验流--reflection--planning">完整经验流 + reflection + planning</a></li>
@@ -155,12 +175,16 @@
     </li>
   </ul>
 </nav></div>
-      </div><div class="content" id="content"><h2 id="state-action-reward-轨迹" class="heading-element"><span>&lt;state, action, reward&gt; 轨迹</span>
+      </div><div class="content" id="content"><h2 id="raw-trajectory-memory" class="heading-element"><span>Raw trajectory memory</span>
+  <a href="#raw-trajectory-memory" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h3 id="state-action-reward-轨迹" class="heading-element"><span>&lt;state, action, reward&gt; 轨迹</span>
   <a href="#state-action-reward-%e8%bd%a8%e8%bf%b9" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><blockquote>
-<p>参考论文：<a href="">Li Y, Lin Z, Deng A, et al. Just-In-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates[J]. arXiv preprint arXiv:2601.18510, 2026.</a></p>
+</h3><blockquote>
+<p>参考论文：<a href="https://tin10g.github.io/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive/"target="_blank" rel="external nofollow noopener noreferrer">Li Y, Lin Z, Deng A, et al. Just-In-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates[J]. arXiv preprint arXiv:2601.18510, 2026.</a></p>
 </blockquote>
 <p>最接近强化学习的 memory。</p>
 <p>下一次遇到类似 state 时，agent 可以参考过去哪些 action 成功、哪些失败。</p>
@@ -170,21 +194,36 @@
 <li>reward: 结果好不好</li>
 </ul>
 <p>适合：Web agent、游戏 agent、工具调用 agent、需要明确 success/failure signal 的任务。</p>
-<h2 id="自然语言-reflection" class="heading-element"><span>自然语言 reflection</span>
+<h2 id="verbal-reflection-memory" class="heading-element"><span>Verbal reflection memory</span>
+  <a href="#verbal-reflection-memory" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h3 id="自然语言-reflection" class="heading-element"><span>自然语言 reflection</span>
   <a href="#%e8%87%aa%e7%84%b6%e8%af%ad%e8%a8%80-reflection" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><blockquote>
+</h3><blockquote>
 <p>参考论文：Shinn N, Cassano F, Gopinath A, et al. Reflexion: Language agents with verbal reinforcement learning[J]. Advances in neural information processing systems, 2023, 36: 8634-8652.</p>
 </blockquote>
 <p>不直接存原始轨迹，而是存 agent 对经验的总结。</p>
 <p>像“经验教训”，会影响 agent 后续 reasoning 和 planning。</p>
 <p>适合：没有明确 reward、但可以从失败中总结规则的任务，比如代码生成、问答、多步推理。</p>
-<h2 id="skill-library" class="heading-element"><span>skill library</span>
+<h3 id="经验抽象--lessons-learned" class="heading-element"><span>经验抽象 / lessons learned</span>
+  <a href="#%e7%bb%8f%e9%aa%8c%e6%8a%bd%e8%b1%a1--lessons-learned" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><blockquote>
+<p>参考论文：Zhao A, Huang D, Xu Q, et al. Expel: Llm agents are experiential learners[C]//Proceedings of the AAAI Conference on Artificial Intelligence. 2024, 38(17): 19632-19642.</p>
+</blockquote>
+<h2 id="executable-skill-memory" class="heading-element"><span>Executable skill memory</span>
+  <a href="#executable-skill-memory" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h3 id="skill-library" class="heading-element"><span>skill library</span>
   <a href="#skill-library" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><blockquote>
+</h3><blockquote>
 <p>参考论文：Wang G, Xie Y, Jiang Y, et al. Voyager: An open-ended embodied agent with large language models[J]. arXiv preprint arXiv:2305.16291, 2023.</p>
 </blockquote>
 <p>memory 存的是可复用技能。agent 不需要每次从零规划，可以直接调用已有 skill。</p>
@@ -197,28 +236,15 @@
 <li>子任务策略</li>
 </ul>
 <p>适合：Minecraft、机器人、网页自动化、复杂工具链任务。</p>
-<h2 id="经验抽象--lessons-learned" class="heading-element"><span>经验抽象 / lessons learned</span>
-  <a href="#%e7%bb%8f%e9%aa%8c%e6%8a%bd%e8%b1%a1--lessons-learned" class="heading-mark">
+<h2 id="failuredebug-memory" class="heading-element"><span>Failure/debug memory</span>
+  <a href="#failuredebug-memory" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><blockquote>
-<p>参考论文：Zhao A, Huang D, Xu Q, et al. Expel: Llm agents are experiential learners[C]//Proceedings of the AAAI Conference on Artificial Intelligence. 2024, 38(17): 19632-19642.</p>
-</blockquote>
-<h2 id="policy-level-reflection" class="heading-element"><span>policy-level reflection</span>
-  <a href="#policy-level-reflection" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h2><blockquote>
-<p>参考论文：Zhang W, Tang K, Wu H, et al. Agent-pro: Learning to evolve via policy-level reflection and optimization[C]//Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers). 2024: 5348-5375.</p>
-</blockquote>
-<h2 id="失败案例--debugging-memory" class="heading-element"><span>失败案例 / debugging memory</span>
+</h2><h3 id="失败案例--debugging-memory" class="heading-element"><span>失败案例 / debugging memory</span>
   <a href="#%e5%a4%b1%e8%b4%a5%e6%a1%88%e4%be%8b--debugging-memory" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><blockquote>
-<p>参考论文：</p>
-</blockquote>
-<p>这种 memory 专门存失败，不只是存“失败了”，而是存失败原因。</p>
+</h3><p>这种 memory 专门存失败，不只是存“失败了”，而是存失败原因。</p>
 <p>这可以帮助 agent 避免重复犯同类错误。</p>
 <p>相比reflection memory，debugging memory更强调 error taxonomy 和 root cause。</p>
 <p>例如：</p>
@@ -228,12 +254,16 @@
 <li>修复建议: 工具调用前必须检查必填参数</li>
 </ul>
 <p>适合：tool-use agent、代码 agent、long-horizon planning agent</p>
-<h2 id="用户偏好-memory" class="heading-element"><span>用户偏好 memory</span>
+<h2 id="preferencepersona-memory" class="heading-element"><span>Preference/persona memory</span>
+  <a href="#preferencepersona-memory" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h3 id="用户偏好-memory" class="heading-element"><span>用户偏好 memory</span>
   <a href="#%e7%94%a8%e6%88%b7%e5%81%8f%e5%a5%bd-memory" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><blockquote>
-<p>参考论文：Packer C, Fang V, Patil S G, et al. MemGPT: towards LLMs as operating systems[J]. 2023.</p>
+</h3><blockquote>
+<p>参考论文：<a href="https://tin10g.github.io/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memgpttowards-llms-as-operating-systems/"target="_blank" rel="external nofollow noopener noreferrer">Packer C, Fang V, Patil S G, et al. MemGPT: towards LLMs as operating systems[J]. 2023.</a></p>
 </blockquote>
 <p>这种 memory 存的是用户长期偏好，而不是任务环境经验。</p>
 <p>可以让 agent 的行为更个性化。</p>
@@ -270,6 +300,13 @@
 </h2><p>这类memory存储完整经历流。保留 agent 的长期上下文，之后可以检索、反思、归纳。</p>
 <p>适合：长期交互 agent、模拟人类行为的 agent、personal assistant。</p>
 <p>相比&lt;state, action, reward&gt;，这类记忆不一定有 reward，也不一定结构化，更接近日记。</p>
+<h2 id="policy-level-reflection" class="heading-element"><span>policy-level reflection</span>
+  <a href="#policy-level-reflection" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><blockquote>
+<p>参考论文：Zhang W, Tang K, Wu H, et al. Agent-pro: Learning to evolve via policy-level reflection and optimization[C]//Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers). 2024: 5348-5375.</p>
+</blockquote>
 <h2 id="混合类的memoryhybrid-memory" class="heading-element"><span>混合类的memory（Hybrid memory）</span>
   <a href="#%e6%b7%b7%e5%90%88%e7%b1%bb%e7%9a%84memoryhybrid-memory" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
@@ -281,7 +318,7 @@
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
 </h3><blockquote>
-<p>参考论文：Park J S, O&rsquo;Brien J, Cai C J, et al. Generative agents: Interactive simulacra of human behavior[C]//Proceedings of the 36th annual acm symposium on user interface software and technology. 2023: 1-22.</p>
+<p>参考论文：<a href="https://tin10g.github.io/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-generative-agentsinteractive-simulacra-of-human-behavior/"target="_blank" rel="external nofollow noopener noreferrer">Park J S, O&rsquo;Brien J, Cai C J, et al. Generative agents: Interactive simulacra of human behavior[C]//Proceedings of the 36th annual acm symposium on user interface software and technology. 2023: 1-22.</a></p>
 </blockquote>
 <h3 id="用户偏好向量--retrieval-bias" class="heading-element"><span>用户偏好向量 + retrieval bias</span>
   <a href="#%e7%94%a8%e6%88%b7%e5%81%8f%e5%a5%bd%e5%90%91%e9%87%8f--retrieval-bias" class="heading-mark">
@@ -305,7 +342,7 @@
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
     </section>
-  </div><div class="post-nav"><a href="/posts/%E8%AF%BE%E7%A8%8B-ai-agent9%E6%9D%8E%E5%AE%8F%E6%AF%85/" class="post-nav-item" rel="prev" title="AI Agent· 第九讲 大型语言模型能力评估"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>AI Agent· 第九讲 大型语言模型能力评估</a></div>
+  </div><div class="post-nav"><a href="/posts/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8-ars-skill/" class="post-nav-item" rel="prev" title="Academic Research Skills（ARS）"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Academic Research Skills（ARS）</a><a href="/posts/%E8%AF%BE%E7%A8%8B-ai-agent10%E6%9D%8E%E5%AE%8F%E6%AF%85/" class="post-nav-item" rel="next" title="AI Agent· 第十讲 Model Editing">AI Agent· 第十讲 Model Editing<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div class="post-reward">
     <div class="comment"></div>

@@ -5,18 +5,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
-    <title>AI Agent· 第十讲 Model Editing - Ting BLOG🐈</title><meta name="author" content="Ting">
-<meta name="description" content="Model Editing是什么给模型植入一条新的信息。
+    <title>LLM · 检索和RAG - Ting BLOG🐈</title><meta name="author" content="Ting">
+<meta name="description" content="检索检索：模型在回答前，先去外部资料或记忆库里找相关信息，再把找到的内容交给 LLM 生成答案。
 ">
-  <meta itemprop="name" content="AI Agent· 第十讲 Model Editing">
-  <meta itemprop="description" content="Model Editing是什么给模型植入一条新的信息。">
+  <meta itemprop="name" content="LLM · 检索和RAG">
+  <meta itemprop="description" content="检索检索：模型在回答前，先去外部资料或记忆库里找相关信息，再把找到的内容交给 LLM 生成答案。">
   <meta itemprop="datePublished" content="2026-07-02T11:25:40+08:00">
   <meta itemprop="dateModified" content="2026-07-02T11:25:40+08:00">
-  <meta itemprop="wordCount" content="38">
-  <meta itemprop="keywords" content="课程 李宏毅2026"><meta property="og:url" content="http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent10%E6%9D%8E%E5%AE%8F%E6%AF%85/">
+  <meta itemprop="wordCount" content="190">
+  <meta itemprop="keywords" content="LLM"><meta property="og:url" content="http://localhost:1313/posts/llm-%E6%A3%80%E7%B4%A2%E5%92%8Crag/">
   <meta property="og:site_name" content="Ting BLOG🐈">
-  <meta property="og:title" content="AI Agent· 第十讲 Model Editing">
-  <meta property="og:description" content="Model Editing是什么给模型植入一条新的信息。">
+  <meta property="og:title" content="LLM · 检索和RAG">
+  <meta property="og:description" content="检索检索：模型在回答前，先去外部资料或记忆库里找相关信息，再把找到的内容交给 LLM 生成答案。">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -24,22 +24,22 @@
     <meta property="article:modified_time" content="2026-07-02T11:25:40+08:00">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="AI Agent· 第十讲 Model Editing">
-  <meta name="twitter:description" content="Model Editing是什么给模型植入一条新的信息。">
+  <meta name="twitter:title" content="LLM · 检索和RAG">
+  <meta name="twitter:description" content="检索检索：模型在回答前，先去外部资料或记忆库里找相关信息，再把找到的内容交给 LLM 生成答案。">
 <meta name="application-name" content="FixIt">
-<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent10%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第十讲 Model Editing - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/llm-memory%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/" title="LLM · Memory结构分类" /><link rel="next" type="text/html" href="http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent11%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第十一讲 Model Merging" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent10%E6%9D%8E%E5%AE%8F%E6%AF%85/index.md" title="AI Agent· 第十讲 Model Editing - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/llm-%E6%A3%80%E7%B4%A2%E5%92%8Crag/" title="LLM · 检索和RAG - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8-ars-skill/" title="Academic Research Skills（ARS）" /><link rel="next" type="text/html" href="http://localhost:1313/posts/llm-policy/" title="LLM · policy" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/llm-%E6%A3%80%E7%B4%A2%E5%92%8Crag/index.md" title="LLM · 检索和RAG - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
-    "headline": "AI Agent· 第十讲 Model Editing",
+    "headline": "LLM · 检索和RAG",
     "inLanguage": "en",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/posts\/%E8%AF%BE%E7%A8%8B-ai-agent10%E6%9D%8E%E5%AE%8F%E6%AF%85\/"
-    },"genre": "posts","wordcount":  38 ,
-    "url": "http:\/\/localhost:1313\/posts\/%E8%AF%BE%E7%A8%8B-ai-agent10%E6%9D%8E%E5%AE%8F%E6%AF%85\/","datePublished": "2026-07-02T11:25:40+08:00","dateModified": "2026-07-02T11:25:40+08:00","publisher": {
+      "@id": "http:\/\/localhost:1313\/posts\/llm-%E6%A3%80%E7%B4%A2%E5%92%8Crag\/"
+    },"genre": "posts","wordcount":  190 ,
+    "url": "http:\/\/localhost:1313\/posts\/llm-%E6%A3%80%E7%B4%A2%E5%92%8Crag\/","datePublished": "2026-07-02T11:25:40+08:00","dateModified": "2026-07-02T11:25:40+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -127,9 +127,9 @@
 </header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
 
   <article class="page single">
-    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>AI Agent· 第十讲 Model Editing</span>
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>LLM · 检索和RAG</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AF%BE%E7%A8%8B-%E6%9D%8E%E5%AE%8F%E6%AF%852026/" class="post-category" title="Category - 课程 李宏毅2026"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 课程 李宏毅2026</a></span></div><div class="post-meta-line"><span title="published on 2026-07-02 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2026-07-02">2026-07-02</time></span>&nbsp;<span title="38 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 100 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>One minute</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/llm/" class="post-category" title="Category - LLM"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> LLM</a></span></div><div class="post-meta-line"><span title="published on 2026-07-02 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2026-07-02">2026-07-02</time></span>&nbsp;<span title="190 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 200 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>One minute</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>Contents</span>
@@ -137,89 +137,254 @@
         </div>
         <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#model-editing是什么">Model Editing是什么</a></li>
-    <li><a href="#model-editing-评量方法">Model Editing 评量方法</a>
+    <li><a href="#检索">检索</a>
       <ul>
-        <li><a href="#reliability">Reliability</a></li>
-        <li><a href="#generalization">Generalization</a></li>
-        <li><a href="#locality">Locality</a></li>
+        <li><a href="#检索流程">检索流程</a></li>
       </ul>
     </li>
-    <li><a href="#model-editing-的方法">Model Editing 的方法</a>
+    <li><a href="#rag">RAG</a>
       <ul>
-        <li><a href="#不动参数">不动参数</a></li>
-        <li><a href="#动参数s">动参数s</a></li>
+        <li><a href="#rag流程">RAG流程</a></li>
+        <li><a href="#rag组成">RAG组成</a></li>
+        <li><a href="#rag分类">RAG分类</a></li>
+        <li><a href="#rag评估">RAG评估</a></li>
       </ul>
     </li>
   </ul>
 </nav></div>
-      </div><div class="content" id="content"><h2 id="model-editing是什么" class="heading-element"><span>Model Editing是什么</span>
-  <a href="#model-editing%e6%98%af%e4%bb%80%e4%b9%88" class="heading-mark">
+      </div><div class="content" id="content"><h2 id="检索" class="heading-element"><span>检索</span>
+  <a href="#%e6%a3%80%e7%b4%a2" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>给模型植入一条新的信息。</p>
-<img src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260702095152391.png" style="zoom:50%;" />
-<p>与Post Training的区别：Post training 是学习新的技能（语言、工具、推理&hellip;）</p>
-<h2 id="model-editing-评量方法" class="heading-element"><span>Model Editing 评量方法</span>
-  <a href="#model-editing-%e8%af%84%e9%87%8f%e6%96%b9%e6%b3%95" class="heading-mark">
+</h2><p>检索：模型在回答前，先去外部资料或记忆库里找相关信息，再把找到的内容交给 LLM 生成答案。</p>
+<p>检索最常见的系统叫 RAG，也就是 Retrieval-Augmented Generation，检索增强生成。</p>
+<h3 id="检索流程" class="heading-element"><span>检索流程</span>
+  <a href="#%e6%a3%80%e7%b4%a2%e6%b5%81%e7%a8%8b" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><h3 id="reliability" class="heading-element"><span>Reliability</span>
-  <a href="#reliability" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><p>想要修改的目标和预期完全一致。</p>
-<h3 id="generalization" class="heading-element"><span>Generalization</span>
-  <a href="#generalization" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><p>相似的问题还是可以输出正确答案。</p>
-<ul>
-<li>改变说法</li>
-<li>反过来问</li>
-<li>问有关的</li>
+</h3><p>最常见流程：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">用户问题
+</span></span><span class="line"><span class="cl">  ↓
+</span></span><span class="line"><span class="cl">把问题转成向量 embedding
+</span></span><span class="line"><span class="cl">  ↓
+</span></span><span class="line"><span class="cl">去向量数据库里找相似内容
+</span></span><span class="line"><span class="cl">  ↓
+</span></span><span class="line"><span class="cl">取出最相关的几个文本片段
+</span></span><span class="line"><span class="cl">  ↓
+</span></span><span class="line"><span class="cl">放进 LLM 的上下文
+</span></span><span class="line"><span class="cl">  ↓
+</span></span><span class="line"><span class="cl">LLM 生成答案</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>文档切块 Chunking</p>
+<p>大文档太长，不能整篇直接丢进去，所以会切成小段。每个 chunk 都可以被检索。</p>
+</li>
+<li>
+<p>Embedding 向量</p>
+<p>把文字变成一串数字。</p>
+</li>
+<li>
+<p>向量数据库 Vector Database</p>
+<p>专门存这些 embedding 的地方。</p>
+<p>普通数据库按关键词找，向量数据库按语义找</p>
+<p>常见：FAISS，Chroma，Milvus，Pinecone，Weaviate，Qdrant</p>
+</li>
+<li>
+<p>Top-k 检索</p>
+<p>系统不会把所有资料都拿出来，只会取最相关的几个。</p>
+<p>比如 <code>top_k = 5</code> 表示：找出最相关的 5 个片段。</p>
+</li>
+<li>
+<p>Rerank 重排序</p>
+<p>第一次检索可能不够准，所以有时会再用一个模型重新排序，把真正最相关的内容排前面。</p>
+</li>
 </ul>
-<h3 id="locality" class="heading-element"><span>Locality</span>
-  <a href="#locality" class="heading-mark">
+<h2 id="rag" class="heading-element"><span>RAG</span>
+  <a href="#rag" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><p>改变后其他原本应该答对的知识应该答对。</p>
-<h2 id="model-editing-的方法" class="heading-element"><span>Model Editing 的方法</span>
-  <a href="#model-editing-%e7%9a%84%e6%96%b9%e6%b3%95" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h2><h3 id="不动参数" class="heading-element"><span>不动参数</span>
-  <a href="#%e4%b8%8d%e5%8a%a8%e5%8f%82%e6%95%b0" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><blockquote>
-<p>In-context Knowledge Editing（IKE）</p>
-</blockquote>
-<p>告诉模型怎么使用给他的新资讯。</p>
-<h3 id="动参数s" class="heading-element"><span>动参数s</span>
-  <a href="#%e5%8a%a8%e5%8f%82%e6%95%b0s" class="heading-mark">
+</h2><p>RAG = 检索 Retrieval + 生成 Generation</p>
+<h3 id="rag流程" class="heading-element"><span>RAG流程</span>
+  <a href="#rag%e6%b5%81%e7%a8%8b" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
 </h3><ol>
-<li>人类决定怎么编辑</li>
+<li>阶段一：构建知识库</li>
 </ol>
-<blockquote>
-<p>Rank-One Model Editing（ROME）</p>
-</blockquote>
-<ul>
-<li>找出神经网络中给要编辑的知识最相同的部分。</li>
-<li>修改部分参数。</li>
-</ul>
-<p>利用找功能性神经元然后替换。</p>
-<ol start="2">
-<li>人工智能学习怎么编辑</li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">原始文档
+</span></span><span class="line"><span class="cl">  ↓
+</span></span><span class="line"><span class="cl">文本提取
+</span></span><span class="line"><span class="cl">  ↓
+</span></span><span class="line"><span class="cl">切块 chunking
+</span></span><span class="line"><span class="cl">  ↓
+</span></span><span class="line"><span class="cl">生成 embedding 向量
+</span></span><span class="line"><span class="cl">  ↓
+</span></span><span class="line"><span class="cl">存入向量数据库</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>阶段二：用户提问时检索并回答</li>
 </ol>
-<ul>
-<li>编辑其他模型的模型是HyperNetwork</li>
-<li>训练HyperNetwork：MetaLearning</li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">用户问题
+</span></span><span class="line"><span class="cl">  ↓
+</span></span><span class="line"><span class="cl">把问题也变成 embedding
+</span></span><span class="line"><span class="cl">  ↓
+</span></span><span class="line"><span class="cl">在向量数据库中找相似 chunk
+</span></span><span class="line"><span class="cl">  ↓
+</span></span><span class="line"><span class="cl">取出最相关的资料
+</span></span><span class="line"><span class="cl">  ↓
+</span></span><span class="line"><span class="cl">放进 prompt
+</span></span><span class="line"><span class="cl">  ↓
+</span></span><span class="line"><span class="cl">LLM 根据资料生成答案</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="rag组成" class="heading-element"><span>RAG组成</span>
+  <a href="#rag%e7%bb%84%e6%88%90" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><table>
+  <thead>
+      <tr>
+          <th>部分</th>
+          <th>作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>文档库</td>
+          <td>存放原始资料</td>
+      </tr>
+      <tr>
+          <td>Chunking</td>
+          <td>把长文档切成小块</td>
+      </tr>
+      <tr>
+          <td>Embedding 模型</td>
+          <td>把文字变成向量</td>
+      </tr>
+      <tr>
+          <td>向量数据库</td>
+          <td>存向量并支持相似度搜索</td>
+      </tr>
+      <tr>
+          <td>Retriever</td>
+          <td>检索相关内容</td>
+      </tr>
+      <tr>
+          <td>Reranker</td>
+          <td>对检索结果重新排序</td>
+      </tr>
+      <tr>
+          <td>Prompt 模板</td>
+          <td>告诉 LLM 如何使用资料</td>
+      </tr>
+      <tr>
+          <td>LLM</td>
+          <td>根据资料生成答案</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="rag分类" class="heading-element"><span>RAG分类</span>
+  <a href="#rag%e5%88%86%e7%b1%bb" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ul>
+<li>
+<p>Hybrid RAG</p>
+<p>结合关键词搜索和向量搜索。</p>
+</li>
+<li>
+<p>Rerank RAG</p>
+<p>先粗略检索 20 条，再用 reranker 精排，选最好的 5 条给 LLM。</p>
+</li>
+<li>
+<p>Multi-hop RAG</p>
+<p>需要多步检索。</p>
+</li>
+<li>
+<p>Agentic RAG</p>
+<p>让 agent 自己决定：要不要检索，检索几次，用什么关键词，是否需要查另一个数据库</p>
+</li>
+<li>
+<p>GraphRAG</p>
+<p>把资料组织成知识图谱，适合复杂关系推理。</p>
+</li>
 </ul>
-<p><img loading="lazy" src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260702101506599.png" alt="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260702101506599.png" srcset="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260702101506599.png?size=small, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260702101506599.png?size=medium 1.5x, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260702101506599.png?size=large 2x" data-title="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260702101506599.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
-<p><img loading="lazy" src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260702101848170.png" alt="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260702101848170.png" srcset="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260702101848170.png?size=small, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260702101848170.png?size=medium 1.5x, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260702101848170.png?size=large 2x" data-title="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260702101848170.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+<h3 id="rag评估" class="heading-element"><span>RAG评估</span>
+  <a href="#rag%e8%af%84%e4%bc%b0" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ul>
+<li>
+<p>检索质量</p>
+<ul>
+<li>有没有找到真正相关的资料？</li>
+<li>相关资料排得够靠前吗？</li>
+<li>有没有漏掉关键资料？</li>
+</ul>
+</li>
+<li>
+<p>生成之类</p>
+<ul>
+<li>答案是否忠实于资料？</li>
+<li>有没有编造？</li>
+<li>是否回答了问题？</li>
+<li>是否引用来源？</li>
+</ul>
+</li>
+<li>
+<p>常见指标</p>
+<ul>
+<li>Context Precision</li>
+<li>Context Recall</li>
+<li>Faithfulness</li>
+<li>Answer Relevance</li>
+<li>Citation Accuracy</li>
+</ul>
+</li>
+</ul>
 </div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
@@ -228,14 +393,14 @@
       </div><div class="post-info-license">
             <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
           </div></div><div class="post-info-line">
-        <div class="post-info-md"><span><a href="/posts/%E8%AF%BE%E7%A8%8B-ai-agent10%E6%9D%8E%E5%AE%8F%E6%AF%85/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div></div></div>
+        <div class="post-info-md"><span><a href="/posts/llm-%E6%A3%80%E7%B4%A2%E5%92%8Crag/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div></div></div>
 
   <div class="post-info-more">
     <section class="post-tags"></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
     </section>
-  </div><div class="post-nav"><a href="/posts/llm-memory%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/" class="post-nav-item" rel="prev" title="LLM · Memory结构分类"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>LLM · Memory结构分类</a><a href="/posts/%E8%AF%BE%E7%A8%8B-ai-agent11%E6%9D%8E%E5%AE%8F%E6%AF%85/" class="post-nav-item" rel="next" title="AI Agent· 第十一讲 Model Merging">AI Agent· 第十一讲 Model Merging<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+  </div><div class="post-nav"><a href="/posts/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8-ars-skill/" class="post-nav-item" rel="prev" title="Academic Research Skills（ARS）"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Academic Research Skills（ARS）</a><a href="/posts/llm-policy/" class="post-nav-item" rel="next" title="LLM · Policy">LLM · Policy<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div class="post-reward">
     <div class="comment"></div>
