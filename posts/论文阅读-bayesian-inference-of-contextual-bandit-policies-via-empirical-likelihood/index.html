@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html itemscope itemtype="http://schema.org/WebPage" lang="en">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8533&amp;path=livereload" data-no-instant defer></script>
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
     <title>论文 · Bayesian Inference of Contextual Bandit Policies via Empirical Likelihood - Ting BLOG🐈</title><meta name="author" content="Ting">
 <meta name="description" content="基础信息会议/期刊：Journal of Machine Learning Research 27 (2026), 1-28 关键词：empirical likelihood, contextual bandit, off-policy evaluation, Bayesian inference, policy comparison 核心贡献：本文用 Bayesian empirical likelihood 构造 contextual bandit policy value 的联合后验和差值后验，使小样本 off-policy policy evaluation 与 policy comparison 能获得更稳健的不确定性量化。
-">
+"><meta name="keywords" content='强化学习'>
   <meta itemprop="name" content="论文 · Bayesian Inference of Contextual Bandit Policies via Empirical Likelihood">
   <meta itemprop="description" content="基础信息会议/期刊：Journal of Machine Learning Research 27 (2026), 1-28 关键词：empirical likelihood, contextual bandit, off-policy evaluation, Bayesian inference, policy comparison 核心贡献：本文用 Bayesian empirical likelihood 构造 contextual bandit policy value 的联合后验和差值后验，使小样本 off-policy policy evaluation 与 policy comparison 能获得更稳健的不确定性量化。">
   <meta itemprop="datePublished" content="2026-07-01T11:25:40+08:00">
   <meta itemprop="dateModified" content="2026-07-01T11:25:40+08:00">
-  <meta itemprop="wordCount" content="317">
-  <meta itemprop="keywords" content="论文阅读"><meta property="og:url" content="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-bayesian-inference-of-contextual-bandit-policies-via-empirical-likelihood/">
+  <meta itemprop="wordCount" content="331">
+  <meta itemprop="keywords" content="强化学习"><meta property="og:url" content="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-bayesian-inference-of-contextual-bandit-policies-via-empirical-likelihood/">
   <meta property="og:site_name" content="Ting BLOG🐈">
   <meta property="og:title" content="论文 · Bayesian Inference of Contextual Bandit Policies via Empirical Likelihood">
   <meta property="og:description" content="基础信息会议/期刊：Journal of Machine Learning Research 27 (2026), 1-28 关键词：empirical likelihood, contextual bandit, off-policy evaluation, Bayesian inference, policy comparison 核心贡献：本文用 Bayesian empirical likelihood 构造 contextual bandit policy value 的联合后验和差值后验，使小样本 off-policy policy evaluation 与 policy comparison 能获得更稳健的不确定性量化。">
@@ -22,12 +22,13 @@
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2026-07-01T11:25:40+08:00">
     <meta property="article:modified_time" content="2026-07-01T11:25:40+08:00">
+    <meta property="article:tag" content="强化学习">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="论文 · Bayesian Inference of Contextual Bandit Policies via Empirical Likelihood">
   <meta name="twitter:description" content="基础信息会议/期刊：Journal of Machine Learning Research 27 (2026), 1-28 关键词：empirical likelihood, contextual bandit, off-policy evaluation, Bayesian inference, policy comparison 核心贡献：本文用 Bayesian empirical likelihood 构造 contextual bandit policy value 的联合后验和差值后验，使小样本 off-policy policy evaluation 与 policy comparison 能获得更稳健的不确定性量化。">
 <meta name="application-name" content="FixIt">
-<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-bayesian-inference-of-contextual-bandit-policies-via-empirical-likelihood/" title="论文 · Bayesian Inference of Contextual Bandit Policies via Empirical Likelihood - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-distributional-soft-actor-critic-with-three-refinements/" title="论文 · Distributional Soft Actor-Critic With Three Refinements" /><link rel="next" type="text/html" href="http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent4%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第四讲 大型语言模型训练方法" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-bayesian-inference-of-contextual-bandit-policies-via-empirical-likelihood/index.md" title="论文 · Bayesian Inference of Contextual Bandit Policies via Empirical Likelihood - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-bayesian-inference-of-contextual-bandit-policies-via-empirical-likelihood/" title="论文 · Bayesian Inference of Contextual Bandit Policies via Empirical Likelihood - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-distributional-soft-actor-critic-with-three-refinements/" title="论文 · Distributional Soft Actor-Critic With Three Refinements" /><link rel="next" type="text/html" href="http://localhost:8533/posts/%E8%AF%BE%E7%A8%8B-ai-agent4%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第四讲 大型语言模型训练方法" /><link rel="alternate" type="text/markdown" href="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-bayesian-inference-of-contextual-bandit-policies-via-empirical-likelihood/index.md" title="论文 · Bayesian Inference of Contextual Bandit Policies via Empirical Likelihood - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
@@ -37,9 +38,9 @@
     "inLanguage": "en",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-bayesian-inference-of-contextual-bandit-policies-via-empirical-likelihood\/"
-    },"genre": "posts","wordcount":  317 ,
-    "url": "http:\/\/localhost:1313\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-bayesian-inference-of-contextual-bandit-policies-via-empirical-likelihood\/","datePublished": "2026-07-01T11:25:40+08:00","dateModified": "2026-07-01T11:25:40+08:00","publisher": {
+      "@id": "http:\/\/localhost:8533\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-bayesian-inference-of-contextual-bandit-policies-via-empirical-likelihood\/"
+    },"genre": "posts","keywords": "强化学习","wordcount":  331 ,
+    "url": "http:\/\/localhost:8533\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-bayesian-inference-of-contextual-bandit-policies-via-empirical-likelihood\/","datePublished": "2026-07-01T11:25:40+08:00","dateModified": "2026-07-01T11:25:40+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -65,6 +66,12 @@
                 
                 
               ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
               <a
                 class="menu-link"
                 href="/friends/"
@@ -109,6 +116,13 @@
               class="menu-item"
             ><a
                   class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
                   href="/friends/"
                   
                   
@@ -129,7 +143,7 @@
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>论文 · Bayesian Inference of Contextual Bandit Policies via Empirical Likelihood</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" class="post-category" title="Category - 论文阅读"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 论文阅读</a></span></div><div class="post-meta-line"><span title="published on 2026-07-01 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2026-07-01">2026-07-01</time></span>&nbsp;<span title="317 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 400 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>2 minutes</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" class="post-category" title="Category - 论文阅读"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 论文阅读</a></span></div><div class="post-meta-line"><span title="published on 2026-07-01 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2026-07-01">2026-07-01</time></span>&nbsp;<span title="331 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 400 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>2 minutes</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>Contents</span>
@@ -162,7 +176,14 @@
   <a href="#q1-%e7%a0%94%e7%a9%b6%e5%8a%a8%e6%9c%ba" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>contextual bandit 中常常需要评估尚未上线的候选策略，但数据来自另一个 behavior policy，且只观察到被选择动作的 reward。已有 empirical likelihood 置信区间依赖渐近 chi-square 校准，小样本或中等样本下覆盖率可能偏离 nominal level，并且多集中于单策略评估，难以比较相关策略。</p>
+</h2><p>contextual bandit 中常常需要评估尚未上线的候选策略，但数据来自另一个 behavior policy，且只观察到被选择动作的 reward。</p>
+<blockquote>
+<p>contextual bandit（上下文赌博机）：一类强化学习/在线学习问题：系统每一轮先看到当前用户或环境的“上下文”，然后从多个动作中选一个，最后只观察到被选动作的奖励，而看不到其他动作如果被选会怎样。</p>
+</blockquote>
+<p>已有 empirical likelihood 置信区间依赖渐近 chi-square 校准，小样本或中等样本下覆盖率可能偏离 nominal level，并且多集中于单策略评估，难以比较相关策略。</p>
+<blockquote>
+<p>Empirical likelihood（经验似然）置信区间：一种不用提前假设总体分布形式的置信区间构造方法。它用样本本身给每个观测点分配概率权重，然后看哪些参数值能让这些权重&quot;合理地解释数据&quot;。</p>
+</blockquote>
 <h2 id="q2-核心问题" class="heading-element"><span>Q2. 核心问题</span>
   <a href="#q2-%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
@@ -172,17 +193,32 @@
   <a href="#q3-%e7%8e%b0%e6%9c%89%e4%b8%8d%e8%b6%b3--%e6%9c%ac%e6%96%87%e6%94%b9%e8%bf%9b" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>Direct method 依赖 reward model，importance sampling 可能方差很大，doubly robust 需要模型或 propensity 条件良好。频率学派 empirical likelihood 虽可用 estimating equations 做非参数推断，但 Wilks 区间在小样本中 chi-square 校准差。本文把 empirical likelihood 放入 Bayesian paradigm，构造 HPD credible interval，并进一步构造多策略联合 empirical likelihood 与 policy value difference 的低维版本，支持灵活的策略比较。</p>
+</h2><ul>
+<li>Direct method</li>
+</ul>
+<p>依赖 reward model，importance sampling 可能方差很大，doubly robust 需要模型或 propensity 条件良好。</p>
+<ul>
+<li>频率学派</li>
+</ul>
+<p>empirical likelihood 虽可用 estimating equations 做非参数推断，但 Wilks 区间在小样本中 chi-square 校准差。</p>
+<p>本文把 empirical likelihood 放入 Bayesian paradigm，构造 HPD credible interval，并进一步构造多策略联合 empirical likelihood 与 policy value difference 的低维版本，支持灵活的策略比较。</p>
 <h2 id="q4-方法流程" class="heading-element"><span>Q4. 方法流程</span>
   <a href="#q4-%e6%96%b9%e6%b3%95%e6%b5%81%e7%a8%8b" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>输入是 behavior policy 收集的 context、action、reward，以及一组 target policies。方法先用目标策略与 behavior policy 的概率比形成 importance weights，并建立满足 policy value moment constraints 的 empirical likelihood。对多个策略，构造 policy value vector 的 joint empirical likelihood；若只关心两策略差异，则对 value difference 构造低维 empirical likelihood。然后结合 prior 得到后验，用 adaptive grid 计算 HPD 区间和改进概率。输出包括 policy value 的后验分布、HPD 区间，以及如 P(v_new &gt; v_baseline + delta) 的比较概率。</p>
+</h2><p>输入是 behavior policy 收集的 context、action、reward，以及一组 target policies。</p>
+<p>方法先用目标策略与 behavior policy 的概率比形成 importance weights，并建立满足 policy value moment constraints 的 empirical likelihood。</p>
+<p>对多个策略，构造 policy value vector 的 joint empirical likelihood；</p>
+<p>若只关心两策略差异，则对 value difference 构造低维 empirical likelihood。然后结合 prior 得到后验，用 adaptive grid 计算 HPD 区间和改进概率。</p>
+<p>输出包括 policy value 的后验分布、HPD 区间，以及如 P(v_new &gt; v_baseline + delta) 的比较概率。</p>
 <h2 id="q5-实验设计与结论" class="heading-element"><span>Q5. 实验设计与结论</span>
   <a href="#q5-%e5%ae%9e%e9%aa%8c%e8%ae%be%e8%ae%a1%e4%b8%8e%e7%bb%93%e8%ae%ba" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><table>
+</h2><blockquote>
+<p>Monte Carlo 是用大量随机样本来近似一个难以直接计算的数学量。</p>
+</blockquote>
+<table>
   <thead>
       <tr>
           <th>实验</th>
@@ -255,7 +291,7 @@
         <div class="post-info-md"><span><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-bayesian-inference-of-contextual-bandit-policies-via-empirical-likelihood/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div></div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" class="post-tag" title="Tags - 强化学习">强化学习</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
     </section>

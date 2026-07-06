@@ -1,235 +1,325 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>http://localhost:8533/about/</loc>
     <lastmod>2024-10-10T16:23:32+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/</loc>
-    <lastmod>2026-07-02T14:18:29+08:00</lastmod>
+    <loc>http://localhost:8533/posts/</loc>
+    <lastmod>2026-07-06T10:52:36+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/</loc>
-    <lastmod>2026-07-02T14:18:29+08:00</lastmod>
+    <loc>http://localhost:8533/</loc>
+    <lastmod>2026-07-06T10:52:36+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/llm-policy/</loc>
+    <loc>http://localhost:8533/categories/</loc>
+    <lastmod>2026-07-03T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:8533/tags/memory/</loc>
+    <lastmod>2026-07-03T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:8533/tags/rag/</loc>
+    <lastmod>2026-07-03T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:8533/tags/</loc>
+    <lastmod>2026-07-03T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:8533/tags/%E7%BB%BC%E8%BF%B0/</loc>
+    <lastmod>2026-07-03T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory%E7%BB%BC%E8%BF%B0/</loc>
+    <lastmod>2026-07-03T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-rag%E7%BB%BC%E8%BF%B0/</loc>
+    <lastmod>2026-07-03T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:8533/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/</loc>
+    <lastmod>2026-07-03T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:8533/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB--%E7%BB%BC%E8%BF%B0/</loc>
+    <lastmod>2026-07-03T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:8533/posts/%E8%AF%BE%E7%A8%8B-ai-agent9%E6%9D%8E%E5%AE%8F%E6%AF%85/</loc>
     <lastmod>2026-07-02T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/llm-%E6%A3%80%E7%B4%A2%E5%92%8Crag/</loc>
+    <loc>http://localhost:8533/posts/%E8%AF%BE%E7%A8%8B-ai-agent11%E6%9D%8E%E5%AE%8F%E6%AF%85/</loc>
     <lastmod>2026-07-02T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent9%E6%9D%8E%E5%AE%8F%E6%AF%85/</loc>
+    <loc>http://localhost:8533/posts/%E8%AF%BE%E7%A8%8B-ai-agent10%E6%9D%8E%E5%AE%8F%E6%AF%85/</loc>
     <lastmod>2026-07-02T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent11%E6%9D%8E%E5%AE%8F%E6%AF%85/</loc>
+    <loc>http://localhost:8533/posts/llm-memory%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/</loc>
     <lastmod>2026-07-02T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent10%E6%9D%8E%E5%AE%8F%E6%AF%85/</loc>
+    <loc>http://localhost:8533/posts/llm-policy/</loc>
     <lastmod>2026-07-02T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>http://localhost:8533/posts/llm-%E6%A3%80%E7%B4%A2%E5%92%8Crag/</loc>
     <lastmod>2026-07-02T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/categories/llm/</loc>
+    <loc>http://localhost:8533/categories/llm%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/</loc>
     <lastmod>2026-07-02T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/llm-memory%E7%BB%93%E6%9E%84%E5%88%86%E7%B1%BB/</loc>
+    <loc>http://localhost:8533/categories/%E8%AF%BE%E7%A8%8B-%E6%9D%8E%E5%AE%8F%E6%AF%852026/</loc>
     <lastmod>2026-07-02T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/categories/%E8%AF%BE%E7%A8%8B-%E6%9D%8E%E5%AE%8F%E6%AF%852026/</loc>
-    <lastmod>2026-07-02T11:25:40+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>http://localhost:1313/posts/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8-ars-skill/</loc>
+    <loc>http://localhost:8533/posts/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8-ars-skill/</loc>
     <lastmod>2026-07-01T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent7%E6%9D%8E%E5%AE%8F%E6%AF%85/</loc>
+    <loc>http://localhost:8533/posts/%E8%AF%BE%E7%A8%8B-ai-agent7%E6%9D%8E%E5%AE%8F%E6%AF%85/</loc>
     <lastmod>2026-07-01T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent5%E6%9D%8E%E5%AE%8F%E6%AF%85/</loc>
+    <loc>http://localhost:8533/posts/%E8%AF%BE%E7%A8%8B-ai-agent5%E6%9D%8E%E5%AE%8F%E6%AF%85/</loc>
     <lastmod>2026-07-01T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent8%E6%9D%8E%E5%AE%8F%E6%AF%85/</loc>
+    <loc>http://localhost:8533/posts/%E8%AF%BE%E7%A8%8B-ai-agent8%E6%9D%8E%E5%AE%8F%E6%AF%85/</loc>
     <lastmod>2026-07-01T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent6%E6%9D%8E%E5%AE%8F%E6%AF%85/</loc>
+    <loc>http://localhost:8533/posts/%E8%AF%BE%E7%A8%8B-ai-agent6%E6%9D%8E%E5%AE%8F%E6%AF%85/</loc>
     <lastmod>2026-07-01T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent4%E6%9D%8E%E5%AE%8F%E6%AF%85/</loc>
+    <loc>http://localhost:8533/posts/%E8%AF%BE%E7%A8%8B-ai-agent4%E6%9D%8E%E5%AE%8F%E6%AF%85/</loc>
     <lastmod>2026-07-01T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</loc>
+    <loc>http://localhost:8533/tags/applications/</loc>
     <lastmod>2026-07-01T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-bayesian-inference-of-contextual-bandit-policies-via-empirical-likelihood/</loc>
+    <loc>http://localhost:8533/tags/benchmark/</loc>
     <lastmod>2026-07-01T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-distributional-soft-actor-critic-with-three-refinements/</loc>
+    <loc>http://localhost:8533/tags/long-context/</loc>
     <lastmod>2026-07-01T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-generative-agentsinteractive-simulacra-of-human-behavior/</loc>
+    <loc>http://localhost:8533/tags/memory-evaluation/</loc>
     <lastmod>2026-07-01T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-hopfield-fenchel-young-networks-a-unified-framework-for-associative-memory-retrieval/</loc>
+    <loc>http://localhost:8533/tags/memory-forms/</loc>
     <lastmod>2026-07-01T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memgpttowards-llms-as-operating-systems/</loc>
+    <loc>http://localhost:8533/tags/memory-operations/</loc>
     <lastmod>2026-07-01T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory-gym-towards-endless-tasks-to-benchmark-memory-capabilities-of-agents/</loc>
+    <loc>http://localhost:8533/tags/memory-sources/</loc>
     <lastmod>2026-07-01T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive/</loc>
+    <loc>http://localhost:8533/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/</loc>
     <lastmod>2026-07-01T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/</loc>
+    <loc>http://localhost:8533/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2026-07-01T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent3%E6%9D%8E%E5%AE%8F%E6%AF%85/</loc>
+    <loc>http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-bayesian-inference-of-contextual-bandit-policies-via-empirical-likelihood/</loc>
+    <lastmod>2026-07-01T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-distributional-soft-actor-critic-with-three-refinements/</loc>
+    <lastmod>2026-07-01T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-generative-agentsinteractive-simulacra-of-human-behavior/</loc>
+    <lastmod>2026-07-01T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-hopfield-fenchel-young-networks-a-unified-framework-for-associative-memory-retrieval/</loc>
+    <lastmod>2026-07-01T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memgpttowards-llms-as-operating-systems/</loc>
+    <lastmod>2026-07-01T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory-gym-towards-endless-tasks-to-benchmark-memory-capabilities-of-agents/</loc>
+    <lastmod>2026-07-01T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive/</loc>
+    <lastmod>2026-07-01T11:25:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:8533/posts/%E8%AF%BE%E7%A8%8B-ai-agent3%E6%9D%8E%E5%AE%8F%E6%AF%85/</loc>
     <lastmod>2026-06-29T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent2%E6%9D%8E%E5%AE%8F%E6%AF%85/</loc>
+    <loc>http://localhost:8533/posts/%E8%AF%BE%E7%A8%8B-ai-agent2%E6%9D%8E%E5%AE%8F%E6%AF%85/</loc>
     <lastmod>2026-06-25T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent1%E6%9D%8E%E5%AE%8F%E6%AF%85/</loc>
+    <loc>http://localhost:8533/posts/%E8%AF%BE%E7%A8%8B-ai-agent1%E6%9D%8E%E5%AE%8F%E6%AF%85/</loc>
     <lastmod>2026-06-24T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/codex-agents%E5%85%A5%E8%81%8C%E8%AF%B4%E6%98%8E%E4%B9%A6/</loc>
+    <loc>http://localhost:8533/categories/codex/</loc>
     <lastmod>2026-06-06T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/codex-%E5%AD%90%E4%BB%A3%E7%90%86/</loc>
+    <loc>http://localhost:8533/posts/codex-agents%E5%85%A5%E8%81%8C%E8%AF%B4%E6%98%8E%E4%B9%A6/</loc>
     <lastmod>2026-06-06T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/codex-%E5%B7%A5%E4%BD%9C%E6%B5%81%E6%80%BB%E7%BB%93/</loc>
+    <loc>http://localhost:8533/posts/codex-%E5%AD%90%E4%BB%A3%E7%90%86/</loc>
     <lastmod>2026-06-06T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/codex-%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</loc>
+    <loc>http://localhost:8533/posts/codex-%E5%B7%A5%E4%BD%9C%E6%B5%81%E6%80%BB%E7%BB%93/</loc>
     <lastmod>2026-06-06T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/codex-skill%E9%83%A8%E7%BD%B2/</loc>
+    <loc>http://localhost:8533/posts/codex-%E6%8F%90%E7%A4%BA%E8%AF%8D%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</loc>
     <lastmod>2026-06-06T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/categories/condex/</loc>
+    <loc>http://localhost:8533/posts/codex-skill%E9%83%A8%E7%BD%B2/</loc>
     <lastmod>2026-06-06T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/friends/</loc>
+    <loc>http://localhost:8533/friends/</loc>
     <lastmod>2026-04-17T00:00:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/posts/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8-git%E4%B8%8A%E4%BC%A0%E9%A1%B9%E7%9B%AE/</loc>
+    <loc>http://localhost:8533/posts/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8-git%E4%B8%8A%E4%BC%A0%E9%A1%B9%E7%9B%AE/</loc>
     <lastmod>2024-04-01T11:25:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/collections/</loc>
+    <loc>http://localhost:8533/collections/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

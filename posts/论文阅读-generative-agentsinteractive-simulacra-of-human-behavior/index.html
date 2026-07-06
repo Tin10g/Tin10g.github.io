@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html itemscope itemtype="http://schema.org/WebPage" lang="en">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8533&amp;path=livereload" data-no-instant defer></script>
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
     <title>论文 · Generative Agents: Interactive Simulacra of Human Behavior - Ting BLOG🐈</title><meta name="author" content="Ting">
 <meta name="description" content="基础信息会议/期刊：UIST 2023 论文主题：用大语言模型构造能记忆、反思、规划并互动的 believable generative agents 核心贡献：本文提出 generative agents 架构，将 LLM 与 memory stream、reflection、planning 结合，使 25 个智能体在 Smallville 沙盒世界中表现出可信的个体行为和信息扩散、关系形成、活动协调等群体行为。
-">
+"><meta name="keywords" content='Memory, memory sources, memory forms, memory operations, memory evaluation, applications'>
   <meta itemprop="name" content="论文 · Generative Agents: Interactive Simulacra of Human Behavior">
   <meta itemprop="description" content="基础信息会议/期刊：UIST 2023 论文主题：用大语言模型构造能记忆、反思、规划并互动的 believable generative agents 核心贡献：本文提出 generative agents 架构，将 LLM 与 memory stream、reflection、planning 结合，使 25 个智能体在 Smallville 沙盒世界中表现出可信的个体行为和信息扩散、关系形成、活动协调等群体行为。">
   <meta itemprop="datePublished" content="2026-07-01T11:25:40+08:00">
   <meta itemprop="dateModified" content="2026-07-01T11:25:40+08:00">
   <meta itemprop="wordCount" content="329">
-  <meta itemprop="keywords" content="论文阅读"><meta property="og:url" content="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-generative-agentsinteractive-simulacra-of-human-behavior/">
+  <meta itemprop="keywords" content="Memory,Memory Sources,Memory Forms,Memory Operations,Memory Evaluation,Applications"><meta property="og:url" content="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-generative-agentsinteractive-simulacra-of-human-behavior/">
   <meta property="og:site_name" content="Ting BLOG🐈">
   <meta property="og:title" content="论文 · Generative Agents: Interactive Simulacra of Human Behavior">
   <meta property="og:description" content="基础信息会议/期刊：UIST 2023 论文主题：用大语言模型构造能记忆、反思、规划并互动的 believable generative agents 核心贡献：本文提出 generative agents 架构，将 LLM 与 memory stream、reflection、planning 结合，使 25 个智能体在 Smallville 沙盒世界中表现出可信的个体行为和信息扩散、关系形成、活动协调等群体行为。">
@@ -22,12 +22,18 @@
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2026-07-01T11:25:40+08:00">
     <meta property="article:modified_time" content="2026-07-01T11:25:40+08:00">
+    <meta property="article:tag" content="Memory">
+    <meta property="article:tag" content="Memory Sources">
+    <meta property="article:tag" content="Memory Forms">
+    <meta property="article:tag" content="Memory Operations">
+    <meta property="article:tag" content="Memory Evaluation">
+    <meta property="article:tag" content="Applications">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="论文 · Generative Agents: Interactive Simulacra of Human Behavior">
   <meta name="twitter:description" content="基础信息会议/期刊：UIST 2023 论文主题：用大语言模型构造能记忆、反思、规划并互动的 believable generative agents 核心贡献：本文提出 generative agents 架构，将 LLM 与 memory stream、reflection、planning 结合，使 25 个智能体在 Smallville 沙盒世界中表现出可信的个体行为和信息扩散、关系形成、活动协调等群体行为。">
 <meta name="application-name" content="FixIt">
-<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-generative-agentsinteractive-simulacra-of-human-behavior/" title="论文 · Generative Agents: Interactive Simulacra of Human Behavior - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-hopfield-fenchel-young-networks-a-unified-framework-for-associative-memory-retrieval/" title="论文 · Hopfield-Fenchel-Young Networks: A Unified Framework for Associative Memory Retrieval" /><link rel="next" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-distributional-soft-actor-critic-with-three-refinements/" title="论文 · Distributional Soft Actor-Critic With Three Refinements" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-generative-agentsinteractive-simulacra-of-human-behavior/index.md" title="论文 · Generative Agents: Interactive Simulacra of Human Behavior - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-generative-agentsinteractive-simulacra-of-human-behavior/" title="论文 · Generative Agents: Interactive Simulacra of Human Behavior - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-hopfield-fenchel-young-networks-a-unified-framework-for-associative-memory-retrieval/" title="论文 · Hopfield-Fenchel-Young Networks: A Unified Framework for Associative Memory Retrieval" /><link rel="next" type="text/html" href="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-distributional-soft-actor-critic-with-three-refinements/" title="论文 · Distributional Soft Actor-Critic With Three Refinements" /><link rel="alternate" type="text/markdown" href="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-generative-agentsinteractive-simulacra-of-human-behavior/index.md" title="论文 · Generative Agents: Interactive Simulacra of Human Behavior - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
@@ -37,9 +43,9 @@
     "inLanguage": "en",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-generative-agentsinteractive-simulacra-of-human-behavior\/"
-    },"genre": "posts","wordcount":  329 ,
-    "url": "http:\/\/localhost:1313\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-generative-agentsinteractive-simulacra-of-human-behavior\/","datePublished": "2026-07-01T11:25:40+08:00","dateModified": "2026-07-01T11:25:40+08:00","publisher": {
+      "@id": "http:\/\/localhost:8533\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-generative-agentsinteractive-simulacra-of-human-behavior\/"
+    },"genre": "posts","keywords": "Memory, memory sources, memory forms, memory operations, memory evaluation, applications","wordcount":  329 ,
+    "url": "http:\/\/localhost:8533\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-generative-agentsinteractive-simulacra-of-human-behavior\/","datePublished": "2026-07-01T11:25:40+08:00","dateModified": "2026-07-01T11:25:40+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -65,6 +71,12 @@
                 
                 
               ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
               <a
                 class="menu-link"
                 href="/friends/"
@@ -106,6 +118,13 @@
                   
                   
                 ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
               class="menu-item"
             ><a
                   class="menu-link"
@@ -270,7 +289,7 @@
         <div class="post-info-md"><span><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-generative-agentsinteractive-simulacra-of-human-behavior/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div></div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/memory/" class="post-tag" title="Tags - Memory">Memory</a><a href="/tags/memory-sources/" class="post-tag" title="Tags - Memory Sources">Memory Sources</a><a href="/tags/memory-forms/" class="post-tag" title="Tags - Memory Forms">Memory Forms</a><a href="/tags/memory-operations/" class="post-tag" title="Tags - Memory Operations">Memory Operations</a><a href="/tags/memory-evaluation/" class="post-tag" title="Tags - Memory Evaluation">Memory Evaluation</a><a href="/tags/applications/" class="post-tag" title="Tags - Applications">Applications</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
     </section>

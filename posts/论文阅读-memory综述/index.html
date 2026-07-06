@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8533&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>论文 · Memory综述 - Ting BLOG🐈</title><meta name="author" content="Ting">
+<meta name="description" content="基础信息会议/期刊：arXiv preprint, 2026 关键词：memory governance, selective forgetting, retrieval, conditional success probability, Bayesian update 核心贡献：本文首次系统综述 LLM-based agents 的 memory mechanism，给出狭义/广义 memory 定义，并从 memory sources、memory forms、memory operations、evaluation 和 applications 已有研究。
+"><meta name="keywords" content='综述, Memory'>
+  <meta itemprop="name" content="论文 · Memory综述">
+  <meta itemprop="description" content="基础信息会议/期刊：arXiv preprint, 2026 关键词：memory governance, selective forgetting, retrieval, conditional success probability, Bayesian update 核心贡献：本文首次系统综述 LLM-based agents 的 memory mechanism，给出狭义/广义 memory 定义，并从 memory sources、memory forms、memory operations、evaluation 和 applications 已有研究。">
+  <meta itemprop="datePublished" content="2026-07-03T11:25:40+08:00">
+  <meta itemprop="dateModified" content="2026-07-03T11:25:40+08:00">
+  <meta itemprop="wordCount" content="401">
+  <meta itemprop="keywords" content="综述,Memory"><meta property="og:url" content="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory%E7%BB%BC%E8%BF%B0/">
+  <meta property="og:site_name" content="Ting BLOG🐈">
+  <meta property="og:title" content="论文 · Memory综述">
+  <meta property="og:description" content="基础信息会议/期刊：arXiv preprint, 2026 关键词：memory governance, selective forgetting, retrieval, conditional success probability, Bayesian update 核心贡献：本文首次系统综述 LLM-based agents 的 memory mechanism，给出狭义/广义 memory 定义，并从 memory sources、memory forms、memory operations、evaluation 和 applications 已有研究。">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-07-03T11:25:40+08:00">
+    <meta property="article:modified_time" content="2026-07-03T11:25:40+08:00">
+    <meta property="article:tag" content="综述">
+    <meta property="article:tag" content="Memory">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="论文 · Memory综述">
+  <meta name="twitter:description" content="基础信息会议/期刊：arXiv preprint, 2026 关键词：memory governance, selective forgetting, retrieval, conditional success probability, Bayesian update 核心贡献：本文首次系统综述 LLM-based agents 的 memory mechanism，给出狭义/广义 memory 定义，并从 memory sources、memory forms、memory operations、evaluation 和 applications 已有研究。">
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory%E7%BB%BC%E8%BF%B0/" title="论文 · Memory综述 - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-rag%E7%BB%BC%E8%BF%B0/" title="论文 · RAG综述" /><link rel="next" type="text/html" href="http://localhost:8533/about/" title="About" /><link rel="alternate" type="text/markdown" href="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory%E7%BB%BC%E8%BF%B0/index.md" title="论文 · Memory综述 - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "论文 · Memory综述",
+    "inLanguage": "en",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:8533\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory%E7%BB%BC%E8%BF%B0\/"
+    },"genre": "posts","keywords": "综述, Memory","wordcount":  401 ,
+    "url": "http:\/\/localhost:8533\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory%E7%BB%BC%E8%BF%B0\/","datePublished": "2026-07-03T11:25:40+08:00","dateModified": "2026-07-03T11:25:40+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Ting"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/archives/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/archives/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>论文 · Memory综述</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB--%E7%BB%BC%E8%BF%B0/" class="post-category" title="Category - 论文阅读 · 综述"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 论文阅读 · 综述</a></span></div><div class="post-meta-line"><span title="published on 2026-07-03 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2026-07-03">2026-07-03</time></span>&nbsp;<span title="401 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 500 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>2 minutes</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#基础信息">基础信息</a>
+      <ul>
+        <li><a href="#q1-研究动机">Q1. 研究动机</a></li>
+        <li><a href="#q2-核心问题">Q2. 核心问题</a></li>
+        <li><a href="#q3-现有方法不足与本文改进">Q3. 现有方法不足与本文改进</a></li>
+        <li><a href="#q4-方法框架流程">Q4. 方法/框架流程</a></li>
+        <li><a href="#q5-证据组织与结论支撑">Q5. 证据组织与结论支撑</a></li>
+        <li><a href="#q6-局限性">Q6. 局限性</a></li>
+        <li><a href="#q7-学术价值">Q7. 学术价值</a></li>
+        <li><a href="#q8-延伸研究方向">Q8. 延伸研究方向</a></li>
+        <li><a href="#q9-反直觉发现与方法失效分析">Q9. 反直觉发现与方法失效分析</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 id="基础信息" class="heading-element"><span>基础信息</span>
+  <a href="#%e5%9f%ba%e7%a1%80%e4%bf%a1%e6%81%af" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>会议/期刊：arXiv preprint, 2026</li>
+<li>关键词：memory governance, selective forgetting, retrieval, conditional success probability, Bayesian update</li>
+</ul>
+<p>核心贡献：本文首次系统综述 LLM-based agents 的 memory mechanism，给出狭义/广义 memory 定义，并从 memory sources、memory forms、memory operations、evaluation 和 applications 已有研究。</p>
+<h3 id="q1-研究动机" class="heading-element"><span>Q1. 研究动机</span>
+  <a href="#q1-%e7%a0%94%e7%a9%b6%e5%8a%a8%e6%9c%ba" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>LLM-based agents 要在环境中长期交互、自我演化并处理复杂任务，必须积累经验、保留上下文、利用外部知识。已有研究提出了很多 memory module，但散落在不同论文中，缺乏统一定义、分类和评估框架。作者希望抽象出可复用的设计模式。</p>
+<h3 id="q2-核心问题" class="heading-element"><span>Q2. 核心问题</span>
+  <a href="#q2-%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>本文围绕三个问题展开：</p>
+<ul>
+<li>What is memory in LLM-based agents?</li>
+<li>Why do agents need memory?</li>
+<li>How should memory be designed and evaluated?</li>
+</ul>
+<p>核心是给 agent memory 建立概念边界、设计空间和评估框架。</p>
+<h3 id="q3-现有方法不足与本文改进" class="heading-element"><span>Q3. 现有方法不足与本文改进</span>
+  <a href="#q3-%e7%8e%b0%e6%9c%89%e6%96%b9%e6%b3%95%e4%b8%8d%e8%b6%b3%e4%b8%8e%e6%9c%ac%e6%96%87%e6%94%b9%e8%bf%9b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>作者指出，已有 LLM 或 agent 综述通常关注模型训练、对齐、规划、工具使用、多智能体、应用等，但 memory mechanism 作为 agent 自我演化的基础组件仍缺乏系统梳理。</p>
+<p>本文改进点：</p>
+<ul>
+<li>正式区分狭义 memory 和广义 memory。</li>
+<li>把 memory <strong>设计</strong>拆成 source、form、operation 三个维度。</li>
+<li>把 memory <strong>评估</strong>拆成 direct evaluation 和 indirect evaluation。</li>
+<li>将 memory-enhanced agents 的<strong>应用</strong>分成角色扮演/社会模拟、个人助理、开放世界游戏、代码生成、推荐、医疗、金融、科学等场景。</li>
+</ul>
+<h3 id="q4-方法框架流程" class="heading-element"><span>Q4. 方法/框架流程</span>
+  <a href="#q4-%e6%96%b9%e6%b3%95%e6%a1%86%e6%9e%b6%e6%b5%81%e7%a8%8b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>作者认为 agent-environment interaction 中有三个阶段：</p>
+<ol>
+<li>agent 感知环境，并把信息写入 memory；</li>
+<li>agent 处理已有 memory，使其更可用；</li>
+<li>agent 读取 memory，支持下一步行动。</li>
+</ol>
+<p>对应到 memory operations：</p>
+<ul>
+<li>Memory writing：把原始观察、动作、反馈投影为可存储内容。可以存原始信息，也可以存摘要、关系、代码、轨迹或结构化条目。</li>
+<li>Memory management：处理 memory，包括 merging、reflection、forgetting。目标是减少冗余、抽象高层经验、遗忘无关或过时信息。</li>
+<li>Memory reading：从 memory 中取出与当前上下文相关的信息。常见实现是向量检索、SQL、树/图结构检索、相似轨迹召回，也可以是参数化 memory 的隐式读取。</li>
+</ul>
+<p>作者还区分两种 memory 定义：</p>
+<ul>
+<li>狭义 memory：只来自同一个 trial 的历史信息，可理解为任务内部短期上下文。</li>
+<li>广义 memory：包括同 trial 历史、跨 trial 经验和外部知识，可支持长期经验积累与自我演化。</li>
+</ul>
+<h3 id="q5-证据组织与结论支撑" class="heading-element"><span>Q5. 证据组织与结论支撑</span>
+  <a href="#q5-%e8%af%81%e6%8d%ae%e7%bb%84%e7%bb%87%e4%b8%8e%e7%bb%93%e8%ae%ba%e6%94%af%e6%92%91" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ul>
+<li>
+<p>Figure 4：trial/step 与 memory 操作示意</p>
+<p><img loading="lazy" src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706091700430.png" alt="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706091700430.png" srcset="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706091700430.png?size=small, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706091700430.png?size=medium 1.5x, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706091700430.png?size=large 2x" data-title="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706091700430.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+<ul>
+<li>目的：说明 agent 通过多步 trial 与环境交互，memory writing/management/reading 如何贯穿其中。</li>
+<li>结论：memory 不是简单聊天历史，而是驱动下一步行动的中间状态。</li>
+</ul>
+</li>
+<li>
+<p>Table 1：Memory Sources</p>
+<p><img loading="lazy" src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092006124.png" alt="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092006124.png" srcset="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092006124.png?size=small, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092006124.png?size=medium 1.5x, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092006124.png?size=large 2x" data-title="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092006124.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+<ul>
+<li>目的：比较各模型是否使用 inside-trial information、cross-trial information、external knowledge。</li>
+<li>结论：inside-trial information 最常见；cross-trial information 和 external knowledge 是把 agent 从短期上下文推进到长期学习/工具增强的关键。</li>
+</ul>
+</li>
+<li>
+<p>Table 2：Memory Forms</p>
+<p><img loading="lazy" src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092053013.png" alt="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092053013.png" srcset="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092053013.png?size=small, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092053013.png?size=medium 1.5x, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092053013.png?size=large 2x" data-title="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092053013.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+<ul>
+<li>目的：比较 textual form 和 parametric form 的实现方式。</li>
+<li>结论：文本 memory 是主流，常见形式包括 complete、recent、retrieved、external；parametric memory 包括 fine-tuning 和 editing，但目前覆盖较少。</li>
+</ul>
+</li>
+<li>
+<p>Table 3：Memory Operations</p>
+<p><img loading="lazy" src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092227769.png" alt="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092227769.png" srcset="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092227769.png?size=small, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092227769.png?size=medium 1.5x, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092227769.png?size=large 2x" data-title="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092227769.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+<ul>
+<li>目的：比较模型是否有 writing、management、reading，以及 management 中的 merging、reflection、forgetting。</li>
+<li>结论：writing/reading 基本是 memory 系统核心；management 尤其 forgetting 和 reflection 的设计还不均衡。</li>
+</ul>
+</li>
+<li>
+<p>Figure 6：Memory Evaluation</p>
+<p><img loading="lazy" src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092324372.png" alt="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092324372.png" srcset="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092324372.png?size=small, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092324372.png?size=medium 1.5x, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092324372.png?size=large 2x" data-title="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092324372.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+<ul>
+<li>
+<p>目的：把 memory 评估分为直接评估和间接评估。</p>
+</li>
+<li>
+<p>结论：memory 既可作为独立模块评估，也可通过 agent 任务成功率间接验证。</p>
+<blockquote>
+<p>Coherence（一致性/连贯性）：记忆是否前后一致？有没有自相矛盾？</p>
+<p>Rationality（合理性）：记忆是否符合常识、任务逻辑、用户意图？是不是该记的东西？</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>Table 4：Memory-enhanced Agent Applications</p>
+<p><img loading="lazy" src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092614436.png" alt="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092614436.png" srcset="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092614436.png?size=small, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092614436.png?size=medium 1.5x, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092614436.png?size=large 2x" data-title="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706092614436.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+<ul>
+<li>目的：列举 memory 在角色扮演、社会模拟、个人助理、开放世界游戏、代码生成、推荐、医疗、金融、科学等领域的代表系统。</li>
+<li>结论：不同应用需要不同 memory：个人助理偏用户事实和偏好，游戏偏经验和技能，专家系统偏领域知识，社会模拟偏角色一致性和人类记忆机制。</li>
+</ul>
+</li>
+</ul>
+<h3 id="q6-局限性" class="heading-element"><span>Q6. 局限性</span>
+  <a href="#q6-%e5%b1%80%e9%99%90%e6%80%a7" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>作者在 Section 8 明确提出未来方向，也可视为当前局限：</p>
+<ul>
+<li>Parametric memory 不成熟：文本 memory 可解释、易编辑，但效率低；参数化 memory 信息密度高、读取效率好，但写入成本、可信性、可解释性仍是挑战。</li>
+<li>Multi-agent memory 问题不足：多智能体中需要 memory synchronization、communication memory、shared/private memory 权衡，尤其 federated setting 下涉及隐私与实时同步。</li>
+<li>Lifelong learning 仍困难：长期 memory 会带来时间性、记忆重叠、海量存储、检索和遗忘问题。</li>
+<li>Humanoid agent memory 需要更贴近人类认知：包括遗忘、记忆扭曲、知识边界等。</li>
+<li>Structured memory 仍处早期：图、树、代码结构各有优势，但如何动态选择、更新和归纳规则仍未解决。</li>
+</ul>
+<p>分析归纳：</p>
+<ul>
+<li>文章更擅长建立 taxonomy（分类框架），对各 memory 方法的统一量化比较仍不足。</li>
+<li>对隐私、安全、数据治理虽然有所提及，但还没有深入展开 memory 泄露、错误记忆固化、恶意 memory injection 等问题。</li>
+<li>Memory 和 RAG 的边界在外部知识、检索式 memory 处高度重叠，文章没有专门把两者统一到一个 agent architecture 里讨论。</li>
+</ul>
+<h3 id="q7-学术价值" class="heading-element"><span>Q7. 学术价值</span>
+  <a href="#q7-%e5%ad%a6%e6%9c%af%e4%bb%b7%e5%80%bc" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ul>
+<li>理论价值：把 agent memory 从“聊天历史/向量库”提升为 agent-environment interaction 中的核心机制。</li>
+<li>方法价值：source-form-operation 是很好的设计 checklist。构建 agent memory 前，应先问：记什么、怎么表示、如何写入/管理/读取。</li>
+<li>应用价值：对个人助理、长期对话、游戏 agent、代码 agent、推荐 agent、医疗/金融/科学专家 agent 都有直接设计指导。</li>
+</ul>
+<h3 id="q8-延伸研究方向" class="heading-element"><span>Q8. 延伸研究方向</span>
+  <a href="#q8-%e5%bb%b6%e4%bc%b8%e7%a0%94%e7%a9%b6%e6%96%b9%e5%90%91" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ol>
+<li>如何设计可解释、可快速更新的 parametric memory？</li>
+<li>多智能体系统中，哪些 memory 应共享，哪些应保持私有？</li>
+<li>lifelong agent 如何在多年交互中管理时间性、过时信息和遗忘机制？</li>
+<li>humanoid agent 是否应模拟人类的遗忘、偏差和知识边界，而不是追求全知？</li>
+<li>memory structure 能否从线性文本库发展为可动态更新的图、树、代码或混合结构？</li>
+</ol>
+<h3 id="q9-反直觉发现与方法失效分析" class="heading-element"><span>Q9. 反直觉发现与方法失效分析</span>
+  <a href="#q9-%e5%8f%8d%e7%9b%b4%e8%a7%89%e5%8f%91%e7%8e%b0%e4%b8%8e%e6%96%b9%e6%b3%95%e5%a4%b1%e6%95%88%e5%88%86%e6%9e%90" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ul>
+<li>
+<p>Table 2：文本 memory 主流，但不一定最高效</p>
+<ul>
+<li>现象：多数模型采用 textual form，尤其 retrieved memory；parametric form 使用明显较少。</li>
+<li>作者解释：文本 memory 可解释、易写入、易扩展；但每次推理都要把 memory 放进 prompt，带来额外 token 成本。</li>
+<li>评价：工程上最容易落地的方案，未必是长期最优方案。</li>
+</ul>
+</li>
+<li>
+<p>Section 6.4：complete interaction 表现可强，但依赖长上下文能力</p>
+<ul>
+<li>现象：作者提到在 MemDaily 中，包含完整交互信息的方法在一些简单问题上可超过 80% accuracy；但其效果高度依赖 foundation model 的长上下文支持，还会受 lost in the middle 影响。</li>
+<li>作者解释：完整上下文保留信息多，但推理成本、位置偏置和截断问题明显。</li>
+<li>评价：简单任务中“全塞进去”可能很好用，但长期 agent 场景不能只靠上下文窗口。</li>
+</ul>
+</li>
+<li>
+<p>Section 6.4：retrieval-based memory 长期有效但成本随规模增长</p>
+<ul>
+<li>现象：作者提到 retrieval-based methods 在 LongMemEval 多数 QA 任务中可达到超过 50% accuracy；但需要建立索引，推理时还要计算匹配分数，额外时间成本会随 memory 数量增长。</li>
+<li>作者解释：检索能从大量历史中找相关内容，但索引和召回本身不是免费的。</li>
+<li>评价：长期 memory 的默认方案应是 retrieval，但必须配合压缩、分层索引或结构化管理。</li>
+</ul>
+</li>
+<li>
+<p>Section 5.2/8.1：parametric memory 读起来高效，写起来困难</p>
+<ul>
+<li>现象：parametric memory 不占 prompt 长度，适合大量稳定知识；但 SFT/编辑需要额外训练或参数修改，可能过拟合、灾难性遗忘，也缺乏可解释性。</li>
+<li>作者解释：参数化记忆的信息密度高，但文本到参数的高效可靠转化仍是开放问题。</li>
+<li>评价：parametric memory 更适合稳定领域知识，不适合频繁变化的用户日常记忆，除非编辑机制足够轻量且可审计。</li>
+</ul>
+</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2026-07-03 11:25:40">Updated on 2026-07-03&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory%E7%BB%BC%E8%BF%B0/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div></div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/%E7%BB%BC%E8%BF%B0/" class="post-tag" title="Tags - 综述">综述</a><a href="/tags/memory/" class="post-tag" title="Tags - Memory">Memory</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-rag%E7%BB%BC%E8%BF%B0/" class="post-nav-item" rel="prev" title="论文 · RAG综述"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>论文 · RAG综述</a></div>
+</div>
+<div class="post-reward">
+    <div class="comment"></div>
+    <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
+    <label class="reward-button" for="fi-reward"><?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1776434267563" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2715" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M377.596784 791.989528s-39.199482 22.799699 27.799633 30.399598c81.198926 9.199878 122.598379 7.999894 211.997197-8.999881 0 0 23.599688 14.799804 56.399254 27.599635C473.395518 926.787745 220.198866 835.988946 377.596784 791.989528m-24.399677-112.198517s-43.799421 32.399572 23.199693 39.399479c86.598855 8.999881 155.197948 9.599873 273.596382-13.199825 0 0 16.399783 16.599781 42.199442 25.599661-242.596792 70.999061-512.593222 5.799923-338.995517-51.799315m206.397271-190.197485c49.399347 56.799249-12.999828 107.998572-12.999828 107.998572s125.398342-64.799143 67.799103-145.798072c-53.799289-75.599-94.998744-113.198503 128.198305-242.596792 0.199997 0-350.395367 87.598842-182.99758 280.396292m265.196493 385.194907s28.999617 23.799685-31.799579 42.399439c-115.798469 34.999537-481.593632 45.599397-583.192289 1.399982-36.599516-15.799791 31.999577-37.999498 53.599291-42.599437 22.399704-4.799937 35.399532-3.999947 35.399532-3.999947-40.599463-28.599622-262.596528 56.199257-112.798508 80.398937 408.3946 66.399122 744.790152-29.799606 638.791553-77.598974M396.396536 563.592548s-186.197538 44.199416-65.999128 60.199204c50.799328 6.79991 151.99799 5.199931 246.196745-2.599966 76.998982-6.399915 154.397958-20.39973 154.397958-20.39973s-27.19964 11.599847-46.799381 24.999669c-188.997501 49.799342-553.992675 26.599648-448.994063-24.19968 88.998823-42.799434 161.197869-37.999498 161.197869-37.999497m333.995583 186.597532c192.197459-99.79868 103.198635-195.797411 41.199456-182.797582-15.199799 3.199958-21.999709 5.999921-21.999709 5.99992s5.599926-8.799884 16.399783-12.599833c122.598379-43.199429 216.997131 127.198318-39.599477 194.597427 0-0.199997 2.99996-2.799963 3.999947-5.199932M614.393653 0s106.398593 106.398593-100.998664 269.99643c-166.197802 131.198265-37.999498 206.197274 0 291.596144-96.998717-87.598842-168.197776-164.597824-120.398408-236.396874C463.195652 220.197088 657.393085 168.997765 614.393653 0m-198.997369 1020.786502c184.397562 11.799844 467.593817-6.599913 474.19373-93.798759 0 0-12.799831 32.999564-152.397985 59.399214-157.397919 29.599609-351.595351 26.199654-466.59383 7.199905 0-0.199997 23.599688 19.399743 144.798085 27.19964" fill="" p-id="2716"></path></svg>为博主买一杯java</label>
+    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/wechatpay.jpg" alt="Ting WeChat Pay" data-title="Ting WeChat Pay" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>WeChat Pay</span>
+          </div></div>
+  </div></article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.137.0">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024 - 2026</span><span class="author" itemprop="copyrightHolder">
+              <a href="Tin10g.github.io">Ting</a></span></div><div class="footer-line statistics"><span class="site-time" title='Website running ...'><i class="fa-solid fa-heartbeat fa-fw animate-icon" aria-hidden="true"></i><span class="ms-1 d-none">Runing</span><span class="run-times ms-1">Website running ...</span></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">This website works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":1000},"comment":{"enable":false},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"siteTime":"2024-04-01T11:25:40+08:00","typeit":{"cursorChar":"|","cursorSpeed":1000,"duration":-1,"loop":false,"speed":100},"version":"v0.3.13"};console.log('Page config:', window.config);</script><script src="/js/theme.min.js" defer></script><script src="/js/custom.min.js" defer></script></body>
+</html>

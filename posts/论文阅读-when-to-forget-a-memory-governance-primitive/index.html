@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html itemscope itemtype="http://schema.org/WebPage" lang="en">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8533&amp;path=livereload" data-no-instant defer></script>
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
     <title>论文 · When to Forget: A Memory Governance Primitive - Ting BLOG🐈</title><meta name="author" content="Ting">
 <meta name="description" content="基础信息会议/期刊：arXiv preprint, 2026 关键词：memory governance, selective forgetting, retrieval, conditional success probability, Bayesian update 核心贡献：本文提出 Memory Worth (MW)，用每条记忆被检索后的成功/失败共现次数构造一个轻量、可在线更新的治理信号，并证明它在明确假设下收敛到条件成功概率 p&#43;(m)，可用于陈旧性检测、抑制检索与弃用决策。
-">
+"><meta name="keywords" content='Memory'>
   <meta itemprop="name" content="论文 · When to Forget: A Memory Governance Primitive">
   <meta itemprop="description" content="基础信息会议/期刊：arXiv preprint, 2026 关键词：memory governance, selective forgetting, retrieval, conditional success probability, Bayesian update 核心贡献：本文提出 Memory Worth (MW)，用每条记忆被检索后的成功/失败共现次数构造一个轻量、可在线更新的治理信号，并证明它在明确假设下收敛到条件成功概率 p&#43;(m)，可用于陈旧性检测、抑制检索与弃用决策。">
   <meta itemprop="datePublished" content="2026-07-01T11:25:40+08:00">
   <meta itemprop="dateModified" content="2026-07-01T11:25:40+08:00">
   <meta itemprop="wordCount" content="293">
-  <meta itemprop="keywords" content="论文阅读"><meta property="og:url" content="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive/">
+  <meta itemprop="keywords" content="Memory"><meta property="og:url" content="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive/">
   <meta property="og:site_name" content="Ting BLOG🐈">
   <meta property="og:title" content="论文 · When to Forget: A Memory Governance Primitive">
   <meta property="og:description" content="基础信息会议/期刊：arXiv preprint, 2026 关键词：memory governance, selective forgetting, retrieval, conditional success probability, Bayesian update 核心贡献：本文提出 Memory Worth (MW)，用每条记忆被检索后的成功/失败共现次数构造一个轻量、可在线更新的治理信号，并证明它在明确假设下收敛到条件成功概率 p&#43;(m)，可用于陈旧性检测、抑制检索与弃用决策。">
@@ -22,12 +22,13 @@
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2026-07-01T11:25:40+08:00">
     <meta property="article:modified_time" content="2026-07-01T11:25:40+08:00">
+    <meta property="article:tag" content="Memory">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="论文 · When to Forget: A Memory Governance Primitive">
   <meta name="twitter:description" content="基础信息会议/期刊：arXiv preprint, 2026 关键词：memory governance, selective forgetting, retrieval, conditional success probability, Bayesian update 核心贡献：本文提出 Memory Worth (MW)，用每条记忆被检索后的成功/失败共现次数构造一个轻量、可在线更新的治理信号，并证明它在明确假设下收敛到条件成功概率 p&#43;(m)，可用于陈旧性检测、抑制检索与弃用决策。">
 <meta name="application-name" content="FixIt">
-<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive/" title="论文 · When to Forget: A Memory Governance Primitive - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent3%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第三讲 Transformer架构" /><link rel="next" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory-gym-towards-endless-tasks-to-benchmark-memory-capabilities-of-agents/" title="论文 · Memory Gym: Towards Endless Tasks to Benchmark Memory Capabilities of Agents" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive/index.md" title="论文 · When to Forget: A Memory Governance Primitive - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive/" title="论文 · When to Forget: A Memory Governance Primitive - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:8533/posts/%E8%AF%BE%E7%A8%8B-ai-agent3%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第三讲 Transformer架构" /><link rel="next" type="text/html" href="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory-gym-towards-endless-tasks-to-benchmark-memory-capabilities-of-agents/" title="论文 · Memory Gym: Towards Endless Tasks to Benchmark Memory Capabilities of Agents" /><link rel="alternate" type="text/markdown" href="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive/index.md" title="论文 · When to Forget: A Memory Governance Primitive - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
@@ -37,9 +38,9 @@
     "inLanguage": "en",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive\/"
-    },"genre": "posts","wordcount":  293 ,
-    "url": "http:\/\/localhost:1313\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive\/","datePublished": "2026-07-01T11:25:40+08:00","dateModified": "2026-07-01T11:25:40+08:00","publisher": {
+      "@id": "http:\/\/localhost:8533\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive\/"
+    },"genre": "posts","keywords": "Memory","wordcount":  293 ,
+    "url": "http:\/\/localhost:8533\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive\/","datePublished": "2026-07-01T11:25:40+08:00","dateModified": "2026-07-01T11:25:40+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -65,6 +66,12 @@
                 
                 
               ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
               <a
                 class="menu-link"
                 href="/friends/"
@@ -106,6 +113,13 @@
                   
                   
                 ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
               class="menu-item"
             ><a
                   class="menu-link"
@@ -278,7 +292,7 @@
         <div class="post-info-md"><span><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div></div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/memory/" class="post-tag" title="Tags - Memory">Memory</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
     </section>

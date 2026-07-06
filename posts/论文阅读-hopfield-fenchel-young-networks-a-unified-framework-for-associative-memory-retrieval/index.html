@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html itemscope itemtype="http://schema.org/WebPage" lang="en">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8533&amp;path=livereload" data-no-instant defer></script>
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
     <title>论文 · Hopfield-Fenchel-Young Networks: A Unified Framework for Associative Memory Retrieval - Ting BLOG🐈</title><meta name="author" content="Ting">
 <meta name="description" content="基础信息会议/期刊：Journal of Machine Learning Research 26 (2025), 1-51 关键词：Hopfield networks, associative memory, Fenchel-Young loss, sparse transformations, structured prediction 核心贡献：本文提出 Hopfield-Fenchel-Young Networks，用两个 Fenchel-Young loss 的差构造统一能量框架，把 classical/modern Hopfield networks、sparse transformations、structured retrieval 和 post-transformations 纳入同一凸分析视角，并在多类记忆检索任务上验证稀疏与结构化检索能力。
-">
+"><meta name="keywords" content='Memory, memory forms, memory operations'>
   <meta itemprop="name" content="论文 · Hopfield-Fenchel-Young Networks: A Unified Framework for Associative Memory Retrieval">
   <meta itemprop="description" content="基础信息会议/期刊：Journal of Machine Learning Research 26 (2025), 1-51 关键词：Hopfield networks, associative memory, Fenchel-Young loss, sparse transformations, structured prediction 核心贡献：本文提出 Hopfield-Fenchel-Young Networks，用两个 Fenchel-Young loss 的差构造统一能量框架，把 classical/modern Hopfield networks、sparse transformations、structured retrieval 和 post-transformations 纳入同一凸分析视角，并在多类记忆检索任务上验证稀疏与结构化检索能力。">
   <meta itemprop="datePublished" content="2026-07-01T11:25:40+08:00">
   <meta itemprop="dateModified" content="2026-07-01T11:25:40+08:00">
   <meta itemprop="wordCount" content="394">
-  <meta itemprop="keywords" content="论文阅读"><meta property="og:url" content="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-hopfield-fenchel-young-networks-a-unified-framework-for-associative-memory-retrieval/">
+  <meta itemprop="keywords" content="Memory,Memory Forms,Memory Operations"><meta property="og:url" content="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-hopfield-fenchel-young-networks-a-unified-framework-for-associative-memory-retrieval/">
   <meta property="og:site_name" content="Ting BLOG🐈">
   <meta property="og:title" content="论文 · Hopfield-Fenchel-Young Networks: A Unified Framework for Associative Memory Retrieval">
   <meta property="og:description" content="基础信息会议/期刊：Journal of Machine Learning Research 26 (2025), 1-51 关键词：Hopfield networks, associative memory, Fenchel-Young loss, sparse transformations, structured prediction 核心贡献：本文提出 Hopfield-Fenchel-Young Networks，用两个 Fenchel-Young loss 的差构造统一能量框架，把 classical/modern Hopfield networks、sparse transformations、structured retrieval 和 post-transformations 纳入同一凸分析视角，并在多类记忆检索任务上验证稀疏与结构化检索能力。">
@@ -22,12 +22,15 @@
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2026-07-01T11:25:40+08:00">
     <meta property="article:modified_time" content="2026-07-01T11:25:40+08:00">
+    <meta property="article:tag" content="Memory">
+    <meta property="article:tag" content="Memory Forms">
+    <meta property="article:tag" content="Memory Operations">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="论文 · Hopfield-Fenchel-Young Networks: A Unified Framework for Associative Memory Retrieval">
   <meta name="twitter:description" content="基础信息会议/期刊：Journal of Machine Learning Research 26 (2025), 1-51 关键词：Hopfield networks, associative memory, Fenchel-Young loss, sparse transformations, structured prediction 核心贡献：本文提出 Hopfield-Fenchel-Young Networks，用两个 Fenchel-Young loss 的差构造统一能量框架，把 classical/modern Hopfield networks、sparse transformations、structured retrieval 和 post-transformations 纳入同一凸分析视角，并在多类记忆检索任务上验证稀疏与结构化检索能力。">
 <meta name="application-name" content="FixIt">
-<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-hopfield-fenchel-young-networks-a-unified-framework-for-associative-memory-retrieval/" title="论文 · Hopfield-Fenchel-Young Networks: A Unified Framework for Associative Memory Retrieval - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memgpttowards-llms-as-operating-systems/" title="论文 · MemGPT: Towards LLMs as Operating Systems" /><link rel="next" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-generative-agentsinteractive-simulacra-of-human-behavior/" title="论文 · Generative Agents: Interactive Simulacra of Human Behavior" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-hopfield-fenchel-young-networks-a-unified-framework-for-associative-memory-retrieval/index.md" title="论文 · Hopfield-Fenchel-Young Networks: A Unified Framework for Associative Memory Retrieval - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-hopfield-fenchel-young-networks-a-unified-framework-for-associative-memory-retrieval/" title="论文 · Hopfield-Fenchel-Young Networks: A Unified Framework for Associative Memory Retrieval - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memgpttowards-llms-as-operating-systems/" title="论文 · MemGPT: Towards LLMs as Operating Systems" /><link rel="next" type="text/html" href="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-generative-agentsinteractive-simulacra-of-human-behavior/" title="论文 · Generative Agents: Interactive Simulacra of Human Behavior" /><link rel="alternate" type="text/markdown" href="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-hopfield-fenchel-young-networks-a-unified-framework-for-associative-memory-retrieval/index.md" title="论文 · Hopfield-Fenchel-Young Networks: A Unified Framework for Associative Memory Retrieval - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
@@ -37,9 +40,9 @@
     "inLanguage": "en",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "http:\/\/localhost:1313\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-hopfield-fenchel-young-networks-a-unified-framework-for-associative-memory-retrieval\/"
-    },"genre": "posts","wordcount":  394 ,
-    "url": "http:\/\/localhost:1313\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-hopfield-fenchel-young-networks-a-unified-framework-for-associative-memory-retrieval\/","datePublished": "2026-07-01T11:25:40+08:00","dateModified": "2026-07-01T11:25:40+08:00","publisher": {
+      "@id": "http:\/\/localhost:8533\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-hopfield-fenchel-young-networks-a-unified-framework-for-associative-memory-retrieval\/"
+    },"genre": "posts","keywords": "Memory, memory forms, memory operations","wordcount":  394 ,
+    "url": "http:\/\/localhost:8533\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-hopfield-fenchel-young-networks-a-unified-framework-for-associative-memory-retrieval\/","datePublished": "2026-07-01T11:25:40+08:00","dateModified": "2026-07-01T11:25:40+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -65,6 +68,12 @@
                 
                 
               ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
               <a
                 class="menu-link"
                 href="/friends/"
@@ -106,6 +115,13 @@
                   
                   
                 ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
               class="menu-item"
             ><a
                   class="menu-link"
@@ -266,7 +282,7 @@
         <div class="post-info-md"><span><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-hopfield-fenchel-young-networks-a-unified-framework-for-associative-memory-retrieval/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div></div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/memory/" class="post-tag" title="Tags - Memory">Memory</a><a href="/tags/memory-forms/" class="post-tag" title="Tags - Memory Forms">Memory Forms</a><a href="/tags/memory-operations/" class="post-tag" title="Tags - Memory Operations">Memory Operations</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
     </section>

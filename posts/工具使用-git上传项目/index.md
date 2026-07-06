@@ -47,8 +47,9 @@ git remote remove orign // 删除orign仓库（比如名称错误）
 git remote add origin 仓库地址// 重新添加远程仓库地址
 ```
 
+
 ---
 
 > Author: [Ting](Tin10g.github.io)  
-> URL: http://localhost:1313/posts/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8-git%E4%B8%8A%E4%BC%A0%E9%A1%B9%E7%9B%AE/  
+> URL: http://localhost:8533/posts/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8-git%E4%B8%8A%E4%BC%A0%E9%A1%B9%E7%9B%AE/  
 

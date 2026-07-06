@@ -129,5 +129,5 @@ Codex 会显示每个子代理的输出，并在主界面中汇总结果。
 ---
 
 > Author: [Ting](Tin10g.github.io)  
-> URL: http://localhost:1313/posts/codex-%E5%AD%90%E4%BB%A3%E7%90%86/  
+> URL: http://localhost:8533/posts/codex-%E5%AD%90%E4%BB%A3%E7%90%86/  
 

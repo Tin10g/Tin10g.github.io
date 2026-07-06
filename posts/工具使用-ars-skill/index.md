@@ -37,8 +37,9 @@
 
 把 research → write → review → revise → finalize 整个流程串成一个 10 阶段的自动编排工作流。
 
+
 ---
 
 > Author: [Ting](Tin10g.github.io)  
-> URL: http://localhost:1313/posts/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8-ars-skill/  
+> URL: http://localhost:8533/posts/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8-ars-skill/  
 

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8533&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>论文 · RAG综述 - Ting BLOG🐈</title><meta name="author" content="Ting">
+<meta name="description" content="基础信息会议/期刊：arXiv preprint, 2026 关键词：memory governance, selective forgetting, retrieval, conditional success probability, Bayesian update 核心贡献：本文从信息检索视角把文本 RAG 统一拆解为 pre-retrieval、retrieval、post-retrieval、generation 四个阶段，并系统梳理每一阶段的典型技术、评估框架、系统挑战与未来方向。
+"><meta name="keywords" content='综述, RAG'>
+  <meta itemprop="name" content="论文 · RAG综述">
+  <meta itemprop="description" content="基础信息会议/期刊：arXiv preprint, 2026 关键词：memory governance, selective forgetting, retrieval, conditional success probability, Bayesian update 核心贡献：本文从信息检索视角把文本 RAG 统一拆解为 pre-retrieval、retrieval、post-retrieval、generation 四个阶段，并系统梳理每一阶段的典型技术、评估框架、系统挑战与未来方向。">
+  <meta itemprop="datePublished" content="2026-07-03T11:25:40+08:00">
+  <meta itemprop="dateModified" content="2026-07-03T11:25:40+08:00">
+  <meta itemprop="wordCount" content="383">
+  <meta itemprop="keywords" content="综述,RAG"><meta property="og:url" content="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-rag%E7%BB%BC%E8%BF%B0/">
+  <meta property="og:site_name" content="Ting BLOG🐈">
+  <meta property="og:title" content="论文 · RAG综述">
+  <meta property="og:description" content="基础信息会议/期刊：arXiv preprint, 2026 关键词：memory governance, selective forgetting, retrieval, conditional success probability, Bayesian update 核心贡献：本文从信息检索视角把文本 RAG 统一拆解为 pre-retrieval、retrieval、post-retrieval、generation 四个阶段，并系统梳理每一阶段的典型技术、评估框架、系统挑战与未来方向。">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-07-03T11:25:40+08:00">
+    <meta property="article:modified_time" content="2026-07-03T11:25:40+08:00">
+    <meta property="article:tag" content="综述">
+    <meta property="article:tag" content="RAG">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="论文 · RAG综述">
+  <meta name="twitter:description" content="基础信息会议/期刊：arXiv preprint, 2026 关键词：memory governance, selective forgetting, retrieval, conditional success probability, Bayesian update 核心贡献：本文从信息检索视角把文本 RAG 统一拆解为 pre-retrieval、retrieval、post-retrieval、generation 四个阶段，并系统梳理每一阶段的典型技术、评估框架、系统挑战与未来方向。">
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-rag%E7%BB%BC%E8%BF%B0/" title="论文 · RAG综述 - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:8533/posts/%E8%AF%BE%E7%A8%8B-ai-agent9%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第九讲 大型语言模型能力评估" /><link rel="next" type="text/html" href="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory%E7%BB%BC%E8%BF%B0/" title="论文 · Memory综述" /><link rel="alternate" type="text/markdown" href="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-rag%E7%BB%BC%E8%BF%B0/index.md" title="论文 · RAG综述 - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "论文 · RAG综述",
+    "inLanguage": "en",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:8533\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-rag%E7%BB%BC%E8%BF%B0\/"
+    },"genre": "posts","keywords": "综述, RAG","wordcount":  383 ,
+    "url": "http:\/\/localhost:8533\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-rag%E7%BB%BC%E8%BF%B0\/","datePublished": "2026-07-03T11:25:40+08:00","dateModified": "2026-07-03T11:25:40+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Ting"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/archives/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/archives/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>论文 · RAG综述</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" class="post-category" title="Category - 论文阅读"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 论文阅读</a></span></div><div class="post-meta-line"><span title="published on 2026-07-03 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2026-07-03">2026-07-03</time></span>&nbsp;<span title="383 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 400 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>2 minutes</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#基础信息">基础信息</a>
+      <ul>
+        <li><a href="#q1-研究动机">Q1. 研究动机</a></li>
+        <li><a href="#q2-核心问题">Q2. 核心问题</a></li>
+        <li><a href="#q3-现有综述不足与本文改进">Q3. 现有综述不足与本文改进</a></li>
+        <li><a href="#q4-方法框架流程">Q4. 方法/框架流程</a></li>
+        <li><a href="#q5-证据组织与结论支撑">Q5. 证据组织与结论支撑</a></li>
+        <li><a href="#q6-局限性">Q6. 局限性</a></li>
+        <li><a href="#q7-学术价值">Q7. 学术价值</a></li>
+        <li><a href="#q8-延伸研究方向">Q8. 延伸研究方向</a></li>
+        <li><a href="#q9-反直觉发现与方法失效分析">Q9. 反直觉发现与方法失效分析</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 id="基础信息" class="heading-element"><span>基础信息</span>
+  <a href="#%e5%9f%ba%e7%a1%80%e4%bf%a1%e6%81%af" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>会议/期刊：arXiv preprint, 2026</li>
+<li>关键词：memory governance, selective forgetting, retrieval, conditional success probability, Bayesian update</li>
+</ul>
+<p>核心贡献：本文从信息检索视角把文本 RAG 统一拆解为 pre-retrieval、retrieval、post-retrieval、generation 四个阶段，并系统梳理每一阶段的典型技术、评估框架、系统挑战与未来方向。</p>
+<h3 id="q1-研究动机" class="heading-element"><span>Q1. 研究动机</span>
+  <a href="#q1-%e7%a0%94%e7%a9%b6%e5%8a%a8%e6%9c%ba" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>LLM 训练后知识静态、领域知识不足且容易幻觉；RAG 通过检索外部信息让模型获得更新、更可靠的上下文。但 RAG 研究发展很快，术语分散，同一方法常影响多个流程环节，导致研究贡献难以定位。作者因此希望从 IR 视角建立统一框架。</p>
+<h3 id="q2-核心问题" class="heading-element"><span>Q2. 核心问题</span>
+  <a href="#q2-%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>这篇文章试图回答：</p>
+<ul>
+<li>
+<p>文本 RAG 系统可以被拆成哪些关键环节？</p>
+</li>
+<li>
+<p>已有研究分别改进了哪些环节？</p>
+</li>
+<li>
+<p>这些改进在检索质量、生成可靠性、系统效率和长上下文场景中面临哪些挑战？</p>
+</li>
+</ul>
+<h3 id="q3-现有综述不足与本文改进" class="heading-element"><span>Q3. 现有综述不足与本文改进</span>
+  <a href="#q3-%e7%8e%b0%e6%9c%89%e7%bb%bc%e8%bf%b0%e4%b8%8d%e8%b6%b3%e4%b8%8e%e6%9c%ac%e6%96%87%e6%94%b9%e8%bf%9b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>作者认为已有 RAG 综述各有侧重，但存在三个不足：</p>
+<ul>
+<li>Gao et al. 的 Naive / Advanced / Modular RAG 分类能展示复杂度演进，但没有细拆 IR 流程中的具体阶段。</li>
+<li>Zhao et al. 覆盖文本、图像、视频等多模态应用，范围很广，但对文本生成中的 RAG 技术分析不够深入。</li>
+<li>Hu et al. 关注 retriever 与 LM 的交互模式，覆盖生成和理解任务，但不是按检索处理阶段展开。</li>
+</ul>
+<p>本文改进点是：把 RAG 研究放进一个四阶段流程中，从“系统在哪一步被增强”来组织文献。这让读者能更容易判断一个方法是在改进<strong>索引、查询、检索、重排、过滤、生成增强还是个性化</strong>。</p>
+<h3 id="q4-方法框架流程" class="heading-element"><span>Q4. 方法/框架流程</span>
+  <a href="#q4-%e6%96%b9%e6%b3%95%e6%a1%86%e6%9e%b6%e6%b5%81%e7%a8%8b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>RAG 的基础流程是：先对外部语料建立索引；用户问题进入系统后，检索器从索引中找相关文档；生成器把问题和检索结果合并为输入，生成最终回答。</p>
+<p>作者进一步把这个流程拆成四个阶段：</p>
+<ul>
+<li>
+<p>Pre-retrieval：准备数据，包括索引和数据修改。</p>
+<ul>
+<li>
+<p>索引：倒排索引、dense vector index、图索引、量化索引等。</p>
+<blockquote>
+<p>Dense vector index（稠密向量索引）：一种用来快速检索“语义相似内容”的数据结构</p>
+</blockquote>
+</li>
+<li>
+<p>数据修改：清洗、补充 metadata、内部知识显式化、外部知识增强。</p>
+<blockquote>
+<p>a.  清洗：把原始资料整理干净，让它更准确、统一、可用。</p>
+<p>​	eg：去重、纠错、统一格式、删除无关内容、拆分过长文本、修正乱码、补齐标题层级等。</p>
+<p>b.  补充 metadata：给资料加上“描述它自己的信息”，方便检索、筛选、排序和追踪来源。</p>
+<p>​	eg：标题、作者、时间、来源、主题标签、部门、文档类型、版本、权限级别、关键词、摘要、关联项目等</p>
+<p>c.  内部知识显式化：原本藏在个人经验、口头沟通、团队习惯、隐性规则里的知识，整理成可以被别人读懂、被系统检索、被 AI 使用的形式。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>Retrieval：处理查询并搜索排序</p>
+<ul>
+<li>
+<p>包括 query expansion、query reformulation、prompt-based rewriting、search and ranking，不同检索策略。</p>
+<blockquote>
+<p>query expansion：加更多相关词，扩大能搜到的范围</p>
+<p>query reformulation：改写问题，让它更清楚、更适合搜索</p>
+<p>prompt-based rewriting：用 LLM 按 prompt 自动改写查询</p>
+<p>search and ranking：检索候选内容，并按相关性排序</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>Post-retrieval：对初检结果再加工。</p>
+<ul>
+<li>包括 re-ranking 和 filtering。</li>
+<li>目标是减少噪声、压缩上下文、保留对生成真正有帮助的证据。</li>
+</ul>
+</li>
+<li>
+<p>Generation：把检索到的信息真正转化为回答，包括 enhancing 和 customization。</p>
+<ul>
+<li>
+<p>Enhancing：关注证据融合、ensemble、feedback/self-correction</p>
+<blockquote>
+<p>证据融合：多个证据怎么合成一个可信答案</p>
+<p>ensemble：多个模型/方法怎么一起降低错误</p>
+<p>feedback/self-correction：生成后怎么检查并修正错误</p>
+</blockquote>
+</li>
+<li>
+<p>Customization：关注用户画像、历史偏好和个性化生成。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="q5-证据组织与结论支撑" class="heading-element"><span>Q5. 证据组织与结论支撑</span>
+  <a href="#q5-%e8%af%81%e6%8d%ae%e7%bb%84%e7%bb%87%e4%b8%8e%e7%bb%93%e8%ae%ba%e6%94%af%e6%92%91" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ul>
+<li>
+<p>Figure 2：基础工作流</p>
+<p><img loading="lazy" src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706090442278.png" alt="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706090442278.png" srcset="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706090442278.png?size=small, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706090442278.png?size=medium 1.5x, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706090442278.png?size=large 2x" data-title="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706090442278.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+<ul>
+<li>目的：说明 RAG 最小闭环是 index -&gt; retrieve -&gt; generate。</li>
+<li>结论：RAG 的核心不是单个模型，而是检索系统和生成模型的组合流程。</li>
+</ul>
+</li>
+<li>
+<p>Figure 3：RAG 核心技术分类树</p>
+<p><img loading="lazy" src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706090322903.png" alt="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706090322903.png" srcset="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706090322903.png?size=small, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706090322903.png?size=medium 1.5x, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706090322903.png?size=large 2x" data-title="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260706090322903.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+<ul>
+<li>目的：把 RAG 方法映射到四阶段流程。</li>
+<li>结论：现有方法主要集中在检索相关环节，generation customization 相对稀少。</li>
+</ul>
+</li>
+<li>
+<p>Table 1：五种检索策略比较</p>
+<ul>
+<li>
+<p>目的：比较 Basic、Iterative、Recursive、Conditional、Adaptive retrieval 的机制、场景、复杂度、成本和优势。</p>
+<table>
+  <thead>
+      <tr>
+          <th>策略</th>
+          <th>核心</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Basic</td>
+          <td>一次检索</td>
+      </tr>
+      <tr>
+          <td>Iterative</td>
+          <td>多轮检索，逐步补证据</td>
+      </tr>
+      <tr>
+          <td>Recursive</td>
+          <td>按层级/图结构逐层深入</td>
+      </tr>
+      <tr>
+          <td>Conditional</td>
+          <td>满足条件才检索</td>
+      </tr>
+      <tr>
+          <td>Adaptive</td>
+          <td>动态决定怎么检索</td>
+      </tr>
+  </tbody>
+</table>
+</li>
+<li>
+<p>结论：检索策略没有绝对最优；Basic 低复杂度低成本，Adaptive 高灵活但高复杂度高成本，Conditional 通过判断是否检索降低延迟和成本。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Table 2：RAG 评估框架比较</p>
+<ul>
+<li>
+<p>目的：整理 RAGAS、ARES、RECALL、RGB、MIRAGE、eRAG、UDCG、BERGEN 等评估框架。</p>
+<table>
+  <thead>
+      <tr>
+          <th>框架</th>
+          <th>简介</th>
+          <th>主要看什么</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>RAGAS</strong></td>
+          <td>常用的 RAG 自动评估框架</td>
+          <td>Context relevance、Answer relevance、Faithfulness</td>
+      </tr>
+      <tr>
+          <td><strong>ARES</strong></td>
+          <td>对 RAGAS 的改进型评估框架</td>
+          <td>用更可靠的评估器和置信区间评估答案相关性、忠实性</td>
+      </tr>
+      <tr>
+          <td><strong>RECALL</strong></td>
+          <td>面向反事实鲁棒性的评估框架</td>
+          <td>RAG 遇到误导信息时是否会被带偏</td>
+      </tr>
+      <tr>
+          <td><strong>RGB</strong></td>
+          <td>评估 RAG 对 LLM 的整体影响</td>
+          <td>噪声鲁棒性、拒答能力、信息整合、反事实鲁棒性</td>
+      </tr>
+      <tr>
+          <td><strong>MIRAGE</strong></td>
+          <td>医疗问答场景的 RAG 评测框架</td>
+          <td>医疗 QA 中 RAG 是否真正提升准确率</td>
+      </tr>
+      <tr>
+          <td><strong>eRAG</strong></td>
+          <td>更关注检索质量对生成结果影响</td>
+          <td>检索 precision、recall、hit rate、MAP、MRR、NDCG 等</td>
+      </tr>
+      <tr>
+          <td><strong>UDCG</strong></td>
+          <td>评估检索内容的“有用性”和“干扰性”</td>
+          <td>好文档是否帮助回答，干扰文档是否损害回答</td>
+      </tr>
+      <tr>
+          <td><strong>BERGEN</strong></td>
+          <td>标准化 RAG 实验的 benchmark/framework</td>
+          <td>用统一设置比较不同 RAG 系统</td>
+      </tr>
+  </tbody>
+</table>
+</li>
+<li>
+<p>结论：RAG 评估需要同时评估 retrieval 和 generation。仅看传统检索相关性不足，因为 LLM 会整体处理上下文，容易被语义相关但无答案的 distractor 影响。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Table 3：RAG 研究总表</p>
+<ul>
+<li>目的：按 retrieval source、multi-hop、training、pre-retrieval、retrieval、post-retrieval、generation 等维度标注代表工作。</li>
+<li>结论：大多数方法使用外部数据；多跳/迭代检索越来越常见；研究重心偏向 retrieval，而 generation customization 仍是空白较大的方向。</li>
+</ul>
+</li>
+<li>
+<p>Table 4：Retriever 与 Generator 总表</p>
+<ul>
+<li>目的：列出代表系统使用的检索器和生成器。</li>
+<li>结论：BM25、DPR、Contriever、Bing、BGE、知识图谱/向量库等仍并存；RAG 系统设计需要在语义质量、效率、可部署性之间权衡。</li>
+</ul>
+</li>
+</ul>
+<h3 id="q6-局限性" class="heading-element"><span>Q6. 局限性</span>
+  <a href="#q6-%e5%b1%80%e9%99%90%e6%80%a7" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>作者明确讨论的挑战主要集中在 Section 8：</p>
+<ul>
+<li>检索模型选择：BM25 效率高，在术语标准化的垂直语料中仍可能很强；神经检索语义能力更强，但成本和部署复杂度更高。</li>
+<li>检索质量：噪声、无关文档、碎片化信息、hard distractor 都会损害生成质量。</li>
+<li>系统效率：精确最近邻检索在某些系统中可占到总推理时间的 97%；近似检索虽快但可能返回更多低质候选，反过来增加生成端负担。</li>
+<li>长上下文 RAG：更多检索文本不一定更好。作者提到长上下文模型会出现 inverted U-shaped 曲线，即检索段落增加后性能先升后降。</li>
+</ul>
+<h3 id="q7-学术价值" class="heading-element"><span>Q7. 学术价值</span>
+  <a href="#q7-%e5%ad%a6%e6%9c%af%e4%bb%b7%e5%80%bc" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ul>
+<li>理论价值：将 RAG 从“模型加检索”的宽泛说法，转化为可分析的 IR 流程框架。</li>
+<li>方法价值：提供一个诊断模板：如果 RAG 效果差，可以分别检查索引、数据、查询、检索器、重排、过滤、生成融合和个性化环节。</li>
+<li>应用价值：对问答、聊天机器人、科学文献生成、医疗 QA、个性化生成、企业知识库等文本生成场景有直接参考意义。</li>
+</ul>
+<h3 id="q8-延伸研究方向" class="heading-element"><span>Q8. 延伸研究方向</span>
+  <a href="#q8-%e5%bb%b6%e4%bc%b8%e7%a0%94%e7%a9%b6%e6%96%b9%e5%90%91" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ol>
+<li>如何设计专门面向 RAG 的检索器，而不是直接复用通用 IR 检索模型？</li>
+<li>如何在低延迟约束下做高质量 re-ranking 和 filtering？</li>
+<li>如何衡量检索结果对生成答案的“真实贡献”，而不只是文本相关性？</li>
+<li>如何处理 hard distractor、噪声文档和互相冲突的证据？</li>
+<li>长上下文 LLM 与 RAG 应如何动态协作，例如先 RAG，必要时再切换 full-context？</li>
+</ol>
+<h3 id="q9-反直觉发现与方法失效分析" class="heading-element"><span>Q9. 反直觉发现与方法失效分析</span>
+  <a href="#q9-%e5%8f%8d%e7%9b%b4%e8%a7%89%e5%8f%91%e7%8e%b0%e4%b8%8e%e6%96%b9%e6%b3%95%e5%a4%b1%e6%95%88%e5%88%86%e6%9e%90" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ul>
+<li>
+<p>Table 1：Adaptive retrieval 并非总是更好</p>
+<ul>
+<li>现象：Adaptive 的主要优势是灵活，可在生成中动态决定何时检索、检索什么，但表中标注复杂度 High、成本 High。</li>
+<li>作者解释：复杂开放任务需要 on-demand information，但高灵活度带来高复杂度和高成本。</li>
+<li>评价：Adaptive 更像高难任务方案，不适合作为默认工程方案。</li>
+</ul>
+</li>
+<li>
+<p>Section 8.2：无关文档有时可能提升准确率</p>
+<ul>
+<li>现象：作者提到 Cuconasu et al. 指出在某些条件下，加入 irrelevant documents 反而能提高整体准确率。</li>
+<li>作者解释：这挑战了“检索结果越干净越好”的直觉，提示噪声可能在特定设置下有特殊作用。</li>
+<li>评价：这是重要的反直觉点，但文章没有给出统一机制解释，仍需专门实验验证。</li>
+</ul>
+</li>
+<li>
+<p>Section 8.3：检索加速可能带来端到端变慢</p>
+<ul>
+<li>现象：精确最近邻检索可占总推理时间最高 97%；近似检索虽然更快，但低质量候选可能迫使系统检索更多文档，增加生成端负担。</li>
+<li>作者解释：速度、检索质量、上下文长度之间存在端到端 tradeoff。</li>
+<li>评价：RAG 优化不能只看 retriever latency，要看 retrieve + rerank + generation 的整体延迟。</li>
+</ul>
+</li>
+<li>
+<p>Section 8.4：长上下文中“更多检索段落”不一定更好</p>
+<ul>
+<li>现象：作者总结长上下文 LLM 中检索段落数量增加后，性能可能先升后降；OpenScholar 相关测试中，给标准 Llama 3.1-8B 超过 10 个 passages 会降低事实准确性和引用质量。</li>
+<li>作者解释：hard negatives 与 lost in the middle 会干扰模型。</li>
+<li>评价：RAG 的关键不是塞更多证据，而是控制证据质量、顺序和结构。</li>
+</ul>
+</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2026-07-03 11:25:40">Updated on 2026-07-03&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-rag%E7%BB%BC%E8%BF%B0/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div></div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/%E7%BB%BC%E8%BF%B0/" class="post-tag" title="Tags - 综述">综述</a><a href="/tags/rag/" class="post-tag" title="Tags - RAG">RAG</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/%E8%AF%BE%E7%A8%8B-ai-agent9%E6%9D%8E%E5%AE%8F%E6%AF%85/" class="post-nav-item" rel="prev" title="AI Agent· 第九讲 大型语言模型能力评估"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>AI Agent· 第九讲 大型语言模型能力评估</a><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory%E7%BB%BC%E8%BF%B0/" class="post-nav-item" rel="next" title="论文 · Memory综述">论文 · Memory综述<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div class="post-reward">
+    <div class="comment"></div>
+    <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
+    <label class="reward-button" for="fi-reward"><?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1776434267563" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2715" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M377.596784 791.989528s-39.199482 22.799699 27.799633 30.399598c81.198926 9.199878 122.598379 7.999894 211.997197-8.999881 0 0 23.599688 14.799804 56.399254 27.599635C473.395518 926.787745 220.198866 835.988946 377.596784 791.989528m-24.399677-112.198517s-43.799421 32.399572 23.199693 39.399479c86.598855 8.999881 155.197948 9.599873 273.596382-13.199825 0 0 16.399783 16.599781 42.199442 25.599661-242.596792 70.999061-512.593222 5.799923-338.995517-51.799315m206.397271-190.197485c49.399347 56.799249-12.999828 107.998572-12.999828 107.998572s125.398342-64.799143 67.799103-145.798072c-53.799289-75.599-94.998744-113.198503 128.198305-242.596792 0.199997 0-350.395367 87.598842-182.99758 280.396292m265.196493 385.194907s28.999617 23.799685-31.799579 42.399439c-115.798469 34.999537-481.593632 45.599397-583.192289 1.399982-36.599516-15.799791 31.999577-37.999498 53.599291-42.599437 22.399704-4.799937 35.399532-3.999947 35.399532-3.999947-40.599463-28.599622-262.596528 56.199257-112.798508 80.398937 408.3946 66.399122 744.790152-29.799606 638.791553-77.598974M396.396536 563.592548s-186.197538 44.199416-65.999128 60.199204c50.799328 6.79991 151.99799 5.199931 246.196745-2.599966 76.998982-6.399915 154.397958-20.39973 154.397958-20.39973s-27.19964 11.599847-46.799381 24.999669c-188.997501 49.799342-553.992675 26.599648-448.994063-24.19968 88.998823-42.799434 161.197869-37.999498 161.197869-37.999497m333.995583 186.597532c192.197459-99.79868 103.198635-195.797411 41.199456-182.797582-15.199799 3.199958-21.999709 5.999921-21.999709 5.99992s5.599926-8.799884 16.399783-12.599833c122.598379-43.199429 216.997131 127.198318-39.599477 194.597427 0-0.199997 2.99996-2.799963 3.999947-5.199932M614.393653 0s106.398593 106.398593-100.998664 269.99643c-166.197802 131.198265-37.999498 206.197274 0 291.596144-96.998717-87.598842-168.197776-164.597824-120.398408-236.396874C463.195652 220.197088 657.393085 168.997765 614.393653 0m-198.997369 1020.786502c184.397562 11.799844 467.593817-6.599913 474.19373-93.798759 0 0-12.799831 32.999564-152.397985 59.399214-157.397919 29.599609-351.595351 26.199654-466.59383 7.199905 0-0.199997 23.599688 19.399743 144.798085 27.19964" fill="" p-id="2716"></path></svg>为博主买一杯java</label>
+    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/wechatpay.jpg" alt="Ting WeChat Pay" data-title="Ting WeChat Pay" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>WeChat Pay</span>
+          </div></div>
+  </div></article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.137.0">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024 - 2026</span><span class="author" itemprop="copyrightHolder">
+              <a href="Tin10g.github.io">Ting</a></span></div><div class="footer-line statistics"><span class="site-time" title='Website running ...'><i class="fa-solid fa-heartbeat fa-fw animate-icon" aria-hidden="true"></i><span class="ms-1 d-none">Runing</span><span class="run-times ms-1">Website running ...</span></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">This website works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":1000},"comment":{"enable":false},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"siteTime":"2024-04-01T11:25:40+08:00","typeit":{"cursorChar":"|","cursorSpeed":1000,"duration":-1,"loop":false,"speed":100},"version":"v0.3.13"};console.log('Page config:', window.config);</script><script src="/js/theme.min.js" defer></script><script src="/js/custom.min.js" defer></script></body>
+</html>
