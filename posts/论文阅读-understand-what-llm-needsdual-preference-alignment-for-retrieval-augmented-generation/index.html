@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=7828&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>论文 · Understand What LLM Needs：Dual Preference Alignment for Retrieval-Augmented Generation - Ting BLOG🐈</title><meta name="author" content="Ting">
+<meta name="description" content="基础信息论文标题：Understand What LLM Needs: Dual Preference Alignment for Retrieval-Augmented Generation 作者：Guanting Dong, Yutao Zhu, Chenghao Zhang, Zechen Wang, Ji-Rong Wen, Zhicheng Dou 会议：WWW 2025 核心贡献：本文提出 DPA-RAG，通过构造 LLM 偏好知识、训练偏好对齐 reranker，并在 SFT 前加入 LLM 自对齐阶段，同时缓解检索器与 LLM 之间的外部偏好错位和 LLM 利用知识时的内部偏好错位，从而在四个知识密集型 QA 数据集上稳定优于传统 RAG、reranker RAG 和已有偏好对齐方法。
+">
+  <meta itemprop="name" content="论文 · Understand What LLM Needs：Dual Preference Alignment for Retrieval-Augmented Generation">
+  <meta itemprop="description" content="基础信息论文标题：Understand What LLM Needs: Dual Preference Alignment for Retrieval-Augmented Generation 作者：Guanting Dong, Yutao Zhu, Chenghao Zhang, Zechen Wang, Ji-Rong Wen, Zhicheng Dou 会议：WWW 2025 核心贡献：本文提出 DPA-RAG，通过构造 LLM 偏好知识、训练偏好对齐 reranker，并在 SFT 前加入 LLM 自对齐阶段，同时缓解检索器与 LLM 之间的外部偏好错位和 LLM 利用知识时的内部偏好错位，从而在四个知识密集型 QA 数据集上稳定优于传统 RAG、reranker RAG 和已有偏好对齐方法。">
+  <meta itemprop="datePublished" content="2026-07-06T11:01:08+08:00">
+  <meta itemprop="dateModified" content="2026-07-06T11:01:08+08:00">
+  <meta itemprop="wordCount" content="776">
+  <meta itemprop="keywords" content="论文阅读"><meta property="og:url" content="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-understand-what-llm-needsdual-preference-alignment-for-retrieval-augmented-generation/">
+  <meta property="og:site_name" content="Ting BLOG🐈">
+  <meta property="og:title" content="论文 · Understand What LLM Needs：Dual Preference Alignment for Retrieval-Augmented Generation">
+  <meta property="og:description" content="基础信息论文标题：Understand What LLM Needs: Dual Preference Alignment for Retrieval-Augmented Generation 作者：Guanting Dong, Yutao Zhu, Chenghao Zhang, Zechen Wang, Ji-Rong Wen, Zhicheng Dou 会议：WWW 2025 核心贡献：本文提出 DPA-RAG，通过构造 LLM 偏好知识、训练偏好对齐 reranker，并在 SFT 前加入 LLM 自对齐阶段，同时缓解检索器与 LLM 之间的外部偏好错位和 LLM 利用知识时的内部偏好错位，从而在四个知识密集型 QA 数据集上稳定优于传统 RAG、reranker RAG 和已有偏好对齐方法。">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-07-06T11:01:08+08:00">
+    <meta property="article:modified_time" content="2026-07-06T11:01:08+08:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="论文 · Understand What LLM Needs：Dual Preference Alignment for Retrieval-Augmented Generation">
+  <meta name="twitter:description" content="基础信息论文标题：Understand What LLM Needs: Dual Preference Alignment for Retrieval-Augmented Generation 作者：Guanting Dong, Yutao Zhu, Chenghao Zhang, Zechen Wang, Ji-Rong Wen, Zhicheng Dou 会议：WWW 2025 核心贡献：本文提出 DPA-RAG，通过构造 LLM 偏好知识、训练偏好对齐 reranker，并在 SFT 前加入 LLM 自对齐阶段，同时缓解检索器与 LLM 之间的外部偏好错位和 LLM 利用知识时的内部偏好错位，从而在四个知识密集型 QA 数据集上稳定优于传统 RAG、reranker RAG 和已有偏好对齐方法。">
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-understand-what-llm-needsdual-preference-alignment-for-retrieval-augmented-generation/" title="论文 · Understand What LLM Needs：Dual Preference Alignment for Retrieval-Augmented Generation - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-graphragfrom-local-to-global/" title="论文 · GraphRAG：From Local to Global" /><link rel="next" type="text/html" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memoragboosting-long-context-processing-with-global-memory-enhanced-retrieval-augmentation/" title="论文 · MemoRAG：Boosting Long Context Processing with Global Memory-Enhanced Retrieval Augmentation" /><link rel="alternate" type="text/markdown" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-understand-what-llm-needsdual-preference-alignment-for-retrieval-augmented-generation/index.md" title="论文 · Understand What LLM Needs：Dual Preference Alignment for Retrieval-Augmented Generation - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "论文 · Understand What LLM Needs：Dual Preference Alignment for Retrieval-Augmented Generation",
+    "inLanguage": "en",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:7828\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-understand-what-llm-needsdual-preference-alignment-for-retrieval-augmented-generation\/"
+    },"genre": "posts","wordcount":  776 ,
+    "url": "http:\/\/localhost:7828\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-understand-what-llm-needsdual-preference-alignment-for-retrieval-augmented-generation\/","datePublished": "2026-07-06T11:01:08+08:00","dateModified": "2026-07-06T11:01:08+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Ting"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/archives/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/archives/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>论文 · Understand What LLM Needs：Dual Preference Alignment for Retrieval-Augmented Generation</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" class="post-category" title="Category - 论文阅读"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 论文阅读</a></span></div><div class="post-meta-line"><span title="published on 2026-07-06 11:01:08"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2026-07-06">2026-07-06</time></span>&nbsp;<span title="776 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 800 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>4 minutes</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#基础信息">基础信息</a></li>
+    <li><a href="#q1-研究动机">Q1. 研究动机</a></li>
+    <li><a href="#q2-核心问题">Q2. 核心问题</a></li>
+    <li><a href="#q3-现有不足--本文改进">Q3. 现有不足 &amp; 本文改进</a></li>
+    <li><a href="#q4-方法流程">Q4. 方法流程</a>
+      <ul>
+        <li><a href="#整体结构">整体结构</a></li>
+        <li><a href="#推理流程">推理流程</a></li>
+        <li><a href="#训练数据格式pa-reranker-训练">训练数据格式（PA-Reranker 训练）</a></li>
+        <li><a href="#模型结构pa-reranker-训练">模型结构（PA-Reranker 训练）</a></li>
+        <li><a href="#三种损失函数pa-reranker-训练">三种损失函数（PA-Reranker 训练）</a></li>
+        <li><a href="#多任务权重自动学习--mgda-ubpa-reranker-训练">多任务权重自动学习 — MGDA-UB（PA-Reranker 训练）</a></li>
+        <li><a href="#llm-自对齐llm-self-alignment">LLM 自对齐（LLM Self-Alignment）</a></li>
+      </ul>
+    </li>
+    <li><a href="#q5-实验设计与结论">Q5. 实验设计与结论</a></li>
+    <li><a href="#q6-局限性">Q6. 局限性</a></li>
+    <li><a href="#q7-学术价值">Q7. 学术价值</a></li>
+    <li><a href="#q8-延伸研究方向">Q8. 延伸研究方向</a></li>
+    <li><a href="#q9-反直觉发现与方法失效分析">Q9. 反直觉发现与方法失效分析</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 id="基础信息" class="heading-element"><span>基础信息</span>
+  <a href="#%e5%9f%ba%e7%a1%80%e4%bf%a1%e6%81%af" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>论文标题：Understand What LLM Needs: Dual Preference Alignment for Retrieval-Augmented Generation</li>
+<li>作者：Guanting Dong, Yutao Zhu, Chenghao Zhang, Zechen Wang, Ji-Rong Wen, Zhicheng Dou</li>
+<li>会议：WWW 2025</li>
+</ul>
+<p><strong>核心贡献</strong>：本文提出 DPA-RAG，通过构造 LLM 偏好知识、训练偏好对齐 reranker，并在 SFT 前加入 LLM 自对齐阶段，同时缓解检索器与 LLM 之间的外部偏好错位和 LLM 利用知识时的内部偏好错位，从而在四个知识密集型 QA 数据集上稳定优于传统 RAG、reranker RAG 和已有偏好对齐方法。</p>
+<h2 id="q1-研究动机" class="heading-element"><span>Q1. 研究动机</span>
+  <a href="#q1-%e7%a0%94%e7%a9%b6%e5%8a%a8%e6%9c%ba" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>RAG 的目标是用外部文档增强 LLM，但检索器通常按向量相似度返回文档，LLM 的推理需求却不一定等同于“语义相似”。</p>
+<p>作者在 Figure 1 中观察到：低相似度文档有时能帮助 LLM 答对，高相似度文档反而可能误导 LLM。因此，可靠 RAG 不只需要“检索相关文档”，还要检索和使用符合 LLM 知识偏好的文档。</p>
+<p>也就是</p>
+<ul>
+<li>排在 第 100 位 的低相似度文档有时能帮助 LLM 答对（Aligned Knowledge）</li>
+<li>排在 第 1 位 的高相似度文档反而可能误导 LLM（Unaligned Knowledge）</li>
+</ul>
+<p><img loading="lazy" src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260707160933448.png" alt="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260707160933448.png" srcset="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260707160933448.png?size=small, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260707160933448.png?size=medium 1.5x, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260707160933448.png?size=large 2x" data-title="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260707160933448.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+<h2 id="q2-核心问题" class="heading-element"><span>Q2. 核心问题</span>
+  <a href="#q2-%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>提出两个核心概念：</p>
+<ol>
+<li>外部偏好错位：检索器排序 ≠ LLM 知识偏好</li>
+<li>内部偏好错位：LLM 自身不会识别哪些知识对自己有用</li>
+</ol>
+<p>技术上，论文把问题拆成两层偏好对齐：</p>
+<p>一是让外部 RAG 组件，尤其是 retriever/reranker，排序出符合 LLM 偏好的文档；</p>
+<p>二是让 LLM 在训练中学会识别并利用这些偏好对齐知识。</p>
+<h2 id="q3-现有不足--本文改进" class="heading-element"><span>Q3. 现有不足 &amp; 本文改进</span>
+  <a href="#q3-%e7%8e%b0%e6%9c%89%e4%b8%8d%e8%b6%b3--%e6%9c%ac%e6%96%87%e6%94%b9%e8%bf%9b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>现有方法的不足：</p>
+<ul>
+<li>传统 RAG 把检索器和 LLM 当作松散拼接的两个模块，默认“相似文档”就是“有用文档”。</li>
+<li>reranker 方法多关注 query-document 相关性，没有显式建模不同 LLM 的知识偏好。</li>
+<li>REPLUG、RA-Judgement 等偏好对齐方法更多依赖 logits 或直接反馈，缺少多粒度地对齐文档判断、文档排序和语义表示。</li>
+<li>训练数据中缺少足够多样的偏好样本，难以覆盖复杂查询形态。</li>
+</ul>
+<p>本文改进点：</p>
+<ul>
+<li>提出偏好知识构造流程，把文档标成 <code>Aligned Knowledge</code>、<code>Unaligned Knowledge</code>、<code>Both Correct</code>、<code>Both Incorrect</code> 四类，并只保留对 LLM 推理有明确正负影响的样本。</li>
+<li>设计五类 query augmentation：Rephrasing、Complexity、Decomposition、Constraint、SPARQL，并用 NLI 过滤语义冲突样本。</li>
+<li>在 reranker 侧联合 point-wise、pair-wise 和 contrastive preference alignment，实现外部偏好对齐。</li>
+<li>在 LLM 侧加入 pre-aligned stage，让模型先学习识别正负偏好知识，再进行普通 QA SFT，实现内部自对齐。</li>
+</ul>
+<h2 id="q4-方法流程" class="heading-element"><span>Q4. 方法流程</span>
+  <a href="#q4-%e6%96%b9%e6%b3%95%e6%b5%81%e7%a8%8b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>DPA-RAG 首先用训练集 query 检索 top-k 文档，并从第 1、25、50、100 位采样文档。</p>
+<p>LLM 分别直接回答和参考这些文档回答，再根据答案是否正确把文档影响分成四类。</p>
+<table>
+  <thead>
+      <tr>
+          <th>LLM 不用文档时</th>
+          <th>LLM 用文档后</th>
+          <th>文档标签</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>✅ 答对</td>
+          <td>❌ 答错</td>
+          <td>Unaligned Knowledge（有害）</td>
+      </tr>
+      <tr>
+          <td>❌ 答错</td>
+          <td>✅ 答对</td>
+          <td>Aligned Knowledge（有益）</td>
+      </tr>
+      <tr>
+          <td>✅ 答对</td>
+          <td>✅ 答对</td>
+          <td>Both Correct（丢弃）</td>
+      </tr>
+      <tr>
+          <td>❌ 答错</td>
+          <td>❌ 答错</td>
+          <td>Both Incorrect（丢弃）</td>
+      </tr>
+  </tbody>
+</table>
+<p>只有能让错误答案变正确的 <code>Aligned Knowledge</code>，或让正确答案变错误的 <code>Unaligned Knowledge</code> 被保留下来作为偏好知识。</p>
+<p>随后，作者用五种策略扩增 query，并用 NLI 模型删除与原 query 矛盾的扩增样本。</p>
+<ul>
+<li>Rephrasing：改写</li>
+<li>Complexity：增加复杂度</li>
+<li>Decomposition：分解为子问题</li>
+<li>Constraint：添加约束条件</li>
+<li>SPARQL：转为结构化查询</li>
+</ul>
+<p>基于这些偏好数据，DPA-RAG 训练一个 preference-aligned reranker：</p>
+<p>point-wise 任务判断单篇文档是否对齐，</p>
+<p>pair-wise 任务学习文档偏好排序，</p>
+<p>contrastive 任务把 query 表示拉近偏好文档并远离负样本。</p>
+<p>最后，开放源 LLM 先在 pre-aligned 任务中学习判断文档是 positive 还是 negative knowledge，再用经偏好 reranker 重排后的文档进行 QA SFT。</p>
+<p>推理时，retriever 先取回候选文档，偏好 reranker 重排过滤，LLM 再基于重排文档生成答案。</p>
+<h3 id="整体结构" class="heading-element"><span>整体结构</span>
+  <a href="#%e6%95%b4%e4%bd%93%e7%bb%93%e6%9e%84" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">原始 Query → Retriever(Top-K) → PA-Reranker(重排过滤) → LLM(生成答案)
+</span></span><span class="line"><span class="cl">                                   ↑                       ↑
+</span></span><span class="line"><span class="cl">                            外部偏好对齐              内部自对齐</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="推理流程" class="heading-element"><span>推理流程</span>
+  <a href="#%e6%8e%a8%e7%90%86%e6%b5%81%e7%a8%8b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Query → DPR Retriever (Top-100)
+</span></span><span class="line"><span class="cl">     → PA-Reranker 对每篇文档打分（二分类器的 aligned 概率）
+</span></span><span class="line"><span class="cl">     → 按分数重排，保留 Top-K
+</span></span><span class="line"><span class="cl">     → Pre-aligned LLM 基于重排文档生成答案</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="训练数据格式pa-reranker-训练" class="heading-element"><span>训练数据格式（PA-Reranker 训练）</span>
+  <a href="#%e8%ae%ad%e7%bb%83%e6%95%b0%e6%8d%ae%e6%a0%bc%e5%bc%8fpa-reranker-%e8%ae%ad%e7%bb%83" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  &#34;query&#34;: &#34;问题文本&#34;,
+</span></span><span class="line"><span class="cl">  &#34;classification&#34;: {
+</span></span><span class="line"><span class="cl">    &#34;text&#34;: &#34;文档文本&#34;,
+</span></span><span class="line"><span class="cl">    &#34;label&#34;: 1          // 1=Aligned Knowledge, 2=Unaligned Knowledge
+</span></span><span class="line"><span class="cl">  },
+</span></span><span class="line"><span class="cl">  &#34;rank_list&#34;: [&#34;doc1&#34;, &#34;doc2&#34;, &#34;doc3&#34;, &#34;doc4&#34;],  // 4篇需排序的文档
+</span></span><span class="line"><span class="cl">  &#34;positive&#34;: [&#34;pos_doc1&#34;, &#34;pos_doc2&#34;],            // 偏好对齐的正样本
+</span></span><span class="line"><span class="cl">  &#34;negative&#34;: [&#34;neg_doc1&#34;, &#34;neg_doc2&#34;]             // 偏好对齐的负样本
+</span></span><span class="line"><span class="cl">}</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="模型结构pa-reranker-训练" class="heading-element"><span>模型结构（PA-Reranker 训练）</span>
+  <a href="#%e6%a8%a1%e5%9e%8b%e7%bb%93%e6%9e%84pa-reranker-%e8%ae%ad%e7%bb%83" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">class</span> <span class="n">BgeJoinedModel</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pretrained_model_path</span><span class="p">,</span> <span class="n">loss_types</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">bge</span> <span class="o">=</span> <span class="n">AutoModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pretrained_model_path</span><span class="p">)</span>  <span class="c1"># BGE 基座</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># 二分类头</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">scl_loss_func</span> <span class="o">=</span> <span class="n">SupConLoss</span><span class="p">()</span>      <span class="c1"># 对比学习 loss</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="三种损失函数pa-reranker-训练" class="heading-element"><span>三种损失函数（PA-Reranker 训练）</span>
+  <a href="#%e4%b8%89%e7%a7%8d%e6%8d%9f%e5%a4%b1%e5%87%bd%e6%95%b0pa-reranker-%e8%ae%ad%e7%bb%83" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><table>
+  <thead>
+      <tr>
+          <th>损失</th>
+          <th>粒度</th>
+          <th>实现函数</th>
+          <th>作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Classification Loss</strong></td>
+          <td>文档级别的偏好判断</td>
+          <td>calc_cls_loss()</td>
+          <td>判断单篇文档是 Aligned 还是 Unaligned（二分类交叉熵）</td>
+      </tr>
+      <tr>
+          <td><strong>Rank Loss</strong></td>
+          <td>排序级别的偏好学习</td>
+          <td>calc_rank_loss()</td>
+          <td>学习文档偏好排序，让 aligned 文档排在 unaligned 前面（logsigmoid 排序损失，C(4,2)=6 对）</td>
+      </tr>
+      <tr>
+          <td><strong>Contrastive Loss</strong></td>
+          <td>语义表示级别的偏好对齐</td>
+          <td>calc_scl_loss()</td>
+          <td>把 query 的表示拉近 positive 文档、远离 negative 文档（SupCon 监督对比学习）</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="多任务权重自动学习--mgda-ubpa-reranker-训练" class="heading-element"><span>多任务权重自动学习 — MGDA-UB（PA-Reranker 训练）</span>
+  <a href="#%e5%a4%9a%e4%bb%bb%e5%8a%a1%e6%9d%83%e9%87%8d%e8%87%aa%e5%8a%a8%e5%ad%a6%e4%b9%a0--mgda-ubpa-reranker-%e8%ae%ad%e7%bb%83" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">class WeightsCalculator:
+</span></span><span class="line"><span class="cl">    def calc_weights(self, submodels, losses):
+</span></span><span class="line"><span class="cl">        # 使用多梯度下降算法 (MGDA-UB)
+</span></span><span class="line"><span class="cl">        # 自动计算每个 loss 的最优权重 alpha
+</span></span><span class="line"><span class="cl">        # 在帕累托最优方向上优化</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="llm-自对齐llm-self-alignment" class="heading-element"><span>LLM 自对齐（LLM Self-Alignment）</span>
+  <a href="#llm-%e8%87%aa%e5%af%b9%e9%bd%90llm-self-alignment" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ol>
+<li>Pre-aligned Stage：先让 LLM 学习判断文档是 &ldquo;positive knowledge&rdquo; 还是 &ldquo;negative knowledge&rdquo;（二分类任务）</li>
+<li>QA SFT Stage：再用偏好 reranker 重排后的文档进行标准 QA 微调</li>
+</ol>
+<h2 id="q5-实验设计与结论" class="heading-element"><span>Q5. 实验设计与结论</span>
+  <a href="#q5-%e5%ae%9e%e9%aa%8c%e8%ae%be%e8%ae%a1%e4%b8%8e%e7%bb%93%e8%ae%ba" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><table>
+  <thead>
+      <tr>
+          <th>实验/分析</th>
+          <th>目的</th>
+          <th>关键设置与结论</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>主实验：四个 QA 数据集</td>
+          <td>验证 DPA-RAG 是否优于 RAG、reranker RAG 和偏好对齐基线</td>
+          <td>数据集为 NQ、TriviaQA、HotpotQA、WebQSP。<br />Table 1 中 DPA-RAG LLaMA2-7B 在 NQ F1 60.19、TQA F1 70.29、HQA F1 43.34、WebQSP F1 71.80，均高于对应传统 RAG 的 54.76、63.80、38.90、64.22。</td>
+      </tr>
+      <tr>
+          <td>跨 reader 泛化</td>
+          <td>验证方法是否只适用于某个 LLM</td>
+          <td>Table 1 中 GPT-3.5、GPT-4、LLaMA2-7B/13B、LLaMA3-8B、Qwen2-7B 均有提升，例如 GPT-4 在 TQA Hit@1 从 79.98 提到 84.41，WebQSP F1 从 67.20 提到 74.83。</td>
+      </tr>
+      <tr>
+          <td>消融实验</td>
+          <td>验证 PA-reranker、pre-align、query augmentation 的作用</td>
+          <td>Table 2 中完整 DPA-RAG 在 NQ/TQA F1 为 60.19/70.29；去掉 Pre-Align 后降为 58.95/61.35；去掉 Query Augmentation 后降为 57.45/60.93。</td>
+      </tr>
+      <tr>
+          <td>细粒度消融</td>
+          <td>验证 point-wise、pair-wise、CPA 和 MGDA-UB 的作用</td>
+          <td>Table 6 显示去掉 point-wise 在 NQ/TQA F1 分别下降 2.12/2.43，影响最大；去掉 pair-wise 分别下降 0.92/1.74；去掉 CPA 分别下降 1.12/2.13。</td>
+      </tr>
+      <tr>
+          <td>参数规模分析</td>
+          <td>研究 reader 参数量与 RAG 能力关系</td>
+          <td>Figure 3 显示基础 RAG 在 500M 到 7B 参数区间提升明显，超过 7B 后趋于稳定；DPA-RAG 在不同参数规模下保持更平滑、稳定的增益。</td>
+      </tr>
+      <tr>
+          <td>偏好对齐效果分析</td>
+          <td>检验 DPA-RAG 是否减少 unaligned knowledge</td>
+          <td>Figure 4 显示 DPA-RAG 在 <code>Aligned Knowledge</code> 类别最高，并显著降低 <code>Unaligned Knowledge</code>，说明它确实在过滤会误导 LLM 的文档。</td>
+      </tr>
+      <tr>
+          <td>Query augmentation 分析</td>
+          <td>研究扩增数据复杂度、多样性与性能关系</td>
+          <td>Table 3 中 Origin 的 NQ F1 为 51.78，Complexity 扩增后达到 54.81；Decomposition 为 54.16，说明复杂度和多样性越高，偏好对齐训练越有效。</td>
+      </tr>
+      <tr>
+          <td>训练策略分析</td>
+          <td>比较 sequential training 与 mixed training</td>
+          <td>Figure 6 显示直接混合偏好任务和 QA 任务会导致性能下降和波动；先 pre-align 再 SFT 的顺序训练更稳定。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="q6-局限性" class="heading-element"><span>Q6. 局限性</span>
+  <a href="#q6-%e5%b1%80%e9%99%90%e6%80%a7" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>作者明确提到或实验显示：</p>
+<ul>
+<li>论文没有单独的 Limitations 章节。</li>
+<li>Figure 1 和后续分析表明，即使文档包含 grounding 信息，也可能不符合 LLM 偏好，因此偏好对齐依赖于对“有益/有害文档”的准确识别。</li>
+<li>Section 4.3.4 显示混合训练会出现性能下降和波动，说明不同训练目标之间存在优化冲突。</li>
+<li>Table 4 中 DPA-RAG 仍需要训练 reranker 和 reader，虽然作者报告其推理流程仍较高效，但训练阶段比普通 RAG 更复杂。</li>
+</ul>
+<p>以下为分析归纳，非原文明确说明：</p>
+<ul>
+<li>偏好标签来自 LLM 的回答变化，可能把数据噪声、评测误差或 LLM 偶然答对/答错误认为文档偏好。</li>
+<li>DPA-RAG 的偏好是 reader-specific 的。一个 reader 偏好的文档不一定适合另一个 reader，因此跨模型迁移仍可能受限。</li>
+<li>方法主要在知识密集型 QA 上验证，对开放式生成、长文档综合、代码或专业高风险场景的有效性仍需进一步测试。</li>
+<li>增强查询和 NLI 过滤引入额外模型依赖，完整复现成本高于普通 RAG。</li>
+</ul>
+<h2 id="q7-学术价值" class="heading-element"><span>Q7. 学术价值</span>
+  <a href="#q7-%e5%ad%a6%e6%9c%af%e4%bb%b7%e5%80%bc" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>理论价值：明确提出 RAG 中存在“知识偏好错位”，把 RAG 失败原因从相关性不足推进到“检索知识是否符合 LLM 推理需求”的层面。</li>
+<li>方法价值：给出一套可复用的偏好知识构造、query augmentation、多粒度 reranker 对齐和 LLM 自对齐流程。</li>
+<li>应用价值：适用于需要提升 QA 准确性、降低误导性检索文档影响的 RAG 系统，尤其适合已有 retriever 召回质量不错但 reader 容易被部分文档带偏的场景。</li>
+</ul>
+<h2 id="q8-延伸研究方向" class="heading-element"><span>Q8. 延伸研究方向</span>
+  <a href="#q8-%e5%bb%b6%e4%bc%b8%e7%a0%94%e7%a9%b6%e6%96%b9%e5%90%91" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ol>
+<li>研究不同 reader 之间的偏好迁移：一个 LLM 上构造的 aligned knowledge 是否能泛化到另一个 LLM。</li>
+<li>将偏好对齐扩展到多跳检索和 agentic RAG，让系统不仅重排文档，还能决定何时重写 query、何时停止检索。</li>
+<li>用人工标注或外部 verifier 校准 <code>Aligned/Unaligned Knowledge</code> 标签，降低 LLM 自举标注带来的偏差。</li>
+<li>在长文档总结、开放式问答、医学法律等专业领域测试 DPA-RAG，观察偏好对齐是否仍然稳定。</li>
+<li>研究偏好对齐 reranker 的可解释性，让用户能看到某篇文档被认为“对齐”或“不对齐”的原因。</li>
+</ol>
+<h2 id="q9-反直觉发现与方法失效分析" class="heading-element"><span>Q9. 反直觉发现与方法失效分析</span>
+  <a href="#q9-%e5%8f%8d%e7%9b%b4%e8%a7%89%e5%8f%91%e7%8e%b0%e4%b8%8e%e6%96%b9%e6%b3%95%e5%a4%b1%e6%95%88%e5%88%86%e6%9e%90" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>发现一：高相似度文档不一定更有帮助。Figure 1 中作者指出，在 <code>Aligned Knowledge</code> 场景下，第 100 位这类低向量相似度文档仍可能帮助 GPT-3.5 推出正确答案；在 <code>Unaligned Knowledge</code> 场景下，高相似度文档反而更可能误导 LLM。作者已讨论该现象，并据此提出偏好知识对齐。</li>
+<li>发现二：去掉 PA-Rerank 后，NQ F1 没有下降。Table 2 中完整 DPA-RAG 的 NQ F1 为 60.19，<code>w/o PA-Rerank</code> 的 NQ F1 也是 60.19，但 Hits@1 从 56.03 降到 52.80。作者总体解释为移除任一模块都会降低性能；这里更细地看，PA-Rerank 对首答命中更敏感，对 NQ F1 的边际影响不明显，作者未单独解释这个异常。</li>
+<li>发现三：去掉双对齐后可能比标准 RAG 更差。Table 2 中 TQA 上 <code>w/o Pre-Align + PA-Rerank</code> 的 Hits@1/F1 为 58.24/59.30，低于 Standard RAG 的 63.90/63.80。作者将其作为双对齐互补性的证据；我的理解是，若只保留部分数据处理或训练流程而缺少核心对齐模块，可能引入训练分布变化却没有带来有效偏好筛选。</li>
+<li>发现四：复杂扩增比简单改写更有效。Table 3 中 Rephrasing 的 NQ F1 为 52.27，而 Complexity 为 54.81、Decomposition 为 54.16。作者解释为复杂度和多样性提升会增强偏好对齐数据质量。</li>
+<li>整体评价：DPA-RAG 的实验结论较稳健，主实验、消融和偏好类别分析相互支撑。但它的有效性依赖于偏好数据构造是否可靠，并且主要证明了 QA 场景下的偏好对齐收益，不应被理解为通用消除幻觉方案。</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2026-07-06 11:01:08">Updated on 2026-07-06&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-understand-what-llm-needsdual-preference-alignment-for-retrieval-augmented-generation/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div></div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-graphragfrom-local-to-global/" class="post-nav-item" rel="prev" title="论文 · GraphRAG：From Local to Global"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>论文 · GraphRAG：From Local to Global</a><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memoragboosting-long-context-processing-with-global-memory-enhanced-retrieval-augmentation/" class="post-nav-item" rel="next" title="论文 · MemoRAG：Boosting Long Context Processing With Global Memory-Enhanced Retrieval Augmentation">论文 · MemoRAG：Boosting Long Context Processing With Global Memory-Enhanced Retrieval Augmentation<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div class="post-reward">
+    <div class="comment"></div>
+    <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
+    <label class="reward-button" for="fi-reward"><?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1776434267563" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2715" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M377.596784 791.989528s-39.199482 22.799699 27.799633 30.399598c81.198926 9.199878 122.598379 7.999894 211.997197-8.999881 0 0 23.599688 14.799804 56.399254 27.599635C473.395518 926.787745 220.198866 835.988946 377.596784 791.989528m-24.399677-112.198517s-43.799421 32.399572 23.199693 39.399479c86.598855 8.999881 155.197948 9.599873 273.596382-13.199825 0 0 16.399783 16.599781 42.199442 25.599661-242.596792 70.999061-512.593222 5.799923-338.995517-51.799315m206.397271-190.197485c49.399347 56.799249-12.999828 107.998572-12.999828 107.998572s125.398342-64.799143 67.799103-145.798072c-53.799289-75.599-94.998744-113.198503 128.198305-242.596792 0.199997 0-350.395367 87.598842-182.99758 280.396292m265.196493 385.194907s28.999617 23.799685-31.799579 42.399439c-115.798469 34.999537-481.593632 45.599397-583.192289 1.399982-36.599516-15.799791 31.999577-37.999498 53.599291-42.599437 22.399704-4.799937 35.399532-3.999947 35.399532-3.999947-40.599463-28.599622-262.596528 56.199257-112.798508 80.398937 408.3946 66.399122 744.790152-29.799606 638.791553-77.598974M396.396536 563.592548s-186.197538 44.199416-65.999128 60.199204c50.799328 6.79991 151.99799 5.199931 246.196745-2.599966 76.998982-6.399915 154.397958-20.39973 154.397958-20.39973s-27.19964 11.599847-46.799381 24.999669c-188.997501 49.799342-553.992675 26.599648-448.994063-24.19968 88.998823-42.799434 161.197869-37.999498 161.197869-37.999497m333.995583 186.597532c192.197459-99.79868 103.198635-195.797411 41.199456-182.797582-15.199799 3.199958-21.999709 5.999921-21.999709 5.99992s5.599926-8.799884 16.399783-12.599833c122.598379-43.199429 216.997131 127.198318-39.599477 194.597427 0-0.199997 2.99996-2.799963 3.999947-5.199932M614.393653 0s106.398593 106.398593-100.998664 269.99643c-166.197802 131.198265-37.999498 206.197274 0 291.596144-96.998717-87.598842-168.197776-164.597824-120.398408-236.396874C463.195652 220.197088 657.393085 168.997765 614.393653 0m-198.997369 1020.786502c184.397562 11.799844 467.593817-6.599913 474.19373-93.798759 0 0-12.799831 32.999564-152.397985 59.399214-157.397919 29.599609-351.595351 26.199654-466.59383 7.199905 0-0.199997 23.599688 19.399743 144.798085 27.19964" fill="" p-id="2716"></path></svg>为博主买一杯java</label>
+    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/wechatpay.jpg" alt="Ting WeChat Pay" data-title="Ting WeChat Pay" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>WeChat Pay</span>
+          </div></div>
+  </div></article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.137.0">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024 - 2026</span><span class="author" itemprop="copyrightHolder">
+              <a href="Tin10g.github.io">Ting</a></span></div><div class="footer-line statistics"><span class="site-time" title='Website running ...'><i class="fa-solid fa-heartbeat fa-fw animate-icon" aria-hidden="true"></i><span class="ms-1 d-none">Runing</span><span class="run-times ms-1">Website running ...</span></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">This website works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":1000},"comment":{"enable":false},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"siteTime":"2024-04-01T11:25:40+08:00","typeit":{"cursorChar":"|","cursorSpeed":1000,"duration":-1,"loop":false,"speed":100},"version":"v0.3.13"};console.log('Page config:', window.config);</script><script src="/js/theme.min.js" defer></script><script src="/js/custom.min.js" defer></script></body>
+</html>

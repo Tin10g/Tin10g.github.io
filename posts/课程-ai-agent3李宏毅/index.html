@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html itemscope itemtype="http://schema.org/WebPage" lang="en">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8533&amp;path=livereload" data-no-instant defer></script>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=7828&amp;path=livereload" data-no-instant defer></script>
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -13,7 +13,7 @@
   <meta itemprop="datePublished" content="2026-06-29T11:25:40+08:00">
   <meta itemprop="dateModified" content="2026-06-29T11:25:40+08:00">
   <meta itemprop="wordCount" content="35">
-  <meta itemprop="keywords" content="课程 李宏毅2026"><meta property="og:url" content="http://localhost:8533/posts/%E8%AF%BE%E7%A8%8B-ai-agent3%E6%9D%8E%E5%AE%8F%E6%AF%85/">
+  <meta itemprop="keywords" content="课程 李宏毅2026"><meta property="og:url" content="http://localhost:7828/posts/%E8%AF%BE%E7%A8%8B-ai-agent3%E6%9D%8E%E5%AE%8F%E6%AF%85/">
   <meta property="og:site_name" content="Ting BLOG🐈">
   <meta property="og:title" content="AI Agent· 第三讲 Transformer架构">
   <meta property="og:description" content="Transformer架构Self-Attention vs RNNRNN（类比Memory的过程）Ht：memory f(A,t)：Reflection f(B,t)：Read f(C,t)：Write Self-Attention二者区别Self-Attention">
@@ -27,7 +27,7 @@
   <meta name="twitter:title" content="AI Agent· 第三讲 Transformer架构">
   <meta name="twitter:description" content="Transformer架构Self-Attention vs RNNRNN（类比Memory的过程）Ht：memory f(A,t)：Reflection f(B,t)：Read f(C,t)：Write Self-Attention二者区别Self-Attention">
 <meta name="application-name" content="FixIt">
-<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:8533/posts/%E8%AF%BE%E7%A8%8B-ai-agent3%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第三讲 Transformer架构 - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:8533/posts/%E8%AF%BE%E7%A8%8B-ai-agent2%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第二讲 LLM大模型内部运作原理" /><link rel="next" type="text/html" href="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive/" title="论文 · When to Forget: A Memory Governance Primitive" /><link rel="alternate" type="text/markdown" href="http://localhost:8533/posts/%E8%AF%BE%E7%A8%8B-ai-agent3%E6%9D%8E%E5%AE%8F%E6%AF%85/index.md" title="AI Agent· 第三讲 Transformer架构 - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:7828/posts/%E8%AF%BE%E7%A8%8B-ai-agent3%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第三讲 Transformer架构 - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:7828/posts/%E8%AF%BE%E7%A8%8B-ai-agent2%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第二讲 LLM大模型内部运作原理" /><link rel="next" type="text/html" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive/" title="论文 · When to Forget: A Memory Governance Primitive" /><link rel="alternate" type="text/markdown" href="http://localhost:7828/posts/%E8%AF%BE%E7%A8%8B-ai-agent3%E6%9D%8E%E5%AE%8F%E6%AF%85/index.md" title="AI Agent· 第三讲 Transformer架构 - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
@@ -37,9 +37,9 @@
     "inLanguage": "en",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "http:\/\/localhost:8533\/posts\/%E8%AF%BE%E7%A8%8B-ai-agent3%E6%9D%8E%E5%AE%8F%E6%AF%85\/"
+      "@id": "http:\/\/localhost:7828\/posts\/%E8%AF%BE%E7%A8%8B-ai-agent3%E6%9D%8E%E5%AE%8F%E6%AF%85\/"
     },"genre": "posts","wordcount":  35 ,
-    "url": "http:\/\/localhost:8533\/posts\/%E8%AF%BE%E7%A8%8B-ai-agent3%E6%9D%8E%E5%AE%8F%E6%AF%85\/","datePublished": "2026-06-29T11:25:40+08:00","dateModified": "2026-06-29T11:25:40+08:00","publisher": {
+    "url": "http:\/\/localhost:7828\/posts\/%E8%AF%BE%E7%A8%8B-ai-agent3%E6%9D%8E%E5%AE%8F%E6%AF%85\/","datePublished": "2026-06-29T11:25:40+08:00","dateModified": "2026-06-29T11:25:40+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",

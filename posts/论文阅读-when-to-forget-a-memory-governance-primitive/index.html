@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html itemscope itemtype="http://schema.org/WebPage" lang="en">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8533&amp;path=livereload" data-no-instant defer></script>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=7828&amp;path=livereload" data-no-instant defer></script>
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -12,8 +12,8 @@
   <meta itemprop="description" content="基础信息会议/期刊：arXiv preprint, 2026 关键词：memory governance, selective forgetting, retrieval, conditional success probability, Bayesian update 核心贡献：本文提出 Memory Worth (MW)，用每条记忆被检索后的成功/失败共现次数构造一个轻量、可在线更新的治理信号，并证明它在明确假设下收敛到条件成功概率 p&#43;(m)，可用于陈旧性检测、抑制检索与弃用决策。">
   <meta itemprop="datePublished" content="2026-07-01T11:25:40+08:00">
   <meta itemprop="dateModified" content="2026-07-01T11:25:40+08:00">
-  <meta itemprop="wordCount" content="293">
-  <meta itemprop="keywords" content="Memory"><meta property="og:url" content="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive/">
+  <meta itemprop="wordCount" content="597">
+  <meta itemprop="keywords" content="Memory"><meta property="og:url" content="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive/">
   <meta property="og:site_name" content="Ting BLOG🐈">
   <meta property="og:title" content="论文 · When to Forget: A Memory Governance Primitive">
   <meta property="og:description" content="基础信息会议/期刊：arXiv preprint, 2026 关键词：memory governance, selective forgetting, retrieval, conditional success probability, Bayesian update 核心贡献：本文提出 Memory Worth (MW)，用每条记忆被检索后的成功/失败共现次数构造一个轻量、可在线更新的治理信号，并证明它在明确假设下收敛到条件成功概率 p&#43;(m)，可用于陈旧性检测、抑制检索与弃用决策。">
@@ -28,7 +28,7 @@
   <meta name="twitter:title" content="论文 · When to Forget: A Memory Governance Primitive">
   <meta name="twitter:description" content="基础信息会议/期刊：arXiv preprint, 2026 关键词：memory governance, selective forgetting, retrieval, conditional success probability, Bayesian update 核心贡献：本文提出 Memory Worth (MW)，用每条记忆被检索后的成功/失败共现次数构造一个轻量、可在线更新的治理信号，并证明它在明确假设下收敛到条件成功概率 p&#43;(m)，可用于陈旧性检测、抑制检索与弃用决策。">
 <meta name="application-name" content="FixIt">
-<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive/" title="论文 · When to Forget: A Memory Governance Primitive - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:8533/posts/%E8%AF%BE%E7%A8%8B-ai-agent3%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第三讲 Transformer架构" /><link rel="next" type="text/html" href="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory-gym-towards-endless-tasks-to-benchmark-memory-capabilities-of-agents/" title="论文 · Memory Gym: Towards Endless Tasks to Benchmark Memory Capabilities of Agents" /><link rel="alternate" type="text/markdown" href="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive/index.md" title="论文 · When to Forget: A Memory Governance Primitive - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive/" title="论文 · When to Forget: A Memory Governance Primitive - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:7828/posts/%E8%AF%BE%E7%A8%8B-ai-agent3%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第三讲 Transformer架构" /><link rel="next" type="text/html" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-score-aware-policy-gradient-and-performance-guarantees-using-local-lyapunov-stability/" title="论文 · Score-Aware Policy-Gradient and Performance Guarantees using Local Lyapunov Stability" /><link rel="alternate" type="text/markdown" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive/index.md" title="论文 · When to Forget: A Memory Governance Primitive - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
@@ -38,9 +38,9 @@
     "inLanguage": "en",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "http:\/\/localhost:8533\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive\/"
-    },"genre": "posts","keywords": "Memory","wordcount":  293 ,
-    "url": "http:\/\/localhost:8533\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive\/","datePublished": "2026-07-01T11:25:40+08:00","dateModified": "2026-07-01T11:25:40+08:00","publisher": {
+      "@id": "http:\/\/localhost:7828\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive\/"
+    },"genre": "posts","keywords": "Memory","wordcount":  597 ,
+    "url": "http:\/\/localhost:7828\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive\/","datePublished": "2026-07-01T11:25:40+08:00","dateModified": "2026-07-01T11:25:40+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -143,7 +143,7 @@
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>论文 · When to Forget: A Memory Governance Primitive</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" class="post-category" title="Category - 论文阅读"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 论文阅读</a></span></div><div class="post-meta-line"><span title="published on 2026-07-01 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2026-07-01">2026-07-01</time></span>&nbsp;<span title="293 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 300 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>2 minutes</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" class="post-category" title="Category - 论文阅读"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 论文阅读</a></span></div><div class="post-meta-line"><span title="published on 2026-07-01 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2026-07-01">2026-07-01</time></span>&nbsp;<span title="597 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 600 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>3 minutes</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>Contents</span>
@@ -155,7 +155,12 @@
     <li><a href="#q1-研究动机">Q1. 研究动机</a></li>
     <li><a href="#q2-核心问题">Q2. 核心问题</a></li>
     <li><a href="#q3-现有不足--本文改进">Q3. 现有不足 &amp; 本文改进</a></li>
-    <li><a href="#q4-方法流程">Q4. 方法流程</a></li>
+    <li><a href="#q4-方法流程">Q4. 方法流程</a>
+      <ul>
+        <li><a href="#简化代码">简化代码</a></li>
+        <li><a href="#一次查询的流程">一次查询的流程</a></li>
+      </ul>
+    </li>
     <li><a href="#q5-实验设计与结论">Q5. 实验设计与结论</a></li>
     <li><a href="#q6-局限性">Q6. 局限性</a></li>
     <li><a href="#q7-学术价值">Q7. 学术价值</a></li>
@@ -199,8 +204,165 @@
 <p>episode：从任务开始，到任务结束的一整段轨迹。</p>
 </blockquote>
 <p>输入是每个 episode 的检索集合 Mt、每条被检索记忆的权重 wt(m) 和 outcome yt。</p>
-<p>算法为每条记忆维护两个计数：hits+ 和 hits-。当该记忆被检索且 episode 成功时，累计到 hits+；失败时累计到 hits-。Memory Worth 定义为 <code>hits+ / (hits+ + hits-)</code>，若没有证据则初始化为 0.5。输出是一个 0 到 1 之间的 per-memory score，可直接用于优先级调整、压制、复核或弃用。</p>
-<h2 id="q5-实验设计与结论" class="heading-element"><span>Q5. 实验设计与结论</span>
+<p>算法为每条记忆维护两个计数：hits+ 和 hits-。</p>
+<p>当该记忆被检索且 episode 成功时，累计到 hits+；失败时累计到 hits-。</p>
+<p>Memory Worth 定义为 <code>hits+ / (hits+ + hits-)</code>，若没有证据则初始化为 0.5。</p>
+<p>输出是一个 0 到 1 之间的 per-memory score，可直接用于优先级调整、压制、复核或弃用。</p>
+<h3 id="简化代码" class="heading-element"><span>简化代码</span>
+  <a href="#%e7%ae%80%e5%8c%96%e4%bb%a3%e7%a0%81" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@dataclass</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MemoryStats</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">success_hits</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">failure_hits</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@property</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">evidence</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">success_hits</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">failure_hits</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@property</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">mw</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">evidence</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="mf">0.5</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">success_hits</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">evidence</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MemoryWorthTracker</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">MemoryStats</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">update_episode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">retrieved_memories</span><span class="p">,</span> <span class="n">success</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">        retrieved_memories: list of {&#34;memory_id&#34;: str, &#34;weight&#34;: float}
+</span></span></span><span class="line"><span class="cl"><span class="s2">        success: 本次任务是否成功
+</span></span></span><span class="line"><span class="cl"><span class="s2">        &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">retrieved_memories</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">memory_id</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s2">&#34;memory_id&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="n">weight</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;weight&#34;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">memory_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="n">memory_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">MemoryStats</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="n">memory_id</span><span class="p">]</span><span class="o">.</span><span class="n">success_hits</span> <span class="o">+=</span> <span class="n">weight</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="p">[</span><span class="n">memory_id</span><span class="p">]</span><span class="o">.</span><span class="n">failure_hits</span> <span class="o">+=</span> <span class="n">weight</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">get_mw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">memory_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">memory_id</span><span class="p">,</span> <span class="n">MemoryStats</span><span class="p">())</span><span class="o">.</span><span class="n">mw</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">should_deprecate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">memory_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">min_evidence</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">stat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">memory_id</span><span class="p">,</span> <span class="n">MemoryStats</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">stat</span><span class="o">.</span><span class="n">evidence</span> <span class="o">&gt;=</span> <span class="n">min_evidence</span> <span class="ow">and</span> <span class="n">stat</span><span class="o">.</span><span class="n">mw</span> <span class="o">&lt;</span> <span class="n">threshold</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="一次查询的流程" class="heading-element"><span>一次查询的流程</span>
+  <a href="#%e4%b8%80%e6%ac%a1%e6%9f%a5%e8%af%a2%e7%9a%84%e6%b5%81%e7%a8%8b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">tracker = MemoryWorthTracker()
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 第 1 次 episode：RAG 检索到这些 memory
+</span></span><span class="line"><span class="cl">retrieved = [
+</span></span><span class="line"><span class="cl">    {&#34;memory_id&#34;: &#34;m001&#34;, &#34;weight&#34;: 0.9},
+</span></span><span class="line"><span class="cl">    {&#34;memory_id&#34;: &#34;m002&#34;, &#34;weight&#34;: 0.7},
+</span></span><span class="line"><span class="cl">    {&#34;memory_id&#34;: &#34;m003&#34;, &#34;weight&#34;: 0.4},
+</span></span><span class="line"><span class="cl">]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 用户认为回答成功，或者评测器判断成功
+</span></span><span class="line"><span class="cl">tracker.update_episode(retrieved, success=True)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">print(tracker.get_mw(&#34;m001&#34;))  # 1.0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 第 2 次 episode：同一条记忆又被检索，但回答失败
+</span></span><span class="line"><span class="cl">retrieved = [
+</span></span><span class="line"><span class="cl">    {&#34;memory_id&#34;: &#34;m001&#34;, &#34;weight&#34;: 0.8},
+</span></span><span class="line"><span class="cl">    {&#34;memory_id&#34;: &#34;m004&#34;, &#34;weight&#34;: 0.6},
+</span></span><span class="line"><span class="cl">]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">tracker.update_episode(retrieved, success=False)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">print(tracker.get_mw(&#34;m001&#34;))</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="q5-实验设计与结论" class="heading-element"><span>Q5. 实验设计与结论</span>
   <a href="#q5-%e5%ae%9e%e9%aa%8c%e8%ae%be%e8%ae%a1%e4%b8%8e%e7%bb%93%e8%ae%ba" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
@@ -221,7 +383,7 @@
       <tr>
           <td>Experiment 2：task-difficulty confound</td>
           <td>检验任务难度与记忆质量混杂时 MW 的表现</td>
-          <td>Global MW 与真实 utility 变成负相关，约 <code>ρ=-0.33</code>；仅在 hard-task 子集上条件化后回升到 <code>ρ≈+0.14±0.07</code>，但仍离无混杂基线 0.89 有差距。</td>
+          <td>Global MW 与真实 utility 变成负相关，约 <code>ρ=-0.33</code>；<br />仅在 hard-task 子集上条件化后回升到 <code>ρ≈+0.14±0.07</code>，但仍离无混杂基线 0.89 有差距。</td>
       </tr>
       <tr>
           <td>Experiment 3：retrieval policy feedback loop</td>
@@ -248,8 +410,8 @@
 <p>MW 衡量的是 retrieval-outcome co-occurrence，不是因果贡献；</p>
 <p>理论收敛依赖 stationarity、minimum exploration、conditional independence 等假设；</p>
 <p>在任务分布漂移、低证据记忆和共检索混杂下会失真；</p>
-<p>rarely retrieved memories 还需要 evidence threshold <code>Vm</code> 来避免误判。</p>
-<p>以下为分析归纳，非原文明确说明：这更像记忆治理的底层原语，而不是完整的遗忘系统；它尤其依赖日志记录、检索多样性和上下文分区能力。</p>
+<p>rarely retrieved memories 还需要 evidence threshold Vm 来避免误判。【代码中：至少被检索并观察过 5 次，且 MW &lt; 0.3，才考虑压制或弃用】</p>
+<p>分析归纳：这更像记忆治理的底层原语，而不是完整的遗忘系统；它尤其依赖日志记录、检索多样性和上下文分区能力。</p>
 <h2 id="q7-学术价值" class="heading-element"><span>Q7. 学术价值</span>
   <a href="#q7-%e5%ad%a6%e6%9c%af%e4%bb%b7%e5%80%bc" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
@@ -264,11 +426,50 @@
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
 </h2><ol>
-<li>构造 contextual Memory Worth，把 MW 条件化到任务簇或 query cluster。</li>
-<li>用 Bayesian Beta-Bernoulli 替代纯 ratio，做 uncertainty-aware ranking。</li>
-<li>用 exponential moving average 处理非平稳任务分布。</li>
-<li>把 retrieval diversity 作为治理约束，而不是训练后修补。</li>
-<li>在真实 live agent 上验证 MW 是否能驱动实际 deprecation 和 re-verification。</li>
+<li>
+<p>构造 contextual Memory Worth，把 MW 条件化到任务簇或 query cluster。</p>
+</li>
+<li>
+<p>用 Bayesian Beta-Bernoulli 替代纯 ratio，做 uncertainty-aware ranking，这样的好处是不会因为一次失败直接掉到 0。。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nd">@dataclass</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">BayesianMemoryStats</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">success_hits</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">failure_hits</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">beta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@property</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">mw</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">success_hits</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">success_hits</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">failure_hits</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>用 exponential moving average 处理非平稳任务分布。</p>
+</li>
+<li>
+<p>把 retrieval diversity 作为治理约束，而不是训练后修补。</p>
+</li>
+<li>
+<p>在真实 live agent 上验证 MW 是否能驱动实际 deprecation 和 re-verification。</p>
+</li>
 </ol>
 <h2 id="q9-反直觉发现与方法失效分析" class="heading-element"><span>Q9. 反直觉发现与方法失效分析</span>
   <a href="#q9-%e5%8f%8d%e7%9b%b4%e8%a7%89%e5%8f%91%e7%8e%b0%e4%b8%8e%e6%96%b9%e6%b3%95%e5%a4%b1%e6%95%88%e5%88%86%e6%9e%90" class="heading-mark">
@@ -296,7 +497,7 @@
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
     </section>
-  </div><div class="post-nav"><a href="/posts/%E8%AF%BE%E7%A8%8B-ai-agent3%E6%9D%8E%E5%AE%8F%E6%AF%85/" class="post-nav-item" rel="prev" title="AI Agent· 第三讲 Transformer架构"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>AI Agent· 第三讲 Transformer架构</a><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory-gym-towards-endless-tasks-to-benchmark-memory-capabilities-of-agents/" class="post-nav-item" rel="next" title="论文 · Memory Gym: Towards Endless Tasks to Benchmark Memory Capabilities of Agents">论文 · Memory Gym: Towards Endless Tasks to Benchmark Memory Capabilities of Agents<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+  </div><div class="post-nav"><a href="/posts/%E8%AF%BE%E7%A8%8B-ai-agent3%E6%9D%8E%E5%AE%8F%E6%AF%85/" class="post-nav-item" rel="prev" title="AI Agent· 第三讲 Transformer架构"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>AI Agent· 第三讲 Transformer架构</a><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-score-aware-policy-gradient-and-performance-guarantees-using-local-lyapunov-stability/" class="post-nav-item" rel="next" title="论文 · Score-Aware Policy-Gradient and Performance Guarantees Using Local Lyapunov Stability">论文 · Score-Aware Policy-Gradient and Performance Guarantees Using Local Lyapunov Stability<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div class="post-reward">
     <div class="comment"></div>

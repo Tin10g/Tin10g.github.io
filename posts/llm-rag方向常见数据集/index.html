@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=7828&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>LLM · RAG常见数据集 - Ting BLOG🐈</title><meta name="author" content="Ting">
+<meta name="description" content="常见数据集经典 Open-Domain QA / RAG 原始论文常用数据集 主要用途 简介与特点 Natural Questions, NQ 开放域 QA、检索器训练、RAG 端到端评测 Google 真实搜索问题 &#43; Wikipedia 页面标注，含 long answer / short answer。NQ 是 DPR、REALM、RAG 等论文的核心基准之一。原始数据约 307k train、7.8k dev、7.8k hidden test。适合测“能不能从大规模 Wikipedia 找到证据并回答”。来源：Google NQ TriviaQA 开放域 QA、检索增强问答 约 95k trivia 问答，超过 650k question-answer-evidence triples；问题更复杂，答案和证据句常有较大词面差异。常用于训练/评估 dense retriever 和 RAG。来源：TriviaQA paper WebQuestions 短答案 factoid QA 基于 Freebase 的自然语言问题，规模小但历史上很常用；RAG 原始论文用它评估 open-domain QA。缺点是 Freebase 过时、规模小，今天更多作为经典对照。 CuratedTREC / TREC QA 小规模事实问答 常见于 DrQA、DPR、RAG 早期论文，问题多为简短 factoid。优点是历史可比性强；缺点是规模小、容易受模型记忆影响。 SQuAD / SQuAD-Open 阅读理解转开放域检索 QA SQuAD 原本是给定段落抽取答案，约 100k&#43; Wikipedia 问题；SQuAD-Open 会把上下文移除，要求系统先检索再回答。来源：SQuAD MS MARCO passage retrieval、reranking、abstractive QA 来自 Bing 查询日志，约 1M 问题、8.8M passage。RAG 论文常用它测“真实搜索式问题 &#43; 生成式答案”。也是训练检索器、reranker 的核心工业级数据。来源：MS MARCO 多跳推理 / 信息整合类 RAG数据集 主要用途 简介与特点 HotpotQA multi-hop QA、supporting facts 检索 113k Wikipedia 多跳问答，要求跨多个文档推理，并标注 sentence-level supporting facts。RAG 里常用来测“检索多篇证据 &#43; 合成答案”。有 distractor 和 fullwiki 两种设定。来源：HotpotQA 2WikiMultiHopQA 多跳推理、路径解释 基于 Wikidata &#43; Wikipedia 构造，强调 reasoning path，常用于测 query decomposition、多跳检索、graph/RAG。来源：2WikiMultiHopQA MuSiQue 更难的 2-4 hop QA 25k 多跳问题，专门减少 shortcut，使单跳模型难以投机。适合测复杂 RAG pipeline 的分解、迭代检索、证据组合。来源：MuSiQue StrategyQA 隐式多跳推理 2,780 个 yes/no 问题，推理步骤不会直接写在问题中，并提供 decomposition 和 Wikipedia evidence。适合测 RAG 是否会规划检索策略。来源：StrategyQA QAMPARI 多答案聚合 QA 问题答案是实体列表，分散在多个段落中；适合测 RAG 的 broad retrieval、coverage、去重和答案聚合能力。来源：QAMPARI ASQA 歧义问题 &#43; 长答案综合 面向 ambiguous questions，要求生成能覆盖多种解释的长答案。常被 citation/RAG 论文用来测综合能力和可验证性。来源：ASQA ELI5 长答案生成 Reddit “Explain Like I’m Five” 约 270k threads，答案长、开放、解释型；RAG 论文用来测 long-form generation 与证据支持。来源：ELI5 检索基准 / Retriever 评测数据集 / Benchmark 主要用途 简介与特点 BEIR zero-shot retrieval 统一评测 RAG 论文常先测 retriever，再测 generator。BEIR 集成 MS MARCO、NQ、HotpotQA、FiQA、TREC-COVID、NFCorpus、ArguAna、Touché、CQADupStack、Quora、DBPedia、SCIDOCS、FEVER、Climate-FEVER、SciFact 等，覆盖新闻、科学、金融、医疗、论坛、事实核查。指标常用 nDCG@k、Recall@k、MRR、MAP。来源：BEIR KILT 统一 knowledge-intensive NLP &#43; provenance 把 FEVER、AIDA、T-REx、zsRE、NQ、HotpotQA、TriviaQA、ELI5、Wizard of Wikipedia 等任务统一到同一个 Wikipedia knowledge source 和 evidence/provenance 格式。非常适合端到端 RAG、可溯源生成。来源：KILT MIRACL / MIRAGE-Bench 多语言检索与多语言 RAG MIRACL 常用于多语言 dense retrieval；MIRAGE-Bench 在此基础上做 multilingual RAG arena-style 评测。适合中文/多语言 RAG。来源：MIRAGE-Bench 事实核查、可归因、幻觉检测数据集 主要用途 简介与特点 FEVER fact verification &#43; evidence retrieval 185,445 条 Wikipedia claims，标签为 supported/refuted/not enough info，并标注证据句。RAG 原始论文也用 FEVER 测分类式 retrieval-augmented generation。来源：FEVER SciFact 科学事实核查 科学 claim &#43; paper abstract evidence，常在 BEIR/RAG 评测中用于 scientific RAG。规模小但证据要求高。 Climate-FEVER 气候事实核查 气候相关 claims &#43; evidence，常用于检索鲁棒性、争议性事实、领域 RAG。 ALCE 带引用生成评测 Automatic LLMs’ Citation Evaluation，要求系统检索证据并生成带 citation 的答案；常用 ASQA、QAMPARI、ELI5。评估 fluency、correctness、citation quality。来源：ALCE HAGRID attributed generative search 面向生成式信息检索，要求生成解释并给出可归因引用；基于 MIRACL English 构建。来源：HAGRID RAGTruth RAG 幻觉标注 约 18k RAG 生成回答，带 case-level 和 word-level hallucination annotation；适合训练/评估 hallucination detector。来源：RAGTruth 专门为 RAG 设计的新 benchmark数据集 主要用途 简介与特点 RGB RAG 基础能力诊断 中英双语，测试 noise robustness、negative rejection、information integration、counterfactual robustness。很适合分析“检索到噪声/错误证据时 LLM 会不会被带偏”。来源：RGB CRAG 真实动态 QA &#43; API/RAG Comprehensive RAG Benchmark，4,409 个 factual QA，含 mock web / KG APIs，覆盖 5 个领域、8 类问题、实体流行度和时间动态性。KDD Cup 2024 相关，适合测现代 agentic/web RAG。来源：CRAG RAGBench 工业 RAG 质量评测 100k examples，覆盖多个行业语料和 RAG 任务，带可解释标签，用于评估 retrieval relevance、answer faithfulness、context utilization 等。来源：RAGBench 垂直领域常见数据集领域 常见数据集 用法 科学论文 RAG QASPER、SciFact、SCIDOCS、LitQA QASPER 是 NLP paper full-text QA，约 5,049 questions / 1,585 papers；适合论文问答、证据定位、长文档 RAG。来源：QASPER 医疗 / 生物 BioASQ、PubMedQA、TREC-COVID、NFCorpus 用于 biomedical retrieval、medical QA、COVID 文献检索。BEIR 中也包含 BioASQ、TREC-COVID、NFCorpus。 金融 FiQA 金融问答/意见检索，常用于 BEIR 检索泛化和金融 RAG。 对话式知识 Wizard of Wikipedia、Doc2Dial / MultiDoc2Dial 测知识型对话、对话状态下的检索与回答。KILT 收录 Wizard of Wikipedia。 数据集的选择测 retriever：BEIR &#43; MS MARCO &#43; NQ/HotpotQA 测端到端 QA：NQ &#43; TriviaQA &#43; HotpotQA &#43; WebQuestions/CuratedTREC 测多跳/综合：HotpotQA &#43; MuSiQue &#43; 2WikiMultiHopQA &#43; QAMPARI &#43; ASQA 测引用/可验证性：ALCE &#43; ASQA &#43; QAMPARI &#43; ELI5 &#43; HAGRID 测幻觉/鲁棒性：RGB &#43; CRAG &#43; RAGTruth &#43; FEVER/SciFact 做中文或多语言 RAG：优先看 RGB、MIRACL/MIRAGE-Bench，再补中文问答/领域私有数据。 ">
+  <meta itemprop="name" content="LLM · RAG常见数据集">
+  <meta itemprop="description" content="常见数据集经典 Open-Domain QA / RAG 原始论文常用数据集 主要用途 简介与特点 Natural Questions, NQ 开放域 QA、检索器训练、RAG 端到端评测 Google 真实搜索问题 &#43; Wikipedia 页面标注，含 long answer / short answer。NQ 是 DPR、REALM、RAG 等论文的核心基准之一。原始数据约 307k train、7.8k dev、7.8k hidden test。适合测“能不能从大规模 Wikipedia 找到证据并回答”。来源：Google NQ TriviaQA 开放域 QA、检索增强问答 约 95k trivia 问答，超过 650k question-answer-evidence triples；问题更复杂，答案和证据句常有较大词面差异。常用于训练/评估 dense retriever 和 RAG。来源：TriviaQA paper WebQuestions 短答案 factoid QA 基于 Freebase 的自然语言问题，规模小但历史上很常用；RAG 原始论文用它评估 open-domain QA。缺点是 Freebase 过时、规模小，今天更多作为经典对照。 CuratedTREC / TREC QA 小规模事实问答 常见于 DrQA、DPR、RAG 早期论文，问题多为简短 factoid。优点是历史可比性强；缺点是规模小、容易受模型记忆影响。 SQuAD / SQuAD-Open 阅读理解转开放域检索 QA SQuAD 原本是给定段落抽取答案，约 100k&#43; Wikipedia 问题；SQuAD-Open 会把上下文移除，要求系统先检索再回答。来源：SQuAD MS MARCO passage retrieval、reranking、abstractive QA 来自 Bing 查询日志，约 1M 问题、8.8M passage。RAG 论文常用它测“真实搜索式问题 &#43; 生成式答案”。也是训练检索器、reranker 的核心工业级数据。来源：MS MARCO 多跳推理 / 信息整合类 RAG数据集 主要用途 简介与特点 HotpotQA multi-hop QA、supporting facts 检索 113k Wikipedia 多跳问答，要求跨多个文档推理，并标注 sentence-level supporting facts。RAG 里常用来测“检索多篇证据 &#43; 合成答案”。有 distractor 和 fullwiki 两种设定。来源：HotpotQA 2WikiMultiHopQA 多跳推理、路径解释 基于 Wikidata &#43; Wikipedia 构造，强调 reasoning path，常用于测 query decomposition、多跳检索、graph/RAG。来源：2WikiMultiHopQA MuSiQue 更难的 2-4 hop QA 25k 多跳问题，专门减少 shortcut，使单跳模型难以投机。适合测复杂 RAG pipeline 的分解、迭代检索、证据组合。来源：MuSiQue StrategyQA 隐式多跳推理 2,780 个 yes/no 问题，推理步骤不会直接写在问题中，并提供 decomposition 和 Wikipedia evidence。适合测 RAG 是否会规划检索策略。来源：StrategyQA QAMPARI 多答案聚合 QA 问题答案是实体列表，分散在多个段落中；适合测 RAG 的 broad retrieval、coverage、去重和答案聚合能力。来源：QAMPARI ASQA 歧义问题 &#43; 长答案综合 面向 ambiguous questions，要求生成能覆盖多种解释的长答案。常被 citation/RAG 论文用来测综合能力和可验证性。来源：ASQA ELI5 长答案生成 Reddit “Explain Like I’m Five” 约 270k threads，答案长、开放、解释型；RAG 论文用来测 long-form generation 与证据支持。来源：ELI5 检索基准 / Retriever 评测数据集 / Benchmark 主要用途 简介与特点 BEIR zero-shot retrieval 统一评测 RAG 论文常先测 retriever，再测 generator。BEIR 集成 MS MARCO、NQ、HotpotQA、FiQA、TREC-COVID、NFCorpus、ArguAna、Touché、CQADupStack、Quora、DBPedia、SCIDOCS、FEVER、Climate-FEVER、SciFact 等，覆盖新闻、科学、金融、医疗、论坛、事实核查。指标常用 nDCG@k、Recall@k、MRR、MAP。来源：BEIR KILT 统一 knowledge-intensive NLP &#43; provenance 把 FEVER、AIDA、T-REx、zsRE、NQ、HotpotQA、TriviaQA、ELI5、Wizard of Wikipedia 等任务统一到同一个 Wikipedia knowledge source 和 evidence/provenance 格式。非常适合端到端 RAG、可溯源生成。来源：KILT MIRACL / MIRAGE-Bench 多语言检索与多语言 RAG MIRACL 常用于多语言 dense retrieval；MIRAGE-Bench 在此基础上做 multilingual RAG arena-style 评测。适合中文/多语言 RAG。来源：MIRAGE-Bench 事实核查、可归因、幻觉检测数据集 主要用途 简介与特点 FEVER fact verification &#43; evidence retrieval 185,445 条 Wikipedia claims，标签为 supported/refuted/not enough info，并标注证据句。RAG 原始论文也用 FEVER 测分类式 retrieval-augmented generation。来源：FEVER SciFact 科学事实核查 科学 claim &#43; paper abstract evidence，常在 BEIR/RAG 评测中用于 scientific RAG。规模小但证据要求高。 Climate-FEVER 气候事实核查 气候相关 claims &#43; evidence，常用于检索鲁棒性、争议性事实、领域 RAG。 ALCE 带引用生成评测 Automatic LLMs’ Citation Evaluation，要求系统检索证据并生成带 citation 的答案；常用 ASQA、QAMPARI、ELI5。评估 fluency、correctness、citation quality。来源：ALCE HAGRID attributed generative search 面向生成式信息检索，要求生成解释并给出可归因引用；基于 MIRACL English 构建。来源：HAGRID RAGTruth RAG 幻觉标注 约 18k RAG 生成回答，带 case-level 和 word-level hallucination annotation；适合训练/评估 hallucination detector。来源：RAGTruth 专门为 RAG 设计的新 benchmark数据集 主要用途 简介与特点 RGB RAG 基础能力诊断 中英双语，测试 noise robustness、negative rejection、information integration、counterfactual robustness。很适合分析“检索到噪声/错误证据时 LLM 会不会被带偏”。来源：RGB CRAG 真实动态 QA &#43; API/RAG Comprehensive RAG Benchmark，4,409 个 factual QA，含 mock web / KG APIs，覆盖 5 个领域、8 类问题、实体流行度和时间动态性。KDD Cup 2024 相关，适合测现代 agentic/web RAG。来源：CRAG RAGBench 工业 RAG 质量评测 100k examples，覆盖多个行业语料和 RAG 任务，带可解释标签，用于评估 retrieval relevance、answer faithfulness、context utilization 等。来源：RAGBench 垂直领域常见数据集领域 常见数据集 用法 科学论文 RAG QASPER、SciFact、SCIDOCS、LitQA QASPER 是 NLP paper full-text QA，约 5,049 questions / 1,585 papers；适合论文问答、证据定位、长文档 RAG。来源：QASPER 医疗 / 生物 BioASQ、PubMedQA、TREC-COVID、NFCorpus 用于 biomedical retrieval、medical QA、COVID 文献检索。BEIR 中也包含 BioASQ、TREC-COVID、NFCorpus。 金融 FiQA 金融问答/意见检索，常用于 BEIR 检索泛化和金融 RAG。 对话式知识 Wizard of Wikipedia、Doc2Dial / MultiDoc2Dial 测知识型对话、对话状态下的检索与回答。KILT 收录 Wizard of Wikipedia。 数据集的选择测 retriever：BEIR &#43; MS MARCO &#43; NQ/HotpotQA 测端到端 QA：NQ &#43; TriviaQA &#43; HotpotQA &#43; WebQuestions/CuratedTREC 测多跳/综合：HotpotQA &#43; MuSiQue &#43; 2WikiMultiHopQA &#43; QAMPARI &#43; ASQA 测引用/可验证性：ALCE &#43; ASQA &#43; QAMPARI &#43; ELI5 &#43; HAGRID 测幻觉/鲁棒性：RGB &#43; CRAG &#43; RAGTruth &#43; FEVER/SciFact 做中文或多语言 RAG：优先看 RGB、MIRACL/MIRAGE-Bench，再补中文问答/领域私有数据。">
+  <meta itemprop="datePublished" content="2026-07-07T11:25:40+08:00">
+  <meta itemprop="dateModified" content="2026-07-07T11:25:40+08:00">
+  <meta itemprop="wordCount" content="465">
+  <meta itemprop="keywords" content="LLM基础概念"><meta property="og:url" content="http://localhost:7828/posts/llm-rag%E6%96%B9%E5%90%91%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E9%9B%86/">
+  <meta property="og:site_name" content="Ting BLOG🐈">
+  <meta property="og:title" content="LLM · RAG常见数据集">
+  <meta property="og:description" content="常见数据集经典 Open-Domain QA / RAG 原始论文常用数据集 主要用途 简介与特点 Natural Questions, NQ 开放域 QA、检索器训练、RAG 端到端评测 Google 真实搜索问题 &#43; Wikipedia 页面标注，含 long answer / short answer。NQ 是 DPR、REALM、RAG 等论文的核心基准之一。原始数据约 307k train、7.8k dev、7.8k hidden test。适合测“能不能从大规模 Wikipedia 找到证据并回答”。来源：Google NQ TriviaQA 开放域 QA、检索增强问答 约 95k trivia 问答，超过 650k question-answer-evidence triples；问题更复杂，答案和证据句常有较大词面差异。常用于训练/评估 dense retriever 和 RAG。来源：TriviaQA paper WebQuestions 短答案 factoid QA 基于 Freebase 的自然语言问题，规模小但历史上很常用；RAG 原始论文用它评估 open-domain QA。缺点是 Freebase 过时、规模小，今天更多作为经典对照。 CuratedTREC / TREC QA 小规模事实问答 常见于 DrQA、DPR、RAG 早期论文，问题多为简短 factoid。优点是历史可比性强；缺点是规模小、容易受模型记忆影响。 SQuAD / SQuAD-Open 阅读理解转开放域检索 QA SQuAD 原本是给定段落抽取答案，约 100k&#43; Wikipedia 问题；SQuAD-Open 会把上下文移除，要求系统先检索再回答。来源：SQuAD MS MARCO passage retrieval、reranking、abstractive QA 来自 Bing 查询日志，约 1M 问题、8.8M passage。RAG 论文常用它测“真实搜索式问题 &#43; 生成式答案”。也是训练检索器、reranker 的核心工业级数据。来源：MS MARCO 多跳推理 / 信息整合类 RAG数据集 主要用途 简介与特点 HotpotQA multi-hop QA、supporting facts 检索 113k Wikipedia 多跳问答，要求跨多个文档推理，并标注 sentence-level supporting facts。RAG 里常用来测“检索多篇证据 &#43; 合成答案”。有 distractor 和 fullwiki 两种设定。来源：HotpotQA 2WikiMultiHopQA 多跳推理、路径解释 基于 Wikidata &#43; Wikipedia 构造，强调 reasoning path，常用于测 query decomposition、多跳检索、graph/RAG。来源：2WikiMultiHopQA MuSiQue 更难的 2-4 hop QA 25k 多跳问题，专门减少 shortcut，使单跳模型难以投机。适合测复杂 RAG pipeline 的分解、迭代检索、证据组合。来源：MuSiQue StrategyQA 隐式多跳推理 2,780 个 yes/no 问题，推理步骤不会直接写在问题中，并提供 decomposition 和 Wikipedia evidence。适合测 RAG 是否会规划检索策略。来源：StrategyQA QAMPARI 多答案聚合 QA 问题答案是实体列表，分散在多个段落中；适合测 RAG 的 broad retrieval、coverage、去重和答案聚合能力。来源：QAMPARI ASQA 歧义问题 &#43; 长答案综合 面向 ambiguous questions，要求生成能覆盖多种解释的长答案。常被 citation/RAG 论文用来测综合能力和可验证性。来源：ASQA ELI5 长答案生成 Reddit “Explain Like I’m Five” 约 270k threads，答案长、开放、解释型；RAG 论文用来测 long-form generation 与证据支持。来源：ELI5 检索基准 / Retriever 评测数据集 / Benchmark 主要用途 简介与特点 BEIR zero-shot retrieval 统一评测 RAG 论文常先测 retriever，再测 generator。BEIR 集成 MS MARCO、NQ、HotpotQA、FiQA、TREC-COVID、NFCorpus、ArguAna、Touché、CQADupStack、Quora、DBPedia、SCIDOCS、FEVER、Climate-FEVER、SciFact 等，覆盖新闻、科学、金融、医疗、论坛、事实核查。指标常用 nDCG@k、Recall@k、MRR、MAP。来源：BEIR KILT 统一 knowledge-intensive NLP &#43; provenance 把 FEVER、AIDA、T-REx、zsRE、NQ、HotpotQA、TriviaQA、ELI5、Wizard of Wikipedia 等任务统一到同一个 Wikipedia knowledge source 和 evidence/provenance 格式。非常适合端到端 RAG、可溯源生成。来源：KILT MIRACL / MIRAGE-Bench 多语言检索与多语言 RAG MIRACL 常用于多语言 dense retrieval；MIRAGE-Bench 在此基础上做 multilingual RAG arena-style 评测。适合中文/多语言 RAG。来源：MIRAGE-Bench 事实核查、可归因、幻觉检测数据集 主要用途 简介与特点 FEVER fact verification &#43; evidence retrieval 185,445 条 Wikipedia claims，标签为 supported/refuted/not enough info，并标注证据句。RAG 原始论文也用 FEVER 测分类式 retrieval-augmented generation。来源：FEVER SciFact 科学事实核查 科学 claim &#43; paper abstract evidence，常在 BEIR/RAG 评测中用于 scientific RAG。规模小但证据要求高。 Climate-FEVER 气候事实核查 气候相关 claims &#43; evidence，常用于检索鲁棒性、争议性事实、领域 RAG。 ALCE 带引用生成评测 Automatic LLMs’ Citation Evaluation，要求系统检索证据并生成带 citation 的答案；常用 ASQA、QAMPARI、ELI5。评估 fluency、correctness、citation quality。来源：ALCE HAGRID attributed generative search 面向生成式信息检索，要求生成解释并给出可归因引用；基于 MIRACL English 构建。来源：HAGRID RAGTruth RAG 幻觉标注 约 18k RAG 生成回答，带 case-level 和 word-level hallucination annotation；适合训练/评估 hallucination detector。来源：RAGTruth 专门为 RAG 设计的新 benchmark数据集 主要用途 简介与特点 RGB RAG 基础能力诊断 中英双语，测试 noise robustness、negative rejection、information integration、counterfactual robustness。很适合分析“检索到噪声/错误证据时 LLM 会不会被带偏”。来源：RGB CRAG 真实动态 QA &#43; API/RAG Comprehensive RAG Benchmark，4,409 个 factual QA，含 mock web / KG APIs，覆盖 5 个领域、8 类问题、实体流行度和时间动态性。KDD Cup 2024 相关，适合测现代 agentic/web RAG。来源：CRAG RAGBench 工业 RAG 质量评测 100k examples，覆盖多个行业语料和 RAG 任务，带可解释标签，用于评估 retrieval relevance、answer faithfulness、context utilization 等。来源：RAGBench 垂直领域常见数据集领域 常见数据集 用法 科学论文 RAG QASPER、SciFact、SCIDOCS、LitQA QASPER 是 NLP paper full-text QA，约 5,049 questions / 1,585 papers；适合论文问答、证据定位、长文档 RAG。来源：QASPER 医疗 / 生物 BioASQ、PubMedQA、TREC-COVID、NFCorpus 用于 biomedical retrieval、medical QA、COVID 文献检索。BEIR 中也包含 BioASQ、TREC-COVID、NFCorpus。 金融 FiQA 金融问答/意见检索，常用于 BEIR 检索泛化和金融 RAG。 对话式知识 Wizard of Wikipedia、Doc2Dial / MultiDoc2Dial 测知识型对话、对话状态下的检索与回答。KILT 收录 Wizard of Wikipedia。 数据集的选择测 retriever：BEIR &#43; MS MARCO &#43; NQ/HotpotQA 测端到端 QA：NQ &#43; TriviaQA &#43; HotpotQA &#43; WebQuestions/CuratedTREC 测多跳/综合：HotpotQA &#43; MuSiQue &#43; 2WikiMultiHopQA &#43; QAMPARI &#43; ASQA 测引用/可验证性：ALCE &#43; ASQA &#43; QAMPARI &#43; ELI5 &#43; HAGRID 测幻觉/鲁棒性：RGB &#43; CRAG &#43; RAGTruth &#43; FEVER/SciFact 做中文或多语言 RAG：优先看 RGB、MIRACL/MIRAGE-Bench，再补中文问答/领域私有数据。">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-07-07T11:25:40+08:00">
+    <meta property="article:modified_time" content="2026-07-07T11:25:40+08:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="LLM · RAG常见数据集">
+  <meta name="twitter:description" content="常见数据集经典 Open-Domain QA / RAG 原始论文常用数据集 主要用途 简介与特点 Natural Questions, NQ 开放域 QA、检索器训练、RAG 端到端评测 Google 真实搜索问题 &#43; Wikipedia 页面标注，含 long answer / short answer。NQ 是 DPR、REALM、RAG 等论文的核心基准之一。原始数据约 307k train、7.8k dev、7.8k hidden test。适合测“能不能从大规模 Wikipedia 找到证据并回答”。来源：Google NQ TriviaQA 开放域 QA、检索增强问答 约 95k trivia 问答，超过 650k question-answer-evidence triples；问题更复杂，答案和证据句常有较大词面差异。常用于训练/评估 dense retriever 和 RAG。来源：TriviaQA paper WebQuestions 短答案 factoid QA 基于 Freebase 的自然语言问题，规模小但历史上很常用；RAG 原始论文用它评估 open-domain QA。缺点是 Freebase 过时、规模小，今天更多作为经典对照。 CuratedTREC / TREC QA 小规模事实问答 常见于 DrQA、DPR、RAG 早期论文，问题多为简短 factoid。优点是历史可比性强；缺点是规模小、容易受模型记忆影响。 SQuAD / SQuAD-Open 阅读理解转开放域检索 QA SQuAD 原本是给定段落抽取答案，约 100k&#43; Wikipedia 问题；SQuAD-Open 会把上下文移除，要求系统先检索再回答。来源：SQuAD MS MARCO passage retrieval、reranking、abstractive QA 来自 Bing 查询日志，约 1M 问题、8.8M passage。RAG 论文常用它测“真实搜索式问题 &#43; 生成式答案”。也是训练检索器、reranker 的核心工业级数据。来源：MS MARCO 多跳推理 / 信息整合类 RAG数据集 主要用途 简介与特点 HotpotQA multi-hop QA、supporting facts 检索 113k Wikipedia 多跳问答，要求跨多个文档推理，并标注 sentence-level supporting facts。RAG 里常用来测“检索多篇证据 &#43; 合成答案”。有 distractor 和 fullwiki 两种设定。来源：HotpotQA 2WikiMultiHopQA 多跳推理、路径解释 基于 Wikidata &#43; Wikipedia 构造，强调 reasoning path，常用于测 query decomposition、多跳检索、graph/RAG。来源：2WikiMultiHopQA MuSiQue 更难的 2-4 hop QA 25k 多跳问题，专门减少 shortcut，使单跳模型难以投机。适合测复杂 RAG pipeline 的分解、迭代检索、证据组合。来源：MuSiQue StrategyQA 隐式多跳推理 2,780 个 yes/no 问题，推理步骤不会直接写在问题中，并提供 decomposition 和 Wikipedia evidence。适合测 RAG 是否会规划检索策略。来源：StrategyQA QAMPARI 多答案聚合 QA 问题答案是实体列表，分散在多个段落中；适合测 RAG 的 broad retrieval、coverage、去重和答案聚合能力。来源：QAMPARI ASQA 歧义问题 &#43; 长答案综合 面向 ambiguous questions，要求生成能覆盖多种解释的长答案。常被 citation/RAG 论文用来测综合能力和可验证性。来源：ASQA ELI5 长答案生成 Reddit “Explain Like I’m Five” 约 270k threads，答案长、开放、解释型；RAG 论文用来测 long-form generation 与证据支持。来源：ELI5 检索基准 / Retriever 评测数据集 / Benchmark 主要用途 简介与特点 BEIR zero-shot retrieval 统一评测 RAG 论文常先测 retriever，再测 generator。BEIR 集成 MS MARCO、NQ、HotpotQA、FiQA、TREC-COVID、NFCorpus、ArguAna、Touché、CQADupStack、Quora、DBPedia、SCIDOCS、FEVER、Climate-FEVER、SciFact 等，覆盖新闻、科学、金融、医疗、论坛、事实核查。指标常用 nDCG@k、Recall@k、MRR、MAP。来源：BEIR KILT 统一 knowledge-intensive NLP &#43; provenance 把 FEVER、AIDA、T-REx、zsRE、NQ、HotpotQA、TriviaQA、ELI5、Wizard of Wikipedia 等任务统一到同一个 Wikipedia knowledge source 和 evidence/provenance 格式。非常适合端到端 RAG、可溯源生成。来源：KILT MIRACL / MIRAGE-Bench 多语言检索与多语言 RAG MIRACL 常用于多语言 dense retrieval；MIRAGE-Bench 在此基础上做 multilingual RAG arena-style 评测。适合中文/多语言 RAG。来源：MIRAGE-Bench 事实核查、可归因、幻觉检测数据集 主要用途 简介与特点 FEVER fact verification &#43; evidence retrieval 185,445 条 Wikipedia claims，标签为 supported/refuted/not enough info，并标注证据句。RAG 原始论文也用 FEVER 测分类式 retrieval-augmented generation。来源：FEVER SciFact 科学事实核查 科学 claim &#43; paper abstract evidence，常在 BEIR/RAG 评测中用于 scientific RAG。规模小但证据要求高。 Climate-FEVER 气候事实核查 气候相关 claims &#43; evidence，常用于检索鲁棒性、争议性事实、领域 RAG。 ALCE 带引用生成评测 Automatic LLMs’ Citation Evaluation，要求系统检索证据并生成带 citation 的答案；常用 ASQA、QAMPARI、ELI5。评估 fluency、correctness、citation quality。来源：ALCE HAGRID attributed generative search 面向生成式信息检索，要求生成解释并给出可归因引用；基于 MIRACL English 构建。来源：HAGRID RAGTruth RAG 幻觉标注 约 18k RAG 生成回答，带 case-level 和 word-level hallucination annotation；适合训练/评估 hallucination detector。来源：RAGTruth 专门为 RAG 设计的新 benchmark数据集 主要用途 简介与特点 RGB RAG 基础能力诊断 中英双语，测试 noise robustness、negative rejection、information integration、counterfactual robustness。很适合分析“检索到噪声/错误证据时 LLM 会不会被带偏”。来源：RGB CRAG 真实动态 QA &#43; API/RAG Comprehensive RAG Benchmark，4,409 个 factual QA，含 mock web / KG APIs，覆盖 5 个领域、8 类问题、实体流行度和时间动态性。KDD Cup 2024 相关，适合测现代 agentic/web RAG。来源：CRAG RAGBench 工业 RAG 质量评测 100k examples，覆盖多个行业语料和 RAG 任务，带可解释标签，用于评估 retrieval relevance、answer faithfulness、context utilization 等。来源：RAGBench 垂直领域常见数据集领域 常见数据集 用法 科学论文 RAG QASPER、SciFact、SCIDOCS、LitQA QASPER 是 NLP paper full-text QA，约 5,049 questions / 1,585 papers；适合论文问答、证据定位、长文档 RAG。来源：QASPER 医疗 / 生物 BioASQ、PubMedQA、TREC-COVID、NFCorpus 用于 biomedical retrieval、medical QA、COVID 文献检索。BEIR 中也包含 BioASQ、TREC-COVID、NFCorpus。 金融 FiQA 金融问答/意见检索，常用于 BEIR 检索泛化和金融 RAG。 对话式知识 Wizard of Wikipedia、Doc2Dial / MultiDoc2Dial 测知识型对话、对话状态下的检索与回答。KILT 收录 Wizard of Wikipedia。 数据集的选择测 retriever：BEIR &#43; MS MARCO &#43; NQ/HotpotQA 测端到端 QA：NQ &#43; TriviaQA &#43; HotpotQA &#43; WebQuestions/CuratedTREC 测多跳/综合：HotpotQA &#43; MuSiQue &#43; 2WikiMultiHopQA &#43; QAMPARI &#43; ASQA 测引用/可验证性：ALCE &#43; ASQA &#43; QAMPARI &#43; ELI5 &#43; HAGRID 测幻觉/鲁棒性：RGB &#43; CRAG &#43; RAGTruth &#43; FEVER/SciFact 做中文或多语言 RAG：优先看 RGB、MIRACL/MIRAGE-Bench，再补中文问答/领域私有数据。">
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:7828/posts/llm-rag%E6%96%B9%E5%90%91%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E9%9B%86/" title="LLM · RAG常见数据集 - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:7828/posts/llm-%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/" title="LLM · 评价指标" /><link rel="next" type="text/html" href="http://localhost:7828/posts/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8-ielts-skill/" title="IELTS skill" /><link rel="alternate" type="text/markdown" href="http://localhost:7828/posts/llm-rag%E6%96%B9%E5%90%91%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E9%9B%86/index.md" title="LLM · RAG常见数据集 - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "LLM · RAG常见数据集",
+    "inLanguage": "en",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:7828\/posts\/llm-rag%E6%96%B9%E5%90%91%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E9%9B%86\/"
+    },"genre": "posts","wordcount":  465 ,
+    "url": "http:\/\/localhost:7828\/posts\/llm-rag%E6%96%B9%E5%90%91%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E9%9B%86\/","datePublished": "2026-07-07T11:25:40+08:00","dateModified": "2026-07-07T11:25:40+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Ting"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/archives/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/archives/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>LLM · RAG常见数据集</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/llm%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" class="post-category" title="Category - LLM基础概念"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> LLM基础概念</a></span></div><div class="post-meta-line"><span title="published on 2026-07-07 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2026-07-07">2026-07-07</time></span>&nbsp;<span title="465 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 500 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>3 minutes</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#常见数据集">常见数据集</a>
+      <ul>
+        <li><a href="#经典-open-domain-qa--rag-原始论文常用">经典 Open-Domain QA / RAG 原始论文常用</a></li>
+        <li><a href="#多跳推理--信息整合类-rag">多跳推理 / 信息整合类 RAG</a></li>
+        <li><a href="#检索基准--retriever-评测">检索基准 / Retriever 评测</a></li>
+        <li><a href="#事实核查可归因幻觉检测">事实核查、可归因、幻觉检测</a></li>
+        <li><a href="#专门为-rag-设计的新-benchmark">专门为 RAG 设计的新 benchmark</a></li>
+        <li><a href="#垂直领域常见数据集">垂直领域常见数据集</a></li>
+      </ul>
+    </li>
+    <li><a href="#数据集的选择">数据集的选择</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 id="常见数据集" class="heading-element"><span>常见数据集</span>
+  <a href="#%e5%b8%b8%e8%a7%81%e6%95%b0%e6%8d%ae%e9%9b%86" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h3 id="经典-open-domain-qa--rag-原始论文常用" class="heading-element"><span>经典 Open-Domain QA / RAG 原始论文常用</span>
+  <a href="#%e7%bb%8f%e5%85%b8-open-domain-qa--rag-%e5%8e%9f%e5%a7%8b%e8%ae%ba%e6%96%87%e5%b8%b8%e7%94%a8" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><table>
+  <thead>
+      <tr>
+          <th>数据集</th>
+          <th>主要用途</th>
+          <th>简介与特点</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Natural Questions, NQ</strong></td>
+          <td>开放域 QA、检索器训练、RAG 端到端评测</td>
+          <td>Google 真实搜索问题 + Wikipedia 页面标注，含 long answer / short answer。NQ 是 DPR、REALM、RAG 等论文的核心基准之一。原始数据约 307k train、7.8k dev、7.8k hidden test。适合测“能不能从大规模 Wikipedia 找到证据并回答”。来源：<a href="https://github.com/google-research-datasets/natural-questions"target="_blank" rel="external nofollow noopener noreferrer">Google NQ</a></td>
+      </tr>
+      <tr>
+          <td><strong>TriviaQA</strong></td>
+          <td>开放域 QA、检索增强问答</td>
+          <td>约 95k trivia 问答，超过 650k question-answer-evidence triples；问题更复杂，答案和证据句常有较大词面差异。常用于训练/评估 dense retriever 和 RAG。来源：<a href="https://arxiv.org/abs/1705.03551"target="_blank" rel="external nofollow noopener noreferrer">TriviaQA paper</a></td>
+      </tr>
+      <tr>
+          <td><strong>WebQuestions</strong></td>
+          <td>短答案 factoid QA</td>
+          <td>基于 Freebase 的自然语言问题，规模小但历史上很常用；RAG 原始论文用它评估 open-domain QA。缺点是 Freebase 过时、规模小，今天更多作为经典对照。</td>
+      </tr>
+      <tr>
+          <td><strong>CuratedTREC / TREC QA</strong></td>
+          <td>小规模事实问答</td>
+          <td>常见于 DrQA、DPR、RAG 早期论文，问题多为简短 factoid。优点是历史可比性强；缺点是规模小、容易受模型记忆影响。</td>
+      </tr>
+      <tr>
+          <td><strong>SQuAD / SQuAD-Open</strong></td>
+          <td>阅读理解转开放域检索 QA</td>
+          <td>SQuAD 原本是给定段落抽取答案，约 100k+ Wikipedia 问题；SQuAD-Open 会把上下文移除，要求系统先检索再回答。来源：<a href="https://arxiv.org/abs/1606.05250"target="_blank" rel="external nofollow noopener noreferrer">SQuAD</a></td>
+      </tr>
+      <tr>
+          <td><strong>MS MARCO</strong></td>
+          <td>passage retrieval、reranking、abstractive QA</td>
+          <td>来自 Bing 查询日志，约 1M 问题、8.8M passage。RAG 论文常用它测“真实搜索式问题 + 生成式答案”。也是训练检索器、reranker 的核心工业级数据。来源：<a href="https://arxiv.org/abs/1611.09268"target="_blank" rel="external nofollow noopener noreferrer">MS MARCO</a></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="多跳推理--信息整合类-rag" class="heading-element"><span>多跳推理 / 信息整合类 RAG</span>
+  <a href="#%e5%a4%9a%e8%b7%b3%e6%8e%a8%e7%90%86--%e4%bf%a1%e6%81%af%e6%95%b4%e5%90%88%e7%b1%bb-rag" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><table>
+  <thead>
+      <tr>
+          <th>数据集</th>
+          <th>主要用途</th>
+          <th>简介与特点</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>HotpotQA</strong></td>
+          <td>multi-hop QA、supporting facts 检索</td>
+          <td>113k Wikipedia 多跳问答，要求跨多个文档推理，并标注 sentence-level supporting facts。RAG 里常用来测“检索多篇证据 + 合成答案”。有 distractor 和 fullwiki 两种设定。来源：<a href="https://hotpotqa.github.io/"target="_blank" rel="external nofollow noopener noreferrer">HotpotQA</a></td>
+      </tr>
+      <tr>
+          <td><strong>2WikiMultiHopQA</strong></td>
+          <td>多跳推理、路径解释</td>
+          <td>基于 Wikidata + Wikipedia 构造，强调 reasoning path，常用于测 query decomposition、多跳检索、graph/RAG。来源：<a href="https://arxiv.org/abs/2011.01060"target="_blank" rel="external nofollow noopener noreferrer">2WikiMultiHopQA</a></td>
+      </tr>
+      <tr>
+          <td><strong>MuSiQue</strong></td>
+          <td>更难的 2-4 hop QA</td>
+          <td>25k 多跳问题，专门减少 shortcut，使单跳模型难以投机。适合测复杂 RAG pipeline 的分解、迭代检索、证据组合。来源：<a href="https://arxiv.org/abs/2108.00573"target="_blank" rel="external nofollow noopener noreferrer">MuSiQue</a></td>
+      </tr>
+      <tr>
+          <td><strong>StrategyQA</strong></td>
+          <td>隐式多跳推理</td>
+          <td>2,780 个 yes/no 问题，推理步骤不会直接写在问题中，并提供 decomposition 和 Wikipedia evidence。适合测 RAG 是否会规划检索策略。来源：<a href="https://arxiv.org/abs/2101.02235"target="_blank" rel="external nofollow noopener noreferrer">StrategyQA</a></td>
+      </tr>
+      <tr>
+          <td><strong>QAMPARI</strong></td>
+          <td>多答案聚合 QA</td>
+          <td>问题答案是实体列表，分散在多个段落中；适合测 RAG 的 broad retrieval、coverage、去重和答案聚合能力。来源：<a href="https://arxiv.org/abs/2205.12665"target="_blank" rel="external nofollow noopener noreferrer">QAMPARI</a></td>
+      </tr>
+      <tr>
+          <td><strong>ASQA</strong></td>
+          <td>歧义问题 + 长答案综合</td>
+          <td>面向 ambiguous questions，要求生成能覆盖多种解释的长答案。常被 citation/RAG 论文用来测综合能力和可验证性。来源：<a href="https://arxiv.org/abs/2204.06092"target="_blank" rel="external nofollow noopener noreferrer">ASQA</a></td>
+      </tr>
+      <tr>
+          <td><strong>ELI5</strong></td>
+          <td>长答案生成</td>
+          <td>Reddit “Explain Like I’m Five” 约 270k threads，答案长、开放、解释型；RAG 论文用来测 long-form generation 与证据支持。来源：<a href="https://arxiv.org/abs/1907.09190"target="_blank" rel="external nofollow noopener noreferrer">ELI5</a></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="检索基准--retriever-评测" class="heading-element"><span>检索基准 / Retriever 评测</span>
+  <a href="#%e6%a3%80%e7%b4%a2%e5%9f%ba%e5%87%86--retriever-%e8%af%84%e6%b5%8b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><table>
+  <thead>
+      <tr>
+          <th>数据集 / Benchmark</th>
+          <th>主要用途</th>
+          <th>简介与特点</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>BEIR</strong></td>
+          <td>zero-shot retrieval 统一评测</td>
+          <td>RAG 论文常先测 retriever，再测 generator。BEIR 集成 MS MARCO、NQ、HotpotQA、FiQA、TREC-COVID、NFCorpus、ArguAna、Touché、CQADupStack、Quora、DBPedia、SCIDOCS、FEVER、Climate-FEVER、SciFact 等，覆盖新闻、科学、金融、医疗、论坛、事实核查。指标常用 nDCG@k、Recall@k、MRR、MAP。来源：<a href="https://github.com/beir-cellar/beir"target="_blank" rel="external nofollow noopener noreferrer">BEIR</a></td>
+      </tr>
+      <tr>
+          <td><strong>KILT</strong></td>
+          <td>统一 knowledge-intensive NLP + provenance</td>
+          <td>把 FEVER、AIDA、T-REx、zsRE、NQ、HotpotQA、TriviaQA、ELI5、Wizard of Wikipedia 等任务统一到同一个 Wikipedia knowledge source 和 evidence/provenance 格式。非常适合端到端 RAG、可溯源生成。来源：<a href="https://github.com/facebookresearch/KILT"target="_blank" rel="external nofollow noopener noreferrer">KILT</a></td>
+      </tr>
+      <tr>
+          <td><strong>MIRACL / MIRAGE-Bench</strong></td>
+          <td>多语言检索与多语言 RAG</td>
+          <td>MIRACL 常用于多语言 dense retrieval；MIRAGE-Bench 在此基础上做 multilingual RAG arena-style 评测。适合中文/多语言 RAG。来源：<a href="https://arxiv.org/abs/2410.13716"target="_blank" rel="external nofollow noopener noreferrer">MIRAGE-Bench</a></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="事实核查可归因幻觉检测" class="heading-element"><span>事实核查、可归因、幻觉检测</span>
+  <a href="#%e4%ba%8b%e5%ae%9e%e6%a0%b8%e6%9f%a5%e5%8f%af%e5%bd%92%e5%9b%a0%e5%b9%bb%e8%a7%89%e6%a3%80%e6%b5%8b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><table>
+  <thead>
+      <tr>
+          <th>数据集</th>
+          <th>主要用途</th>
+          <th>简介与特点</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>FEVER</strong></td>
+          <td>fact verification + evidence retrieval</td>
+          <td>185,445 条 Wikipedia claims，标签为 supported/refuted/not enough info，并标注证据句。RAG 原始论文也用 FEVER 测分类式 retrieval-augmented generation。来源：<a href="https://arxiv.org/abs/1803.05355"target="_blank" rel="external nofollow noopener noreferrer">FEVER</a></td>
+      </tr>
+      <tr>
+          <td><strong>SciFact</strong></td>
+          <td>科学事实核查</td>
+          <td>科学 claim + paper abstract evidence，常在 BEIR/RAG 评测中用于 scientific RAG。规模小但证据要求高。</td>
+      </tr>
+      <tr>
+          <td><strong>Climate-FEVER</strong></td>
+          <td>气候事实核查</td>
+          <td>气候相关 claims + evidence，常用于检索鲁棒性、争议性事实、领域 RAG。</td>
+      </tr>
+      <tr>
+          <td><strong>ALCE</strong></td>
+          <td>带引用生成评测</td>
+          <td>Automatic LLMs’ Citation Evaluation，要求系统检索证据并生成带 citation 的答案；常用 ASQA、QAMPARI、ELI5。评估 fluency、correctness、citation quality。来源：<a href="https://arxiv.org/abs/2305.14627"target="_blank" rel="external nofollow noopener noreferrer">ALCE</a></td>
+      </tr>
+      <tr>
+          <td><strong>HAGRID</strong></td>
+          <td>attributed generative search</td>
+          <td>面向生成式信息检索，要求生成解释并给出可归因引用；基于 MIRACL English 构建。来源：<a href="https://arxiv.org/abs/2307.16883"target="_blank" rel="external nofollow noopener noreferrer">HAGRID</a></td>
+      </tr>
+      <tr>
+          <td><strong>RAGTruth</strong></td>
+          <td>RAG 幻觉标注</td>
+          <td>约 18k RAG 生成回答，带 case-level 和 word-level hallucination annotation；适合训练/评估 hallucination detector。来源：<a href="https://arxiv.org/abs/2401.00396"target="_blank" rel="external nofollow noopener noreferrer">RAGTruth</a></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="专门为-rag-设计的新-benchmark" class="heading-element"><span>专门为 RAG 设计的新 benchmark</span>
+  <a href="#%e4%b8%93%e9%97%a8%e4%b8%ba-rag-%e8%ae%be%e8%ae%a1%e7%9a%84%e6%96%b0-benchmark" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><table>
+  <thead>
+      <tr>
+          <th>数据集</th>
+          <th>主要用途</th>
+          <th>简介与特点</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>RGB</strong></td>
+          <td>RAG 基础能力诊断</td>
+          <td>中英双语，测试 noise robustness、negative rejection、information integration、counterfactual robustness。很适合分析“检索到噪声/错误证据时 LLM 会不会被带偏”。来源：<a href="https://github.com/chen700564/RGB"target="_blank" rel="external nofollow noopener noreferrer">RGB</a></td>
+      </tr>
+      <tr>
+          <td><strong>CRAG</strong></td>
+          <td>真实动态 QA + API/RAG</td>
+          <td>Comprehensive RAG Benchmark，4,409 个 factual QA，含 mock web / KG APIs，覆盖 5 个领域、8 类问题、实体流行度和时间动态性。KDD Cup 2024 相关，适合测现代 agentic/web RAG。来源：<a href="https://github.com/facebookresearch/CRAG"target="_blank" rel="external nofollow noopener noreferrer">CRAG</a></td>
+      </tr>
+      <tr>
+          <td><strong>RAGBench</strong></td>
+          <td>工业 RAG 质量评测</td>
+          <td>100k examples，覆盖多个行业语料和 RAG 任务，带可解释标签，用于评估 retrieval relevance、answer faithfulness、context utilization 等。来源：<a href="https://arxiv.org/abs/2407.11005"target="_blank" rel="external nofollow noopener noreferrer">RAGBench</a></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="垂直领域常见数据集" class="heading-element"><span>垂直领域常见数据集</span>
+  <a href="#%e5%9e%82%e7%9b%b4%e9%a2%86%e5%9f%9f%e5%b8%b8%e8%a7%81%e6%95%b0%e6%8d%ae%e9%9b%86" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><table>
+  <thead>
+      <tr>
+          <th>领域</th>
+          <th>常见数据集</th>
+          <th>用法</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>科学论文 RAG</td>
+          <td><strong>QASPER、SciFact、SCIDOCS、LitQA</strong></td>
+          <td>QASPER 是 NLP paper full-text QA，约 5,049 questions / 1,585 papers；适合论文问答、证据定位、长文档 RAG。来源：<a href="https://arxiv.org/abs/2105.03011"target="_blank" rel="external nofollow noopener noreferrer">QASPER</a></td>
+      </tr>
+      <tr>
+          <td>医疗 / 生物</td>
+          <td><strong>BioASQ、PubMedQA、TREC-COVID、NFCorpus</strong></td>
+          <td>用于 biomedical retrieval、medical QA、COVID 文献检索。BEIR 中也包含 BioASQ、TREC-COVID、NFCorpus。</td>
+      </tr>
+      <tr>
+          <td>金融</td>
+          <td><strong>FiQA</strong></td>
+          <td>金融问答/意见检索，常用于 BEIR 检索泛化和金融 RAG。</td>
+      </tr>
+      <tr>
+          <td>对话式知识</td>
+          <td><strong>Wizard of Wikipedia、Doc2Dial / MultiDoc2Dial</strong></td>
+          <td>测知识型对话、对话状态下的检索与回答。KILT 收录 Wizard of Wikipedia。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="数据集的选择" class="heading-element"><span>数据集的选择</span>
+  <a href="#%e6%95%b0%e6%8d%ae%e9%9b%86%e7%9a%84%e9%80%89%e6%8b%a9" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>测 retriever：<code>BEIR + MS MARCO + NQ/HotpotQA</code></li>
+<li>测端到端 QA：<code>NQ + TriviaQA + HotpotQA + WebQuestions/CuratedTREC</code></li>
+<li>测多跳/综合：<code>HotpotQA + MuSiQue + 2WikiMultiHopQA + QAMPARI + ASQA</code></li>
+<li>测引用/可验证性：<code>ALCE + ASQA + QAMPARI + ELI5 + HAGRID</code></li>
+<li>测幻觉/鲁棒性：<code>RGB + CRAG + RAGTruth + FEVER/SciFact</code></li>
+<li>做中文或多语言 RAG：优先看 <code>RGB、MIRACL/MIRAGE-Bench</code>，再补中文问答/领域私有数据。</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2026-07-07 11:25:40">Updated on 2026-07-07&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/llm-rag%E6%96%B9%E5%90%91%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E9%9B%86/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div></div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/llm-%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/" class="post-nav-item" rel="prev" title="LLM · 评价指标"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>LLM · 评价指标</a><a href="/posts/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8-ielts-skill/" class="post-nav-item" rel="next" title="IELTS Skill">IELTS Skill<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div class="post-reward">
+    <div class="comment"></div>
+    <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
+    <label class="reward-button" for="fi-reward"><?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1776434267563" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2715" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M377.596784 791.989528s-39.199482 22.799699 27.799633 30.399598c81.198926 9.199878 122.598379 7.999894 211.997197-8.999881 0 0 23.599688 14.799804 56.399254 27.599635C473.395518 926.787745 220.198866 835.988946 377.596784 791.989528m-24.399677-112.198517s-43.799421 32.399572 23.199693 39.399479c86.598855 8.999881 155.197948 9.599873 273.596382-13.199825 0 0 16.399783 16.599781 42.199442 25.599661-242.596792 70.999061-512.593222 5.799923-338.995517-51.799315m206.397271-190.197485c49.399347 56.799249-12.999828 107.998572-12.999828 107.998572s125.398342-64.799143 67.799103-145.798072c-53.799289-75.599-94.998744-113.198503 128.198305-242.596792 0.199997 0-350.395367 87.598842-182.99758 280.396292m265.196493 385.194907s28.999617 23.799685-31.799579 42.399439c-115.798469 34.999537-481.593632 45.599397-583.192289 1.399982-36.599516-15.799791 31.999577-37.999498 53.599291-42.599437 22.399704-4.799937 35.399532-3.999947 35.399532-3.999947-40.599463-28.599622-262.596528 56.199257-112.798508 80.398937 408.3946 66.399122 744.790152-29.799606 638.791553-77.598974M396.396536 563.592548s-186.197538 44.199416-65.999128 60.199204c50.799328 6.79991 151.99799 5.199931 246.196745-2.599966 76.998982-6.399915 154.397958-20.39973 154.397958-20.39973s-27.19964 11.599847-46.799381 24.999669c-188.997501 49.799342-553.992675 26.599648-448.994063-24.19968 88.998823-42.799434 161.197869-37.999498 161.197869-37.999497m333.995583 186.597532c192.197459-99.79868 103.198635-195.797411 41.199456-182.797582-15.199799 3.199958-21.999709 5.999921-21.999709 5.99992s5.599926-8.799884 16.399783-12.599833c122.598379-43.199429 216.997131 127.198318-39.599477 194.597427 0-0.199997 2.99996-2.799963 3.999947-5.199932M614.393653 0s106.398593 106.398593-100.998664 269.99643c-166.197802 131.198265-37.999498 206.197274 0 291.596144-96.998717-87.598842-168.197776-164.597824-120.398408-236.396874C463.195652 220.197088 657.393085 168.997765 614.393653 0m-198.997369 1020.786502c184.397562 11.799844 467.593817-6.599913 474.19373-93.798759 0 0-12.799831 32.999564-152.397985 59.399214-157.397919 29.599609-351.595351 26.199654-466.59383 7.199905 0-0.199997 23.599688 19.399743 144.798085 27.19964" fill="" p-id="2716"></path></svg>为博主买一杯java</label>
+    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/wechatpay.jpg" alt="Ting WeChat Pay" data-title="Ting WeChat Pay" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>WeChat Pay</span>
+          </div></div>
+  </div></article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.137.0">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024 - 2026</span><span class="author" itemprop="copyrightHolder">
+              <a href="Tin10g.github.io">Ting</a></span></div><div class="footer-line statistics"><span class="site-time" title='Website running ...'><i class="fa-solid fa-heartbeat fa-fw animate-icon" aria-hidden="true"></i><span class="ms-1 d-none">Runing</span><span class="run-times ms-1">Website running ...</span></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">This website works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":1000},"comment":{"enable":false},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"siteTime":"2024-04-01T11:25:40+08:00","typeit":{"cursorChar":"|","cursorSpeed":1000,"duration":-1,"loop":false,"speed":100},"version":"v0.3.13"};console.log('Page config:', window.config);</script><script src="/js/theme.min.js" defer></script><script src="/js/custom.min.js" defer></script></body>
+</html>

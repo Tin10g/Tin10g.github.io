@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html itemscope itemtype="http://schema.org/WebPage" lang="en">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8533&amp;path=livereload" data-no-instant defer></script>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=7828&amp;path=livereload" data-no-instant defer></script>
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -13,7 +13,7 @@
   <meta itemprop="datePublished" content="2026-07-01T11:25:40+08:00">
   <meta itemprop="dateModified" content="2026-07-01T11:25:40+08:00">
   <meta itemprop="wordCount" content="420">
-  <meta itemprop="keywords" content="Memory,Benchmark"><meta property="og:url" content="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory-gym-towards-endless-tasks-to-benchmark-memory-capabilities-of-agents/">
+  <meta itemprop="keywords" content="Memory,Benchmark"><meta property="og:url" content="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory-gym-towards-endless-tasks-to-benchmark-memory-capabilities-of-agents/">
   <meta property="og:site_name" content="Ting BLOG🐈">
   <meta property="og:title" content="论文 · Memory Gym: Towards Endless Tasks to Benchmark Memory Capabilities of Agents">
   <meta property="og:description" content="基础信息会议/期刊：Journal of Machine Learning Research 26 (2025), 1-40 关键词：deep reinforcement learning, memory, benchmark, Transformer-XL, GRU, PPO 核心贡献：本文把 Memory Gym 的三个有限 POMDP 任务扩展为 endless cumulative memory tasks，并提供 CleanRL 中基于 PPO 的 Transformer-XL baseline，证明有限任务上的 sample efficiency 不足以衡量长期 memory effectiveness，且 GRU 在 endless 任务中显著优于 TrXL。">
@@ -29,7 +29,7 @@
   <meta name="twitter:title" content="论文 · Memory Gym: Towards Endless Tasks to Benchmark Memory Capabilities of Agents">
   <meta name="twitter:description" content="基础信息会议/期刊：Journal of Machine Learning Research 26 (2025), 1-40 关键词：deep reinforcement learning, memory, benchmark, Transformer-XL, GRU, PPO 核心贡献：本文把 Memory Gym 的三个有限 POMDP 任务扩展为 endless cumulative memory tasks，并提供 CleanRL 中基于 PPO 的 Transformer-XL baseline，证明有限任务上的 sample efficiency 不足以衡量长期 memory effectiveness，且 GRU 在 endless 任务中显著优于 TrXL。">
 <meta name="application-name" content="FixIt">
-<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory-gym-towards-endless-tasks-to-benchmark-memory-capabilities-of-agents/" title="论文 · Memory Gym: Towards Endless Tasks to Benchmark Memory Capabilities of Agents - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive/" title="论文 · When to Forget: A Memory Governance Primitive" /><link rel="next" type="text/html" href="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memgpttowards-llms-as-operating-systems/" title="论文 · MemGPT: Towards LLMs as Operating Systems" /><link rel="alternate" type="text/markdown" href="http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory-gym-towards-endless-tasks-to-benchmark-memory-capabilities-of-agents/index.md" title="论文 · Memory Gym: Towards Endless Tasks to Benchmark Memory Capabilities of Agents - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory-gym-towards-endless-tasks-to-benchmark-memory-capabilities-of-agents/" title="论文 · Memory Gym: Towards Endless Tasks to Benchmark Memory Capabilities of Agents - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-score-aware-policy-gradient-and-performance-guarantees-using-local-lyapunov-stability/" title="论文 · Score-Aware Policy-Gradient and Performance Guarantees using Local Lyapunov Stability" /><link rel="next" type="text/html" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memgpttowards-llms-as-operating-systems/" title="论文 · MemGPT: Towards LLMs as Operating Systems" /><link rel="alternate" type="text/markdown" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory-gym-towards-endless-tasks-to-benchmark-memory-capabilities-of-agents/index.md" title="论文 · Memory Gym: Towards Endless Tasks to Benchmark Memory Capabilities of Agents - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
@@ -39,9 +39,9 @@
     "inLanguage": "en",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "http:\/\/localhost:8533\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory-gym-towards-endless-tasks-to-benchmark-memory-capabilities-of-agents\/"
+      "@id": "http:\/\/localhost:7828\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory-gym-towards-endless-tasks-to-benchmark-memory-capabilities-of-agents\/"
     },"genre": "posts","keywords": "Memory, Benchmark","wordcount":  420 ,
-    "url": "http:\/\/localhost:8533\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory-gym-towards-endless-tasks-to-benchmark-memory-capabilities-of-agents\/","datePublished": "2026-07-01T11:25:40+08:00","dateModified": "2026-07-01T11:25:40+08:00","publisher": {
+    "url": "http:\/\/localhost:7828\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory-gym-towards-endless-tasks-to-benchmark-memory-capabilities-of-agents\/","datePublished": "2026-07-01T11:25:40+08:00","dateModified": "2026-07-01T11:25:40+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -280,7 +280,7 @@
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
     </section>
-  </div><div class="post-nav"><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive/" class="post-nav-item" rel="prev" title="论文 · When to Forget: A Memory Governance Primitive"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>论文 · When to Forget: A Memory Governance Primitive</a><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memgpttowards-llms-as-operating-systems/" class="post-nav-item" rel="next" title="论文 · MemGPT: Towards LLMs as Operating Systems">论文 · MemGPT: Towards LLMs as Operating Systems<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+  </div><div class="post-nav"><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-score-aware-policy-gradient-and-performance-guarantees-using-local-lyapunov-stability/" class="post-nav-item" rel="prev" title="论文 · Score-Aware Policy-Gradient and Performance Guarantees Using Local Lyapunov Stability"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>论文 · Score-Aware Policy-Gradient and Performance Guarantees Using Local Lyapunov Stability</a><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memgpttowards-llms-as-operating-systems/" class="post-nav-item" rel="next" title="论文 · MemGPT: Towards LLMs as Operating Systems">论文 · MemGPT: Towards LLMs as Operating Systems<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div class="post-reward">
     <div class="comment"></div>

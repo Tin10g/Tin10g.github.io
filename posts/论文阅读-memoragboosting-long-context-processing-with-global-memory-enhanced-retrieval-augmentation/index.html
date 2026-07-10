@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=7828&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>论文 · MemoRAG：Boosting Long Context Processing With Global Memory-Enhanced Retrieval Augmentation - Ting BLOG🐈</title><meta name="author" content="Ting">
+<meta name="description" content="基础信息论文标题：MemoRAG: Boosting Long Context Processing with Global Memory-Enhanced Retrieval Augmentation 作者：Hongjin Qian, Zheng Liu, Peitian Zhang, Kelong Mao, Defu Lian, Zhicheng Dou, Tiejun Huang 会议：WWW 2025 核心贡献：MemoRAG 用轻量长程 memory model 先为超长上下文形成全局记忆，并在任务到来时生成 draft answer clues 来引导检索，再由较强 generator 基于检索证据生成最终答案，从而缓解传统 RAG 对显式查询和良好结构化知识的依赖，在长上下文 QA、总结和复杂领域任务上超过标准 RAG、GraphRAG、HyDE 以及直接读全文的长上下文 LLM。
+">
+  <meta itemprop="name" content="论文 · MemoRAG：Boosting Long Context Processing with Global Memory-Enhanced Retrieval Augmentation">
+  <meta itemprop="description" content="基础信息论文标题：MemoRAG: Boosting Long Context Processing with Global Memory-Enhanced Retrieval Augmentation 作者：Hongjin Qian, Zheng Liu, Peitian Zhang, Kelong Mao, Defu Lian, Zhicheng Dou, Tiejun Huang 会议：WWW 2025 核心贡献：MemoRAG 用轻量长程 memory model 先为超长上下文形成全局记忆，并在任务到来时生成 draft answer clues 来引导检索，再由较强 generator 基于检索证据生成最终答案，从而缓解传统 RAG 对显式查询和良好结构化知识的依赖，在长上下文 QA、总结和复杂领域任务上超过标准 RAG、GraphRAG、HyDE 以及直接读全文的长上下文 LLM。">
+  <meta itemprop="datePublished" content="2026-07-06T11:01:08+08:00">
+  <meta itemprop="dateModified" content="2026-07-06T11:01:08+08:00">
+  <meta itemprop="wordCount" content="598">
+  <meta itemprop="keywords" content="论文阅读"><meta property="og:url" content="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memoragboosting-long-context-processing-with-global-memory-enhanced-retrieval-augmentation/">
+  <meta property="og:site_name" content="Ting BLOG🐈">
+  <meta property="og:title" content="论文 · MemoRAG：Boosting Long Context Processing with Global Memory-Enhanced Retrieval Augmentation">
+  <meta property="og:description" content="基础信息论文标题：MemoRAG: Boosting Long Context Processing with Global Memory-Enhanced Retrieval Augmentation 作者：Hongjin Qian, Zheng Liu, Peitian Zhang, Kelong Mao, Defu Lian, Zhicheng Dou, Tiejun Huang 会议：WWW 2025 核心贡献：MemoRAG 用轻量长程 memory model 先为超长上下文形成全局记忆，并在任务到来时生成 draft answer clues 来引导检索，再由较强 generator 基于检索证据生成最终答案，从而缓解传统 RAG 对显式查询和良好结构化知识的依赖，在长上下文 QA、总结和复杂领域任务上超过标准 RAG、GraphRAG、HyDE 以及直接读全文的长上下文 LLM。">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-07-06T11:01:08+08:00">
+    <meta property="article:modified_time" content="2026-07-06T11:01:08+08:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="论文 · MemoRAG：Boosting Long Context Processing with Global Memory-Enhanced Retrieval Augmentation">
+  <meta name="twitter:description" content="基础信息论文标题：MemoRAG: Boosting Long Context Processing with Global Memory-Enhanced Retrieval Augmentation 作者：Hongjin Qian, Zheng Liu, Peitian Zhang, Kelong Mao, Defu Lian, Zhicheng Dou, Tiejun Huang 会议：WWW 2025 核心贡献：MemoRAG 用轻量长程 memory model 先为超长上下文形成全局记忆，并在任务到来时生成 draft answer clues 来引导检索，再由较强 generator 基于检索证据生成最终答案，从而缓解传统 RAG 对显式查询和良好结构化知识的依赖，在长上下文 QA、总结和复杂领域任务上超过标准 RAG、GraphRAG、HyDE 以及直接读全文的长上下文 LLM。">
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memoragboosting-long-context-processing-with-global-memory-enhanced-retrieval-augmentation/" title="论文 · MemoRAG：Boosting Long Context Processing with Global Memory-Enhanced Retrieval Augmentation - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-understand-what-llm-needsdual-preference-alignment-for-retrieval-augmented-generation/" title="论文 · Understand What LLM Needs：Dual Preference Alignment for Retrieval-Augmented Generation" /><link rel="next" type="text/html" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-lightragsimple-and-fast-retrieval-augmented-generation/" title="论文 · LightRAG：Simple and Fast Retrieval-Augmented Generation" /><link rel="alternate" type="text/markdown" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memoragboosting-long-context-processing-with-global-memory-enhanced-retrieval-augmentation/index.md" title="论文 · MemoRAG：Boosting Long Context Processing with Global Memory-Enhanced Retrieval Augmentation - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "论文 · MemoRAG：Boosting Long Context Processing with Global Memory-Enhanced Retrieval Augmentation",
+    "inLanguage": "en",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:7828\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memoragboosting-long-context-processing-with-global-memory-enhanced-retrieval-augmentation\/"
+    },"genre": "posts","wordcount":  598 ,
+    "url": "http:\/\/localhost:7828\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memoragboosting-long-context-processing-with-global-memory-enhanced-retrieval-augmentation\/","datePublished": "2026-07-06T11:01:08+08:00","dateModified": "2026-07-06T11:01:08+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Ting"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/archives/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/archives/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>论文 · MemoRAG：Boosting Long Context Processing With Global Memory-Enhanced Retrieval Augmentation</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" class="post-category" title="Category - 论文阅读"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 论文阅读</a></span></div><div class="post-meta-line"><span title="published on 2026-07-06 11:01:08"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2026-07-06">2026-07-06</time></span>&nbsp;<span title="598 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 600 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>3 minutes</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#基础信息">基础信息</a></li>
+    <li><a href="#q1-研究动机">Q1. 研究动机</a></li>
+    <li><a href="#q2-核心问题">Q2. 核心问题</a></li>
+    <li><a href="#q3-现有不足--本文改进">Q3. 现有不足 &amp; 本文改进</a></li>
+    <li><a href="#q4-方法流程">Q4. 方法流程</a></li>
+    <li><a href="#q5-实验设计与结论">Q5. 实验设计与结论</a></li>
+    <li><a href="#q6-局限性">Q6. 局限性</a></li>
+    <li><a href="#q7-学术价值">Q7. 学术价值</a></li>
+    <li><a href="#q8-延伸研究方向">Q8. 延伸研究方向</a></li>
+    <li><a href="#q9-反直觉发现与方法失效分析">Q9. 反直觉发现与方法失效分析</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 id="基础信息" class="heading-element"><span>基础信息</span>
+  <a href="#%e5%9f%ba%e7%a1%80%e4%bf%a1%e6%81%af" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>论文标题：MemoRAG: Boosting Long Context Processing with Global Memory-Enhanced Retrieval Augmentation</li>
+<li>作者：Hongjin Qian, Zheng Liu, Peitian Zhang, Kelong Mao, Defu Lian, Zhicheng Dou, Tiejun Huang</li>
+<li>会议：WWW 2025</li>
+</ul>
+<p><strong>核心贡献</strong>：MemoRAG 用轻量长程 memory model 先为超长上下文形成全局记忆，并在任务到来时生成 draft answer clues 来引导检索，再由较强 generator 基于检索证据生成最终答案，从而缓解传统 RAG 对显式查询和良好结构化知识的依赖，在长上下文 QA、总结和复杂领域任务上超过标准 RAG、GraphRAG、HyDE 以及直接读全文的长上下文 LLM。</p>
+<h2 id="q1-研究动机" class="heading-element"><span>Q1. 研究动机</span>
+  <a href="#q1-%e7%a0%94%e7%a9%b6%e5%8a%a8%e6%9c%ba" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>长上下文任务中，直接把全部上下文喂给 LLM 成本高，且 32K/128K 仍可能不够。传统 RAG 虽然能降低上下文长度，但依赖两个条件：用户 query 要明确可检索，知识库要能被良好切分和索引。很多长文档任务并不满足这些条件，例如总结、人物关系梳理和跨报告综合。作者因此借鉴人类阅读长文档的过程：先形成全局记忆，再根据任务回忆线索，最后回查细节。</p>
+<h2 id="q2-核心问题" class="heading-element"><span>Q2. 核心问题</span>
+  <a href="#q2-%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>本文要解决的问题是：当长上下文任务缺少明确检索意图、信息分散且文档结构不适合直接 chunk 检索时，如何让 RAG 仍能找到关键证据。</p>
+<p>技术上，MemoRAG 试图在 query 与原始长上下文之间加入一个全局记忆层，由 memory model 生成可检索的 clue，把“不可直接搜索的任务”转化成更容易定位证据的检索查询。</p>
+<h2 id="q3-现有不足--本文改进" class="heading-element"><span>Q3. 现有不足 &amp; 本文改进</span>
+  <a href="#q3-%e7%8e%b0%e6%9c%89%e4%b8%8d%e8%b6%b3--%e6%9c%ac%e6%96%87%e6%94%b9%e8%bf%9b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>现有方法的不足：</p>
+<ul>
+<li>直接长上下文 LLM 的 prefill 时间和 KV cache 成本高，且超出上下文窗口后无法完整处理。</li>
+<li>标准 RAG 假设 query 明确，适合事实 QA，但不擅长总结、关系梳理、跨文档综合等高层任务。</li>
+<li>HyDE、RQ-RAG 仍主要基于 query 改写或假想文档，缺少对整个上下文的全局记忆。</li>
+<li>GraphRAG 能做全局结构化处理，但索引和查询成本较高。</li>
+</ul>
+<p>本文改进点：</p>
+<ul>
+<li>提出 dual-system 架构：轻量长程 memory model 负责形成全局记忆和生成 clues，较强 generator 负责最终回答。</li>
+<li>设计 compact global memory，把长文本压缩成 memory tokens 的 KV cache，常用压缩率为 4、8、16、32、64。</li>
+<li>用 clue 作为检索查询，让 RAG 不再只依赖用户原始 query。</li>
+<li>提出 RLGF，即 Reinforcement Learning with Generation Feedback，根据 clue 对最终答案质量的贡献来偏好优化 memory model。</li>
+<li>证明该方法不仅适用于 QA，也适用于 summarization、long-book QA 和 UltraDomain 中的复杂领域任务。</li>
+</ul>
+<h2 id="q4-方法流程" class="heading-element"><span>Q4. 方法流程</span>
+  <a href="#q4-%e6%96%b9%e6%b3%95%e6%b5%81%e7%a8%8b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>MemoRAG 接收长上下文 <code>C</code> 后，先由 memory model 处理 <code>C</code> 加辅助 prompt，生成全局记忆 <code>theta_mem</code>。当任务 query 到来时，memory model 不直接给最终答案，而是基于全局记忆生成 draft answer clues。这些 clues 可能不完整甚至有局部错误，但它们能揭示任务需要找什么信息，因此被用作检索器的查询，从原始长上下文中定位证据。最后，generator 读取用户 query 和检索到的 evidence，生成最终答案。</p>
+<p>memory module 有两个实现方向。Light global memory 直接复用完整 KV cache 或长上下文优化技术，简单但显存和语义保真都有局限。Compact global memory 则在每个上下文窗口后插入少量 memory tokens，只保留 memory token 的 KV cache，丢弃普通 token 的 KV cache，从而用较小显存保留全局语义。训练分三步：pre-training 学会用 memory tokens 预测文本，SFT 学会生成 task-specific clues，RLGF 再根据 clue 对最终生成质量的帮助进行偏好优化。</p>
+<h2 id="q5-实验设计与结论" class="heading-element"><span>Q5. 实验设计与结论</span>
+  <a href="#q5-%e5%ae%9e%e9%aa%8c%e8%ae%be%e8%ae%a1%e4%b8%8e%e7%bb%93%e8%ae%ba" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><table>
+  <thead>
+      <tr>
+          <th>实验/分析</th>
+          <th>目的</th>
+          <th>关键设置与结论</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>主实验：LongBench、InfiniteBench、UltraDomain</td>
+          <td>验证 MemoRAG 是否优于长上下文 LLM 与 RAG 方法</td>
+          <td>Table 1 中 MemoRAG 平均分 40.2，高于 Full 35.0、BGE-M3 29.7、GraphRAG 29.4、RQ-RAG 30.1。</td>
+      </tr>
+      <tr>
+          <td>QA 任务评估</td>
+          <td>验证 MemoRAG 在标准 RAG 场景是否有效</td>
+          <td>Table 1 中 NarrativeQA 27.5、Qasper 43.9、MultiFieldQA 52.2、HotpotQA 54.8，均为最优并带 <code>p &lt; 0.05</code> 显著性标记。</td>
+      </tr>
+      <tr>
+          <td>非 QA 与长书任务</td>
+          <td>验证缺少明确 query 时是否有效</td>
+          <td>Table 1 中 MultiNews 26.3、GovReport 32.9、En.SUM 15.7、En.QA 22.9，均高于所有基线，说明 clue generation 对总结和长书问答有帮助。</td>
+      </tr>
+      <tr>
+          <td>UltraDomain 泛化</td>
+          <td>测试多领域长文档场景</td>
+          <td>Figure 3 中 MemoRAG 在 20 个领域均优于 Full、BGE-M3、Stella-v5、HyDE；Out-of-domain 平均分为 36.2，高于 Full 33.8、BGE-M3 33.0、HyDE 32.5。</td>
+      </tr>
+      <tr>
+          <td>记忆设计与训练消融</td>
+          <td>验证 compact memory、pretrain、SFT、RLGF 的作用</td>
+          <td>Figure 4 中 Mistral memory model 从 RAG 的 Complex Tasks 37.8 提升到 SFT 50.9、RLGF 52.5；Qwen memory model 从 RAG 36.5 提升到 SFT 49.9、RLGF 51.1。</td>
+      </tr>
+      <tr>
+          <td>替换基础 memory model</td>
+          <td>验证架构是否依赖特定 LLM</td>
+          <td>Figure 4(a)(b) 比较 Mistral-7B-32K 和 Qwen2-7B-128K，二者使用 MemoRAG 后均有稳定提升。</td>
+      </tr>
+      <tr>
+          <td>替换 generator</td>
+          <td>验证 MemoRAG 能否增强不同生成器</td>
+          <td>Figure 4(c) 显示 MemoRAG 与 Mistral-7B、Llama3.1-8B、Phi-3-mini 结合时都优于直接使用这些 long LLM。</td>
+      </tr>
+      <tr>
+          <td>压缩率分析</td>
+          <td>研究效率与性能权衡</td>
+          <td>Figure 5(b) 中压缩率从 4 增至 64 时性能下降但趋于稳定，例如 Legal 从 51.2 降到 46.2，Mix 从 53.6 降到 45.2；即使高压缩仍优于标准 RAG 曲线。</td>
+      </tr>
+      <tr>
+          <td>效率分析</td>
+          <td>比较索引、检索延迟和显存</td>
+          <td>Figure 5(a) 显示 MemoRAG 索引慢于标准 RAG，但快于长 LLM prefill 和 GraphRAG；检索慢于标准 RAG，但快于 GraphRAG；128K 上下文下 MemoRAG 和标准 RAG 显存低于 60 GiB，长 LLM 显存显著更高。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="q6-局限性" class="heading-element"><span>Q6. 局限性</span>
+  <a href="#q6-%e5%b1%80%e9%99%90%e6%80%a7" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>作者明确提到或实验显示：</p>
+<ul>
+<li>论文没有单独的 Limitations 章节。</li>
+<li>Figure 5(a) 显示 MemoRAG 由于需要形成全局记忆，索引阶段慢于标准 RAG；由于需要生成 retrieval clues，检索阶段也慢于标准向量检索。</li>
+<li>Figure 5(b) 显示压缩率增大时性能下降，例如 Fin 从 48.0 降到 45.0，Legal 从 51.2 降到 46.2，Mix 从 53.6 降到 45.2。</li>
+<li>作者承认生成的 clues 可能包含不准确或缺少细节的信息，但认为它们仍能暴露任务的信息需求。</li>
+</ul>
+<p>以下为分析归纳，非原文明确说明：</p>
+<ul>
+<li>MemoRAG 把检索质量部分转移给 clue generation。如果 memory model 生成的 clue 偏离任务，后续检索会系统性跑偏。</li>
+<li>Compact memory 需要额外训练 memory token 的参数，完整部署成本高于即插即用检索器。</li>
+<li>RLGF 依赖对 clue 贡献的偏好排序，构造和评估成本较高，且 reward 是否能泛化到新领域仍需验证。</li>
+<li>对短文本、明确事实 QA 或低延迟场景，MemoRAG 的额外 memory formation 与 clue generation 可能得不偿失。</li>
+</ul>
+<h2 id="q7-学术价值" class="heading-element"><span>Q7. 学术价值</span>
+  <a href="#q7-%e5%ad%a6%e6%9c%af%e4%bb%b7%e5%80%bc" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>理论价值：把长上下文 RAG 从“query 直接检索 chunk”改造成“全局记忆生成线索再检索”，解释了传统 RAG 在无显式查询和非结构化长文档任务中的失效原因。</li>
+<li>方法价值：提出 memory-augmented retrieval 的完整实现，包括 compact KV memory、clue generation 和 RLGF 偏好优化。</li>
+<li>应用价值：适合长报告分析、书籍问答、长文档总结、法律金融材料综合等需要先全局理解再定位证据的任务。</li>
+</ul>
+<h2 id="q8-延伸研究方向" class="heading-element"><span>Q8. 延伸研究方向</span>
+  <a href="#q8-%e5%bb%b6%e4%bc%b8%e7%a0%94%e7%a9%b6%e6%96%b9%e5%90%91" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ol>
+<li>为 generated clues 加入可验证机制，判断 clue 是有效线索、部分错误线索还是会误导检索的线索。</li>
+<li>研究多轮任务中的 memory reuse，让同一长文档的全局记忆在多个 query 之间持续复用和更新。</li>
+<li>将 MemoRAG 与图索引结合，使 clues 不只检索文本 chunk，也能检索实体、关系和多跳证据。</li>
+<li>探索更低成本的 memory model 训练方法，例如蒸馏、LoRA 或只训练少量 memory adapter。</li>
+<li>在真实企业长文档工作流中评估端到端延迟、成本和人工审查体验。</li>
+</ol>
+<h2 id="q9-反直觉发现与方法失效分析" class="heading-element"><span>Q9. 反直觉发现与方法失效分析</span>
+  <a href="#q9-%e5%8f%8d%e7%9b%b4%e8%a7%89%e5%8f%91%e7%8e%b0%e4%b8%8e%e6%96%b9%e6%b3%95%e5%a4%b1%e6%95%88%e5%88%86%e6%9e%90" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>发现一：直接读全文的 long LLM 常常强于标准 RAG。Table 1 中 Full 平均分为 35.0，高于 BGE-M3 29.7、GraphRAG 29.4、RQ-RAG 30.1；GovReport 上 Full 为 32.6，而 BGE-M3 只有 19.8。作者已讨论该现象，认为标准 RAG 难以处理高层 query 和证据定位。</li>
+<li>发现二：轻量全局记忆有时比不用训练还差。Figure 4(a) 中 Mistral memory model 的 Long Book QA 上 Light 为 11.9，低于 Zero 12.3 和 RAG 12.2；Summarization 上 Light 为 19.6，低于 RAG 21.3。作者解释为 light memory 受原生上下文窗口和稀疏注意力影响，语义完整性不足。</li>
+<li>发现三：RLGF 的增益相对 SFT 较小但稳定。Figure 4 中 Mistral 设置下 Complex Tasks 从 SFT 50.9 到 RLGF 52.5，Qwen 设置下从 49.9 到 51.1。作者认为 RLGF 进一步优化 clue 的最终答案贡献；我的理解是，主要能力来自 SFT 学会生成 clue，RLGF 更像端到端质量校准。</li>
+<li>发现四：压缩率提高后性能下降但没有崩溃。Figure 5(b) 中 Legal 从 beta=4 的 51.2 降到 beta=64 的 46.2，Mix 从 53.6 降到 45.2。作者解释为高压缩牺牲语义丰富度，但 compact memory 仍能保留关键信息。</li>
+<li>整体评价：MemoRAG 的结论在长上下文任务上比较有说服力，尤其是它同时超过标准 RAG 和直接读全文的 long LLM。但它不是低成本检索的替代品，而是一种为复杂长文档任务付出额外 memory/clue 成本后换取更好证据定位的框架。</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2026-07-06 11:01:08">Updated on 2026-07-06&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memoragboosting-long-context-processing-with-global-memory-enhanced-retrieval-augmentation/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div></div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-understand-what-llm-needsdual-preference-alignment-for-retrieval-augmented-generation/" class="post-nav-item" rel="prev" title="论文 · Understand What LLM Needs：Dual Preference Alignment for Retrieval-Augmented Generation"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>论文 · Understand What LLM Needs：Dual Preference Alignment for Retrieval-Augmented Generation</a><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-lightragsimple-and-fast-retrieval-augmented-generation/" class="post-nav-item" rel="next" title="论文 · LightRAG：Simple and Fast Retrieval-Augmented Generation">论文 · LightRAG：Simple and Fast Retrieval-Augmented Generation<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div class="post-reward">
+    <div class="comment"></div>
+    <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
+    <label class="reward-button" for="fi-reward"><?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1776434267563" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2715" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M377.596784 791.989528s-39.199482 22.799699 27.799633 30.399598c81.198926 9.199878 122.598379 7.999894 211.997197-8.999881 0 0 23.599688 14.799804 56.399254 27.599635C473.395518 926.787745 220.198866 835.988946 377.596784 791.989528m-24.399677-112.198517s-43.799421 32.399572 23.199693 39.399479c86.598855 8.999881 155.197948 9.599873 273.596382-13.199825 0 0 16.399783 16.599781 42.199442 25.599661-242.596792 70.999061-512.593222 5.799923-338.995517-51.799315m206.397271-190.197485c49.399347 56.799249-12.999828 107.998572-12.999828 107.998572s125.398342-64.799143 67.799103-145.798072c-53.799289-75.599-94.998744-113.198503 128.198305-242.596792 0.199997 0-350.395367 87.598842-182.99758 280.396292m265.196493 385.194907s28.999617 23.799685-31.799579 42.399439c-115.798469 34.999537-481.593632 45.599397-583.192289 1.399982-36.599516-15.799791 31.999577-37.999498 53.599291-42.599437 22.399704-4.799937 35.399532-3.999947 35.399532-3.999947-40.599463-28.599622-262.596528 56.199257-112.798508 80.398937 408.3946 66.399122 744.790152-29.799606 638.791553-77.598974M396.396536 563.592548s-186.197538 44.199416-65.999128 60.199204c50.799328 6.79991 151.99799 5.199931 246.196745-2.599966 76.998982-6.399915 154.397958-20.39973 154.397958-20.39973s-27.19964 11.599847-46.799381 24.999669c-188.997501 49.799342-553.992675 26.599648-448.994063-24.19968 88.998823-42.799434 161.197869-37.999498 161.197869-37.999497m333.995583 186.597532c192.197459-99.79868 103.198635-195.797411 41.199456-182.797582-15.199799 3.199958-21.999709 5.999921-21.999709 5.99992s5.599926-8.799884 16.399783-12.599833c122.598379-43.199429 216.997131 127.198318-39.599477 194.597427 0-0.199997 2.99996-2.799963 3.999947-5.199932M614.393653 0s106.398593 106.398593-100.998664 269.99643c-166.197802 131.198265-37.999498 206.197274 0 291.596144-96.998717-87.598842-168.197776-164.597824-120.398408-236.396874C463.195652 220.197088 657.393085 168.997765 614.393653 0m-198.997369 1020.786502c184.397562 11.799844 467.593817-6.599913 474.19373-93.798759 0 0-12.799831 32.999564-152.397985 59.399214-157.397919 29.599609-351.595351 26.199654-466.59383 7.199905 0-0.199997 23.599688 19.399743 144.798085 27.19964" fill="" p-id="2716"></path></svg>为博主买一杯java</label>
+    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/wechatpay.jpg" alt="Ting WeChat Pay" data-title="Ting WeChat Pay" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>WeChat Pay</span>
+          </div></div>
+  </div></article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.137.0">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024 - 2026</span><span class="author" itemprop="copyrightHolder">
+              <a href="Tin10g.github.io">Ting</a></span></div><div class="footer-line statistics"><span class="site-time" title='Website running ...'><i class="fa-solid fa-heartbeat fa-fw animate-icon" aria-hidden="true"></i><span class="ms-1 d-none">Runing</span><span class="run-times ms-1">Website running ...</span></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">This website works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":1000},"comment":{"enable":false},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"siteTime":"2024-04-01T11:25:40+08:00","typeit":{"cursorChar":"|","cursorSpeed":1000,"duration":-1,"loop":false,"speed":100},"version":"v0.3.13"};console.log('Page config:', window.config);</script><script src="/js/theme.min.js" defer></script><script src="/js/custom.min.js" defer></script></body>
+</html>

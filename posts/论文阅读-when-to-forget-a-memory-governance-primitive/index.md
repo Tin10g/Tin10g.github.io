@@ -34,14 +34,98 @@
 
 输入是每个 episode 的检索集合 Mt、每条被检索记忆的权重 wt(m) 和 outcome yt。
 
-算法为每条记忆维护两个计数：hits&#43; 和 hits-。当该记忆被检索且 episode 成功时，累计到 hits&#43;；失败时累计到 hits-。Memory Worth 定义为 `hits&#43; / (hits&#43; &#43; hits-)`，若没有证据则初始化为 0.5。输出是一个 0 到 1 之间的 per-memory score，可直接用于优先级调整、压制、复核或弃用。
+算法为每条记忆维护两个计数：hits&#43; 和 hits-。
+
+当该记忆被检索且 episode 成功时，累计到 hits&#43;；失败时累计到 hits-。
+
+Memory Worth 定义为 `hits&#43; / (hits&#43; &#43; hits-)`，若没有证据则初始化为 0.5。
+
+输出是一个 0 到 1 之间的 per-memory score，可直接用于优先级调整、压制、复核或弃用。
+
+### 简化代码
+
+``````python
+from dataclasses import dataclass
+
+@dataclass
+class MemoryStats:
+    success_hits: float = 0.0
+    failure_hits: float = 0.0
+
+    @property
+    def evidence(self) -&gt; float:
+        return self.success_hits &#43; self.failure_hits
+
+    @property
+    def mw(self) -&gt; float:
+        if self.evidence == 0:
+            return 0.5
+        return self.success_hits / self.evidence
+
+
+class MemoryWorthTracker:
+    def __init__(self):
+        self.stats: dict[str, MemoryStats] = {}
+
+    def update_episode(self, retrieved_memories, success: bool):
+        &#34;&#34;&#34;
+        retrieved_memories: list of {&#34;memory_id&#34;: str, &#34;weight&#34;: float}
+        success: 本次任务是否成功
+        &#34;&#34;&#34;
+        for item in retrieved_memories:
+            memory_id = item[&#34;memory_id&#34;]
+            weight = item.get(&#34;weight&#34;, 1.0)
+
+            if memory_id not in self.stats:
+                self.stats[memory_id] = MemoryStats()
+
+            if success:
+                self.stats[memory_id].success_hits &#43;= weight
+            else:
+                self.stats[memory_id].failure_hits &#43;= weight
+
+    def get_mw(self, memory_id: str) -&gt; float:
+        return self.stats.get(memory_id, MemoryStats()).mw
+
+    def should_deprecate(self, memory_id: str, min_evidence=5, threshold=0.3) -&gt; bool:
+        stat = self.stats.get(memory_id, MemoryStats())
+        return stat.evidence &gt;= min_evidence and stat.mw &lt; threshold
+``````
+
+### 一次查询的流程
+
+``````
+tracker = MemoryWorthTracker()
+
+# 第 1 次 episode：RAG 检索到这些 memory
+retrieved = [
+    {&#34;memory_id&#34;: &#34;m001&#34;, &#34;weight&#34;: 0.9},
+    {&#34;memory_id&#34;: &#34;m002&#34;, &#34;weight&#34;: 0.7},
+    {&#34;memory_id&#34;: &#34;m003&#34;, &#34;weight&#34;: 0.4},
+]
+
+# 用户认为回答成功，或者评测器判断成功
+tracker.update_episode(retrieved, success=True)
+
+print(tracker.get_mw(&#34;m001&#34;))  # 1.0
+
+# 第 2 次 episode：同一条记忆又被检索，但回答失败
+retrieved = [
+    {&#34;memory_id&#34;: &#34;m001&#34;, &#34;weight&#34;: 0.8},
+    {&#34;memory_id&#34;: &#34;m004&#34;, &#34;weight&#34;: 0.6},
+]
+
+tracker.update_episode(retrieved, success=False)
+
+print(tracker.get_mw(&#34;m001&#34;))
+``````
 
 ## Q5. 实验设计与结论
 
 | 实验 | 目的 | 结论 |
 | --- | --- | --- |
 | Experiment 1：synthetic controlled setting | 验证 MW 在假设成立时是否能收敛到真值排序 | 100 memories、8 条检索、10,000 episodes 后，Spearman 相关从约 0.66 上升到 0.89-0.90；无更新 baseline 一直为 0。 |
-| Experiment 2：task-difficulty confound | 检验任务难度与记忆质量混杂时 MW 的表现 | Global MW 与真实 utility 变成负相关，约 `ρ=-0.33`；仅在 hard-task 子集上条件化后回升到 `ρ≈&#43;0.14±0.07`，但仍离无混杂基线 0.89 有差距。 |
+| Experiment 2：task-difficulty confound | 检验任务难度与记忆质量混杂时 MW 的表现 | Global MW 与真实 utility 变成负相关，约 `ρ=-0.33`；&lt;br /&gt;仅在 hard-task 子集上条件化后回升到 `ρ≈&#43;0.14±0.07`，但仍离无混杂基线 0.89 有差距。 |
 | Experiment 3：retrieval policy feedback loop | 检验 MW 参与检索是否会自我崩塌 | 在 softmax-biased retrieval 下，MW 仍收敛到 `ρ≈0.895-0.899`，没有出现退化。 |
 | Experiment 4：co-retrieval confound | 检验总是一起被检索的记忆能否区分 | 0% independent retrieval 时 anchor 和 hitchhiker 都收敛到 `MW≈0.49`，几乎不可区分；约 30% 独立检索后才开始有效分离。 |
 | Experiment 5：text-based retrieval agent | 检验现代 embedding retrieval 下是否仍有效 | all-MiniLM-L6-v2 检索、3,000 episodes 后，stale memory 从约 0.97 降到 0.17，specialist 稳在 0.77，说明 MW 能识别过时记忆。 |
@@ -56,9 +140,9 @@ MW 衡量的是 retrieval-outcome co-occurrence，不是因果贡献；
 
 在任务分布漂移、低证据记忆和共检索混杂下会失真；
 
-rarely retrieved memories 还需要 evidence threshold `Vm` 来避免误判。
+rarely retrieved memories 还需要 evidence threshold Vm 来避免误判。【代码中：至少被检索并观察过 5 次，且 MW &lt; 0.3，才考虑压制或弃用】
 
-以下为分析归纳，非原文明确说明：这更像记忆治理的底层原语，而不是完整的遗忘系统；它尤其依赖日志记录、检索多样性和上下文分区能力。
+分析归纳：这更像记忆治理的底层原语，而不是完整的遗忘系统；它尤其依赖日志记录、检索多样性和上下文分区能力。
 
 ## Q7. 学术价值
 
@@ -69,9 +153,28 @@ rarely retrieved memories 还需要 evidence threshold `Vm` 来避免误判。
 ## Q8. 延伸研究方向
 
 1. 构造 contextual Memory Worth，把 MW 条件化到任务簇或 query cluster。
-2. 用 Bayesian Beta-Bernoulli 替代纯 ratio，做 uncertainty-aware ranking。
+
+2. 用 Bayesian Beta-Bernoulli 替代纯 ratio，做 uncertainty-aware ranking，这样的好处是不会因为一次失败直接掉到 0。。
+
+   ``````python
+   @dataclass
+   class BayesianMemoryStats:
+       success_hits: float = 0.0
+       failure_hits: float = 0.0
+       alpha: float = 1.0
+       beta: float = 1.0
+   
+       @property
+       def mw(self) -&gt; float:
+           return (self.alpha &#43; self.success_hits) / (
+               self.alpha &#43; self.beta &#43; self.success_hits &#43; self.failure_hits
+           )
+   ``````
+
 3. 用 exponential moving average 处理非平稳任务分布。
+
 4. 把 retrieval diversity 作为治理约束，而不是训练后修补。
+
 5. 在真实 live agent 上验证 MW 是否能驱动实际 deprecation 和 re-verification。
 
 ## Q9. 反直觉发现与方法失效分析
@@ -86,5 +189,5 @@ rarely retrieved memories 还需要 evidence threshold `Vm` 来避免误判。
 ---
 
 > Author: [Ting](Tin10g.github.io)  
-> URL: http://localhost:8533/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive/  
+> URL: http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-when-to-forget-a-memory-governance-primitive/  
 

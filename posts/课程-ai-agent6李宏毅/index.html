@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html itemscope itemtype="http://schema.org/WebPage" lang="en">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8533&amp;path=livereload" data-no-instant defer></script>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=7828&amp;path=livereload" data-no-instant defer></script>
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -13,7 +13,7 @@
   <meta itemprop="datePublished" content="2026-07-01T11:25:40+08:00">
   <meta itemprop="dateModified" content="2026-07-01T11:25:40+08:00">
   <meta itemprop="wordCount" content="31">
-  <meta itemprop="keywords" content="课程 李宏毅2026"><meta property="og:url" content="http://localhost:8533/posts/%E8%AF%BE%E7%A8%8B-ai-agent6%E6%9D%8E%E5%AE%8F%E6%AF%85/">
+  <meta itemprop="keywords" content="课程 李宏毅2026"><meta property="og:url" content="http://localhost:7828/posts/%E8%AF%BE%E7%A8%8B-ai-agent6%E6%9D%8E%E5%AE%8F%E6%AF%85/">
   <meta property="og:site_name" content="Ting BLOG🐈">
   <meta property="og:title" content="AI Agent· 第六讲 生成式人工智能后训练">
   <meta property="og:description" content="后训练简介 Post training(Continual Learning)alignment和post training的区别 后训练使用的fundation model可以是instruct model（已经经历过alignment的model），也可以是pre-training之后的。而alignment的只是pre-training后的 alignment的偏好调整是让模型的行为更符合人类或产品希望的偏好（不一定要训练，训练是实现的一个方法），post-training的偏好调整是对模型本身的再训练 后训练的例子（给某个模型训练另一种语言）">
@@ -27,7 +27,7 @@
   <meta name="twitter:title" content="AI Agent· 第六讲 生成式人工智能后训练">
   <meta name="twitter:description" content="后训练简介 Post training(Continual Learning)alignment和post training的区别 后训练使用的fundation model可以是instruct model（已经经历过alignment的model），也可以是pre-training之后的。而alignment的只是pre-training后的 alignment的偏好调整是让模型的行为更符合人类或产品希望的偏好（不一定要训练，训练是实现的一个方法），post-training的偏好调整是对模型本身的再训练 后训练的例子（给某个模型训练另一种语言）">
 <meta name="application-name" content="FixIt">
-<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:8533/posts/%E8%AF%BE%E7%A8%8B-ai-agent6%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第六讲 生成式人工智能后训练 - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:8533/posts/%E8%AF%BE%E7%A8%8B-ai-agent4%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第四讲 大型语言模型训练方法" /><link rel="next" type="text/html" href="http://localhost:8533/posts/%E8%AF%BE%E7%A8%8B-ai-agent8%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第八讲 大语言模型的推理过程" /><link rel="alternate" type="text/markdown" href="http://localhost:8533/posts/%E8%AF%BE%E7%A8%8B-ai-agent6%E6%9D%8E%E5%AE%8F%E6%AF%85/index.md" title="AI Agent· 第六讲 生成式人工智能后训练 - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:7828/posts/%E8%AF%BE%E7%A8%8B-ai-agent6%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第六讲 生成式人工智能后训练 - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:7828/posts/%E8%AF%BE%E7%A8%8B-ai-agent4%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第四讲 大型语言模型训练方法" /><link rel="next" type="text/html" href="http://localhost:7828/posts/%E8%AF%BE%E7%A8%8B-ai-agent8%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第八讲 大语言模型的推理过程" /><link rel="alternate" type="text/markdown" href="http://localhost:7828/posts/%E8%AF%BE%E7%A8%8B-ai-agent6%E6%9D%8E%E5%AE%8F%E6%AF%85/index.md" title="AI Agent· 第六讲 生成式人工智能后训练 - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
@@ -37,9 +37,9 @@
     "inLanguage": "en",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "http:\/\/localhost:8533\/posts\/%E8%AF%BE%E7%A8%8B-ai-agent6%E6%9D%8E%E5%AE%8F%E6%AF%85\/"
+      "@id": "http:\/\/localhost:7828\/posts\/%E8%AF%BE%E7%A8%8B-ai-agent6%E6%9D%8E%E5%AE%8F%E6%AF%85\/"
     },"genre": "posts","wordcount":  31 ,
-    "url": "http:\/\/localhost:8533\/posts\/%E8%AF%BE%E7%A8%8B-ai-agent6%E6%9D%8E%E5%AE%8F%E6%AF%85\/","datePublished": "2026-07-01T11:25:40+08:00","dateModified": "2026-07-01T11:25:40+08:00","publisher": {
+    "url": "http:\/\/localhost:7828\/posts\/%E8%AF%BE%E7%A8%8B-ai-agent6%E6%9D%8E%E5%AE%8F%E6%AF%85\/","datePublished": "2026-07-01T11:25:40+08:00","dateModified": "2026-07-01T11:25:40+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=7828&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>论文 · GraphRAG：From Local to Global - Ting BLOG🐈</title><meta name="author" content="Ting">
+<meta name="description" content="基础信息论文标题：From Local to Global: A GraphRAG Approach to Query-Focused Summarization 作者：Darren Edge, Ha Trinh, Newman Cheng, Joshua Bradley, Alex Chao, Apurva Mody, Steven Truitt, Dasha Metropolitansky, Robert Osazuwa Ness, Jonathan Larson 核心贡献：GraphRAG 将文档集合预处理成 LLM 抽取的实体-关系图，并基于图社区生成层级 community summaries，使系统能够回答面向整个语料库的全局 sensemaking 问题，而不是只回答局部事实检索问题。
+">
+  <meta itemprop="name" content="论文 · GraphRAG：From Local to Global">
+  <meta itemprop="description" content="基础信息论文标题：From Local to Global: A GraphRAG Approach to Query-Focused Summarization 作者：Darren Edge, Ha Trinh, Newman Cheng, Joshua Bradley, Alex Chao, Apurva Mody, Steven Truitt, Dasha Metropolitansky, Robert Osazuwa Ness, Jonathan Larson 核心贡献：GraphRAG 将文档集合预处理成 LLM 抽取的实体-关系图，并基于图社区生成层级 community summaries，使系统能够回答面向整个语料库的全局 sensemaking 问题，而不是只回答局部事实检索问题。">
+  <meta itemprop="datePublished" content="2026-07-06T10:52:36+08:00">
+  <meta itemprop="dateModified" content="2026-07-06T10:52:36+08:00">
+  <meta itemprop="wordCount" content="600">
+  <meta itemprop="keywords" content="论文阅读"><meta property="og:url" content="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-graphragfrom-local-to-global/">
+  <meta property="og:site_name" content="Ting BLOG🐈">
+  <meta property="og:title" content="论文 · GraphRAG：From Local to Global">
+  <meta property="og:description" content="基础信息论文标题：From Local to Global: A GraphRAG Approach to Query-Focused Summarization 作者：Darren Edge, Ha Trinh, Newman Cheng, Joshua Bradley, Alex Chao, Apurva Mody, Steven Truitt, Dasha Metropolitansky, Robert Osazuwa Ness, Jonathan Larson 核心贡献：GraphRAG 将文档集合预处理成 LLM 抽取的实体-关系图，并基于图社区生成层级 community summaries，使系统能够回答面向整个语料库的全局 sensemaking 问题，而不是只回答局部事实检索问题。">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-07-06T10:52:36+08:00">
+    <meta property="article:modified_time" content="2026-07-06T10:52:36+08:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="论文 · GraphRAG：From Local to Global">
+  <meta name="twitter:description" content="基础信息论文标题：From Local to Global: A GraphRAG Approach to Query-Focused Summarization 作者：Darren Edge, Ha Trinh, Newman Cheng, Joshua Bradley, Alex Chao, Apurva Mody, Steven Truitt, Dasha Metropolitansky, Robert Osazuwa Ness, Jonathan Larson 核心贡献：GraphRAG 将文档集合预处理成 LLM 抽取的实体-关系图，并基于图社区生成层级 community summaries，使系统能够回答面向整个语料库的全局 sensemaking 问题，而不是只回答局部事实检索问题。">
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-graphragfrom-local-to-global/" title="论文 · GraphRAG：From Local to Global - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-self-raglearning-to-retrieve-generate-and-critique-through-self-reflection/" title="论文 · Self-RAG：Learning to Retrieve, Generate, and Critique through Self-Reflection" /><link rel="next" type="text/html" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-understand-what-llm-needsdual-preference-alignment-for-retrieval-augmented-generation/" title="论文 · Understand What LLM Needs：Dual Preference Alignment for Retrieval-Augmented Generation" /><link rel="alternate" type="text/markdown" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-graphragfrom-local-to-global/index.md" title="论文 · GraphRAG：From Local to Global - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "论文 · GraphRAG：From Local to Global",
+    "inLanguage": "en",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:7828\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-graphragfrom-local-to-global\/"
+    },"genre": "posts","wordcount":  600 ,
+    "url": "http:\/\/localhost:7828\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-graphragfrom-local-to-global\/","datePublished": "2026-07-06T10:52:36+08:00","dateModified": "2026-07-06T10:52:36+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Ting"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/archives/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/archives/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>论文 · GraphRAG：From Local to Global</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" class="post-category" title="Category - 论文阅读"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 论文阅读</a></span></div><div class="post-meta-line"><span title="published on 2026-07-06 10:52:36"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2026-07-06">2026-07-06</time></span>&nbsp;<span title="600 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 700 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>3 minutes</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#基础信息">基础信息</a></li>
+    <li><a href="#q1-研究动机">Q1. 研究动机</a></li>
+    <li><a href="#q2-核心问题">Q2. 核心问题</a></li>
+    <li><a href="#q3-现有不足--本文改进">Q3. 现有不足 &amp; 本文改进</a></li>
+    <li><a href="#q4-方法流程">Q4. 方法流程</a></li>
+    <li><a href="#q5-实验设计与结论">Q5. 实验设计与结论</a></li>
+    <li><a href="#q6-局限性">Q6. 局限性</a></li>
+    <li><a href="#q7-学术价值">Q7. 学术价值</a></li>
+    <li><a href="#q8-延伸研究方向">Q8. 延伸研究方向</a></li>
+    <li><a href="#q9-反直觉发现与方法失效分析">Q9. 反直觉发现与方法失效分析</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 id="基础信息" class="heading-element"><span>基础信息</span>
+  <a href="#%e5%9f%ba%e7%a1%80%e4%bf%a1%e6%81%af" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>论文标题：From Local to Global: A GraphRAG Approach to Query-Focused Summarization</li>
+<li>作者：Darren Edge, Ha Trinh, Newman Cheng, Joshua Bradley, Alex Chao, Apurva Mody, Steven Truitt, Dasha Metropolitansky, Robert Osazuwa Ness, Jonathan Larson</li>
+</ul>
+<p><strong>核心贡献</strong>：GraphRAG 将文档集合预处理成 LLM 抽取的实体-关系图，并基于图社区生成层级 community summaries，使系统能够回答面向整个语料库的全局 sensemaking 问题，而不是只回答局部事实检索问题。</p>
+<h2 id="q1-研究动机" class="heading-element"><span>Q1. 研究动机</span>
+  <a href="#q1-%e7%a0%94%e7%a9%b6%e5%8a%a8%e6%9c%ba" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>传统 RAG 擅长回答可以定位到少量片段的问题，但面对“这个数据集的主要主题是什么”“有哪些跨文档趋势”这类全局问题时，向量检索只能取回局部样本，容易把局部事实误当整体总结。作者认为，这类问题本质上更接近 query-focused summarization，但传统 QFS 又难以扩展到 RAG 系统常见的大规模私有语料。</p>
+<h2 id="q2-核心问题" class="heading-element"><span>Q2. 核心问题</span>
+  <a href="#q2-%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>本文试图解决的问题是：如何让 RAG 系统在百万 token 级别的私有语料上回答需要全局理解的问题。</p>
+<p>它要处理的不是“找出最相关 chunk”，而是“如何把整个语料组织成可分层汇总、可按查询聚合的知识结构”。</p>
+<h2 id="q3-现有不足--本文改进" class="heading-element"><span>Q3. 现有不足 &amp; 本文改进</span>
+  <a href="#q3-%e7%8e%b0%e6%9c%89%e4%b8%8d%e8%b6%b3--%e6%9c%ac%e6%96%87%e6%94%b9%e8%bf%9b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>现有方法的不足：</p>
+<ul>
+<li>Vector RAG 偏局部：适合显式事实检索，不适合需要整体理解的 sensemaking query。</li>
+<li>直接全文 summarization 成本高：对整个 source text 做 map-reduce summarization 会消耗大量 token。</li>
+<li>普通知识图谱 RAG 多用于增强局部检索或图遍历，较少利用图的 modularity 来做全局 summarization。</li>
+</ul>
+<p>本文改进点：</p>
+<ul>
+<li>用 LLM 从文本块中抽取 entities、relationships 和 claims，构建图索引。</li>
+<li>用 Leiden community detection 将图划分为层级社区。</li>
+<li>为每个社区预生成 community summary，作为可复用的全局语义索引。</li>
+<li>查询时先让每个 community summary 生成 partial answer 和 helpfulness score，再将高分 partial answers 汇总成最终答案。</li>
+<li>通过 C0-C3 不同社区层级，探索 summary 粒度、回答质量和 token 成本之间的权衡。</li>
+</ul>
+<h2 id="q4-方法流程" class="heading-element"><span>Q4. 方法流程</span>
+  <a href="#q4-%e6%96%b9%e6%b3%95%e6%b5%81%e7%a8%8b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>GraphRAG 的流程分为 indexing time 和 query time。</p>
+<p>Indexing time 阶段，系统先将源文档切成 text chunks；然后用 LLM 抽取实体、关系和可选的 claims，并为这些元素生成简短描述；接着把重复出现的实体和关系聚合成 knowledge graph，其中边权可以反映关系重复出现次数。之后，系统用 Leiden 算法递归地检测图社区，形成层级 community structure。最后，LLM 为每个社区生成 report-like community summary：叶子社区直接汇总节点、边和 claims；高层社区则在上下文过长时用低层社区 summaries 替代原始元素描述。</p>
+<p>Query time 阶段，系统选择某一层级的 community summaries，将它们打乱并按 token 窗口分块；每个块并行生成 community answer，同时给出 0-100 的 helpfulness score；得分为 0 的答案被过滤，剩余答案按 helpfulness 排序后放入最终上下文，由 LLM 生成 global answer。</p>
+<h2 id="q5-实验设计与结论" class="heading-element"><span>Q5. 实验设计与结论</span>
+  <a href="#q5-%e5%ae%9e%e9%aa%8c%e8%ae%be%e8%ae%a1%e4%b8%8e%e7%bb%93%e8%ae%ba" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><table>
+  <thead>
+      <tr>
+          <th>实验/分析</th>
+          <th>目的</th>
+          <th>关键设置与结论</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>全局 sensemaking 问题生成</td>
+          <td>构造没有 gold answer 的全局评测问题</td>
+          <td>对每个数据集生成潜在用户、任务和问题；设置 K=N=M=5，因此每个数据集有 125 个测试问题。</td>
+      </tr>
+      <tr>
+          <td>Experiment 1：LLM-as-a-judge 成对比较</td>
+          <td>比较 GraphRAG、全文 map-reduce 和 vector RAG 的回答质量</td>
+          <td>数据集为 Podcast transcripts（约 1M tokens）和 News articles（约 1.7M tokens）。条件包括 C0-C3 四个 GraphRAG 社区层级、TS source text summarization、SS semantic search。</td>
+      </tr>
+      <tr>
+          <td>评价指标设计</td>
+          <td>评价全局回答的不同质量</td>
+          <td>主要指标为 comprehensiveness、diversity、empowerment；directness 作为控制指标。作者预期 directness 与 comprehensiveness/diversity 存在冲突。</td>
+      </tr>
+      <tr>
+          <td>GraphRAG vs vector RAG</td>
+          <td>验证全局方法是否优于局部检索</td>
+          <td>Figure 2 显示，所有 GraphRAG 条件在 comprehensiveness 和 diversity 上均优于 SS。Podcast 中 comprehensiveness win rate 为 72-83%，diversity 为 75-82%；News 中 comprehensiveness 为 72-80%，diversity 为 62-71%。</td>
+      </tr>
+      <tr>
+          <td>GraphRAG vs source text summarization</td>
+          <td>验证图社区摘要是否优于直接全文 map-reduce</td>
+          <td>C1-C3 相比 TS 在 comprehensiveness 和 diversity 上有小幅、稳定优势；root-level C0 因过度压缩，在部分比较中不如更细层级。</td>
+      </tr>
+      <tr>
+          <td>Token 成本分析</td>
+          <td>衡量图索引的可扩展性</td>
+          <td>Table 2 中 Podcast 的 C0 只有 34 个 units、26,657 tokens，为 TS 的 2.6%；News 的 C0 为 55 个 units、39,770 tokens，为 TS 的 2.3%。C0 相比全文 TS 节省超过 97% query-time context tokens。</td>
+      </tr>
+      <tr>
+          <td>Experiment 2：claim-based validation</td>
+          <td>验证 LLM judge 结果是否有独立支持</td>
+          <td>Table 3 中 SS 的平均 claims 数为 News 25.23、Podcast 26.50，所有 C0-C3 和 TS 都更高。Table 4 中 GraphRAG 在多数 cluster 数指标上高于 SS，说明 comprehensiveness/diversity 结论有一定外部验证。</td>
+      </tr>
+      <tr>
+          <td>附录：entity extraction self-reflection</td>
+          <td>分析构图时的抽取质量</td>
+          <td>Appendix A.2/Figure 3 显示，较大 chunk size 成本更低但容易漏抽实体；加入 self-reflection/gleaning 后可缓解实体漏抽问题。</td>
+      </tr>
+      <tr>
+          <td>附录：context window selection</td>
+          <td>选择最终实验上下文窗口</td>
+          <td>Appendix C 显示，在 8k、16k、32k、64k 中，8k 在 comprehensiveness 比较上平均 win rate 为 58.1%，因此最终统一使用 8k。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="q6-局限性" class="heading-element"><span>Q6. 局限性</span>
+  <a href="#q6-%e5%b1%80%e9%99%90%e6%80%a7" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>作者明确提到：</p>
+<ul>
+<li>评估只覆盖两个约百万 token 的语料，并且问题集中在 sensemaking 类型，尚不清楚能否推广到更多领域、规模和用例。</li>
+<li>当前分析还需要比较 fabrication rates，例如用 SelfCheckGPT 等方法检查答案是否虚构。</li>
+<li>评估依赖 LLM-as-a-judge；虽然作者用 claim-based metrics 做了验证，但 LLM 评价仍可能有偏。</li>
+<li>构建图索引存在成本，是否值得取决于数据集生命周期、预期查询次数和图索引的额外价值。</li>
+</ul>
+<p>以下为分析归纳，非原文明确说明：</p>
+<ul>
+<li>GraphRAG 的效果很大程度依赖 LLM 抽取实体/关系的质量；抽取错误会进入图结构并被后续 community summaries 放大。</li>
+<li>本文 entity matching 使用 exact string matching，虽然作者说 GraphRAG 对重复实体有一定韧性，但复杂领域里的同名/别名/跨语言实体仍可能影响图质量。</li>
+<li>GraphRAG 更适合全局问题；对精确局部事实问题，semantic search 可能更直接、更便宜。</li>
+<li>Community summaries 是预生成摘要，可能丢失细节；C0 这类 root-level summaries 成本极低，但也更容易过度压缩。</li>
+</ul>
+<h2 id="q7-学术价值" class="heading-element"><span>Q7. 学术价值</span>
+  <a href="#q7-%e5%ad%a6%e6%9c%af%e4%bb%b7%e5%80%bc" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>理论价值：把 RAG 的问题从“局部检索”扩展到“语料级 sensemaking”，指出全局问题本质上更接近 query-focused summarization。</li>
+<li>方法价值：提出基于 LLM 抽取图、图社区发现、层级社区摘要和 map-reduce global answering 的完整 pipeline。</li>
+<li>应用价值：适合企业文档、新闻库、会议/访谈记录、情报分析、科研趋势分析等需要跨文档总结的大规模私有语料场景。</li>
+</ul>
+<h2 id="q8-延伸研究方向" class="heading-element"><span>Q8. 延伸研究方向</span>
+  <a href="#q8-%e5%bb%b6%e4%bc%b8%e7%a0%94%e7%a9%b6%e6%96%b9%e5%90%91" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ol>
+<li>设计 hybrid RAG：结合 embedding-based local retrieval 与 GraphRAG 的 community summaries，兼顾局部事实和全局结构。</li>
+<li>改进 entity resolution：从 exact string matching 扩展到别名识别、跨文档实体合并和领域本体约束。</li>
+<li>评估 hallucination/fabrication：比较 GraphRAG、TS、SS 在事实错误率上的差异，而不仅是 comprehensiveness/diversity。</li>
+<li>研究动态更新：当文档集合持续变化时，如何增量更新图索引和 community summaries。</li>
+<li>让用户可交互地 drill down：从高层社区摘要进入低层社区、原始实体、关系和来源文本。</li>
+</ol>
+<h2 id="q9-反直觉发现与方法失效分析" class="heading-element"><span>Q9. 反直觉发现与方法失效分析</span>
+  <a href="#q9-%e5%8f%8d%e7%9b%b4%e8%a7%89%e5%8f%91%e7%8e%b0%e4%b8%8e%e6%96%b9%e6%b3%95%e5%a4%b1%e6%95%88%e5%88%86%e6%9e%90" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>发现一：GraphRAG 并不追求 directness 全赢。Figure 2 中 SS 在 directness 上通常更强，例如 Podcast directness 中 SS 对 C0/C1/C2/C3 的 win rate 分别为 65/60/60/60；News directness 中 SS 对 C0/C1/C2/C3 为 59/55/55/54。作者把 directness 作为控制指标，并认为它与 comprehensiveness/diversity 存在天然冲突。</li>
+<li>发现二：最便宜的 C0 仍能显著优于 vector RAG。Table 2 中 C0 只占 TS token 的 2.6%（Podcast）和 2.3%（News），但 Figure 2 中 C0 对 SS 的 comprehensiveness win rate 仍为 72/72，diversity win rate 为 77/62。这说明对多轮全局查询，粗粒度社区摘要有很高性价比。</li>
+<li>发现三：更细的社区层级并非总是更好。Figure 2 中 Podcast comprehensiveness 的 TS 对 C0 为 50、对 C1 为 48、对 C2 为 43、对 C3 为 44，说明中低层级社区摘要相对 TS 有优势；但 C0 因压缩过强不一定胜过 TS。作者讨论为 root-level summaries 有 modest drop，但成本极低。</li>
+<li>发现四：claim-based diversity 对 News 数据集的支持弱于 LLM judge。Table 4 中 News 的 C0-C3 cluster 数都高于 SS，但正文指出只有 C0 在所有距离阈值上显著优于 SS，C1-C3 只在部分阈值显著；而 Experiment 1 中所有 GraphRAG 条件都显著优于 SS。作者认为方向一致，但差异幅度较小。</li>
+<li>发现五：8k context 反而优于更大窗口。Appendix C 中，8k 在 comprehensiveness 上平均 win rate 为 58.1%，作者据此选择 8k。作者未把它作为核心贡献，但这提示“更长上下文”不必然带来更好的全局回答，可能与 lost-in-the-middle 或上下文噪声有关。</li>
+<li>整体评价：GraphRAG 的优势非常明确地集中在全局 sensemaking；如果任务是短事实问答、需要精确引用原文，或查询次数很少，构图和社区摘要的前期成本未必划算。它更像是为“长期使用的大语料库”建立可复用的语义地图，而不是普通 RAG 的通用替代品。</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2026-07-06 10:52:36">Updated on 2026-07-06&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-graphragfrom-local-to-global/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div></div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-self-raglearning-to-retrieve-generate-and-critique-through-self-reflection/" class="post-nav-item" rel="prev" title="论文 · Self-RAG：Learning to Retrieve, Generate, and Critique Through Self-Reflection"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>论文 · Self-RAG：Learning to Retrieve, Generate, and Critique Through Self-Reflection</a><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-understand-what-llm-needsdual-preference-alignment-for-retrieval-augmented-generation/" class="post-nav-item" rel="next" title="论文 · Understand What LLM Needs：Dual Preference Alignment for Retrieval-Augmented Generation">论文 · Understand What LLM Needs：Dual Preference Alignment for Retrieval-Augmented Generation<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div class="post-reward">
+    <div class="comment"></div>
+    <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
+    <label class="reward-button" for="fi-reward"><?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1776434267563" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2715" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M377.596784 791.989528s-39.199482 22.799699 27.799633 30.399598c81.198926 9.199878 122.598379 7.999894 211.997197-8.999881 0 0 23.599688 14.799804 56.399254 27.599635C473.395518 926.787745 220.198866 835.988946 377.596784 791.989528m-24.399677-112.198517s-43.799421 32.399572 23.199693 39.399479c86.598855 8.999881 155.197948 9.599873 273.596382-13.199825 0 0 16.399783 16.599781 42.199442 25.599661-242.596792 70.999061-512.593222 5.799923-338.995517-51.799315m206.397271-190.197485c49.399347 56.799249-12.999828 107.998572-12.999828 107.998572s125.398342-64.799143 67.799103-145.798072c-53.799289-75.599-94.998744-113.198503 128.198305-242.596792 0.199997 0-350.395367 87.598842-182.99758 280.396292m265.196493 385.194907s28.999617 23.799685-31.799579 42.399439c-115.798469 34.999537-481.593632 45.599397-583.192289 1.399982-36.599516-15.799791 31.999577-37.999498 53.599291-42.599437 22.399704-4.799937 35.399532-3.999947 35.399532-3.999947-40.599463-28.599622-262.596528 56.199257-112.798508 80.398937 408.3946 66.399122 744.790152-29.799606 638.791553-77.598974M396.396536 563.592548s-186.197538 44.199416-65.999128 60.199204c50.799328 6.79991 151.99799 5.199931 246.196745-2.599966 76.998982-6.399915 154.397958-20.39973 154.397958-20.39973s-27.19964 11.599847-46.799381 24.999669c-188.997501 49.799342-553.992675 26.599648-448.994063-24.19968 88.998823-42.799434 161.197869-37.999498 161.197869-37.999497m333.995583 186.597532c192.197459-99.79868 103.198635-195.797411 41.199456-182.797582-15.199799 3.199958-21.999709 5.999921-21.999709 5.99992s5.599926-8.799884 16.399783-12.599833c122.598379-43.199429 216.997131 127.198318-39.599477 194.597427 0-0.199997 2.99996-2.799963 3.999947-5.199932M614.393653 0s106.398593 106.398593-100.998664 269.99643c-166.197802 131.198265-37.999498 206.197274 0 291.596144-96.998717-87.598842-168.197776-164.597824-120.398408-236.396874C463.195652 220.197088 657.393085 168.997765 614.393653 0m-198.997369 1020.786502c184.397562 11.799844 467.593817-6.599913 474.19373-93.798759 0 0-12.799831 32.999564-152.397985 59.399214-157.397919 29.599609-351.595351 26.199654-466.59383 7.199905 0-0.199997 23.599688 19.399743 144.798085 27.19964" fill="" p-id="2716"></path></svg>为博主买一杯java</label>
+    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/wechatpay.jpg" alt="Ting WeChat Pay" data-title="Ting WeChat Pay" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>WeChat Pay</span>
+          </div></div>
+  </div></article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.137.0">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024 - 2026</span><span class="author" itemprop="copyrightHolder">
+              <a href="Tin10g.github.io">Ting</a></span></div><div class="footer-line statistics"><span class="site-time" title='Website running ...'><i class="fa-solid fa-heartbeat fa-fw animate-icon" aria-hidden="true"></i><span class="ms-1 d-none">Runing</span><span class="run-times ms-1">Website running ...</span></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">This website works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":1000},"comment":{"enable":false},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"siteTime":"2024-04-01T11:25:40+08:00","typeit":{"cursorChar":"|","cursorSpeed":1000,"duration":-1,"loop":false,"speed":100},"version":"v0.3.13"};console.log('Page config:', window.config);</script><script src="/js/theme.min.js" defer></script><script src="/js/custom.min.js" defer></script></body>
+</html>
