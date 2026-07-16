@@ -125,5 +125,5 @@ JitRL 的输入是当前环境观测、冻结 LLM 给出的候选动作及其 lo
 ---
 
 > Author: [Ting](Tin10g.github.io)  
-> URL: http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-just-in-time-reinforcement-learning-continual-learning-in-llm-agents-without-gradient-updates/  
+> URL: http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-just-in-time-reinforcement-learning-continual-learning-in-llm-agents-without-gradient-updates/  
 

@@ -12,5 +12,5 @@
 ---
 
 > Author: [Ting](Tin10g.github.io)  
-> URL: http://localhost:7828/posts/ietls-synonym/  
+> URL: http://localhost:1313/posts/ietls-synonym/  
 

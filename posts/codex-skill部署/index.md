@@ -50,5 +50,5 @@
 ---
 
 > Author: [Ting](Tin10g.github.io)  
-> URL: http://localhost:7828/posts/codex-skill%E9%83%A8%E7%BD%B2/  
+> URL: http://localhost:1313/posts/codex-skill%E9%83%A8%E7%BD%B2/  
 

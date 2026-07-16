@@ -75,5 +75,5 @@
 ---
 
 > Author: [Ting](Tin10g.github.io)  
-> URL: http://localhost:7828/posts/llm-rag%E6%96%B9%E5%90%91%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E9%9B%86/  
+> URL: http://localhost:1313/posts/llm-rag%E6%96%B9%E5%90%91%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E9%9B%86/  
 

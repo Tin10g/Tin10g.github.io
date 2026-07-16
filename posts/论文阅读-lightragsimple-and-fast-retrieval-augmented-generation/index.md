@@ -203,5 +203,5 @@ naive_query()
 ---
 
 > Author: [Ting](Tin10g.github.io)  
-> URL: http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-lightragsimple-and-fast-retrieval-augmented-generation/  
+> URL: http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-lightragsimple-and-fast-retrieval-augmented-generation/  
 

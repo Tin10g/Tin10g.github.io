@@ -66,5 +66,5 @@ Classical Hopfield networks 容量约 O(D)，超过容量会出现 spurious attr
 ---
 
 > Author: [Ting](Tin10g.github.io)  
-> URL: http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-hopfield-fenchel-young-networks-a-unified-framework-for-associative-memory-retrieval/  
+> URL: http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-hopfield-fenchel-young-networks-a-unified-framework-for-associative-memory-retrieval/  
 

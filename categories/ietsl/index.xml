@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>IETSL - Category - Ting BLOG🐈</title>
-    <link>http://localhost:7828/categories/ietsl/</link>
+    <link>http://localhost:1313/categories/ietsl/</link>
     <description>This is Ting&#39;s BLOG ...</description>
     <generator>Hugo 0.137.0 &amp; FixIt v0.3.13</generator>
     <language>en</language>
     <managingEditor>ting10win@gmail.com (Ting)</managingEditor>
     <webMaster>ting10win@gmail.com (Ting)</webMaster>
     <lastBuildDate>Thu, 09 Jul 2026 11:25:40 +0800</lastBuildDate>
-    <atom:link href="http://localhost:7828/categories/ietsl/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/categories/ietsl/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Synonym list</title>
-      <link>http://localhost:7828/posts/ietls-synonym/</link>
+      <link>http://localhost:1313/posts/ietls-synonym/</link>
       <pubDate>Thu, 09 Jul 2026 11:25:40 +0800</pubDate><author>ting10win@gmail.com (Ting)</author>
-      <guid>http://localhost:7828/posts/ietls-synonym/</guid>
-      <category domain="http://localhost:7828/categories/ietsl/">IETSL</category>
+      <guid>http://localhost:1313/posts/ietls-synonym/</guid>
+      <category domain="http://localhost:1313/categories/ietsl/">IETSL</category>
       <description>&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th style=&#34;text-align: center&#34;&gt;题目表达&lt;/th&gt;&#xA;          &lt;th style=&#34;text-align: center&#34;&gt;原文表达&lt;/th&gt;&#xA;          &lt;th style=&#34;text-align: center&#34;&gt;关系&lt;/th&gt;&#xA;          &lt;th style=&#34;text-align: center&#34;&gt;备注&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;feel it is unlikely that they will return&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;once-in-a-lifetime visit&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;同义词：否定之否定&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;&lt;/td&gt;&#xA;          &lt;td style=&#34;text-align: center&#34;&gt;&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;</description>
     </item>
   </channel>

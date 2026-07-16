@@ -87,5 +87,5 @@ empirical likelihood 虽可用 estimating equations 做非参数推断，但 Wil
 ---
 
 > Author: [Ting](Tin10g.github.io)  
-> URL: http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-bayesian-inference-of-contextual-bandit-policies-via-empirical-likelihood/  
+> URL: http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-bayesian-inference-of-contextual-bandit-policies-via-empirical-likelihood/  
 

@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html itemscope itemtype="http://schema.org/WebPage" lang="en">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=7828&amp;path=livereload" data-no-instant defer></script>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
     <title>论文 · Memory综述 - Ting BLOG🐈</title><meta name="author" content="Ting">
 <meta name="description" content="基础信息会议/期刊：arXiv preprint, 2026 关键词：memory governance, selective forgetting, retrieval, conditional success probability, Bayesian update 核心贡献：本文首次系统综述 LLM-based agents 的 memory mechanism，给出狭义/广义 memory 定义，并从 memory sources、memory forms、memory operations、evaluation 和 applications 已有研究。
-"><meta name="keywords" content='综述, Memory'>
+"><meta name="keywords" content='综述, Memory, LLM Agent, 记忆机制'>
   <meta itemprop="name" content="论文 · Memory综述">
   <meta itemprop="description" content="基础信息会议/期刊：arXiv preprint, 2026 关键词：memory governance, selective forgetting, retrieval, conditional success probability, Bayesian update 核心贡献：本文首次系统综述 LLM-based agents 的 memory mechanism，给出狭义/广义 memory 定义，并从 memory sources、memory forms、memory operations、evaluation 和 applications 已有研究。">
   <meta itemprop="datePublished" content="2026-07-03T11:25:40+08:00">
   <meta itemprop="dateModified" content="2026-07-03T11:25:40+08:00">
   <meta itemprop="wordCount" content="401">
-  <meta itemprop="keywords" content="综述,Memory"><meta property="og:url" content="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory%E7%BB%BC%E8%BF%B0/">
+  <meta itemprop="keywords" content="综述,Memory,LLM Agent,记忆机制"><meta property="og:url" content="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory%E7%BB%BC%E8%BF%B0/">
   <meta property="og:site_name" content="Ting BLOG🐈">
   <meta property="og:title" content="论文 · Memory综述">
   <meta property="og:description" content="基础信息会议/期刊：arXiv preprint, 2026 关键词：memory governance, selective forgetting, retrieval, conditional success probability, Bayesian update 核心贡献：本文首次系统综述 LLM-based agents 的 memory mechanism，给出狭义/广义 memory 定义，并从 memory sources、memory forms、memory operations、evaluation 和 applications 已有研究。">
@@ -24,12 +24,14 @@
     <meta property="article:modified_time" content="2026-07-03T11:25:40+08:00">
     <meta property="article:tag" content="综述">
     <meta property="article:tag" content="Memory">
+    <meta property="article:tag" content="LLM Agent">
+    <meta property="article:tag" content="记忆机制">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="论文 · Memory综述">
   <meta name="twitter:description" content="基础信息会议/期刊：arXiv preprint, 2026 关键词：memory governance, selective forgetting, retrieval, conditional success probability, Bayesian update 核心贡献：本文首次系统综述 LLM-based agents 的 memory mechanism，给出狭义/广义 memory 定义，并从 memory sources、memory forms、memory operations、evaluation 和 applications 已有研究。">
 <meta name="application-name" content="FixIt">
-<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory%E7%BB%BC%E8%BF%B0/" title="论文 · Memory综述 - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-rag%E7%BB%BC%E8%BF%B0/" title="论文 · RAG综述" /><link rel="next" type="text/html" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-self-raglearning-to-retrieve-generate-and-critique-through-self-reflection/" title="论文 · Self-RAG：Learning to Retrieve, Generate, and Critique through Self-Reflection" /><link rel="alternate" type="text/markdown" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory%E7%BB%BC%E8%BF%B0/index.md" title="论文 · Memory综述 - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory%E7%BB%BC%E8%BF%B0/" title="论文 · Memory综述 - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-rag%E7%BB%BC%E8%BF%B0/" title="论文 · RAG综述" /><link rel="next" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-self-raglearning-to-retrieve-generate-and-critique-through-self-reflection/" title="论文 · Self-RAG：Learning to Retrieve, Generate, and Critique through Self-Reflection" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory%E7%BB%BC%E8%BF%B0/index.md" title="论文 · Memory综述 - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
@@ -39,9 +41,9 @@
     "inLanguage": "en",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "http:\/\/localhost:7828\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory%E7%BB%BC%E8%BF%B0\/"
-    },"genre": "posts","keywords": "综述, Memory","wordcount":  401 ,
-    "url": "http:\/\/localhost:7828\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory%E7%BB%BC%E8%BF%B0\/","datePublished": "2026-07-03T11:25:40+08:00","dateModified": "2026-07-03T11:25:40+08:00","publisher": {
+      "@id": "http:\/\/localhost:1313\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory%E7%BB%BC%E8%BF%B0\/"
+    },"genre": "posts","keywords": "综述, Memory, LLM Agent, 记忆机制","wordcount":  401 ,
+    "url": "http:\/\/localhost:1313\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory%E7%BB%BC%E8%BF%B0\/","datePublished": "2026-07-03T11:25:40+08:00","dateModified": "2026-07-03T11:25:40+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -144,7 +146,7 @@
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>论文 · Memory综述</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB--%E7%BB%BC%E8%BF%B0/" class="post-category" title="Category - 论文阅读 · 综述"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 论文阅读 · 综述</a></span></div><div class="post-meta-line"><span title="published on 2026-07-03 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2026-07-03">2026-07-03</time></span>&nbsp;<span title="401 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 500 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>2 minutes</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" class="post-category" title="Category - 论文阅读"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 论文阅读</a></span></div><div class="post-meta-line"><span title="published on 2026-07-03 11:25:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2026-07-03">2026-07-03</time></span>&nbsp;<span title="401 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 500 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>2 minutes</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>Contents</span>
@@ -374,7 +376,7 @@
         <div class="post-info-md"><span><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory%E7%BB%BC%E8%BF%B0/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div></div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/%E7%BB%BC%E8%BF%B0/" class="post-tag" title="Tags - 综述">综述</a><a href="/tags/memory/" class="post-tag" title="Tags - Memory">Memory</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/%E7%BB%BC%E8%BF%B0/" class="post-tag" title="Tags - 综述">综述</a><a href="/tags/memory/" class="post-tag" title="Tags - Memory">Memory</a><a href="/tags/llm-agent/" class="post-tag" title="Tags - LLM Agent">LLM Agent</a><a href="/tags/%E8%AE%B0%E5%BF%86%E6%9C%BA%E5%88%B6/" class="post-tag" title="Tags - 记忆机制">记忆机制</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
     </section>

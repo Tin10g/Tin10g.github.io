@@ -234,5 +234,5 @@ RAG 系统通常分两部分评估：检索质量和生成质量。
 ---
 
 > Author: [Ting](Tin10g.github.io)  
-> URL: http://localhost:7828/posts/llm-%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/  
+> URL: http://localhost:1313/posts/llm-%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/  
 

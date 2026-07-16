@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html itemscope itemtype="http://schema.org/WebPage" lang="en">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=7828&amp;path=livereload" data-no-instant defer></script>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
     <title>论文 · Just-in-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates - Ting BLOG🐈</title><meta name="author" content="Ting">
 <meta name="description" content="基础信息论文标题：Just-In-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates 发表信息：ICML 2026, PMLR 306 代码：https://github.com/liushiliushi/JitRL 关键词：LLM Agent, continual learning, test-time learning, reinforcement learning, non-parametric memory, logit update 核心贡献：论文提出 JitRL，一个无需梯度更新的测试时强化学习框架，通过存储历史轨迹、检索相似经验、估计动作优势并直接调整 LLM 输出 logits，使冻结权重的 LLM agent 能在部署过程中持续学习；作者证明该加性 logit 更新是 KL 约束策略优化目标的闭式解，并在 WebArena 与 Jericho 上取得训练免费方法中的最好结果，且相较 WebRL 将成本降低 30 倍以上。 主要结论：在 WebArena 主实验中，JitRL 的平均 / 最终成功率为 46.98% / 51.35%，高于所有训练免费基线；在 WebArena-Lite 上，JitRL 最终成功率 60.00%，高于 WebRL 的 46.06%；在 Jericho 中，JitRL 在 Library、Zork1、Zork3 的平均分分别为 25.9、53.0、3.1，均高于训练免费与 GRPO 基线。 Q1. 研究动机部署后的 LLM agent 权重通常被冻结，面对新环境或动态任务时会重复犯错，缺少类似人类的“边做边学”能力。传统 RL 可更新策略，但成本高、样本需求大且有灾难性遗忘风险；纯 ICL / 反思 / 记忆方法又受上下文长度和文本提示能力限制。因此作者希望让 agent 在不训练参数的情况下，从交互经验中持续改进。
-"><meta name="keywords" content='强化学习'>
+"><meta name="keywords" content='强化学习, LLM Agent, Continual Learning, Memory'>
   <meta itemprop="name" content="论文 · Just-In-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates">
   <meta itemprop="description" content="基础信息论文标题：Just-In-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates 发表信息：ICML 2026, PMLR 306 代码：https://github.com/liushiliushi/JitRL 关键词：LLM Agent, continual learning, test-time learning, reinforcement learning, non-parametric memory, logit update 核心贡献：论文提出 JitRL，一个无需梯度更新的测试时强化学习框架，通过存储历史轨迹、检索相似经验、估计动作优势并直接调整 LLM 输出 logits，使冻结权重的 LLM agent 能在部署过程中持续学习；作者证明该加性 logit 更新是 KL 约束策略优化目标的闭式解，并在 WebArena 与 Jericho 上取得训练免费方法中的最好结果，且相较 WebRL 将成本降低 30 倍以上。 主要结论：在 WebArena 主实验中，JitRL 的平均 / 最终成功率为 46.98% / 51.35%，高于所有训练免费基线；在 WebArena-Lite 上，JitRL 最终成功率 60.00%，高于 WebRL 的 46.06%；在 Jericho 中，JitRL 在 Library、Zork1、Zork3 的平均分分别为 25.9、53.0、3.1，均高于训练免费与 GRPO 基线。 Q1. 研究动机部署后的 LLM agent 权重通常被冻结，面对新环境或动态任务时会重复犯错，缺少类似人类的“边做边学”能力。传统 RL 可更新策略，但成本高、样本需求大且有灾难性遗忘风险；纯 ICL / 反思 / 记忆方法又受上下文长度和文本提示能力限制。因此作者希望让 agent 在不训练参数的情况下，从交互经验中持续改进。">
   <meta itemprop="datePublished" content="2026-07-02T14:18:29+08:00">
   <meta itemprop="dateModified" content="2026-07-02T14:18:29+08:00">
   <meta itemprop="wordCount" content="764">
-  <meta itemprop="keywords" content="强化学习"><meta property="og:url" content="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-just-in-time-reinforcement-learning-continual-learning-in-llm-agents-without-gradient-updates/">
+  <meta itemprop="keywords" content="强化学习,LLM Agent,Continual Learning,Memory"><meta property="og:url" content="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-just-in-time-reinforcement-learning-continual-learning-in-llm-agents-without-gradient-updates/">
   <meta property="og:site_name" content="Ting BLOG🐈">
   <meta property="og:title" content="论文 · Just-In-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates">
   <meta property="og:description" content="基础信息论文标题：Just-In-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates 发表信息：ICML 2026, PMLR 306 代码：https://github.com/liushiliushi/JitRL 关键词：LLM Agent, continual learning, test-time learning, reinforcement learning, non-parametric memory, logit update 核心贡献：论文提出 JitRL，一个无需梯度更新的测试时强化学习框架，通过存储历史轨迹、检索相似经验、估计动作优势并直接调整 LLM 输出 logits，使冻结权重的 LLM agent 能在部署过程中持续学习；作者证明该加性 logit 更新是 KL 约束策略优化目标的闭式解，并在 WebArena 与 Jericho 上取得训练免费方法中的最好结果，且相较 WebRL 将成本降低 30 倍以上。 主要结论：在 WebArena 主实验中，JitRL 的平均 / 最终成功率为 46.98% / 51.35%，高于所有训练免费基线；在 WebArena-Lite 上，JitRL 最终成功率 60.00%，高于 WebRL 的 46.06%；在 Jericho 中，JitRL 在 Library、Zork1、Zork3 的平均分分别为 25.9、53.0、3.1，均高于训练免费与 GRPO 基线。 Q1. 研究动机部署后的 LLM agent 权重通常被冻结，面对新环境或动态任务时会重复犯错，缺少类似人类的“边做边学”能力。传统 RL 可更新策略，但成本高、样本需求大且有灾难性遗忘风险；纯 ICL / 反思 / 记忆方法又受上下文长度和文本提示能力限制。因此作者希望让 agent 在不训练参数的情况下，从交互经验中持续改进。">
@@ -23,12 +23,15 @@
     <meta property="article:published_time" content="2026-07-02T14:18:29+08:00">
     <meta property="article:modified_time" content="2026-07-02T14:18:29+08:00">
     <meta property="article:tag" content="强化学习">
+    <meta property="article:tag" content="LLM Agent">
+    <meta property="article:tag" content="Continual Learning">
+    <meta property="article:tag" content="Memory">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="论文 · Just-In-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates">
   <meta name="twitter:description" content="基础信息论文标题：Just-In-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates 发表信息：ICML 2026, PMLR 306 代码：https://github.com/liushiliushi/JitRL 关键词：LLM Agent, continual learning, test-time learning, reinforcement learning, non-parametric memory, logit update 核心贡献：论文提出 JitRL，一个无需梯度更新的测试时强化学习框架，通过存储历史轨迹、检索相似经验、估计动作优势并直接调整 LLM 输出 logits，使冻结权重的 LLM agent 能在部署过程中持续学习；作者证明该加性 logit 更新是 KL 约束策略优化目标的闭式解，并在 WebArena 与 Jericho 上取得训练免费方法中的最好结果，且相较 WebRL 将成本降低 30 倍以上。 主要结论：在 WebArena 主实验中，JitRL 的平均 / 最终成功率为 46.98% / 51.35%，高于所有训练免费基线；在 WebArena-Lite 上，JitRL 最终成功率 60.00%，高于 WebRL 的 46.06%；在 Jericho 中，JitRL 在 Library、Zork1、Zork3 的平均分分别为 25.9、53.0、3.1，均高于训练免费与 GRPO 基线。 Q1. 研究动机部署后的 LLM agent 权重通常被冻结，面对新环境或动态任务时会重复犯错，缺少类似人类的“边做边学”能力。传统 RL 可更新策略，但成本高、样本需求大且有灾难性遗忘风险；纯 ICL / 反思 / 记忆方法又受上下文长度和文本提示能力限制。因此作者希望让 agent 在不训练参数的情况下，从交互经验中持续改进。">
 <meta name="application-name" content="FixIt">
-<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-just-in-time-reinforcement-learning-continual-learning-in-llm-agents-without-gradient-updates/" title="论文 · Just-In-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:7828/posts/%E8%AF%BE%E7%A8%8B-ai-agent9%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第九讲 大型语言模型能力评估" /><link rel="next" type="text/html" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-rag%E7%BB%BC%E8%BF%B0/" title="论文 · RAG综述" /><link rel="alternate" type="text/markdown" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-just-in-time-reinforcement-learning-continual-learning-in-llm-agents-without-gradient-updates/index.md" title="论文 · Just-In-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-just-in-time-reinforcement-learning-continual-learning-in-llm-agents-without-gradient-updates/" title="论文 · Just-In-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent9%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第九讲 大型语言模型能力评估" /><link rel="next" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-rag%E7%BB%BC%E8%BF%B0/" title="论文 · RAG综述" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-just-in-time-reinforcement-learning-continual-learning-in-llm-agents-without-gradient-updates/index.md" title="论文 · Just-In-Time Reinforcement Learning: Continual Learning in LLM Agents Without Gradient Updates - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
@@ -38,9 +41,9 @@
     "inLanguage": "en",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "http:\/\/localhost:7828\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-just-in-time-reinforcement-learning-continual-learning-in-llm-agents-without-gradient-updates\/"
-    },"genre": "posts","keywords": "强化学习","wordcount":  764 ,
-    "url": "http:\/\/localhost:7828\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-just-in-time-reinforcement-learning-continual-learning-in-llm-agents-without-gradient-updates\/","datePublished": "2026-07-02T14:18:29+08:00","dateModified": "2026-07-02T14:18:29+08:00","publisher": {
+      "@id": "http:\/\/localhost:1313\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-just-in-time-reinforcement-learning-continual-learning-in-llm-agents-without-gradient-updates\/"
+    },"genre": "posts","keywords": "强化学习, LLM Agent, Continual Learning, Memory","wordcount":  764 ,
+    "url": "http:\/\/localhost:1313\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-just-in-time-reinforcement-learning-continual-learning-in-llm-agents-without-gradient-updates\/","datePublished": "2026-07-02T14:18:29+08:00","dateModified": "2026-07-02T14:18:29+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -364,7 +367,7 @@
         <div class="post-info-md"><span><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-just-in-time-reinforcement-learning-continual-learning-in-llm-agents-without-gradient-updates/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div></div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" class="post-tag" title="Tags - 强化学习">强化学习</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" class="post-tag" title="Tags - 强化学习">强化学习</a><a href="/tags/llm-agent/" class="post-tag" title="Tags - LLM Agent">LLM Agent</a><a href="/tags/continual-learning/" class="post-tag" title="Tags - Continual Learning">Continual Learning</a><a href="/tags/memory/" class="post-tag" title="Tags - Memory">Memory</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
     </section>

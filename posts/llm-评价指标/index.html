@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html itemscope itemtype="http://schema.org/WebPage" lang="en">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=7828&amp;path=livereload" data-no-instant defer></script>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -13,7 +13,7 @@
   <meta itemprop="datePublished" content="2026-07-07T11:25:40+08:00">
   <meta itemprop="dateModified" content="2026-07-07T11:25:40+08:00">
   <meta itemprop="wordCount" content="518">
-  <meta itemprop="keywords" content="LLM基础概念"><meta property="og:url" content="http://localhost:7828/posts/llm-%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/">
+  <meta itemprop="keywords" content="LLM基础概念"><meta property="og:url" content="http://localhost:1313/posts/llm-%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/">
   <meta property="og:site_name" content="Ting BLOG🐈">
   <meta property="og:title" content="LLM · 评价指标">
   <meta property="og:description" content="评价指标常用分类、选择题：Accuracy 短答案问答：EM / F1 摘要：ROUGE &#43; Faithfulness 翻译：BLEU / COMET RAG：Recall@k &#43; Faithfulness &#43; Answer Relevancy 代码：pass@k / Test Pass Rate 对话模型：Win Rate / Human Preference 安全模型：Refusal Accuracy / Jailbreak ASR / Toxicity 部署系统：Latency / Throughput / Cost 通用正确性指标指标 含义 适用场景 Accuracy 准确率，答对样本数 / 总样本数 选择题、分类、判断题、数学题最终答案 Exact Match, EM 模型答案和标准答案完全一致才算对 开放域问答、抽取式问答、短答案任务 Precision 模型给出的内容中，有多少是正确的 信息抽取、检索、实体识别 Recall 标准答案中，有多少被模型覆盖到了 检索、召回、长答案覆盖度 F1 Precision 和 Recall 的调和平均 问答、信息抽取、开放域 QA F1 = 2 * Precision * Recall / (Precision &#43; Recall)">
@@ -27,7 +27,7 @@
   <meta name="twitter:title" content="LLM · 评价指标">
   <meta name="twitter:description" content="评价指标常用分类、选择题：Accuracy 短答案问答：EM / F1 摘要：ROUGE &#43; Faithfulness 翻译：BLEU / COMET RAG：Recall@k &#43; Faithfulness &#43; Answer Relevancy 代码：pass@k / Test Pass Rate 对话模型：Win Rate / Human Preference 安全模型：Refusal Accuracy / Jailbreak ASR / Toxicity 部署系统：Latency / Throughput / Cost 通用正确性指标指标 含义 适用场景 Accuracy 准确率，答对样本数 / 总样本数 选择题、分类、判断题、数学题最终答案 Exact Match, EM 模型答案和标准答案完全一致才算对 开放域问答、抽取式问答、短答案任务 Precision 模型给出的内容中，有多少是正确的 信息抽取、检索、实体识别 Recall 标准答案中，有多少被模型覆盖到了 检索、召回、长答案覆盖度 F1 Precision 和 Recall 的调和平均 问答、信息抽取、开放域 QA F1 = 2 * Precision * Recall / (Precision &#43; Recall)">
 <meta name="application-name" content="FixIt">
-<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:7828/posts/llm-%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/" title="LLM · 评价指标 - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-lightragsimple-and-fast-retrieval-augmented-generation/" title="论文 · LightRAG：Simple and Fast Retrieval-Augmented Generation" /><link rel="next" type="text/html" href="http://localhost:7828/posts/llm-rag%E6%96%B9%E5%90%91%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E9%9B%86/" title="LLM · RAG常见数据集" /><link rel="alternate" type="text/markdown" href="http://localhost:7828/posts/llm-%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/index.md" title="LLM · 评价指标 - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/llm-%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/" title="LLM · 评价指标 - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-lightragsimple-and-fast-retrieval-augmented-generation/" title="论文 · LightRAG：Simple and Fast Retrieval-Augmented Generation" /><link rel="next" type="text/html" href="http://localhost:1313/posts/llm-rag%E6%96%B9%E5%90%91%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E9%9B%86/" title="LLM · RAG常见数据集" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/llm-%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87/index.md" title="LLM · 评价指标 - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
@@ -37,9 +37,9 @@
     "inLanguage": "en",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "http:\/\/localhost:7828\/posts\/llm-%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87\/"
+      "@id": "http:\/\/localhost:1313\/posts\/llm-%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87\/"
     },"genre": "posts","wordcount":  518 ,
-    "url": "http:\/\/localhost:7828\/posts\/llm-%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87\/","datePublished": "2026-07-07T11:25:40+08:00","dateModified": "2026-07-07T11:25:40+08:00","publisher": {
+    "url": "http:\/\/localhost:1313\/posts\/llm-%E8%AF%84%E4%BB%B7%E6%8C%87%E6%A0%87\/","datePublished": "2026-07-07T11:25:40+08:00","dateModified": "2026-07-07T11:25:40+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",

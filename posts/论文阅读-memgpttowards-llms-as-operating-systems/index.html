@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html itemscope itemtype="http://schema.org/WebPage" lang="en">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=7828&amp;path=livereload" data-no-instant defer></script>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
     <title>论文 · MemGPT: Towards LLMs as Operating Systems - Ting BLOG🐈</title><meta name="author" content="Ting">
 <meta name="description" content="基础信息会议/期刊：arXiv preprint, 2023 论文主题：用操作系统式分层记忆与 virtual context management 扩展固定上下文 LLM 核心贡献：本文提出 MemGPT，将 LLM 类比为操作系统中的处理器，通过 main context、external context、archival storage、recall storage 和 function calling 实现 virtual context management，使固定上下文模型能处理长对话和长文档任务。
-"><meta name="keywords" content='Memory, Long Context'>
+"><meta name="keywords" content='Memory, Long Context, Agent架构, 虚拟上下文'>
   <meta itemprop="name" content="论文 · MemGPT: Towards LLMs as Operating Systems">
   <meta itemprop="description" content="基础信息会议/期刊：arXiv preprint, 2023 论文主题：用操作系统式分层记忆与 virtual context management 扩展固定上下文 LLM 核心贡献：本文提出 MemGPT，将 LLM 类比为操作系统中的处理器，通过 main context、external context、archival storage、recall storage 和 function calling 实现 virtual context management，使固定上下文模型能处理长对话和长文档任务。">
   <meta itemprop="datePublished" content="2026-07-01T11:25:40+08:00">
   <meta itemprop="dateModified" content="2026-07-01T11:25:40+08:00">
   <meta itemprop="wordCount" content="421">
-  <meta itemprop="keywords" content="Memory,Long Context"><meta property="og:url" content="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memgpttowards-llms-as-operating-systems/">
+  <meta itemprop="keywords" content="Memory,Long Context,Agent架构,虚拟上下文"><meta property="og:url" content="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memgpttowards-llms-as-operating-systems/">
   <meta property="og:site_name" content="Ting BLOG🐈">
   <meta property="og:title" content="论文 · MemGPT: Towards LLMs as Operating Systems">
   <meta property="og:description" content="基础信息会议/期刊：arXiv preprint, 2023 论文主题：用操作系统式分层记忆与 virtual context management 扩展固定上下文 LLM 核心贡献：本文提出 MemGPT，将 LLM 类比为操作系统中的处理器，通过 main context、external context、archival storage、recall storage 和 function calling 实现 virtual context management，使固定上下文模型能处理长对话和长文档任务。">
@@ -24,12 +24,14 @@
     <meta property="article:modified_time" content="2026-07-01T11:25:40+08:00">
     <meta property="article:tag" content="Memory">
     <meta property="article:tag" content="Long Context">
+    <meta property="article:tag" content="Agent架构">
+    <meta property="article:tag" content="虚拟上下文">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="论文 · MemGPT: Towards LLMs as Operating Systems">
   <meta name="twitter:description" content="基础信息会议/期刊：arXiv preprint, 2023 论文主题：用操作系统式分层记忆与 virtual context management 扩展固定上下文 LLM 核心贡献：本文提出 MemGPT，将 LLM 类比为操作系统中的处理器，通过 main context、external context、archival storage、recall storage 和 function calling 实现 virtual context management，使固定上下文模型能处理长对话和长文档任务。">
 <meta name="application-name" content="FixIt">
-<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memgpttowards-llms-as-operating-systems/" title="论文 · MemGPT: Towards LLMs as Operating Systems - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory-gym-towards-endless-tasks-to-benchmark-memory-capabilities-of-agents/" title="论文 · Memory Gym: Towards Endless Tasks to Benchmark Memory Capabilities of Agents" /><link rel="next" type="text/html" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-hopfield-fenchel-young-networks-a-unified-framework-for-associative-memory-retrieval/" title="论文 · Hopfield-Fenchel-Young Networks: A Unified Framework for Associative Memory Retrieval" /><link rel="alternate" type="text/markdown" href="http://localhost:7828/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memgpttowards-llms-as-operating-systems/index.md" title="论文 · MemGPT: Towards LLMs as Operating Systems - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memgpttowards-llms-as-operating-systems/" title="论文 · MemGPT: Towards LLMs as Operating Systems - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memory-gym-towards-endless-tasks-to-benchmark-memory-capabilities-of-agents/" title="论文 · Memory Gym: Towards Endless Tasks to Benchmark Memory Capabilities of Agents" /><link rel="next" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-hopfield-fenchel-young-networks-a-unified-framework-for-associative-memory-retrieval/" title="论文 · Hopfield-Fenchel-Young Networks: A Unified Framework for Associative Memory Retrieval" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memgpttowards-llms-as-operating-systems/index.md" title="论文 · MemGPT: Towards LLMs as Operating Systems - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
@@ -39,9 +41,9 @@
     "inLanguage": "en",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "http:\/\/localhost:7828\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memgpttowards-llms-as-operating-systems\/"
-    },"genre": "posts","keywords": "Memory, Long Context","wordcount":  421 ,
-    "url": "http:\/\/localhost:7828\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memgpttowards-llms-as-operating-systems\/","datePublished": "2026-07-01T11:25:40+08:00","dateModified": "2026-07-01T11:25:40+08:00","publisher": {
+      "@id": "http:\/\/localhost:1313\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memgpttowards-llms-as-operating-systems\/"
+    },"genre": "posts","keywords": "Memory, Long Context, Agent架构, 虚拟上下文","wordcount":  421 ,
+    "url": "http:\/\/localhost:1313\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memgpttowards-llms-as-operating-systems\/","datePublished": "2026-07-01T11:25:40+08:00","dateModified": "2026-07-01T11:25:40+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -283,7 +285,7 @@
         <div class="post-info-md"><span><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memgpttowards-llms-as-operating-systems/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div></div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/memory/" class="post-tag" title="Tags - Memory">Memory</a><a href="/tags/long-context/" class="post-tag" title="Tags - Long Context">Long Context</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/memory/" class="post-tag" title="Tags - Memory">Memory</a><a href="/tags/long-context/" class="post-tag" title="Tags - Long Context">Long Context</a><a href="/tags/agent%E6%9E%B6%E6%9E%84/" class="post-tag" title="Tags - Agent架构">Agent架构</a><a href="/tags/%E8%99%9A%E6%8B%9F%E4%B8%8A%E4%B8%8B%E6%96%87/" class="post-tag" title="Tags - 虚拟上下文">虚拟上下文</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
     </section>

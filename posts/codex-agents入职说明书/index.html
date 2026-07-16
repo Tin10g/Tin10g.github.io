@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html itemscope itemtype="http://schema.org/WebPage" lang="en">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=7828&amp;path=livereload" data-no-instant defer></script>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -16,7 +16,7 @@ AGENT内容1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 # AGENTS.md ##
   <meta itemprop="datePublished" content="2026-06-06T11:25:40+08:00">
   <meta itemprop="dateModified" content="2026-06-06T11:25:40+08:00">
   <meta itemprop="wordCount" content="99">
-  <meta itemprop="keywords" content="Codex"><meta property="og:url" content="http://localhost:7828/posts/codex-agents%E5%85%A5%E8%81%8C%E8%AF%B4%E6%98%8E%E4%B9%A6/">
+  <meta itemprop="keywords" content="Codex"><meta property="og:url" content="http://localhost:1313/posts/codex-agents%E5%85%A5%E8%81%8C%E8%AF%B4%E6%98%8E%E4%B9%A6/">
   <meta property="og:site_name" content="Ting BLOG🐈">
   <meta property="og:title" content="Codex · AGENTS的入职说明书">
   <meta property="og:description" content="AGENTS.md的作用
@@ -34,7 +34,7 @@ AGENT内容1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 # AGENTS.md ##
 告诉他你的项目基本信息，不能动什么，数据怎么走，避免重复 交代信息。
 AGENT内容1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 # AGENTS.md ## 项目概述 这是一个基于 Next.js 14 &#43; Prisma &#43; PostgreSQL 的 SaaS 应用。 使用 App Router，不使用 Pages Router。 ## 技术栈 - 前端：Next.js 14, React 18, TailwindCSS, shadcn/ui - 后端：Next.js API Routes, Prisma ORM - 数据库：PostgreSQL 15 - 认证：NextAuth.js ## 重要约定 - 所有数据库操作必须通过 lib/db.ts 中的 prisma 实例 - API 路由错误统一用 lib/api-error.ts 处理 - 环境变量在 .env.local 中，参考 .env.example ## 禁止事项 - 不要修改 prisma/schema.prisma，除非我明确要求 - 不要删除任何现有测试 - 生产环境的 .env 文件不要碰 配置层级 全局层：~/.codex/AGENTS.md 项目层： repo/AGENTS.md 覆写层： repo/services/payments/AGENTS.override.md（子目录）">
 <meta name="application-name" content="FixIt">
-<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:7828/posts/codex-agents%E5%85%A5%E8%81%8C%E8%AF%B4%E6%98%8E%E4%B9%A6/" title="Codex · AGENTS的入职说明书 - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:7828/posts/codex-%E5%AD%90%E4%BB%A3%E7%90%86/" title="Codex · 子代理" /><link rel="next" type="text/html" href="http://localhost:7828/posts/%E8%AF%BE%E7%A8%8B-ai-agent1%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第一讲 AI Agent 原理" /><link rel="alternate" type="text/markdown" href="http://localhost:7828/posts/codex-agents%E5%85%A5%E8%81%8C%E8%AF%B4%E6%98%8E%E4%B9%A6/index.md" title="Codex · AGENTS的入职说明书 - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/codex-agents%E5%85%A5%E8%81%8C%E8%AF%B4%E6%98%8E%E4%B9%A6/" title="Codex · AGENTS的入职说明书 - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/codex-%E5%AD%90%E4%BB%A3%E7%90%86/" title="Codex · 子代理" /><link rel="next" type="text/html" href="http://localhost:1313/posts/%E8%AF%BE%E7%A8%8B-ai-agent1%E6%9D%8E%E5%AE%8F%E6%AF%85/" title="AI Agent· 第一讲 AI Agent 原理" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/codex-agents%E5%85%A5%E8%81%8C%E8%AF%B4%E6%98%8E%E4%B9%A6/index.md" title="Codex · AGENTS的入职说明书 - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
@@ -44,9 +44,9 @@ AGENT内容1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 # AGENTS.md ##
     "inLanguage": "en",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "http:\/\/localhost:7828\/posts\/codex-agents%E5%85%A5%E8%81%8C%E8%AF%B4%E6%98%8E%E4%B9%A6\/"
+      "@id": "http:\/\/localhost:1313\/posts\/codex-agents%E5%85%A5%E8%81%8C%E8%AF%B4%E6%98%8E%E4%B9%A6\/"
     },"genre": "posts","wordcount":  99 ,
-    "url": "http:\/\/localhost:7828\/posts\/codex-agents%E5%85%A5%E8%81%8C%E8%AF%B4%E6%98%8E%E4%B9%A6\/","datePublished": "2026-06-06T11:25:40+08:00","dateModified": "2026-06-06T11:25:40+08:00","publisher": {
+    "url": "http:\/\/localhost:1313\/posts\/codex-agents%E5%85%A5%E8%81%8C%E8%AF%B4%E6%98%8E%E4%B9%A6\/","datePublished": "2026-06-06T11:25:40+08:00","dateModified": "2026-06-06T11:25:40+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
