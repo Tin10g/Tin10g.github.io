@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>HL-MRF - Tag - Ting BLOG🐈</title>
+    <link>http://localhost:1313/tags/hl-mrf/</link>
+    <description>This is Ting&#39;s BLOG ...</description>
+    <generator>Hugo 0.137.0 &amp; FixIt v0.3.13</generator>
+    <language>en</language>
+    <managingEditor>ting10win@gmail.com (Ting)</managingEditor>
+    <webMaster>ting10win@gmail.com (Ting)</webMaster>
+    <lastBuildDate>Mon, 20 Jul 2026 00:00:00 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/hl-mrf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>论文阅读 · Hinge-Loss Markov Random Fields and Probabilistic Soft Logic</title>
+      <link>http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-hinge-loss-markov-random-fields-and-probabilistic-soft-logic/</link>
+      <pubDate>Mon, 20 Jul 2026 00:00:00 +0800</pubDate><author>ting10win@gmail.com (Ting)</author>
+      <guid>http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-hinge-loss-markov-random-fields-and-probabilistic-soft-logic/</guid>
+      <category domain="http://localhost:1313/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</category>
+      <description>&lt;h2 id=&#34;基础信息&#34; class=&#34;heading-element&#34;&gt;&lt;span&gt;基础信息&lt;/span&gt;&#xD;&#xA;  &lt;a href=&#34;#%e5%9f%ba%e7%a1%80%e4%bf%a1%e6%81%af&#34; class=&#34;heading-mark&#34;&gt;&#xD;&#xA;    &lt;svg class=&#34;octicon octicon-link&#34; viewBox=&#34;0 0 16 16&#34; version=&#34;1.1&#34; width=&#34;16&#34; height=&#34;16&#34; aria-hidden=&#34;true&#34;&gt;&lt;path d=&#34;m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&lt;ul&gt;&#xA;&lt;li&gt;作者：Stephen H. Bach, Matthias Broecheler, Bert Huang, Lise Getoor&lt;/li&gt;&#xA;&lt;li&gt;期刊/日期：Journal of Machine Learning Research 18 (2017) 1-67；Submitted 12/2015, Revised 12/2016, Published 10/2017&lt;/li&gt;&#xA;&lt;li&gt;核心贡献：提出 Hinge-Loss Markov Random Fields (HL-MRFs) 和 Probabilistic Soft Logic (PSL)，用连续 [0,1] 变量、hinge/squared hinge loss 与一阶逻辑式规则统一表达结构化依赖，并用 ADMM MAP 推理和多种权重学习方法实现大规模可扩展建模。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;q1-研究动机&#34; class=&#34;heading-element&#34;&gt;&lt;span&gt;Q1. 研究动机&lt;/span&gt;&#xD;&#xA;  &lt;a href=&#34;#q1-%e7%a0%94%e7%a9%b6%e5%8a%a8%e6%9c%ba&#34; class=&#34;heading-mark&#34;&gt;&#xD;&#xA;    &lt;svg class=&#34;octicon octicon-link&#34; viewBox=&#34;0 0 16 16&#34; version=&#34;1.1&#34; width=&#34;16&#34; height=&#34;16&#34; aria-hidden=&#34;true&#34;&gt;&lt;path d=&#34;m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&lt;p&gt;许多机器学习问题既结构复杂又规模很大，例如社交网络、知识图谱、Web、图像和自然语言。传统结构化模型越表达丰富，推理和学习越难扩展；作者希望找到一个兼具逻辑表达能力和大规模凸推理效率的建模形式。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

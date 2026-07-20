@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>论文 · Smooth Reading: Bridging the Gap of Recurrent LLM to Self-Attention LLM on Long-Context Understanding - Ting BLOG🐈</title><meta name="author" content="Ting">
+<meta name="description" content="基础信息论文：Smooth Reading: Bridging the Gap of Recurrent LLM to Self-Attention LLM on Long-Context Understanding 作者：Kai Liu, Zhan Su, Peijie Dong, Fengran Mo, Jianfei Gao, Shaoting Zhang, Kai Chen 会议：ICLR 2026 主题：Recurrent LLM, long-context understanding, End-to-End Multi-Round inference, architecture-inference co-design 核心贡献：本文认为 Recurrent LLM 长上下文表现差并非只因架构记忆不足，而是 One-Round inference 与固定大小记忆不匹配；提出 Smooth Reading，将 Recurrent LLM 与 End-to-End Multi-Round inference 结合，通过 chunk reading、contextual summary、hidden memory preservation 和 early stopping，在保持线性复杂度的同时接近或超过 Self-Attention LLM 的长上下文表现。 Q1. 研究动机Self-Attention LLM 长上下文能力强，但计算复杂度随长度二次增长；Recurrent LLM 线性计算、常数内存，更适合超长上下文，却在 LongBench 等任务上落后。以往研究主要改架构、增大记忆容量，但仍未追平 Self-Attention。作者认为问题在于传统 One-Round inference 把整个长上下文一次性塞入固定记忆，导致 memory overwhelm。
+"><meta name="keywords" content='长上下文, Recurrent LLM, Memory, 多轮推理'>
+  <meta itemprop="name" content="论文 · Smooth Reading: Bridging the Gap of Recurrent LLM to Self-Attention LLM on Long-Context Understanding">
+  <meta itemprop="description" content="基础信息论文：Smooth Reading: Bridging the Gap of Recurrent LLM to Self-Attention LLM on Long-Context Understanding 作者：Kai Liu, Zhan Su, Peijie Dong, Fengran Mo, Jianfei Gao, Shaoting Zhang, Kai Chen 会议：ICLR 2026 主题：Recurrent LLM, long-context understanding, End-to-End Multi-Round inference, architecture-inference co-design 核心贡献：本文认为 Recurrent LLM 长上下文表现差并非只因架构记忆不足，而是 One-Round inference 与固定大小记忆不匹配；提出 Smooth Reading，将 Recurrent LLM 与 End-to-End Multi-Round inference 结合，通过 chunk reading、contextual summary、hidden memory preservation 和 early stopping，在保持线性复杂度的同时接近或超过 Self-Attention LLM 的长上下文表现。 Q1. 研究动机Self-Attention LLM 长上下文能力强，但计算复杂度随长度二次增长；Recurrent LLM 线性计算、常数内存，更适合超长上下文，却在 LongBench 等任务上落后。以往研究主要改架构、增大记忆容量，但仍未追平 Self-Attention。作者认为问题在于传统 One-Round inference 把整个长上下文一次性塞入固定记忆，导致 memory overwhelm。">
+  <meta itemprop="datePublished" content="2026-07-08T21:30:00+08:00">
+  <meta itemprop="dateModified" content="2026-07-08T21:30:00+08:00">
+  <meta itemprop="wordCount" content="514">
+  <meta itemprop="keywords" content="长上下文,Recurrent LLM,Memory,多轮推理"><meta property="og:url" content="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-smooth-reading/">
+  <meta property="og:site_name" content="Ting BLOG🐈">
+  <meta property="og:title" content="论文 · Smooth Reading: Bridging the Gap of Recurrent LLM to Self-Attention LLM on Long-Context Understanding">
+  <meta property="og:description" content="基础信息论文：Smooth Reading: Bridging the Gap of Recurrent LLM to Self-Attention LLM on Long-Context Understanding 作者：Kai Liu, Zhan Su, Peijie Dong, Fengran Mo, Jianfei Gao, Shaoting Zhang, Kai Chen 会议：ICLR 2026 主题：Recurrent LLM, long-context understanding, End-to-End Multi-Round inference, architecture-inference co-design 核心贡献：本文认为 Recurrent LLM 长上下文表现差并非只因架构记忆不足，而是 One-Round inference 与固定大小记忆不匹配；提出 Smooth Reading，将 Recurrent LLM 与 End-to-End Multi-Round inference 结合，通过 chunk reading、contextual summary、hidden memory preservation 和 early stopping，在保持线性复杂度的同时接近或超过 Self-Attention LLM 的长上下文表现。 Q1. 研究动机Self-Attention LLM 长上下文能力强，但计算复杂度随长度二次增长；Recurrent LLM 线性计算、常数内存，更适合超长上下文，却在 LongBench 等任务上落后。以往研究主要改架构、增大记忆容量，但仍未追平 Self-Attention。作者认为问题在于传统 One-Round inference 把整个长上下文一次性塞入固定记忆，导致 memory overwhelm。">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-07-08T21:30:00+08:00">
+    <meta property="article:modified_time" content="2026-07-08T21:30:00+08:00">
+    <meta property="article:tag" content="长上下文">
+    <meta property="article:tag" content="Recurrent LLM">
+    <meta property="article:tag" content="Memory">
+    <meta property="article:tag" content="多轮推理">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="论文 · Smooth Reading: Bridging the Gap of Recurrent LLM to Self-Attention LLM on Long-Context Understanding">
+  <meta name="twitter:description" content="基础信息论文：Smooth Reading: Bridging the Gap of Recurrent LLM to Self-Attention LLM on Long-Context Understanding 作者：Kai Liu, Zhan Su, Peijie Dong, Fengran Mo, Jianfei Gao, Shaoting Zhang, Kai Chen 会议：ICLR 2026 主题：Recurrent LLM, long-context understanding, End-to-End Multi-Round inference, architecture-inference co-design 核心贡献：本文认为 Recurrent LLM 长上下文表现差并非只因架构记忆不足，而是 One-Round inference 与固定大小记忆不匹配；提出 Smooth Reading，将 Recurrent LLM 与 End-to-End Multi-Round inference 结合，通过 chunk reading、contextual summary、hidden memory preservation 和 early stopping，在保持线性复杂度的同时接近或超过 Self-Attention LLM 的长上下文表现。 Q1. 研究动机Self-Attention LLM 长上下文能力强，但计算复杂度随长度二次增长；Recurrent LLM 线性计算、常数内存，更适合超长上下文，却在 LongBench 等任务上落后。以往研究主要改架构、增大记忆容量，但仍未追平 Self-Attention。作者认为问题在于传统 One-Round inference 把整个长上下文一次性塞入固定记忆，导致 memory overwhelm。">
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-smooth-reading/" title="论文 · Smooth Reading: Bridging the Gap of Recurrent LLM to Self-Attention LLM on Long-Context Understanding - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8-ielts-skill/" title="IELTS skill" /><link rel="next" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-mrrope-mixed-radix-rotary/" title="论文 · MrRoPE: Mixed-radix Rotary Position Embedding" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-smooth-reading/index.md" title="论文 · Smooth Reading: Bridging the Gap of Recurrent LLM to Self-Attention LLM on Long-Context Understanding - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "论文 · Smooth Reading: Bridging the Gap of Recurrent LLM to Self-Attention LLM on Long-Context Understanding",
+    "inLanguage": "en",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-smooth-reading\/"
+    },"genre": "posts","keywords": "长上下文, Recurrent LLM, Memory, 多轮推理","wordcount":  514 ,
+    "url": "http:\/\/localhost:1313\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-smooth-reading\/","datePublished": "2026-07-08T21:30:00+08:00","dateModified": "2026-07-08T21:30:00+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Ting"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/archives/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/archives/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>论文 · Smooth Reading: Bridging the Gap of Recurrent LLM to Self-Attention LLM on Long-Context Understanding</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" class="post-category" title="Category - 论文阅读"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 论文阅读</a></span></div><div class="post-meta-line"><span title="published on 2026-07-08 21:30:00"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2026-07-08">2026-07-08</time></span>&nbsp;<span title="514 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 600 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>3 minutes</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#基础信息">基础信息</a></li>
+    <li><a href="#q1-研究动机">Q1. 研究动机</a></li>
+    <li><a href="#q2-核心问题">Q2. 核心问题</a></li>
+    <li><a href="#q3-现有不足--本文改进">Q3. 现有不足 &amp; 本文改进</a></li>
+    <li><a href="#q4-方法流程">Q4. 方法流程</a></li>
+    <li><a href="#q5-实验设计与结论">Q5. 实验设计与结论</a></li>
+    <li><a href="#q6-局限性">Q6. 局限性</a></li>
+    <li><a href="#q7-学术价值">Q7. 学术价值</a></li>
+    <li><a href="#q8-延伸研究方向">Q8. 延伸研究方向</a></li>
+    <li><a href="#q9-反直觉发现与方法失效分析">Q9. 反直觉发现与方法失效分析</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 id="基础信息" class="heading-element"><span>基础信息</span>
+  <a href="#%e5%9f%ba%e7%a1%80%e4%bf%a1%e6%81%af" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>论文：Smooth Reading: Bridging the Gap of Recurrent LLM to Self-Attention LLM on Long-Context Understanding</li>
+<li>作者：Kai Liu, Zhan Su, Peijie Dong, Fengran Mo, Jianfei Gao, Shaoting Zhang, Kai Chen</li>
+<li>会议：ICLR 2026</li>
+<li>主题：Recurrent LLM, long-context understanding, End-to-End Multi-Round inference, architecture-inference co-design</li>
+<li>核心贡献：本文认为 Recurrent LLM 长上下文表现差并非只因架构记忆不足，而是 One-Round inference 与固定大小记忆不匹配；提出 Smooth Reading，将 Recurrent LLM 与 End-to-End Multi-Round inference 结合，通过 chunk reading、contextual summary、hidden memory preservation 和 early stopping，在保持线性复杂度的同时接近或超过 Self-Attention LLM 的长上下文表现。</li>
+</ul>
+<h2 id="q1-研究动机" class="heading-element"><span>Q1. 研究动机</span>
+  <a href="#q1-%e7%a0%94%e7%a9%b6%e5%8a%a8%e6%9c%ba" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>Self-Attention LLM 长上下文能力强，但计算复杂度随长度二次增长；Recurrent LLM 线性计算、常数内存，更适合超长上下文，却在 LongBench 等任务上落后。以往研究主要改架构、增大记忆容量，但仍未追平 Self-Attention。作者认为问题在于传统 One-Round inference 把整个长上下文一次性塞入固定记忆，导致 memory overwhelm。</p>
+<h2 id="q2-核心问题" class="heading-element"><span>Q2. 核心问题</span>
+  <a href="#q2-%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>核心问题是：如何通过架构和推理方式协同设计，使 Recurrent LLM 在长上下文理解上弥合与 Self-Attention LLM 的性能差距，同时保留线性效率优势。</p>
+<p>关键不是让 Recurrent LLM 单次记住所有内容，而是让它逐步阅读、压缩、更新记忆。</p>
+<h2 id="q3-现有不足--本文改进" class="heading-element"><span>Q3. 现有不足 &amp; 本文改进</span>
+  <a href="#q3-%e7%8e%b0%e6%9c%89%e4%b8%8d%e8%b6%b3--%e6%9c%ac%e6%96%87%e6%94%b9%e8%bf%9b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>现有不足：</p>
+<ul>
+<li>Self-Attention OR 推理表现强但成本高，context length 增大时训练和推理不经济。</li>
+<li>Self-Attention 的 multi-round 方法会重复处理上下文，复杂度更高；non-end-to-end multi-round 会丢弃 hidden states。</li>
+<li>Recurrent LLM 在 OR 下固定记忆被长输入压垮，导致长上下文理解差。</li>
+</ul>
+<p>本文改进：</p>
+<ul>
+<li>提出 EMR for Recurrent LLM：chunk-by-chunk 阅读，每轮生成 contextual summary 和动作。</li>
+<li>保留并更新 recurrent hidden memory，不像 NMR 那样每轮丢弃隐藏状态。</li>
+<li>通过 SFT 构造 48,856 条 Smooth Reading 数据，让模型学会 <READ>/<STOP> 行为。</li>
+<li>提出窗口大小和 chunk size 共同优化的 co-design 观点。</li>
+</ul>
+<h2 id="q4-方法流程" class="heading-element"><span>Q4. 方法流程</span>
+  <a href="#q4-%e6%96%b9%e6%b3%95%e6%b5%81%e7%a8%8b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>输入是 query 和长 context。Smooth Reading 先用分层规则 chunker 将 context 切成语义相对完整的小块。模型每轮读取当前 chunk，生成包含 Target、Clues、Reason 的 contextual summary，并更新 hidden memory。如果模型判断信息足够，就输出 <STOP> 和答案；否则输出 <READ> 继续读取下一块。训练时，作者用规则或 DeepSeek-V3 生成 stepwise summaries 和最终答案，构造 SFT 数据。输出是能在多轮阅读中保留 hidden memory 的 Recurrent LLM。</p>
+<h2 id="q5-实验设计与结论" class="heading-element"><span>Q5. 实验设计与结论</span>
+  <a href="#q5-%e5%ae%9e%e9%aa%8c%e8%ae%be%e8%ae%a1%e4%b8%8e%e7%bb%93%e8%ae%ba" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>LongBench 主实验：Table 2 中 Qwen-2.5-3B-OR 平均 47.38，Self-Attention NMR 为 48.37；Recurrent OR 较弱，RWKV-7-3B-OR 为 41.43，SWA-3B-4k-OR 为 41.70；Smooth Reading 后 RWKV-7-3B-EMR 达 48.03，SWA-3B-4k-EMR 达 50.99。</li>
+<li>NIAH 长度外推：Table 3 中 Qwen-2.5-3B-OR 在 8K-32K 平均 98.13，但 64K-256K 平均仅 41.33，256K 为 0.00；SWA-3B-4k-EMR 在 8K-32K 平均 99.93，64K-256K 平均 99.80，256K 仍为 99.60。</li>
+<li>效率实验：Figure 4 显示在 64K 下，SWA-3B-4k-EMR 训练速度约为 Qwen-2.5-3B-OR 的 2.5 倍，推理约快 2 倍；启用 early stopping 后最多约快 4 倍。</li>
+<li>Window/chunk 消融：Table 4 显示 chunk size 不应超过窗口大小。W=512、C=2048 或 4096 时 accuracy 为 0.0；W=4096、C=2048 时 accuracy 为 100.0，C=4096 时降到 83.4。</li>
+<li>7B 扩展：Table 6 中 SWA-7B-4k-EMR 平均 53.86，接近 Qwen-2.5-7B-OR 的 54.60，明显高于 SWA-7B-4k-OR 的 46.17。</li>
+<li>OOD 评估：Table 8 中 RULER Avg，SWA-3B-4k-EMR 为 28.10，高于 Qwen-2.5-3B-OR 的 26.25；Table 9 中 HELMET Avg，SWA-3B-4k-EMR 为 25.01，略低于 Qwen-2.5-3B-OR 的 25.64。</li>
+<li>与 OPRM/RAG 类方法对比：Table 10 中 SWA-3B-4k-EMR LongBench Avg 为 50.99，显著高于 OPRM 变体 27.88、30.73、31.35。</li>
+</ul>
+<h2 id="q6-局限性" class="heading-element"><span>Q6. 局限性</span>
+  <a href="#q6-%e5%b1%80%e9%99%90%e6%80%a7" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>作者明确提到：</p>
+<ul>
+<li>没有提出全新架构或全新推理算法，而是系统研究已有组件的 co-design。</li>
+<li>只研究 sliding-window LLM 和 RWKV，未覆盖 DeltaNet 等其他 recurrent architecture，主要受限于开源预训练模型和推理引擎。</li>
+<li>方法需要额外 SFT 来适配 Smooth Reading 推理范式。</li>
+<li>需要专门构造 multi-round training data，数据成本较高。</li>
+<li>当前只支持 [QUERY] [CONTEXT] 顺序，不支持 [CONTEXT] [QUERY]。</li>
+<li>评估主要集中在 long-context tasks，尚未扩展到 deep research、software development 等更广场景。</li>
+</ul>
+<p>以下为分析归纳，非原文明确说明：</p>
+<ul>
+<li>Smooth Reading 的收益依赖模型能生成高质量 summary；一旦 summary 遗漏关键信息，后续 hidden memory 可能无法恢复。</li>
+<li>多轮推理引入 action 和 stopping 决策，可能出现过早停止或过度阅读。</li>
+<li>长上下文效果很强，但 HELMET 和 RULER 上仍存在任务不均衡表现。</li>
+</ul>
+<h2 id="q7-学术价值" class="heading-element"><span>Q7. 学术价值</span>
+  <a href="#q7-%e5%ad%a6%e6%9c%af%e4%bb%b7%e5%80%bc" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>理论价值：强调 architecture-inference co-design，指出 Recurrent LLM 的性能瓶颈不是架构单点，而是与推理方式共同决定。</li>
+<li>方法价值：提出可操作的 EMR pipeline，包括 chunking、summary、hidden memory preservation、early stopping 和窗口/chunk 调参原则。</li>
+<li>应用价值：适合超长文档阅读、长对话历史、研究资料浏览等需要线性扩展和渐进式阅读的场景。</li>
+</ul>
+<h2 id="q8-延伸研究方向" class="heading-element"><span>Q8. 延伸研究方向</span>
+  <a href="#q8-%e5%bb%b6%e4%bc%b8%e7%a0%94%e7%a9%b6%e6%96%b9%e5%90%91" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ol>
+<li>将 Smooth Reading 扩展到 DeltaNet、Mamba、RetNet 等更多 recurrent 或 state-space 架构。</li>
+<li>用 RL 学习阅读顺序和停止策略，减少人工 summary 数据构造。</li>
+<li>支持 [CONTEXT] [QUERY] 和任意顺序 chunk selection，使模型能先扫全文再响应任务。</li>
+<li>研究 summary 错误如何累积，以及如何用 verification 或 retrieval 修复。</li>
+<li>在 LongBench v2、真实代码库、科研文献综述任务上评估其深层 reasoning 能力。</li>
+</ol>
+<h2 id="q9-反直觉发现与方法失效分析" class="heading-element"><span>Q9. 反直觉发现与方法失效分析</span>
+  <a href="#q9-%e5%8f%8d%e7%9b%b4%e8%a7%89%e5%8f%91%e7%8e%b0%e4%b8%8e%e6%96%b9%e6%b3%95%e5%a4%b1%e6%95%88%e5%88%86%e6%9e%90" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>发现一：Self-Attention NMR 平均略升，但某些任务退化。Table 2 中 Qwen-2.5-3B-NMR Avg 48.37 高于 OR 的 47.38，但 Summary 从 30.22 降到 21.91，Code 从 66.00 降到 64.13。说明多轮压缩并不总是有益，丢 hidden state 会伤害部分任务。</li>
+<li>发现二：Self-Attention OR 在训练长度内强，但长度外推崩溃。Table 3 中 Qwen-2.5-3B-OR 在 8K-32K 平均 98.13，但 256K 为 0.00；SWA-3B-4k-EMR 在 256K 仍为 99.60。</li>
+<li>发现三：最快的 chunk 设置可能完全无效。Table 4 中 W=512、C=4096 推理时间为 100 秒，是表中最快之一，但 accuracy 为 0.0；说明效率不能脱离记忆窗口约束。</li>
+<li>发现四：OOD HELMET 上 Smooth Reading 不全面领先。Table 9 中 SWA-3B-4k-EMR 的 Avg 为 25.01，略低于 Qwen-2.5-3B-OR 的 25.64；ICL 更是 16.68 vs. 34.80。作者指出 PRR 和 VT 等任务更 OOD，整体说明训练分布仍影响泛化。</li>
+<li>整体评价：Smooth Reading 在 retrieval-like 和 NIAH 类超长任务上非常强，效率优势清楚；但在需要复杂 task adaptation 的 HELMET/ICL 上仍存在明显短板。</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2026-07-08 21:30:00">Updated on 2026-07-08&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-smooth-reading/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div></div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/%E9%95%BF%E4%B8%8A%E4%B8%8B%E6%96%87/" class="post-tag" title="Tags - 长上下文">长上下文</a><a href="/tags/recurrent-llm/" class="post-tag" title="Tags - Recurrent LLM">Recurrent LLM</a><a href="/tags/memory/" class="post-tag" title="Tags - Memory">Memory</a><a href="/tags/%E5%A4%9A%E8%BD%AE%E6%8E%A8%E7%90%86/" class="post-tag" title="Tags - 多轮推理">多轮推理</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8-ielts-skill/" class="post-nav-item" rel="prev" title="IELTS Skill"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>IELTS Skill</a><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-mrrope-mixed-radix-rotary/" class="post-nav-item" rel="next" title="论文 · MrRoPE: Mixed-Radix Rotary Position Embedding">论文 · MrRoPE: Mixed-Radix Rotary Position Embedding<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div class="post-reward">
+    <div class="comment"></div>
+    <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
+    <label class="reward-button" for="fi-reward"><?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1776434267563" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2715" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M377.596784 791.989528s-39.199482 22.799699 27.799633 30.399598c81.198926 9.199878 122.598379 7.999894 211.997197-8.999881 0 0 23.599688 14.799804 56.399254 27.599635C473.395518 926.787745 220.198866 835.988946 377.596784 791.989528m-24.399677-112.198517s-43.799421 32.399572 23.199693 39.399479c86.598855 8.999881 155.197948 9.599873 273.596382-13.199825 0 0 16.399783 16.599781 42.199442 25.599661-242.596792 70.999061-512.593222 5.799923-338.995517-51.799315m206.397271-190.197485c49.399347 56.799249-12.999828 107.998572-12.999828 107.998572s125.398342-64.799143 67.799103-145.798072c-53.799289-75.599-94.998744-113.198503 128.198305-242.596792 0.199997 0-350.395367 87.598842-182.99758 280.396292m265.196493 385.194907s28.999617 23.799685-31.799579 42.399439c-115.798469 34.999537-481.593632 45.599397-583.192289 1.399982-36.599516-15.799791 31.999577-37.999498 53.599291-42.599437 22.399704-4.799937 35.399532-3.999947 35.399532-3.999947-40.599463-28.599622-262.596528 56.199257-112.798508 80.398937 408.3946 66.399122 744.790152-29.799606 638.791553-77.598974M396.396536 563.592548s-186.197538 44.199416-65.999128 60.199204c50.799328 6.79991 151.99799 5.199931 246.196745-2.599966 76.998982-6.399915 154.397958-20.39973 154.397958-20.39973s-27.19964 11.599847-46.799381 24.999669c-188.997501 49.799342-553.992675 26.599648-448.994063-24.19968 88.998823-42.799434 161.197869-37.999498 161.197869-37.999497m333.995583 186.597532c192.197459-99.79868 103.198635-195.797411 41.199456-182.797582-15.199799 3.199958-21.999709 5.999921-21.999709 5.99992s5.599926-8.799884 16.399783-12.599833c122.598379-43.199429 216.997131 127.198318-39.599477 194.597427 0-0.199997 2.99996-2.799963 3.999947-5.199932M614.393653 0s106.398593 106.398593-100.998664 269.99643c-166.197802 131.198265-37.999498 206.197274 0 291.596144-96.998717-87.598842-168.197776-164.597824-120.398408-236.396874C463.195652 220.197088 657.393085 168.997765 614.393653 0m-198.997369 1020.786502c184.397562 11.799844 467.593817-6.599913 474.19373-93.798759 0 0-12.799831 32.999564-152.397985 59.399214-157.397919 29.599609-351.595351 26.199654-466.59383 7.199905 0-0.199997 23.599688 19.399743 144.798085 27.19964" fill="" p-id="2716"></path></svg>为博主买一杯java</label>
+    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/wechatpay.jpg" alt="Ting WeChat Pay" data-title="Ting WeChat Pay" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>WeChat Pay</span>
+          </div></div>
+  </div></article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.137.0">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024 - 2026</span><span class="author" itemprop="copyrightHolder">
+              <a href="Tin10g.github.io">Ting</a></span></div><div class="footer-line statistics"><span class="site-time" title='Website running ...'><i class="fa-solid fa-heartbeat fa-fw animate-icon" aria-hidden="true"></i><span class="ms-1 d-none">Runing</span><span class="run-times ms-1">Website running ...</span></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">This website works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":1000},"comment":{"enable":false},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"siteTime":"2024-04-01T11:25:40+08:00","typeit":{"cursorChar":"|","cursorSpeed":1000,"duration":-1,"loop":false,"speed":100},"version":"v0.3.13"};console.log('Page config:', window.config);</script><script src="/js/theme.min.js" defer></script><script src="/js/custom.min.js" defer></script></body>
+</html>

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>论文阅读 · Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks - Ting BLOG🐈</title><meta name="author" content="Ting">
+<meta name="description" content="基础信息研究对象：knowledge-intensive NLP tasks 中的检索增强生成，覆盖开放域问答、抽象式问答、Jeopardy 问题生成和事实验证
+"><meta name="keywords" content='RAG, Memory, 检索增强生成, 知识密集QA'>
+  <meta itemprop="name" content="论文阅读 · Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks">
+  <meta itemprop="description" content="基础信息研究对象：knowledge-intensive NLP tasks 中的检索增强生成，覆盖开放域问答、抽象式问答、Jeopardy 问题生成和事实验证">
+  <meta itemprop="datePublished" content="2026-07-16T17:15:37+08:00">
+  <meta itemprop="dateModified" content="2026-07-16T17:15:37+08:00">
+  <meta itemprop="wordCount" content="783">
+  <meta itemprop="keywords" content="RAG,Memory,检索增强生成,知识密集QA"><meta property="og:url" content="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-retrieval-augmented-generation-for-knowledge-intensive-nlp-tasks/">
+  <meta property="og:site_name" content="Ting BLOG🐈">
+  <meta property="og:title" content="论文阅读 · Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks">
+  <meta property="og:description" content="基础信息研究对象：knowledge-intensive NLP tasks 中的检索增强生成，覆盖开放域问答、抽象式问答、Jeopardy 问题生成和事实验证">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-07-16T17:15:37+08:00">
+    <meta property="article:modified_time" content="2026-07-16T17:15:37+08:00">
+    <meta property="article:tag" content="RAG">
+    <meta property="article:tag" content="Memory">
+    <meta property="article:tag" content="检索增强生成">
+    <meta property="article:tag" content="知识密集QA">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="论文阅读 · Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks">
+  <meta name="twitter:description" content="基础信息研究对象：knowledge-intensive NLP tasks 中的检索增强生成，覆盖开放域问答、抽象式问答、Jeopardy 问题生成和事实验证">
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-retrieval-augmented-generation-for-knowledge-intensive-nlp-tasks/" title="论文阅读 · Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-a-comprehensive-survey-of-agents-for-computer-use-foundations-challenges-and-future-directions/" title="论文 · A Comprehensive Survey of Agents for Computer Use Foundations, Challenges, and Future Directions" /><link rel="next" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memorybank-enhancing-large-language-models-with-long-term-memory/" title="论文阅读 · MemoryBank: Enhancing Large Language Models with Long-Term Memory" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-retrieval-augmented-generation-for-knowledge-intensive-nlp-tasks/index.md" title="论文阅读 · Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "论文阅读 · Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+    "inLanguage": "en",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-retrieval-augmented-generation-for-knowledge-intensive-nlp-tasks\/"
+    },"genre": "posts","keywords": "RAG, Memory, 检索增强生成, 知识密集QA","wordcount":  783 ,
+    "url": "http:\/\/localhost:1313\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-retrieval-augmented-generation-for-knowledge-intensive-nlp-tasks\/","datePublished": "2026-07-16T17:15:37+08:00","dateModified": "2026-07-16T17:15:37+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Ting"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/archives/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/archives/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>论文阅读 · Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" class="post-category" title="Category - 论文阅读"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 论文阅读</a></span></div><div class="post-meta-line"><span title="published on 2026-07-16 17:15:37"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2026-07-16">2026-07-16</time></span>&nbsp;<span title="783 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 800 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>4 minutes</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#基础信息">基础信息</a></li>
+    <li><a href="#q1-研究动机">Q1. 研究动机</a></li>
+    <li><a href="#q2-核心问题">Q2. 核心问题</a></li>
+    <li><a href="#q3-现有不足--本文改进">Q3. 现有不足 &amp; 本文改进</a></li>
+    <li><a href="#q4-方法流程">Q4. 方法流程</a></li>
+    <li><a href="#q5-实验设计与结论">Q5. 实验设计与结论</a></li>
+    <li><a href="#q6-局限性">Q6. 局限性</a></li>
+    <li><a href="#q7-学术价值">Q7. 学术价值</a></li>
+    <li><a href="#q8-延伸研究方向">Q8. 延伸研究方向</a></li>
+    <li><a href="#q9-反直觉发现与方法失效分析">Q9. 反直觉发现与方法失效分析</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 id="基础信息" class="heading-element"><span>基础信息</span>
+  <a href="#%e5%9f%ba%e7%a1%80%e4%bf%a1%e6%81%af" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>
+<p>研究对象：knowledge-intensive NLP tasks 中的检索增强生成，覆盖开放域问答、抽象式问答、Jeopardy 问题生成和事实验证</p>
+<blockquote>
+<ul>
+<li>
+<p>检索增强生成：生成模型在回答前先去外部知识库检索相关资料，再基于检索结果生成答案。</p>
+</li>
+<li>
+<p>覆盖开放域问答：用户可以问任何领域的问题，系统不能只依赖某一篇给定文章，而要从一个很大的知识源里找信息并回答。</p>
+</li>
+<li>
+<p>Jeopardy 问题生成：一个生成任务，用来测试模型能不能根据一个“答案实体”生成一条包含事实线索的问题。</p>
+</li>
+<li>
+<p>事实验证：给模型一个 claim，也就是“待验证陈述”，模型需要根据外部资料判断它属于哪一类（支持、反驳，信息不足）</p>
+</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p>核心贡献：本文提出 RAG，把预训练 seq2seq 生成器 BART 作为参数化记忆，把基于 DPR 的 Wikipedia 稠密向量索引作为非参数化记忆，通过对检索文档进行隐变量边缘化，让生成模型在多个知识密集任务上获得更强的事实性、可更新性和开放域 QA 表现。</p>
+<blockquote>
+<ul>
+<li>BART：一种预训练的 seq2seq 生成模型，全名是 Bidirectional and Auto-Regressive Transformers。一个擅长把一段文本转换成另一段文本的生成模型。</li>
+<li>DPR：稠密段落检索。从大量文档中找出和问题最相关的段落。</li>
+<li>Wikipedia：维基百科 外部知识库。总共形成约 2100 万个 documents / passages。</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p>关键结果</p>
+<p>RAG 在 NQ、WQ、CT 和 TQA-Wiki 等开放域 QA 设置中达到或超过当时强基线。</p>
+<p>在生成任务中比 BART 更事实、更具体、更多样。</p>
+<p>展示了通过替换 Wikipedia 索引来更新模型知识的能力。</p>
+</li>
+</ul>
+<h2 id="q1-研究动机" class="heading-element"><span>Q1. 研究动机</span>
+  <a href="#q1-%e7%a0%94%e7%a9%b6%e5%8a%a8%e6%9c%ba" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>预训练语言模型能在参数中存储事实知识，但很难更新、解释来源，也容易幻觉；</p>
+<p>已有检索增强模型主要用于抽取式 QA。</p>
+<blockquote>
+<p>抽取式 QA：答案必须从给定文章或检索到的文档里“原样截取”出来。</p>
+</blockquote>
+<p>作者希望把外部显式知识库接入通用 seq2seq 生成模型，使模型既能生成自然语言，又能利用可检查、可替换的外部记忆。</p>
+<blockquote>
+<p>seq2seq 生成模型：把一段文本转换/生成成另一段文本的模型。</p>
+</blockquote>
+<h2 id="q2-核心问题" class="heading-element"><span>Q2. 核心问题</span>
+  <a href="#q2-%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>
+<p>现象层面</p>
+<p>纯参数化语言模型在知识密集任务上受限，尤其<strong>缺少可靠的知识访问</strong>、来源解释和<strong>知识更新机制</strong>。</p>
+</li>
+<li>
+<p>技术问题</p>
+<p>如何把预训练检索器、外部 Wikipedia 索引和预训练 seq2seq 生成器组合成一个可端到端微调的模型，并在没有显式检索监督的下游任务中学习选择有用文档。</p>
+</li>
+</ul>
+<h2 id="q3-现有不足--本文改进" class="heading-element"><span>Q3. 现有不足 &amp; 本文改进</span>
+  <a href="#q3-%e7%8e%b0%e6%9c%89%e4%b8%8d%e8%b6%b3--%e6%9c%ac%e6%96%87%e6%94%b9%e8%bf%9b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>作者明确指出的现有不足：</p>
+<ul>
+<li>
+<p>纯参数化模型</p>
+<p>知识写在参数里，难以扩展或修订，预测依据不直观，并可能产生 hallucination。</p>
+<blockquote>
+<p>hallucination：模型幻觉</p>
+</blockquote>
+</li>
+<li>
+<p>早期<strong>混合记忆模型</strong> REALM、ORQA</p>
+<p>已证明<strong>可微检索</strong>对开放域抽取式 QA 有帮助，但尚未扩展到通用 seq2seq 生成任务。</p>
+<blockquote>
+<ul>
+<li>ORQA（Open-Retrieval Question Answering）：不给固定文章，，先从 Wikipedia 里检索相关文档，再从文档中抽取答案，用弱监督方式训练检索器和阅读器。</li>
+<li>REALM（Retrieval-Augmented Language Model pre-training）：让语言模型在预训练阶段就学会检索外部知识。</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p><strong>任务专用</strong>的 memory networks、stack-augmented networks、memory layers</p>
+<p>通常从头训练，且多为特定任务架构，不是统一的预训练生成框架。</p>
+<blockquote>
+<ul>
+<li>memory networks：以memory slots来记忆，存放可访问的信息，用于问答/推理</li>
+<li>stack-augmented networks：以stack 栈结构记忆，强化序列/算法式操作能力</li>
+<li>memory layers：以大型可寻址参数层记忆，在模型内部增加可检索参数记忆</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p>标准抽取式 QA：要求答案以可抽取片段出现在检索文档中；如果文档只提供线索而不直接包含答案，抽取模型无法利用这些线索生成答案。</p>
+</li>
+</ul>
+<p>本文改进点：</p>
+<p><img loading="lazy" src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260716201243077.png" alt="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260716201243077.png" srcset="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260716201243077.png?size=small, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260716201243077.png?size=medium 1.5x, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260716201243077.png?size=large 2x" data-title="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260716201243077.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+<blockquote>
+<p>RAG = Retriever 非参数记忆 + Generator 参数记忆</p>
+</blockquote>
+<ul>
+<li>将 BART-large 作为参数化记忆，将 DPR 检索到的 Wikipedia 文档块作为非参数化记忆，形成通用的 retrieval-augmented generation 框架。</li>
+<li>把检索文档视为隐变量，在 top-K 文档上做边缘化，而不是只选一个文档或依赖人工证据标签。</li>
+<li>提出两种形式：RAG-Sequence 假设整段输出由同一文档支持，RAG-Token 允许每个 token 依赖不同文档。</li>
+<li>训练时固定文档编码器和索引，只微调 query encoder 与 BART 生成器，降低了反复重建大规模索引的成本。</li>
+<li>外部记忆是原始文本而非不可读向量参数，因此更容易检查、替换和更新。</li>
+</ul>
+<h2 id="q4-方法流程" class="heading-element"><span>Q4. 方法流程</span>
+  <a href="#q4-%e6%96%b9%e6%b3%95%e6%b5%81%e7%a8%8b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>输入是问题、claim、实体名等文本。</p>
+<p>模型先用 DPR 的 query encoder 把输入编码成向量，在由 2018 年 12 月 Wikipedia 切成的约 2100 万个 100-word 文档块索引中，用 FAISS 做最大内积检索，取 top-K 文档。随后把每个检索文档与原始输入拼接，送入 BART-large 生成目标文本。</p>
+<p>训练时不使用 gold retrieval evidence，而是把检索文档当作隐变量，通过目标 输出的负边缘 log-likelihood 联合优化 query encoder 和生成器。</p>
+<p>RAG-Sequence 对整段输出共享同一文档并在候选文档上求和；RAG-Token 则在每个生成位置分别对文档求和，因此更适合需要组合多个文档信息的输出。</p>
+<p>测试时，短答案 QA 主要用 greedy decoding；较长生成任务使用 beam search，RAG-Sequence 还区分 thorough decoding 和 fast decoding。</p>
+<h2 id="q5-实验设计与结论" class="heading-element"><span>Q5. 实验设计与结论</span>
+  <a href="#q5-%e5%ae%9e%e9%aa%8c%e8%ae%be%e8%ae%a1%e4%b8%8e%e7%bb%93%e8%ae%ba" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>
+<p>开放域问答主实验（Table 1）</p>
+<img src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260716204107205.png" style="zoom:67%;" />
+<ul>
+<li>目的：验证 RAG 在 Natural Questions、TriviaQA、WebQuestions、CuratedTrec 上是否优于 closed-book 生成模型和 open-book 抽取式系统。</li>
+<li>结论：RAG-Sequence 在 NQ 达到 44.5 EM，高于 DPR 的 41.5 和 T5-11B+SSM 的 36.6；在 CT 达到 52.2，高于 DPR 的 50.6；RAG-Token 在 WQ 达到 45.5，高于 DPR 的 41.1 和 T5-11B+SSM 的 44.7。TriviaQA 常规 open-domain split 上 DPR 为 57.9，RAG-Sequence 为 56.8，没有超过 DPR；但在 TQA-Wiki split 上 RAG-Sequence 为 68.0，高于 T5-11B+SSM 的 60.5。</li>
+</ul>
+</li>
+<li>
+<p>抽象式问答 MS-MARCO（Table 2, Table 3）</p>
+<img src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260716204246603.png" style="zoom:67%;" />
+<ul>
+<li>
+<p>目的：验证 RAG 是否能在不使用官方给定 gold passages 的情况下生成长一些、事实性更强的答案。</p>
+</li>
+<li>
+<p>结论：RAG-Sequence 在 MS-MARCO 上达到 Rouge-L 40.8、Bleu-1 44.2，高于 BART 的 38.2 和 41.6。作者也用样例说明 BART 更容易生成事实错误或循环式表述，而 RAG 输出更具体。</p>
+<p><img loading="lazy" src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260716204733411.png" alt="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260716204733411.png" srcset="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260716204733411.png?size=small, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260716204733411.png?size=medium 1.5x, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260716204733411.png?size=large 2x" data-title="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260716204733411.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Jeopardy 问题生成（Table 2, Table 4, Figure 2）</p>
+<ul>
+<li>目的：测试 RAG 在非 QA 的知识密集生成任务中能否生成精确、事实性的 clue-style question。</li>
+<li>结论：RAG-Token 的 Bleu-1/Q-BLEU-1 为 17.3/22.2，高于 BART 的 15.1/19.7，也高于 RAG-Sequence 的 14.7/21.4。452 对人工评估中，RAG 在 factuality 上被判优的比例为 42.7%，BART 仅 7.1%；specificity 上 RAG 为 37.4%，BART 为 16.8%。Figure 2 显示 RAG-Token 在生成 Hemingway 相关 clue 时，会在不同 token 位置依赖不同文档。</li>
+</ul>
+</li>
+<li>
+<p>FEVER 事实验证（Table 2）</p>
+<ul>
+<li>目的：检验 RAG 是否能处理分类式知识密集任务，而不只是生成任务。</li>
+<li>结论：RAG 在 FEVER-3 上得到 72.5 label accuracy，高于 BART 的 64.0，距离复杂 pipeline SOTA 76.8 仍有差距；FEVER-2 上 RAG 为 89.5，高于 BART 的 81.1，低于使用 gold evidence 的 92.2。作者还报告 top-1 检索文档标题与 gold evidence article 重合率为 71%，top-10 为 90%。</li>
+</ul>
+</li>
+<li>
+<p>生成多样性实验（Table 5）</p>
+<img src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260717143541747.png" style="zoom:67%;" />
+<ul>
+<li>目的：评估 RAG 是否只是更准确，还是也能生成更多样的文本。</li>
+<li>结论：RAG 的 distinct trigram ratio 明显高于 BART。MS-MARCO 上 BART 为 70.7%，RAG-Token 为 77.8%，RAG-Sequence 为 83.5%；Jeopardy 上 BART 为 32.4%，RAG-Token 为 46.8%，RAG-Sequence 为 53.8%。</li>
+</ul>
+</li>
+<li>
+<p>检索消融实验（Table 6）</p>
+<p><img loading="lazy" src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260717143608683.png" alt="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260717143608683.png" srcset="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260717143608683.png?size=small, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260717143608683.png?size=medium 1.5x, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260717143608683.png?size=large 2x" data-title="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260717143608683.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+<ul>
+<li>目的：验证学习到的 dense retriever 是否真的贡献性能，并比较 BM25/frozen retriever。</li>
+<li>结论：在开放域 QA 上，学习检索明显有用。例如 NQ dev 上 RAG-Sequence 为 44.0，Frozen 为 41.2，BM25 为 31.8；TQA 上 RAG-Sequence 为 55.8，Frozen 为 52.1，BM25 为 44.1。但 FEVER 是例外，BM25 在 FVR-3/FVR-2 上为 75.1/91.6，高于 learned RAG 的 74.5/90.6。</li>
+</ul>
+</li>
+<li>
+<p>索引热替换实验（Section 4.5）</p>
+<ul>
+<li>目的：验证非参数化记忆是否能通过替换索引来更新世界知识。</li>
+<li>结论：使用 2016 索引回答 2016 年世界领导人问题正确率 70%，使用 2018 索引回答 2018 年问题正确率 68%；错配索引时正确率降到 12% 和 4%。这支持了“替换外部记忆即可更新模型知识”的论点。</li>
+</ul>
+</li>
+<li>
+<p>检索文档数影响（Figure 3）</p>
+<ul>
+<li>目的：分析 test-time top-K 检索数量对性能的影响。</li>
+<li>结论：RAG-Sequence 在 NQ 上随检索文档数增加而单调提升；RAG-Token 在约 10 篇文档处达到峰值。MS-MARCO 上，增加文档数会提高 RAG-Token 的 Rouge-L，但 Bleu-1 下降，说明更多检索不总是无条件收益。</li>
+</ul>
+</li>
+</ul>
+<h2 id="q6-局限性" class="heading-element"><span>Q6. 局限性</span>
+  <a href="#q6-%e5%b1%80%e9%99%90%e6%80%a7" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>作者明确提到：</p>
+<ul>
+<li>Section 3.2：MS-MARCO 中有些问题需要官方 gold passages 或非 Wikipedia 信息才能回答，例如天气类问题；只用 Wikipedia 会天然受限。</li>
+<li>Section 4.1：RAG 的 retriever 初始化自 DPR，而 DPR 使用过 Natural Questions 和 TriviaQA 的检索监督；因此 RAG 并不是从完全无检索监督的空白检索器开始。</li>
+<li>Broader Impact：外部知识源如 Wikipedia 不可能完全无错或无偏；RAG 作为语言模型也可能被用于生成误导内容、冒充他人、自动化 spam/phishing，或带来工作自动化风险。</li>
+<li>Appendix C/G：系统资源成本较高。作者报告训练分布在 8 张 32GB V100 GPU 上；完整 Wikipedia 索引最初需要约 100GB CPU memory，压缩后仍需 36GB；模型含约 626M trainable parameters，另有 2100 万个 728 维文档向量。</li>
+<li>Appendix E：FEVER 的 evidence sentence extraction 没有直接处理，原因是所用 Wikipedia dump 与 FEVER 不同；作者将其列为未来工作。</li>
+<li>Appendix F：作者尝试过 null document 机制，但没有提升性能，因此省略。这说明模型在“没有有用检索结果”时仍缺少一个显式、稳定的拒检机制。</li>
+<li>Appendix H：作者在 story generation 等任务中观察到 retrieval collapse，即检索器学会对不同输入返回相同文档，生成器随后忽略文档，模型退化到接近 BART。</li>
+</ul>
+<p>以下为分析归纳，非原文明确说明：</p>
+<ul>
+<li>文档编码器和索引在微调期间固定，避免了索引重建成本，但也限制了文档表示随下游任务共同适配的能力。</li>
+<li>RAG 的“可解释性”主要来自可查看检索文档，但生成内容可能同时来自参数化记忆；因此检索文档可读不等于每个生成事实都有严格 provenance。</li>
+<li>生成任务的人工评估主要集中在 Jeopardy，MS-MARCO 更多依赖自动指标和样例，长答案事实一致性的系统性评估仍偏弱。</li>
+<li>方法依赖 Wikipedia 作为外部知识源，对非百科知识、强时效知识、私有领域知识的效果没有在本文中充分验证。</li>
+</ul>
+<h2 id="q7-学术价值" class="heading-element"><span>Q7. 学术价值</span>
+  <a href="#q7-%e5%ad%a6%e6%9c%af%e4%bb%b7%e5%80%bc" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>理论价值：论文把参数化记忆和非参数化记忆的分工明确化：语言模型参数负责通用语言与部分事实知识，外部文本索引负责可更新、可检查的显式知识；并用隐变量边缘化把检索与生成放在统一概率框架中。</li>
+<li>方法价值：RAG-Sequence 和 RAG-Token 提供了可复用的检索增强生成范式，证明预训练检索器与预训练 seq2seq 生成器可以在无 gold evidence 的下游任务中联合微调。</li>
+<li>应用价值：开放域问答、事实验证、知识密集型摘要/问答、面向专业领域的问答系统都可复用该思路；索引热替换实验也说明它适合需要知识更新的应用。</li>
+</ul>
+<h2 id="q8-延伸研究方向" class="heading-element"><span>Q8. 延伸研究方向</span>
+  <a href="#q8-%e5%bb%b6%e4%bc%b8%e7%a0%94%e7%a9%b6%e6%96%b9%e5%90%91" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ol>
+<li>联合预训练 retriever 与 generator：作者在 Section 6 提到，可探索从头联合预训练两个组件，使用类似 BART 的 denoising objective 或其他检索感知目标。</li>
+<li>更可靠的证据归因：如何保证每个生成事实都能回溯到具体检索片段，而不是混合来自参数记忆和检索文档的未标注信息。</li>
+<li>抑制 retrieval collapse：针对长文本生成或事实需求不明显的任务，设计更稳定的检索训练信号，避免检索器退化为固定文档选择器。</li>
+<li>自适应检索与拒检机制：让模型判断何时需要检索、检索多少文档、何时应使用 null document 或直接依赖参数化知识。</li>
+<li>扩展外部记忆类型：把 Wikipedia 替换或扩展为多源、多时间版本、领域专业文档库，并研究外部知识错误和偏见如何影响生成。</li>
+</ol>
+<h2 id="q9-反直觉发现与方法失效分析" class="heading-element"><span>Q9. 反直觉发现与方法失效分析</span>
+  <a href="#q9-%e5%8f%8d%e7%9b%b4%e8%a7%89%e5%8f%91%e7%8e%b0%e4%b8%8e%e6%96%b9%e6%b3%95%e5%a4%b1%e6%95%88%e5%88%86%e6%9e%90" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>
+<p>发现一（Table 1）：RAG 并非在所有开放域 QA 指标上都压过检索式强基线。TriviaQA 常规 open-domain split 中，DPR 为 57.9 EM，RAG-Sequence 为 56.8，RAG-Token 为 55.2；但 TQA-Wiki split 中 RAG-Sequence 为 68.0，高于 T5-11B+SSM 的 60.5。</p>
+<ul>
+<li>作者解释：Appendix D 说明 TriviaQA 存在不同 evaluation setups，官方 Wiki test set 更容易从 Wikipedia 回答，因此 RAG 在 TQA-Wiki 上更高。整体看，RAG 的 SOTA 结论依赖具体数据划分，不能简单概括为所有 TriviaQA 设置都优于 DPR。</li>
+</ul>
+</li>
+<li>
+<p>发现二（Table 2）：两种 RAG 变体的优劣具有任务依赖性。Jeopardy 上 RAG-Token 的 Bleu-1/Q-BLEU-1 为 17.3/22.2，高于 RAG-Sequence 的 14.7/21.4；但 MS-MARCO 上 RAG-Sequence 的 Rouge-L/Bleu-1 为 40.8/44.2，高于 RAG-Token 的 40.1/41.5。</p>
+<ul>
+<li>作者解释：Section 4.3 解释 Jeopardy clue 往往包含多个事实片段，RAG-Token 可在不同 token 使用不同文档，因此更有优势。作者没有对 MS-MARCO 中 RAG-Sequence 更强给出同等详细解释；合理推测是 MS-MARCO 的答案通常需要围绕同一证据片段生成，整段共享文档更稳定。</li>
+</ul>
+</li>
+<li>
+<p>发现三（Table 6）：BM25 在 FEVER dev 上反而优于 learned dense retriever。RAG-Token-BM25 的 FVR-3/FVR-2 为 75.1/91.6，而 learned RAG-Token 为 74.5/90.6；RAG-Sequence 与 RAG-Token 在分类任务中等价，表中未重复给 learned RAG-Sequence 的 FEVER 分数。</p>
+<ul>
+<li>作者解释：Section 4.5 指出 FEVER claims 很 entity-centric，适合词重叠检索，所以 BM25 更强。这说明 dense differentiable retrieval 并不是所有知识密集任务的默认最佳选择。</li>
+</ul>
+</li>
+<li>
+<p>发现四（Figure 3）：检索更多文档不总是更好。NQ 上 RAG-Sequence 随 K 增加而提升，但 RAG-Token 在约 K=10 后达到峰值；MS-MARCO 上增加 K 会提高 RAG-Token Rouge-L，却降低 Bleu-1。</p>
+<ul>
+<li>作者解释：作者只说明检索数量影响性能和运行时间，未深入解释 Bleu-1 与 Rouge-L 的相反变化。合理推测是更多文档增加了可覆盖内容，提升 recall-style 指标，但也可能引入噪声或改变措辞，降低精确 n-gram 匹配。</li>
+</ul>
+</li>
+<li>
+<p>发现五（Appendix H）：在 story generation 等任务中，检索器会 collapse 到几乎固定文档，生成器随后忽略文档，RAG 表现退化为 BART。</p>
+<ul>
+<li>作者解释：作者认为可能因为这些任务对事实知识的显式需求较弱，或目标序列更长导致 retriever 梯度信号不够明确。这是本文最直接的失效模式说明，意味着 RAG 更适合事实需求明确的任务，而不是所有生成任务。</li>
+</ul>
+</li>
+<li>
+<p>整体评价：RAG 的优势不是碾压式的全任务统一优势，而是“在知识密集、可由 Wikipedia 支撑、检索证据有帮助的任务上条件性有效”。它在开放域 QA、事实性生成和知识更新方面贡献很大，但对检索器初始化、知识源质量、任务是否 entity-centric、检索文档数量都较敏感。</p>
+</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2026-07-16 17:15:37">Updated on 2026-07-16&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-retrieval-augmented-generation-for-knowledge-intensive-nlp-tasks/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div></div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/rag/" class="post-tag" title="Tags - RAG">RAG</a><a href="/tags/memory/" class="post-tag" title="Tags - Memory">Memory</a><a href="/tags/%E6%A3%80%E7%B4%A2%E5%A2%9E%E5%BC%BA%E7%94%9F%E6%88%90/" class="post-tag" title="Tags - 检索增强生成">检索增强生成</a><a href="/tags/%E7%9F%A5%E8%AF%86%E5%AF%86%E9%9B%86qa/" class="post-tag" title="Tags - 知识密集QA">知识密集QA</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-a-comprehensive-survey-of-agents-for-computer-use-foundations-challenges-and-future-directions/" class="post-nav-item" rel="prev" title="论文 · a Comprehensive Survey of Agents for Computer Use Foundations, Challenges, and Future Directions"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>论文 · a Comprehensive Survey of Agents for Computer Use Foundations, Challenges, and Future Directions</a><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-memorybank-enhancing-large-language-models-with-long-term-memory/" class="post-nav-item" rel="next" title="论文阅读 · MemoryBank: Enhancing Large Language Models With Long-Term Memory">论文阅读 · MemoryBank: Enhancing Large Language Models With Long-Term Memory<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div class="post-reward">
+    <div class="comment"></div>
+    <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
+    <label class="reward-button" for="fi-reward"><?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1776434267563" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2715" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M377.596784 791.989528s-39.199482 22.799699 27.799633 30.399598c81.198926 9.199878 122.598379 7.999894 211.997197-8.999881 0 0 23.599688 14.799804 56.399254 27.599635C473.395518 926.787745 220.198866 835.988946 377.596784 791.989528m-24.399677-112.198517s-43.799421 32.399572 23.199693 39.399479c86.598855 8.999881 155.197948 9.599873 273.596382-13.199825 0 0 16.399783 16.599781 42.199442 25.599661-242.596792 70.999061-512.593222 5.799923-338.995517-51.799315m206.397271-190.197485c49.399347 56.799249-12.999828 107.998572-12.999828 107.998572s125.398342-64.799143 67.799103-145.798072c-53.799289-75.599-94.998744-113.198503 128.198305-242.596792 0.199997 0-350.395367 87.598842-182.99758 280.396292m265.196493 385.194907s28.999617 23.799685-31.799579 42.399439c-115.798469 34.999537-481.593632 45.599397-583.192289 1.399982-36.599516-15.799791 31.999577-37.999498 53.599291-42.599437 22.399704-4.799937 35.399532-3.999947 35.399532-3.999947-40.599463-28.599622-262.596528 56.199257-112.798508 80.398937 408.3946 66.399122 744.790152-29.799606 638.791553-77.598974M396.396536 563.592548s-186.197538 44.199416-65.999128 60.199204c50.799328 6.79991 151.99799 5.199931 246.196745-2.599966 76.998982-6.399915 154.397958-20.39973 154.397958-20.39973s-27.19964 11.599847-46.799381 24.999669c-188.997501 49.799342-553.992675 26.599648-448.994063-24.19968 88.998823-42.799434 161.197869-37.999498 161.197869-37.999497m333.995583 186.597532c192.197459-99.79868 103.198635-195.797411 41.199456-182.797582-15.199799 3.199958-21.999709 5.999921-21.999709 5.99992s5.599926-8.799884 16.399783-12.599833c122.598379-43.199429 216.997131 127.198318-39.599477 194.597427 0-0.199997 2.99996-2.799963 3.999947-5.199932M614.393653 0s106.398593 106.398593-100.998664 269.99643c-166.197802 131.198265-37.999498 206.197274 0 291.596144-96.998717-87.598842-168.197776-164.597824-120.398408-236.396874C463.195652 220.197088 657.393085 168.997765 614.393653 0m-198.997369 1020.786502c184.397562 11.799844 467.593817-6.599913 474.19373-93.798759 0 0-12.799831 32.999564-152.397985 59.399214-157.397919 29.599609-351.595351 26.199654-466.59383 7.199905 0-0.199997 23.599688 19.399743 144.798085 27.19964" fill="" p-id="2716"></path></svg>为博主买一杯java</label>
+    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/wechatpay.jpg" alt="Ting WeChat Pay" data-title="Ting WeChat Pay" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>WeChat Pay</span>
+          </div></div>
+  </div></article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.137.0">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024 - 2026</span><span class="author" itemprop="copyrightHolder">
+              <a href="Tin10g.github.io">Ting</a></span></div><div class="footer-line statistics"><span class="site-time" title='Website running ...'><i class="fa-solid fa-heartbeat fa-fw animate-icon" aria-hidden="true"></i><span class="ms-1 d-none">Runing</span><span class="run-times ms-1">Website running ...</span></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">This website works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":1000},"comment":{"enable":false},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"siteTime":"2024-04-01T11:25:40+08:00","typeit":{"cursorChar":"|","cursorSpeed":1000,"duration":-1,"loop":false,"speed":100},"version":"v0.3.13"};console.log('Page config:', window.config);</script><script src="/js/theme.min.js" defer></script><script src="/js/custom.min.js" defer></script></body>
+</html>

@@ -12,8 +12,8 @@
 <meta name="description" content="This is Ting&#39;s BLOG ...">
   <meta itemprop="name" content="Ting BLOG🐈">
   <meta itemprop="description" content="This is Ting&#39;s BLOG ...">
-  <meta itemprop="datePublished" content="2026-07-13T20:00:00+08:00">
-  <meta itemprop="dateModified" content="2026-07-13T20:00:00+08:00"><meta property="og:url" content="http://localhost:1313/">
+  <meta itemprop="datePublished" content="2026-07-20T00:00:00+08:00">
+  <meta itemprop="dateModified" content="2026-07-20T00:00:00+08:00"><meta property="og:url" content="http://localhost:1313/">
   <meta property="og:site_name" content="Ting BLOG🐈">
   <meta property="og:title" content="Ting BLOG🐈">
   <meta property="og:description" content="This is Ting&#39;s BLOG ...">
@@ -130,369 +130,98 @@
     </a><a href="mailto:ting10win@gmail.com" title="Email"target="_blank" rel="external nofollow noopener noreferrer me"><i class="fa-regular fa-envelope fa-fw" aria-hidden="true"></i>
     </a><a href="/index.xml" title="RSS"target="_blank" rel="external nofollow noopener noreferrer me"><i class="fa-solid fa-rss fa-fw" aria-hidden="true"></i>
     </a></div></div>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-a-comprehensive-survey-of-agents-for-computer-use-foundations-challenges-and-future-directions/">论文 · a Comprehensive Survey of Agents for Computer Use Foundations, Challenges, and Future Directions</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2026-07-13 20:00:00'>published on <time datetime="2026-07-13">2026-07-13</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" class="post-category" title="Category - 论文阅读"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 论文阅读</a></span></div><div class="content"><h3 id="基础信息" class="heading-element"><span>基础信息</span>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-dont-ask-the-llm-to-track-freshnessa-deterministic-recipe-for-memory-conflict-resolution/">论文 · Don’t Ask the LLM to Track Freshness: A Deterministic Recipe for Memory Conflict Resolution</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2026-07-20 00:00:00'>published on <time datetime="2026-07-20">2026-07-20</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" class="post-category" title="Category - 论文阅读"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 论文阅读</a></span></div><div class="content"><h3 id="基础信息" class="heading-element"><span>基础信息</span>
   <a href="#%e5%9f%ba%e7%a1%80%e4%bf%a1%e6%81%af" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
 </h3><ul>
-<li>
-<p>核心贡献：综述 87 篇 computer-use agent 论文和 33 个数据集，从 domain、interaction、agent 三个视角建立 ACU taxonomy，并总结通向真实可用通用计算机代理的关键研究缺口。</p></div><div class="post-footer">
-    <a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-a-comprehensive-survey-of-agents-for-computer-use-foundations-challenges-and-future-directions/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/%E7%BB%BC%E8%BF%B0/' class="post-tag">综述</a><a href='/tags/llm-agent/' class="post-tag">LLM Agent</a><a href='/tags/computer-use/' class="post-tag">Computer Use</a><a href='/tags/gui-agent/' class="post-tag">GUI Agent</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-a-survey-on-evaluation-of-llm-based-agents/">论文 · a Survey on Evaluation of LLM-Based Agents</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2026-07-13 20:00:00'>published on <time datetime="2026-07-13">2026-07-13</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" class="post-category" title="Category - 论文阅读"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 论文阅读</a></span></div><div class="content"><h3 id="基础信息" class="heading-element"><span>基础信息</span>
-  <a href="#%e5%9f%ba%e7%a1%80%e4%bf%a1%e6%81%af" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><ul>
-<li>核心贡献：从核心能力、应用型 benchmark、generalist agents、benchmark 维度和开发者评测框架五个视角综述 LLM-based agents 的评测方法，并指出成本、安全、鲁棒性和细粒度过程评测缺口。</li>
-<li>期刊/日期：ACL Findings, 2026</li>
+<li>作者：Vikas Reddy; Sumanth Challaram</li>
+<li>期刊/日期：arXiv:2606.01435v1，2026-05-31</li>
 </ul>
 <h3 id="q1-研究动机" class="heading-element"><span>Q1. 研究动机</span>
   <a href="#q1-%e7%a0%94%e7%a9%b6%e5%8a%a8%e6%9c%ba" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><p>LLM agents 已能规划、推理、调用工具并与动态环境交互，但评测体系仍碎片化：</p></div><div class="post-footer">
-    <a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-a-survey-on-evaluation-of-llm-based-agents/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/%E7%BB%BC%E8%BF%B0/' class="post-tag">综述</a><a href='/tags/llm-agent/' class="post-tag">LLM Agent</a><a href='/tags/%E8%AF%84%E6%B5%8B/' class="post-tag">评测</a><a href='/tags/benchmark/' class="post-tag">Benchmark</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-a-survey-on-the-optimization-of-large-language-model-based-agents/">论文 · a Survey on the Optimization of Large Language Model-Based Agents</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2026-07-13 20:00:00'>published on <time datetime="2026-07-13">2026-07-13</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" class="post-category" title="Category - 论文阅读"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 论文阅读</a></span></div><div class="content"><h3 id="基础信息" class="heading-element"><span>基础信息</span>
+</h3><p>长期记忆系统会持续接收会变化的事实：</p></div><div class="post-footer">
+    <a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-dont-ask-the-llm-to-track-freshnessa-deterministic-recipe-for-memory-conflict-resolution/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/benchmark/' class="post-tag">Benchmark</a><a href='/tags/rag/' class="post-tag">RAG</a><a href='/tags/%E9%80%89%E6%8B%A9%E6%80%A7%E9%81%97%E5%BF%98/' class="post-tag">选择性遗忘</a><a href='/tags/%E5%9C%A8%E7%BA%BF%E6%9B%B4%E6%96%B0/' class="post-tag">在线更新</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-evaluating-memory-in-llm-agents-via-incremental-multi-turn-interactions/">论文 · Evaluating Memory in LLM Agents via Incremental Multi-Turn Interactions</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2026-07-20 00:00:00'>published on <time datetime="2026-07-20">2026-07-20</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" class="post-category" title="Category - 论文阅读"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 论文阅读</a></span></div><div class="content"><h3 id="基础信息" class="heading-element"><span>基础信息</span>
   <a href="#%e5%9f%ba%e7%a1%80%e4%bf%a1%e6%81%af" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
 </h3><ul>
-<li>标题：A Survey on the Optimization of Large Language Model-based Agents</li>
-<li>类型：综述；ACM Computing Surveys 2026</li>
-<li>研究对象：LLM-based agent 的优化方法、评测基准、开源框架和应用场景</li>
-<li>核心贡献：本文把 LLM-based agent 优化系统化为参数驱动和无参数两大路线，进一步拆解为微调、强化学习、混合优化、经验/反馈/工具/检索/多智能体协作等策略，并总结评测、应用、挑战和未来方向。</li>
+<li>作者：Yuanzhe Hu; Yu Wang; Julian McAuley</li>
+<li>期刊/日期：ICLR 2026；arXiv:2507.05257v4，2026-06-28</li>
 </ul>
 <h3 id="q1-研究动机" class="heading-element"><span>Q1. 研究动机</span>
   <a href="#q1-%e7%a0%94%e7%a9%b6%e5%8a%a8%e6%9c%ba" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><p>LLM agent 已广泛用于复杂交互任务，但单靠提示或通用 LLM 微调很难解决长程规划、动态环境适应、记忆利用和决策稳定性问题。已有工作分散讨论微调、RL、记忆、工具、检索等优化手段，缺少从 agent 行为优化角度出发的整体分类和比较。</p></div><div class="post-footer">
-    <a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-a-survey-on-the-optimization-of-large-language-model-based-agents/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/%E7%BB%BC%E8%BF%B0/' class="post-tag">综述</a><a href='/tags/llm-agent/' class="post-tag">LLM Agent</a><a href='/tags/agent%E4%BC%98%E5%8C%96/' class="post-tag">Agent优化</a><a href='/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/' class="post-tag">强化学习</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/ietls-synonym/">Synonym List</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2026-07-09 11:25:40'>published on <time datetime="2026-07-09">2026-07-09</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/ietsl/" class="post-category" title="Category - IETSL"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> IETSL</a></span></div><div class="content"><table>
-  <thead>
-      <tr>
-          <th style="text-align: center">题目表达</th>
-          <th style="text-align: center">原文表达</th>
-          <th style="text-align: center">关系</th>
-          <th style="text-align: center">备注</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td style="text-align: center">feel it is unlikely that they will return</td>
-          <td style="text-align: center">once-in-a-lifetime visit</td>
-          <td style="text-align: center">同义词：否定之否定</td>
-          <td style="text-align: center"></td>
-      </tr>
-      <tr>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-      </tr>
-      <tr>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-          <td style="text-align: center"></td>
-      </tr>
-  </tbody>
-</table></div><div class="post-footer">
-    <a href="/posts/ietls-synonym/">Read More</a></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8-ielts-skill/">IELTS Skill</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2026-07-08 11:25:40'>published on <time datetime="2026-07-08">2026-07-08</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/" class="post-category" title="Category - 工具使用"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 工具使用</a></span></div><div class="content"><h3 id="使用" class="heading-element"><span>使用</span>
-  <a href="#%e4%bd%bf%e7%94%a8" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><table>
-  <thead>
-      <tr>
-          <th>Skill</th>
-          <th>干啥</th>
-          <th>触发词</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>/ielts</code></td>
-          <td>路由入口 + 摸底 + 给建议</td>
-          <td>「我要备考雅思」「IELTS」</td>
-      </tr>
-      <tr>
-          <td><code>/ielts-writing</code></td>
-          <td>写作四维批改 + 改写对比 + 审题</td>
-          <td>「批改作文」「帮我看看这篇」</td>
-      </tr>
-      <tr>
-          <td><code>/ielts-reading</code></td>
-          <td>同义替换提取 + T/F/NG 拆解 + 错题诊断</td>
-          <td>「分析阅读」「这道为什么错」</td>
-      </tr>
-      <tr>
-          <td><code>/ielts-speaking</code></td>
-          <td>5 个万能故事覆盖 80% Part 2 话题</td>
-          <td>「口语素材」「Part 2 准备」</td>
-      </tr>
-  </tbody>
-</table></div><div class="post-footer">
-    <a href="/posts/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8-ielts-skill/">Read More</a></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/llm-rag%E6%96%B9%E5%90%91%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E9%9B%86/">LLM · RAG常见数据集</a>
-  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2026-07-07 11:25:40'>published on <time datetime="2026-07-07">2026-07-07</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/llm%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" class="post-category" title="Category - LLM基础概念"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> LLM基础概念</a></span></div><div class="content"><h3 id="常见数据集" class="heading-element"><span>常见数据集</span>
-  <a href="#%e5%b8%b8%e8%a7%81%e6%95%b0%e6%8d%ae%e9%9b%86" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h3><h4 id="经典-open-domain-qa--rag-原始论文常用" class="heading-element"><span>经典 Open-Domain QA / RAG 原始论文常用</span>
-  <a href="#%e7%bb%8f%e5%85%b8-open-domain-qa--rag-%e5%8e%9f%e5%a7%8b%e8%ae%ba%e6%96%87%e5%b8%b8%e7%94%a8" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h4><table>
-  <thead>
-      <tr>
-          <th>数据集</th>
-          <th>主要用途</th>
-          <th>简介与特点</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Natural Questions, NQ</strong></td>
-          <td>开放域 QA、检索器训练、RAG 端到端评测</td>
-          <td>Google 真实搜索问题 + Wikipedia 页面标注，含 long answer / short answer。NQ 是 DPR、REALM、RAG 等论文的核心基准之一。原始数据约 307k train、7.8k dev、7.8k hidden test。适合测“能不能从大规模 Wikipedia 找到证据并回答”。来源：<a href="https://github.com/google-research-datasets/natural-questions"target="_blank" rel="external nofollow noopener noreferrer">Google NQ</a></td>
-      </tr>
-      <tr>
-          <td><strong>TriviaQA</strong></td>
-          <td>开放域 QA、检索增强问答</td>
-          <td>约 95k trivia 问答，超过 650k question-answer-evidence triples；问题更复杂，答案和证据句常有较大词面差异。常用于训练/评估 dense retriever 和 RAG。来源：<a href="https://arxiv.org/abs/1705.03551"target="_blank" rel="external nofollow noopener noreferrer">TriviaQA paper</a></td>
-      </tr>
-      <tr>
-          <td><strong>WebQuestions</strong></td>
-          <td>短答案 factoid QA</td>
-          <td>基于 Freebase 的自然语言问题，规模小但历史上很常用；RAG 原始论文用它评估 open-domain QA。缺点是 Freebase 过时、规模小，今天更多作为经典对照。</td>
-      </tr>
-      <tr>
-          <td><strong>CuratedTREC / TREC QA</strong></td>
-          <td>小规模事实问答</td>
-          <td>常见于 DrQA、DPR、RAG 早期论文，问题多为简短 factoid。优点是历史可比性强；缺点是规模小、容易受模型记忆影响。</td>
-      </tr>
-      <tr>
-          <td><strong>SQuAD / SQuAD-Open</strong></td>
-          <td>阅读理解转开放域检索 QA</td>
-          <td>SQuAD 原本是给定段落抽取答案，约 100k+ Wikipedia 问题；SQuAD-Open 会把上下文移除，要求系统先检索再回答。来源：<a href="https://arxiv.org/abs/1606.05250"target="_blank" rel="external nofollow noopener noreferrer">SQuAD</a></td>
-      </tr>
-      <tr>
-          <td><strong>MS MARCO</strong></td>
-          <td>passage retrieval、reranking、abstractive QA</td>
-          <td>来自 Bing 查询日志，约 1M 问题、8.8M passage。RAG 论文常用它测“真实搜索式问题 + 生成式答案”。也是训练检索器、reranker 的核心工业级数据。来源：<a href="https://arxiv.org/abs/1611.09268"target="_blank" rel="external nofollow noopener noreferrer">MS MARCO</a></td>
-      </tr>
-  </tbody>
-</table>
-<h4 id="多跳推理--信息整合类-rag" class="heading-element"><span>多跳推理 / 信息整合类 RAG</span>
-  <a href="#%e5%a4%9a%e8%b7%b3%e6%8e%a8%e7%90%86--%e4%bf%a1%e6%81%af%e6%95%b4%e5%90%88%e7%b1%bb-rag" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h4><table>
-  <thead>
-      <tr>
-          <th>数据集</th>
-          <th>主要用途</th>
-          <th>简介与特点</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>HotpotQA</strong></td>
-          <td>multi-hop QA、supporting facts 检索</td>
-          <td>113k Wikipedia 多跳问答，要求跨多个文档推理，并标注 sentence-level supporting facts。RAG 里常用来测“检索多篇证据 + 合成答案”。有 distractor 和 fullwiki 两种设定。来源：<a href="https://hotpotqa.github.io/"target="_blank" rel="external nofollow noopener noreferrer">HotpotQA</a></td>
-      </tr>
-      <tr>
-          <td><strong>2WikiMultiHopQA</strong></td>
-          <td>多跳推理、路径解释</td>
-          <td>基于 Wikidata + Wikipedia 构造，强调 reasoning path，常用于测 query decomposition、多跳检索、graph/RAG。来源：<a href="https://arxiv.org/abs/2011.01060"target="_blank" rel="external nofollow noopener noreferrer">2WikiMultiHopQA</a></td>
-      </tr>
-      <tr>
-          <td><strong>MuSiQue</strong></td>
-          <td>更难的 2-4 hop QA</td>
-          <td>25k 多跳问题，专门减少 shortcut，使单跳模型难以投机。适合测复杂 RAG pipeline 的分解、迭代检索、证据组合。来源：<a href="https://arxiv.org/abs/2108.00573"target="_blank" rel="external nofollow noopener noreferrer">MuSiQue</a></td>
-      </tr>
-      <tr>
-          <td><strong>StrategyQA</strong></td>
-          <td>隐式多跳推理</td>
-          <td>2,780 个 yes/no 问题，推理步骤不会直接写在问题中，并提供 decomposition 和 Wikipedia evidence。适合测 RAG 是否会规划检索策略。来源：<a href="https://arxiv.org/abs/2101.02235"target="_blank" rel="external nofollow noopener noreferrer">StrategyQA</a></td>
-      </tr>
-      <tr>
-          <td><strong>QAMPARI</strong></td>
-          <td>多答案聚合 QA</td>
-          <td>问题答案是实体列表，分散在多个段落中；适合测 RAG 的 broad retrieval、coverage、去重和答案聚合能力。来源：<a href="https://arxiv.org/abs/2205.12665"target="_blank" rel="external nofollow noopener noreferrer">QAMPARI</a></td>
-      </tr>
-      <tr>
-          <td><strong>ASQA</strong></td>
-          <td>歧义问题 + 长答案综合</td>
-          <td>面向 ambiguous questions，要求生成能覆盖多种解释的长答案。常被 citation/RAG 论文用来测综合能力和可验证性。来源：<a href="https://arxiv.org/abs/2204.06092"target="_blank" rel="external nofollow noopener noreferrer">ASQA</a></td>
-      </tr>
-      <tr>
-          <td><strong>ELI5</strong></td>
-          <td>长答案生成</td>
-          <td>Reddit “Explain Like I’m Five” 约 270k threads，答案长、开放、解释型；RAG 论文用来测 long-form generation 与证据支持。来源：<a href="https://arxiv.org/abs/1907.09190"target="_blank" rel="external nofollow noopener noreferrer">ELI5</a></td>
-      </tr>
-  </tbody>
-</table>
-<h4 id="检索基准--retriever-评测" class="heading-element"><span>检索基准 / Retriever 评测</span>
-  <a href="#%e6%a3%80%e7%b4%a2%e5%9f%ba%e5%87%86--retriever-%e8%af%84%e6%b5%8b" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h4><table>
-  <thead>
-      <tr>
-          <th>数据集 / Benchmark</th>
-          <th>主要用途</th>
-          <th>简介与特点</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>BEIR</strong></td>
-          <td>zero-shot retrieval 统一评测</td>
-          <td>RAG 论文常先测 retriever，再测 generator。BEIR 集成 MS MARCO、NQ、HotpotQA、FiQA、TREC-COVID、NFCorpus、ArguAna、Touché、CQADupStack、Quora、DBPedia、SCIDOCS、FEVER、Climate-FEVER、SciFact 等，覆盖新闻、科学、金融、医疗、论坛、事实核查。指标常用 nDCG@k、Recall@k、MRR、MAP。来源：<a href="https://github.com/beir-cellar/beir"target="_blank" rel="external nofollow noopener noreferrer">BEIR</a></td>
-      </tr>
-      <tr>
-          <td><strong>KILT</strong></td>
-          <td>统一 knowledge-intensive NLP + provenance</td>
-          <td>把 FEVER、AIDA、T-REx、zsRE、NQ、HotpotQA、TriviaQA、ELI5、Wizard of Wikipedia 等任务统一到同一个 Wikipedia knowledge source 和 evidence/provenance 格式。非常适合端到端 RAG、可溯源生成。来源：<a href="https://github.com/facebookresearch/KILT"target="_blank" rel="external nofollow noopener noreferrer">KILT</a></td>
-      </tr>
-      <tr>
-          <td><strong>MIRACL / MIRAGE-Bench</strong></td>
-          <td>多语言检索与多语言 RAG</td>
-          <td>MIRACL 常用于多语言 dense retrieval；MIRAGE-Bench 在此基础上做 multilingual RAG arena-style 评测。适合中文/多语言 RAG。来源：<a href="https://arxiv.org/abs/2410.13716"target="_blank" rel="external nofollow noopener noreferrer">MIRAGE-Bench</a></td>
-      </tr>
-  </tbody>
-</table>
-<h4 id="事实核查可归因幻觉检测" class="heading-element"><span>事实核查、可归因、幻觉检测</span>
-  <a href="#%e4%ba%8b%e5%ae%9e%e6%a0%b8%e6%9f%a5%e5%8f%af%e5%bd%92%e5%9b%a0%e5%b9%bb%e8%a7%89%e6%a3%80%e6%b5%8b" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h4><table>
-  <thead>
-      <tr>
-          <th>数据集</th>
-          <th>主要用途</th>
-          <th>简介与特点</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>FEVER</strong></td>
-          <td>fact verification + evidence retrieval</td>
-          <td>185,445 条 Wikipedia claims，标签为 supported/refuted/not enough info，并标注证据句。RAG 原始论文也用 FEVER 测分类式 retrieval-augmented generation。来源：<a href="https://arxiv.org/abs/1803.05355"target="_blank" rel="external nofollow noopener noreferrer">FEVER</a></td>
-      </tr>
-      <tr>
-          <td><strong>SciFact</strong></td>
-          <td>科学事实核查</td>
-          <td>科学 claim + paper abstract evidence，常在 BEIR/RAG 评测中用于 scientific RAG。规模小但证据要求高。</td>
-      </tr>
-      <tr>
-          <td><strong>Climate-FEVER</strong></td>
-          <td>气候事实核查</td>
-          <td>气候相关 claims + evidence，常用于检索鲁棒性、争议性事实、领域 RAG。</td>
-      </tr>
-      <tr>
-          <td><strong>ALCE</strong></td>
-          <td>带引用生成评测</td>
-          <td>Automatic LLMs’ Citation Evaluation，要求系统检索证据并生成带 citation 的答案；常用 ASQA、QAMPARI、ELI5。评估 fluency、correctness、citation quality。来源：<a href="https://arxiv.org/abs/2305.14627"target="_blank" rel="external nofollow noopener noreferrer">ALCE</a></td>
-      </tr>
-      <tr>
-          <td><strong>HAGRID</strong></td>
-          <td>attributed generative search</td>
-          <td>面向生成式信息检索，要求生成解释并给出可归因引用；基于 MIRACL English 构建。来源：<a href="https://arxiv.org/abs/2307.16883"target="_blank" rel="external nofollow noopener noreferrer">HAGRID</a></td>
-      </tr>
-      <tr>
-          <td><strong>RAGTruth</strong></td>
-          <td>RAG 幻觉标注</td>
-          <td>约 18k RAG 生成回答，带 case-level 和 word-level hallucination annotation；适合训练/评估 hallucination detector。来源：<a href="https://arxiv.org/abs/2401.00396"target="_blank" rel="external nofollow noopener noreferrer">RAGTruth</a></td>
-      </tr>
-  </tbody>
-</table>
-<h4 id="专门为-rag-设计的新-benchmark" class="heading-element"><span>专门为 RAG 设计的新 benchmark</span>
-  <a href="#%e4%b8%93%e9%97%a8%e4%b8%ba-rag-%e8%ae%be%e8%ae%a1%e7%9a%84%e6%96%b0-benchmark" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h4><table>
-  <thead>
-      <tr>
-          <th>数据集</th>
-          <th>主要用途</th>
-          <th>简介与特点</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>RGB</strong></td>
-          <td>RAG 基础能力诊断</td>
-          <td>中英双语，测试 noise robustness、negative rejection、information integration、counterfactual robustness。很适合分析“检索到噪声/错误证据时 LLM 会不会被带偏”。来源：<a href="https://github.com/chen700564/RGB"target="_blank" rel="external nofollow noopener noreferrer">RGB</a></td>
-      </tr>
-      <tr>
-          <td><strong>CRAG</strong></td>
-          <td>真实动态 QA + API/RAG</td>
-          <td>Comprehensive RAG Benchmark，4,409 个 factual QA，含 mock web / KG APIs，覆盖 5 个领域、8 类问题、实体流行度和时间动态性。KDD Cup 2024 相关，适合测现代 agentic/web RAG。来源：<a href="https://github.com/facebookresearch/CRAG"target="_blank" rel="external nofollow noopener noreferrer">CRAG</a></td>
-      </tr>
-      <tr>
-          <td><strong>RAGBench</strong></td>
-          <td>工业 RAG 质量评测</td>
-          <td>100k examples，覆盖多个行业语料和 RAG 任务，带可解释标签，用于评估 retrieval relevance、answer faithfulness、context utilization 等。来源：<a href="https://arxiv.org/abs/2407.11005"target="_blank" rel="external nofollow noopener noreferrer">RAGBench</a></td>
-      </tr>
-  </tbody>
-</table>
-<h4 id="垂直领域常见数据集" class="heading-element"><span>垂直领域常见数据集</span>
-  <a href="#%e5%9e%82%e7%9b%b4%e9%a2%86%e5%9f%9f%e5%b8%b8%e8%a7%81%e6%95%b0%e6%8d%ae%e9%9b%86" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h4><table>
-  <thead>
-      <tr>
-          <th>领域</th>
-          <th>常见数据集</th>
-          <th>用法</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>科学论文 RAG</td>
-          <td><strong>QASPER、SciFact、SCIDOCS、LitQA</strong></td>
-          <td>QASPER 是 NLP paper full-text QA，约 5,049 questions / 1,585 papers；适合论文问答、证据定位、长文档 RAG。来源：<a href="https://arxiv.org/abs/2105.03011"target="_blank" rel="external nofollow noopener noreferrer">QASPER</a></td>
-      </tr>
-      <tr>
-          <td>医疗 / 生物</td>
-          <td><strong>BioASQ、PubMedQA、TREC-COVID、NFCorpus</strong></td>
-          <td>用于 biomedical retrieval、medical QA、COVID 文献检索。BEIR 中也包含 BioASQ、TREC-COVID、NFCorpus。</td>
-      </tr>
-      <tr>
-          <td>金融</td>
-          <td><strong>FiQA</strong></td>
-          <td>金融问答/意见检索，常用于 BEIR 检索泛化和金融 RAG。</td>
-      </tr>
-      <tr>
-          <td>对话式知识</td>
-          <td><strong>Wizard of Wikipedia、Doc2Dial / MultiDoc2Dial</strong></td>
-          <td>测知识型对话、对话状态下的检索与回答。KILT 收录 Wizard of Wikipedia。</td>
-      </tr>
-  </tbody>
-</table>
-<h3 id="数据集的选择" class="heading-element"><span>数据集的选择</span>
-  <a href="#%e6%95%b0%e6%8d%ae%e9%9b%86%e7%9a%84%e9%80%89%e6%8b%a9" class="heading-mark">
+</h3><p>当前 agent benchmark 主要评估推理、规划、工具使用和代码执行，但长期记忆是 <strong>agent 能否持续服务用户的核心能力</strong>。</p></div><div class="post-footer">
+    <a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-evaluating-memory-in-llm-agents-via-incremental-multi-turn-interactions/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/memory/' class="post-tag">Memory</a><a href='/tags/llm-agent/' class="post-tag">LLM Agent</a><a href='/tags/%E8%AF%84%E6%B5%8B/' class="post-tag">评测</a><a href='/tags/benchmark/' class="post-tag">Benchmark</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-longmemevalbenchmarking-chat-assistants-on-long-term-interactive-memory/">论文 · LongMemEval: Benchmarking Chat Assistants on Long-Term Interactive Memory</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2026-07-20 00:00:00'>published on <time datetime="2026-07-20">2026-07-20</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" class="post-category" title="Category - 论文阅读"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 论文阅读</a></span></div><div class="content"><h3 id="基础信息" class="heading-element"><span>基础信息</span>
+  <a href="#%e5%9f%ba%e7%a1%80%e4%bf%a1%e6%81%af" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
 </h3><ul>
-<li>测 retriever：<code>BEIR + MS MARCO + NQ/HotpotQA</code></li>
-<li>测端到端 QA：<code>NQ + TriviaQA + HotpotQA + WebQuestions/CuratedTREC</code></li>
-<li>测多跳/综合：<code>HotpotQA + MuSiQue + 2WikiMultiHopQA + QAMPARI + ASQA</code></li>
-<li>测引用/可验证性：<code>ALCE + ASQA + QAMPARI + ELI5 + HAGRID</code></li>
-<li>测幻觉/鲁棒性：<code>RGB + CRAG + RAGTruth + FEVER/SciFact</code></li>
-<li>做中文或多语言 RAG：优先看 <code>RGB、MIRACL/MIRAGE-Bench</code>，再补中文问答/领域私有数据。</li>
-</ul></div><div class="post-footer">
-    <a href="/posts/llm-rag%E6%96%B9%E5%90%91%E5%B8%B8%E8%A7%81%E6%95%B0%E6%8D%AE%E9%9B%86/">Read More</a></div>
+<li>作者：Di Wu; Hongwei Wang; Wenhao Yu; Yuwei Zhang; Kai-Wei Chang; Dong Yu</li>
+<li>期刊/日期：ICLR 2025；arXiv:2410.10813v2，2025-03-04</li>
+</ul>
+<h3 id="q1-研究动机" class="heading-element"><span>Q1. 研究动机</span>
+  <a href="#q1-%e7%a0%94%e7%a9%b6%e5%8a%a8%e6%9c%ba" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>聊天助手要真正个性化，必须长期记住用户在很多次交互中透露的信息，并在之后回答问题、给建议、处理任务时用上这些记忆。</p></div><div class="post-footer">
+    <a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-longmemevalbenchmarking-chat-assistants-on-long-term-interactive-memory/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/memory/' class="post-tag">Memory</a><a href='/tags/benchmark/' class="post-tag">Benchmark</a><a href='/tags/%E9%95%BF%E4%B8%8A%E4%B8%8B%E6%96%87/' class="post-tag">长上下文</a><a href='/tags/%E8%AE%B0%E5%BF%86%E6%9C%BA%E5%88%B6/' class="post-tag">记忆机制</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-tug-of-war-between-knowledgeexploring-and-resolving-knowledge-conflicts-in-retrieval-augmented-language-models/">论文 · Tug-of-War Between Knowledge: Exploring and Resolving Knowledge Conflicts in Retrieval-Augmented Language Models</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2026-07-20 00:00:00'>published on <time datetime="2026-07-20">2026-07-20</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" class="post-category" title="Category - 论文阅读"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 论文阅读</a></span></div><div class="content"><h3 id="基础信息" class="heading-element"><span>基础信息</span>
+  <a href="#%e5%9f%ba%e7%a1%80%e4%bf%a1%e6%81%af" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ul>
+<li>作者：Zhuoran Jin; Pengfei Cao; Yubo Chen; Kang Liu; Xiaojian Jiang; Jiexin Xu; Qiuxia Li; Jun Zhao</li>
+<li>期刊/日期：arXiv:2402.14409v1，2024-02-22</li>
+</ul>
+<h3 id="q1-研究动机" class="heading-element"><span>Q1. 研究动机</span>
+  <a href="#q1-%e7%a0%94%e7%a9%b6%e5%8a%a8%e6%9c%ba" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p><strong>RAG/RALM 通过检索外部证据来补充或纠正模型内部知识，但外部证据并不总是干净可信。</strong></p></div><div class="post-footer">
+    <a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-tug-of-war-between-knowledgeexploring-and-resolving-knowledge-conflicts-in-retrieval-augmented-language-models/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/rag/' class="post-tag">RAG</a><a href='/tags/%E7%9F%A5%E8%AF%86%E5%AF%86%E9%9B%86/' class="post-tag">知识密集</a><a href='/tags/qa/' class="post-tag">QA</a><a href='/tags/%E6%A3%80%E7%B4%A2%E5%A2%9E%E5%BC%BA%E7%94%9F%E6%88%90/' class="post-tag">检索增强生成</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-hinge-loss-markov-random-fields-and-probabilistic-soft-logic/">论文阅读 · Hinge-Loss Markov Random Fields and Probabilistic Soft Logic</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2026-07-20 00:00:00'>published on <time datetime="2026-07-20">2026-07-20</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" class="post-category" title="Category - 论文阅读"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 论文阅读</a></span></div><div class="content"><h3 id="基础信息" class="heading-element"><span>基础信息</span>
+  <a href="#%e5%9f%ba%e7%a1%80%e4%bf%a1%e6%81%af" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ul>
+<li>作者：Stephen H. Bach, Matthias Broecheler, Bert Huang, Lise Getoor</li>
+<li>期刊/日期：Journal of Machine Learning Research 18 (2017) 1-67；Submitted 12/2015, Revised 12/2016, Published 10/2017</li>
+<li>核心贡献：提出 Hinge-Loss Markov Random Fields (HL-MRFs) 和 Probabilistic Soft Logic (PSL)，用连续 [0,1] 变量、hinge/squared hinge loss 与一阶逻辑式规则统一表达结构化依赖，并用 ADMM MAP 推理和多种权重学习方法实现大规模可扩展建模。</li>
+</ul>
+<h3 id="q1-研究动机" class="heading-element"><span>Q1. 研究动机</span>
+  <a href="#q1-%e7%a0%94%e7%a9%b6%e5%8a%a8%e6%9c%ba" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>许多机器学习问题既结构复杂又规模很大，例如社交网络、知识图谱、Web、图像和自然语言。传统结构化模型越表达丰富，推理和学习越难扩展；作者希望找到一个兼具逻辑表达能力和大规模凸推理效率的建模形式。</p></div><div class="post-footer">
+    <a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-hinge-loss-markov-random-fields-and-probabilistic-soft-logic/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/%E6%A6%82%E7%8E%87%E8%BD%AF%E9%80%BB%E8%BE%91/' class="post-tag">概率软逻辑</a><a href='/tags/hl-mrf/' class="post-tag">HL-MRF</a><a href='/tags/%E7%BB%93%E6%9E%84%E5%8C%96%E9%A2%84%E6%B5%8B/' class="post-tag">结构化预测</a><a href='/tags/%E5%87%B8%E6%8E%A8%E7%90%86/' class="post-tag">凸推理</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-markov-logic-networks/">论文阅读 · Markov Logic Networks</a>
+  </h2><div class="post-meta"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span>&nbsp;<span class="post-publish" title='2026-07-20 00:00:00'>published on <time datetime="2026-07-20">2026-07-20</time></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" class="post-category" title="Category - 论文阅读"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 论文阅读</a></span></div><div class="content"><h3 id="基础信息" class="heading-element"><span>基础信息</span>
+  <a href="#%e5%9f%ba%e7%a1%80%e4%bf%a1%e6%81%af" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ul>
+<li>作者：Matthew Richardson, Pedro Domingos</li>
+<li>期刊/日期：Machine Learning 62:107-136, 2006；Published online: 27 January 2006；DOI: 10.1007/s10994-006-5833-1</li>
+<li>核心贡献：提出 Markov Logic Networks (MLNs)，通过给一阶逻辑公式附加权重，把硬逻辑知识库变成 Markov network 模板，并给出基于 query-focused grounding、MCMC、pseudo-likelihood 和 ILP 的推理与学习流程。</li>
+</ul>
+<h3 id="q1-研究动机" class="heading-element"><span>Q1. 研究动机</span>
+  <a href="#q1-%e7%a0%94%e7%a9%b6%e5%8a%a8%e6%9c%ba" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>AI 长期希望把概率图模型处理不确定性的能力与一阶逻辑表达关系知识的能力结合起来。纯逻辑对错误和矛盾很脆弱，纯概率图模型又难以紧凑表达关系结构；作者希望用一个简单表示同时获得两者优势。</p></div><div class="post-footer">
+    <a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-markov-logic-networks/">Read More</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%80%BB%E8%BE%91%E7%BD%91%E7%BB%9C/' class="post-tag">马尔可夫逻辑网络</a><a href='/tags/%E6%A6%82%E7%8E%87%E9%80%BB%E8%BE%91/' class="post-tag">概率逻辑</a><a href='/tags/%E7%BB%9F%E8%AE%A1%E5%85%B3%E7%B3%BB%E5%AD%A6%E4%B9%A0/' class="post-tag">统计关系学习</a><a href='/tags/%E4%B8%80%E9%98%B6%E9%80%BB%E8%BE%91/' class="post-tag">一阶逻辑</a></div></div>
 </article><ul class="pagination"><li class="page-item active">
           <span class="page-link">
             <a href="/">1</a>
@@ -509,7 +238,7 @@
           <span class="page-link" aria-hidden="true">&hellip;</span>
         </li><li class="page-item">
           <span class="page-link">
-            <a href="/page/8/">8</a>
+            <a href="/page/12/">12</a>
           </span>
         </li></ul></div></main><footer class="footer">
     <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.137.0">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>

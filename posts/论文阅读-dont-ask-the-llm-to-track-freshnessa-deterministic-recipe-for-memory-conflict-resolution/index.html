@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>论文 · Don’t Ask the LLM to Track Freshness: A Deterministic Recipe for Memory Conflict Resolution - Ting BLOG🐈</title><meta name="author" content="Ting">
+<meta name="description" content="基础信息作者：Vikas Reddy; Sumanth Challaram 期刊/日期：arXiv:2606.01435v1，2026-05-31 Q1. 研究动机长期记忆系统会持续接收会变化的事实：
+"><meta name="keywords" content='Benchmark, RAG, 选择性遗忘, 在线更新'>
+  <meta itemprop="name" content="论文 · Don’t Ask the LLM to Track Freshness: A Deterministic Recipe for Memory Conflict Resolution">
+  <meta itemprop="description" content="基础信息作者：Vikas Reddy; Sumanth Challaram 期刊/日期：arXiv:2606.01435v1，2026-05-31 Q1. 研究动机长期记忆系统会持续接收会变化的事实：">
+  <meta itemprop="datePublished" content="2026-07-20T00:00:00+08:00">
+  <meta itemprop="dateModified" content="2026-07-20T00:00:00+08:00">
+  <meta itemprop="wordCount" content="346">
+  <meta itemprop="keywords" content="Benchmark,RAG,选择性遗忘,在线更新"><meta property="og:url" content="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-dont-ask-the-llm-to-track-freshnessa-deterministic-recipe-for-memory-conflict-resolution/">
+  <meta property="og:site_name" content="Ting BLOG🐈">
+  <meta property="og:title" content="论文 · Don’t Ask the LLM to Track Freshness: A Deterministic Recipe for Memory Conflict Resolution">
+  <meta property="og:description" content="基础信息作者：Vikas Reddy; Sumanth Challaram 期刊/日期：arXiv:2606.01435v1，2026-05-31 Q1. 研究动机长期记忆系统会持续接收会变化的事实：">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-07-20T00:00:00+08:00">
+    <meta property="article:modified_time" content="2026-07-20T00:00:00+08:00">
+    <meta property="article:tag" content="Benchmark">
+    <meta property="article:tag" content="RAG">
+    <meta property="article:tag" content="选择性遗忘">
+    <meta property="article:tag" content="在线更新">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="论文 · Don’t Ask the LLM to Track Freshness: A Deterministic Recipe for Memory Conflict Resolution">
+  <meta name="twitter:description" content="基础信息作者：Vikas Reddy; Sumanth Challaram 期刊/日期：arXiv:2606.01435v1，2026-05-31 Q1. 研究动机长期记忆系统会持续接收会变化的事实：">
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/icons/favicon.svg"><link rel="canonical" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-dont-ask-the-llm-to-track-freshnessa-deterministic-recipe-for-memory-conflict-resolution/" title="论文 · Don’t Ask the LLM to Track Freshness: A Deterministic Recipe for Memory Conflict Resolution - Ting BLOG🐈" /><link rel="prev" type="text/html" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-evaluating-memory-in-llm-agents-via-incremental-multi-turn-interactions/" title="论文 · Evaluating Memory in LLM Agents via Incremental Multi-Turn Interactions" /><link rel="next" type="text/html" href="http://localhost:1313/about/" title="About" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-dont-ask-the-llm-to-track-freshnessa-deterministic-recipe-for-memory-conflict-resolution/index.md" title="论文 · Don’t Ask the LLM to Track Freshness: A Deterministic Recipe for Memory Conflict Resolution - Ting BLOG🐈"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "论文 · Don’t Ask the LLM to Track Freshness: A Deterministic Recipe for Memory Conflict Resolution",
+    "inLanguage": "en",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-dont-ask-the-llm-to-track-freshnessa-deterministic-recipe-for-memory-conflict-resolution\/"
+    },"genre": "posts","keywords": "Benchmark, RAG, 选择性遗忘, 在线更新","wordcount":  346 ,
+    "url": "http:\/\/localhost:1313\/posts\/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-dont-ask-the-llm-to-track-freshnessa-deterministic-recipe-for-memory-conflict-resolution\/","datePublished": "2026-07-20T00:00:00+08:00","dateModified": "2026-07-20T00:00:00+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "Ting"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/archives/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item delimiter"></li><li class="menu-item theme-switch" title="Switch Theme">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Ting BLOG🐈"><span class="header-title-pre">🐈</span><span class="typeit"><template>Ting BLOG</template></span></a><span class="typeit header-subtitle"><template></template></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/archives/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Archives</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-chain fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-graduation-cap fa-fw fa-sm" aria-hidden="true"></i> About</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="Switch Theme"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="Collections"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>论文 · Don’t Ask the LLM to Track Freshness: A Deterministic Recipe for Memory Conflict Resolution</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="Tin10g.github.io" title="Author" rel=" author" class="author"><img loading="lazy" src="/images/avatar.png" alt="Ting" data-title="Ting" width="20" height="20" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Ting</a></span><span class="post-included-in">&nbsp;included in <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" class="post-category" title="Category - 论文阅读"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 论文阅读</a></span></div><div class="post-meta-line"><span title="published on 2026-07-20 00:00:00"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2026-07-20">2026-07-20</time></span>&nbsp;<span title="346 words"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>About 400 words</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>2 minutes</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>Contents</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#基础信息">基础信息</a></li>
+    <li><a href="#q1-研究动机">Q1. 研究动机</a></li>
+    <li><a href="#q2-核心问题">Q2. 核心问题</a></li>
+    <li><a href="#q3-现有不足--本文改进">Q3. 现有不足 &amp; 本文改进</a></li>
+    <li><a href="#q4-方法流程">Q4. 方法流程</a></li>
+    <li><a href="#q5-实验设计与结论">Q5. 实验设计与结论</a></li>
+    <li><a href="#q6-局限性">Q6. 局限性</a></li>
+    <li><a href="#q7-学术价值">Q7. 学术价值</a></li>
+    <li><a href="#q8-延伸研究方向">Q8. 延伸研究方向</a></li>
+    <li><a href="#q9-反直觉发现与方法失效分析">Q9. 反直觉发现与方法失效分析</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 id="基础信息" class="heading-element"><span>基础信息</span>
+  <a href="#%e5%9f%ba%e7%a1%80%e4%bf%a1%e6%81%af" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>作者：Vikas Reddy; Sumanth Challaram</li>
+<li>期刊/日期：arXiv:2606.01435v1，2026-05-31</li>
+</ul>
+<h2 id="q1-研究动机" class="heading-element"><span>Q1. 研究动机</span>
+  <a href="#q1-%e7%a0%94%e7%a9%b6%e5%8a%a8%e6%9c%ba" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>长期记忆系统会持续接收会变化的事实：</p>
+<ul>
+<li>
+<p>用户偏好会更新，政策会被新版本替代，知识库事实会被纠正。</p>
+</li>
+<li>
+<p>核心困难不是“有没有存下来”，而是当同一事实在记忆中出现多个互相矛盾的版本时，<strong>系统到底应该返回哪一个</strong>。</p>
+</li>
+</ul>
+<p>MemoryAgentBench的FactConsolidation任务把这个问题做成了一个<strong>干净压力测试</strong>：事实带有序号，且prompt明确说明“newer facts have larger serial numbers”。</p>
+<p>但<strong>已有系统仍普遍失败</strong>：HippoRAG-v2在 FC-SH 上只有 54%，BM25 48%，Mem0/Contriever 18%，Zep/Graphiti 7%，多跳 FC-MH 对大多数系统几乎未解。</p>
+<p>作者认为这说明瓶颈<strong>不只是存储结构，而是检索后如何组装、排序和解决冲突</strong>。</p>
+<h2 id="q2-核心问题" class="heading-element"><span>Q2. 核心问题</span>
+  <a href="#q2-%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>本文要回答的问题是：</p>
+<p>在有显式版本标记的记忆冲突中，是否应让 LLM 自己判断“哪个事实更新”，还是把 LLM 限定为候选抽取器，再由确定性代码做版本聚合？</p>
+<p>作者检验三个子问题：</p>
+<ul>
+<li>candidate extraction + max(serial) 是否比 LLM-judgment answer pipeline 更可靠</li>
+<li>该思路是否能扩展到多跳冲突链</li>
+<li>序号版本能否迁移到真实会话中的 timestamp 更新场景</li>
+</ul>
+<h2 id="q3-现有不足--本文改进" class="heading-element"><span>Q3. 现有不足 &amp; 本文改进</span>
+  <a href="#q3-%e7%8e%b0%e6%9c%89%e4%b8%8d%e8%b6%b3--%e6%9c%ac%e6%96%87%e6%94%b9%e8%bf%9b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>现有记忆框架大量投入在复杂存储结构上，例如知识图谱、层次化 RAG、agentic loop、typed memory、temporal KG 等。</p>
+<p>很多系统仍把“冲突解析”交给 LLM prompt 完成。</p>
+<p>这样会把检索、候选过滤、训练先验抑制、版本比较和答案生成<strong>缠在同一个自由文本步骤里</strong>。</p>
+<p>本文的改进很朴素：</p>
+<ul>
+<li>
+<p>保留 BM25 检索和 LLM 语义理解能力，但把 freshness 比较移出 LLM。</p>
+<blockquote>
+<p>freshness 比较：比较知识是否过期，以及更新后的知识库是否能带来更符合当前时间的答案。</p>
+</blockquote>
+</li>
+<li>
+<p>LLM 只负责抽取所有语义匹配的候选事实，最终由代码对 serial 做 max()。</p>
+<blockquote>
+<p>serial：串行的 / 序列式的 / 连续编号的</p>
+</blockquote>
+</li>
+</ul>
+<p>这个设计直接消除两类失效：</p>
+<ul>
+<li>LLM 被真实世界先验覆盖 prompt 中的新事实</li>
+<li>在长上下文、多候选条件下比较序号漂移</li>
+</ul>
+<h2 id="q4-方法流程" class="heading-element"><span>Q4. 方法流程</span>
+  <a href="#q4-%e6%96%b9%e6%b3%95%e6%b5%81%e7%a8%8b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>单跳 SH-conflict 流程如下：</p>
+<p><img loading="lazy" src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260720105649196.png" alt="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260720105649196.png" srcset="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260720105649196.png?size=small, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260720105649196.png?size=medium 1.5x, https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260720105649196.png?size=large 2x" data-title="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260720105649196.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+<ol>
+<li>
+<p>对编号事实做 BM25 检索，默认 TOP_K=10。</p>
+<blockquote>
+<p>BM25 ：一种经典的<strong>关键词检索算法</strong>，常用于搜索引擎和 RAG 系统里，用来从一堆文档中找出和查询最相关的文本片段。</p>
+</blockquote>
+</li>
+<li>
+<p>用 LLM 严格抽取与问题 subject/predicate 语义匹配的候选，输出结构化 JSON：<code>serial</code>、原始事实文本、抽取实体。</p>
+</li>
+<li>
+<p>若候选为空则返回 <code>no answer</code>；否则返回 serial 最大候选的实体。</p>
+</li>
+</ol>
+<p>多跳 CAR（Chain-Aware Resolution）流程是在此基础上加入 Self-Ask 风格分解：</p>
+<img src="https://raw.githubusercontent.com/Tin10g/PictureBed/main/20260720105740429.png" style="zoom:150%;" />
+<p>把问题拆成原子 hop，每一跳用前一跳答案替换 placeholder，再运行同一个 SH-conflict 管道；</p>
+<p>任何依赖断裂都会导致链条停止。</p>
+<p>它的关键是“每一跳都先做确定性 freshness resolution，再传给下一跳”。</p>
+<p>跨基准实验中，作者把 <code>max(serial)</code> 换成 <code>max(timestamp)</code>，用于 LongMemEval 的 knowledge-update 子集，检验该机制是否能迁移到真实会话时间戳。</p>
+<h2 id="q5-实验设计与结论" class="heading-element"><span>Q5. 实验设计与结论</span>
+  <a href="#q5-%e5%ae%9e%e9%aa%8c%e8%ae%be%e8%ae%a1%e4%b8%8e%e7%bb%93%e8%ae%ba" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>主实验使用 MemoryAgentBench FactConsolidation，包含 FC-SH 和 FC-MH，长度为 6K、32K、64K、262K，每个 cell 100 题，指标为 SubEM。</p>
+<p>关键结果如下：</p>
+<ul>
+<li>gpt-4o-mini + candidate extraction + <code>max(serial)</code> 在 FC-SH 平均 78.0%，262K 为 82%；同设置 LLM-judgment baseline 平均 67.2%，262K 为 61%，平均提升 +10.8pp，最长上下文提升 +21pp。</li>
+<li>gpt-4o 作为 backbone 时，FC-SH 平均达到 94.8%，262K 为 93%，显著高于 GPT-4o long-context 在 MAB 中的 60%。</li>
+<li>CAR 在 FC-MH 上平均 30.2%，超过 MAB 已发布系统的最好多跳结果 7%；换成 gpt-4o 后 CAR 平均 51.5%，o4-mini + CAR 为 43.2%。</li>
+<li>chunk-4096 条件下，确定性管道平均 80.8%，同 chunk 的 LLM-judgment 为 61.0%，说明优势不只来自 fact-level chunking。</li>
+<li>两个管道并非严格支配：在 400 个 FC-SH 问题中，二者至少一个答对的 union accuracy 为 88.5%；Python-only 正确占 21.3%，LLM-only 正确占 10.5%。</li>
+<li>LongMemEval knowledge-update 上，<code>max(timestamp)</code> 没有超过 LLM baseline：57.8% vs 64.4%，置信区间重叠。作者分析认为失败主要来自 Yes/No、历史状态、聚合类问题，这些需要的不是“最新值”算子。</li>
+</ul>
+<p>结论是：对于“当前值冲突解析 + 显式版本标记”任务，确定性聚合是正确原语；对于更广泛的记忆 QA，它需要与问题类型路由组合。</p>
+<h2 id="q6-局限性" class="heading-element"><span>Q6. 局限性</span>
+  <a href="#q6-%e5%b1%80%e9%99%90%e6%80%a7" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>本文主结果集中在 MAB FactConsolidation，这个任务来自 MQUAKE counterfactual，冲突形式比真实用户记忆更干净。真实生产记忆可能存在部分序、合并版本、模糊更新时间、事件时间与记录时间不一致等情况。</p>
+<p>matched comparison 不是 resolver-only ablation：</p>
+<p>两个管道同时改变了 prompt、输出格式、temperature、LLM 的任务定义和 resolver。</p>
+<p>严格证明 <code>max()</code> 本身贡献多少，需要共享候选列表后让 LLM picker 与 Python picker 对比。</p>
+<p>此外，确定性管道并非总赢。严格候选抽取会过度拒绝一部分有效事实，导致约 10.5% 的问题由 LLM-judgment 答对而本文管道错。多跳也远未解决，FC-MH 30.2% 说明主要错误会在第一跳候选抽取后级联。</p>
+<h2 id="q7-学术价值" class="heading-element"><span>Q7. 学术价值</span>
+  <a href="#q7-%e5%ad%a6%e6%9c%af%e4%bb%b7%e5%80%bc" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>这篇论文的价值在于把“记忆冲突解析”从存储架构问题重新定位为检索后 assembly 问题。</p>
+<p>它用一个非常小的确定性模块证明：如果元数据已经给出版本顺序，让 LLM 自己做比较既昂贵又不稳定。</p>
+<p>对长期记忆系统设计的启发很直接：</p>
+<ul>
+<li>保存事实级元数据</li>
+<li>把时间戳、serial、version string 这类结构化比较交给代码</li>
+<li>让 LLM 做语义识别，而不是做精确排序</li>
+</ul>
+<p>这个结论也能解释为什么 temporal KG 这类复杂结构如果仍由 LLM 判断 supersession，仍可能在冲突任务上失败。</p>
+<h2 id="q8-延伸研究方向" class="heading-element"><span>Q8. 延伸研究方向</span>
+  <a href="#q8-%e5%bb%b6%e4%bc%b8%e7%a0%94%e7%a9%b6%e6%96%b9%e5%90%91" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ol>
+<li>
+<p>做真正 resolver isolation：</p>
+<p>同一批候选同时喂给 Python <code>max()</code>、LLM picker、规则 + LLM hybrid，拆出纯 resolver 贡献。</p>
+</li>
+<li>
+<p>构建问题类型路由器：</p>
+<p>current-value 用 <code>max(timestamp)</code>，历史问题用 second-newest/k-th-newest，Yes/No 用布尔包装，统计问题用过滤聚合。</p>
+</li>
+<li>
+<p>用真实用户偏好更新、政策版本、协作文档修订验证，而不只使用 MQUAKE counterfactual。</p>
+</li>
+<li>
+<p>改进候选抽取召回，例如 subject linking、predicate paraphrase、fallback LLM-judgment，以减少 over-rejection。</p>
+</li>
+<li>
+<p>研究部分序和因果依赖更新，例如“合并分支”“撤销更新”“事件发生时间晚于记录时间”等。</p>
+</li>
+</ol>
+<h2 id="q9-反直觉发现与方法失效分析" class="heading-element"><span>Q9. 反直觉发现与方法失效分析</span>
+  <a href="#q9-%e5%8f%8d%e7%9b%b4%e8%a7%89%e5%8f%91%e7%8e%b0%e4%b8%8e%e6%96%b9%e6%b3%95%e5%a4%b1%e6%95%88%e5%88%86%e6%9e%90" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>最反直觉的是：明明 prompt 已经写清楚“序号越大越新”，LLM 仍会在长上下文里选旧事实或真实世界先验；而更复杂的记忆结构并没有天然解决这个问题。Zep/Graphiti 这类 temporal KG 在 FC-SH 上只有 7%，<strong>说明“有时间结构”不等于“解析动作是可靠的”</strong>。</p>
+<p>本文方法失效主要来自确定性模块之前：BM25 没召回 counterfactual、LLM 抽错 subject、predicate 同义表达没匹配、候选抽取过度保守，或者多跳第一跳抽错导致后续级联。LongMemEval 中的失败则提醒：<code>max()</code> 是强原语，但不是通用记忆 QA 算子。</p>
+</div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="Updated on 2026-07-20 00:00:00">Updated on 2026-07-20&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-dont-ask-the-llm-to-track-freshnessa-deterministic-recipe-for-memory-conflict-resolution/index.md" title="Read Markdown" class="link-to-markdown">Read Markdown</a></span></div></div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/benchmark/" class="post-tag" title="Tags - Benchmark">Benchmark</a><a href="/tags/rag/" class="post-tag" title="Tags - RAG">RAG</a><a href="/tags/%E9%80%89%E6%8B%A9%E6%80%A7%E9%81%97%E5%BF%98/" class="post-tag" title="Tags - 选择性遗忘">选择性遗忘</a><a href="/tags/%E5%9C%A8%E7%BA%BF%E6%9B%B4%E6%96%B0/" class="post-tag" title="Tags - 在线更新">在线更新</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-evaluating-memory-in-llm-agents-via-incremental-multi-turn-interactions/" class="post-nav-item" rel="prev" title="论文 · Evaluating Memory in LLM Agents via Incremental Multi-Turn Interactions"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>论文 · Evaluating Memory in LLM Agents via Incremental Multi-Turn Interactions</a></div>
+</div>
+<div class="post-reward">
+    <div class="comment"></div>
+    <input type="checkbox" class="reward-input" name="reward" id="fi-reward" hidden />
+    <label class="reward-button" for="fi-reward"><?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1776434267563" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2715" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M377.596784 791.989528s-39.199482 22.799699 27.799633 30.399598c81.198926 9.199878 122.598379 7.999894 211.997197-8.999881 0 0 23.599688 14.799804 56.399254 27.599635C473.395518 926.787745 220.198866 835.988946 377.596784 791.989528m-24.399677-112.198517s-43.799421 32.399572 23.199693 39.399479c86.598855 8.999881 155.197948 9.599873 273.596382-13.199825 0 0 16.399783 16.599781 42.199442 25.599661-242.596792 70.999061-512.593222 5.799923-338.995517-51.799315m206.397271-190.197485c49.399347 56.799249-12.999828 107.998572-12.999828 107.998572s125.398342-64.799143 67.799103-145.798072c-53.799289-75.599-94.998744-113.198503 128.198305-242.596792 0.199997 0-350.395367 87.598842-182.99758 280.396292m265.196493 385.194907s28.999617 23.799685-31.799579 42.399439c-115.798469 34.999537-481.593632 45.599397-583.192289 1.399982-36.599516-15.799791 31.999577-37.999498 53.599291-42.599437 22.399704-4.799937 35.399532-3.999947 35.399532-3.999947-40.599463-28.599622-262.596528 56.199257-112.798508 80.398937 408.3946 66.399122 744.790152-29.799606 638.791553-77.598974M396.396536 563.592548s-186.197538 44.199416-65.999128 60.199204c50.799328 6.79991 151.99799 5.199931 246.196745-2.599966 76.998982-6.399915 154.397958-20.39973 154.397958-20.39973s-27.19964 11.599847-46.799381 24.999669c-188.997501 49.799342-553.992675 26.599648-448.994063-24.19968 88.998823-42.799434 161.197869-37.999498 161.197869-37.999497m333.995583 186.597532c192.197459-99.79868 103.198635-195.797411 41.199456-182.797582-15.199799 3.199958-21.999709 5.999921-21.999709 5.99992s5.599926-8.799884 16.399783-12.599833c122.598379-43.199429 216.997131 127.198318-39.599477 194.597427 0-0.199997 2.99996-2.799963 3.999947-5.199932M614.393653 0s106.398593 106.398593-100.998664 269.99643c-166.197802 131.198265-37.999498 206.197274 0 291.596144-96.998717-87.598842-168.197776-164.597824-120.398408-236.396874C463.195652 220.197088 657.393085 168.997765 614.393653 0m-198.997369 1020.786502c184.397562 11.799844 467.593817-6.599913 474.19373-93.798759 0 0-12.799831 32.999564-152.397985 59.399214-157.397919 29.599609-351.595351 26.199654-466.59383 7.199905 0-0.199997 23.599688 19.399743 144.798085 27.19964" fill="" p-id="2716"></path></svg>为博主买一杯java</label>
+    <div class="reward-ways" data-mode="static"><div><img loading="lazy" src="/images/wechatpay.jpg" alt="Ting WeChat Pay" data-title="Ting WeChat Pay" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span>WeChat Pay</span>
+          </div></div>
+  </div></article>
+
+  <aside class="toc" id="toc-auto" aria-label="Contents"><h2 class="toc-title">Contents&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.137.0">Hugo</a> | Theme - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.13">FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2024 - 2026</span><span class="author" itemprop="copyrightHolder">
+              <a href="Tin10g.github.io">Ting</a></span></div><div class="footer-line statistics"><span class="site-time" title='Website running ...'><i class="fa-solid fa-heartbeat fa-fw animate-icon" aria-hidden="true"></i><span class="ms-1 d-none">Runing</span><span class="run-times ms-1">Website running ...</span></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="Back to Top"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">This website works best with JavaScript enabled.</div>
+  </noscript>
+</div><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><script src="/lib/typeit/index.umd.js" defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":1000},"comment":{"enable":false},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"siteTime":"2024-04-01T11:25:40+08:00","typeit":{"cursorChar":"|","cursorSpeed":1000,"duration":-1,"loop":false,"speed":100},"version":"v0.3.13"};console.log('Page config:', window.config);</script><script src="/js/theme.min.js" defer></script><script src="/js/custom.min.js" defer></script></body>
+</html>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>马尔可夫逻辑网络 - Tag - Ting BLOG🐈</title>
+    <link>http://localhost:1313/tags/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%80%BB%E8%BE%91%E7%BD%91%E7%BB%9C/</link>
+    <description>This is Ting&#39;s BLOG ...</description>
+    <generator>Hugo 0.137.0 &amp; FixIt v0.3.13</generator>
+    <language>en</language>
+    <managingEditor>ting10win@gmail.com (Ting)</managingEditor>
+    <webMaster>ting10win@gmail.com (Ting)</webMaster>
+    <lastBuildDate>Mon, 20 Jul 2026 00:00:00 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%80%BB%E8%BE%91%E7%BD%91%E7%BB%9C/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>论文阅读 · Markov logic networks</title>
+      <link>http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-markov-logic-networks/</link>
+      <pubDate>Mon, 20 Jul 2026 00:00:00 +0800</pubDate><author>ting10win@gmail.com (Ting)</author>
+      <guid>http://localhost:1313/posts/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB-markov-logic-networks/</guid>
+      <category domain="http://localhost:1313/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</category>
+      <description>&lt;h2 id=&#34;基础信息&#34; class=&#34;heading-element&#34;&gt;&lt;span&gt;基础信息&lt;/span&gt;&#xD;&#xA;  &lt;a href=&#34;#%e5%9f%ba%e7%a1%80%e4%bf%a1%e6%81%af&#34; class=&#34;heading-mark&#34;&gt;&#xD;&#xA;    &lt;svg class=&#34;octicon octicon-link&#34; viewBox=&#34;0 0 16 16&#34; version=&#34;1.1&#34; width=&#34;16&#34; height=&#34;16&#34; aria-hidden=&#34;true&#34;&gt;&lt;path d=&#34;m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&lt;ul&gt;&#xA;&lt;li&gt;作者：Matthew Richardson, Pedro Domingos&lt;/li&gt;&#xA;&lt;li&gt;期刊/日期：Machine Learning 62:107-136, 2006；Published online: 27 January 2006；DOI: 10.1007/s10994-006-5833-1&lt;/li&gt;&#xA;&lt;li&gt;核心贡献：提出 Markov Logic Networks (MLNs)，通过给一阶逻辑公式附加权重，把硬逻辑知识库变成 Markov network 模板，并给出基于 query-focused grounding、MCMC、pseudo-likelihood 和 ILP 的推理与学习流程。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;q1-研究动机&#34; class=&#34;heading-element&#34;&gt;&lt;span&gt;Q1. 研究动机&lt;/span&gt;&#xD;&#xA;  &lt;a href=&#34;#q1-%e7%a0%94%e7%a9%b6%e5%8a%a8%e6%9c%ba&#34; class=&#34;heading-mark&#34;&gt;&#xD;&#xA;    &lt;svg class=&#34;octicon octicon-link&#34; viewBox=&#34;0 0 16 16&#34; version=&#34;1.1&#34; width=&#34;16&#34; height=&#34;16&#34; aria-hidden=&#34;true&#34;&gt;&lt;path d=&#34;m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&lt;p&gt;AI 长期希望把概率图模型处理不确定性的能力与一阶逻辑表达关系知识的能力结合起来。纯逻辑对错误和矛盾很脆弱，纯概率图模型又难以紧凑表达关系结构；作者希望用一个简单表示同时获得两者优势。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
